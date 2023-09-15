@@ -3,7 +3,7 @@ layout: default
 title: Mbot Assembly
 parent: Getting Started
 nav_order: 1
-last_modified_at: 2023-09-13 17:37:48 -0500
+last_modified_at: 2023-09-15 17:37:48 -0500
 ---
 
 
@@ -230,8 +230,8 @@ Now let's move to the middle part.
 
 If you have successfully assembled the middle plate, the result should look like this:
 
-<a class="image-link" href="/assets/images/assembly/middlePlate//middlefinish.jpg">
-    <img src="/assets/images/assembly/middlePlate//middlefinish.jpg" alt="" style="max-width:400px;"/>
+<a class="image-link" href="/assets/images/assembly/middlePlate/middlefinish.jpg">
+    <img src="/assets/images/assembly/middlePlate/middlefinish.jpg" alt="" style="max-width:400px;"/>
 </a>
 
 Now let's move to the top part.
@@ -239,12 +239,91 @@ Now let's move to the top part.
 
 ## Top Assembly
 
+1. Attach the RPLidar standoffs to the Lidar
+
+    | Components     | #         | 
+    |:-------------|:---- -------|
+    | RPLidar A1 |1| 
+    | M2.5 standoffs        |4| 
+    | M2.5 Screws   |4|
+    
+    Attach four standoffs to the Lidar as shown in the image below.
+
+    <div class="popup-gallery">
+        <a href="/assets/images/assembly/topPlate/lidarstandoff1.jpg" title="Attach lidar standoff 1"><img src="/assets/images/assembly/topPlate/lidarstandoff1.jpg" width="225" height="225"></a>
+        <a href="/assets/images/assembly/topPlate/lidarstandoff2.jpg" title="Attach lidar standoff 2"><img src="/assets/images/assembly/topPlate/lidarstandoff2.jpg" width="200" height="200"></a>
+    </div>
+
+
+2. Attach the RPLidar USB Interface to the underside of the top plate
+
+    | Components     | #         | 
+    |:-------------|:---- -------|
+    | M2 x 8mm Screws        |2| 
+    | M2 Nuts     |2|
+    
+    Begin by unplugging the connector from the interface. Then, pass it through one of the square holes on the board and re-plug the connector back in. Secure the USB Interface to the top plate using two sets of M2 screws and nuts.
+
+
+    <div class="popup-gallery">
+        <a href="/assets/images/assembly/topPlate/usb1.jpg" title="Attach USB Interface to plate 1"><img src="/assets/images/assembly/topPlate/usb1.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/topPlate/usb2.jpg" title="Attach USB Interface to plate 2"><img src="/assets/images/assembly/topPlate/usb2.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/topPlate/usb3.jpg" title="Attach USB Interface to plate 3"><img src="/assets/images/assembly/topPlate/usb3.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/topPlate/attachusb.jpg" title="Attach USB Interface to plate 4"><img src="/assets/images/assembly/topPlate/attachusb.jpg" width="380" ></a>
+    </div>
+
+3. Attach the RPLidar to the upper side of the top plate
+
+    | Components     | #         | 
+    |:-------------|:---- -------|
+    | M2.5 Screws   |4|
+
+    <div class="popup-gallery">
+        <a href="/assets/images/assembly/topPlate/attachlidar1.jpg" title="Attach lidar to plate 1"><img src="/assets/images/assembly/topPlate/attachlidar1.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/topPlate/attachlidar2.jpg" title="Attach lidar to plate 2"><img src="/assets/images/assembly/topPlate/attachlidar2.jpg" width="200" height="200"></a>
+    </div>
+
+4. Plug in the USB cord to the RPLidar USB Interface, and fastening it with a zip tie
+
+    | Components     | #         | 
+    |:-------------|:---- -------|
+    | 9" USB Micro Cable  |1| 
+    | zip tie   |1|
+
+    <div class="popup-gallery">
+        <a href="/assets/images/assembly/topPlate/plugusb1.jpg" title="Plug in USB 1"><img src="/assets/images/assembly/topPlate/plugusb1.jpg" width="225" height="225"></a>
+        <a href="/assets/images/assembly/topPlate/plugusb2.jpg" title="Plug in USB 2"><img src="/assets/images/assembly/topPlate/plugusb2.jpg" width="200" height="200"></a>
+    </div>
+
 If you have successfully assembled the top plate, the result should look like this:
- 
+
+<a class="image-link" href="/assets/images/assembly/topPlate/topfinish.jpg">
+    <img src="/assets/images/assembly/topPlate/topfinish.jpg" alt="" style="max-width:400px;"/>
+</a> 
 
 Now let's put all 3 parts together!
 
 
 ## Final Assembly
+
+1. Attach all three parts together
+
+    | Components     | #         | 
+    |:-------------|:---- -------|
+    |     4-40 thumb screw 3/8"|8| 
+
+    <div class="popup-gallery">
+        <a href="/assets/images/assembly/final/final1.jpg" title="Final assemble 1"><img src="/assets/images/assembly/final/final1.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/final/final2.jpg" title="Final assemble 2"><img src="/assets/images/assembly/final/final2.jpg" width="200" height="200"></a>
+    </div>
+
+2. Connect all the cables and power
+
+    | Components     | #         | 
+    |:-------------|:---- -------|
+    |  DC power “Y” cable |1| 
+    |  12V Power Bank |1| 
+    |  9" USB-C Cable |1| 
+
 
 Yay! Now you have a complete version of MBot!

@@ -1,0 +1,16 @@
+title: ROB550 Mbot Docs
+description: A place to store mbot stuff for rob550
+
+ # Build settings
+plugins:
+  - jekyll-remote-theme
+  - jekyll-last-modified-at
+
+remote_theme: pmarsceill/just-the-docs
+ 
+last_modified_at: true
+
+logo: "/assets/images/robotics-logo.svg"
+favicon_ico: "/assets/images/mbot-logo.png"
+
+url: "https://rob550-docs.github.io"

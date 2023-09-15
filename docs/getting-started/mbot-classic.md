@@ -9,7 +9,9 @@ last_modified_at: 2023-09-15 17:37:48 -0500
 
 > This guide will walk you through the steps needed to assemble the MBot Classic. 
 
-**TODO: Insert a finished mbot here**
+<a class="image-link" href="/assets/images/assembly/mbot.jpg">
+    <img src="/assets/images/assembly/mbot.jpg" alt="" style="max-width:200px;"/>
+</a>
 
 ### Contents
 * TOC
@@ -104,36 +106,36 @@ last_modified_at: 2023-09-15 17:37:48 -0500
             <a href="/assets/images/assembly/bottomPlate/wheelon2.jpg" title="Mount the wheel on 2"><img src="/assets/images/assembly/bottomPlate/wheelon2.jpg" width="200" height="200"></a>
         </div>
 
-6. Assemble the MBot board standoffs
+6. Assemble the Robotics Control Board standoffs
 
     | Components     | #         | 
     |:-------------|:---- -------|
-    | MBot board               |1|
+    | Robotics Control Board   |1|
     | M2.5 8mm Nylon Standoffs |4| 
     | M2.5 x 6mm Screws        |4| 
 
     Gather all the components you need and assemble them as depicted in the image below. 
 
     <div class="popup-gallery">
-        <a href="/assets/images/assembly/bottomPlate/mbotboard1.jpg" title="Assemble the MBot board standoffs 1"><img src="/assets/images/assembly/bottomPlate/mbotboard1.jpg" width="300" height="300"></a>
-        <a href="/assets/images/assembly/bottomPlate/mbotboard2.jpg" title="Assemble the MBot board standoffs 2"><img src="/assets/images/assembly/bottomPlate/mbotboard2.jpg" width="300" height="300"></a>
+        <a href="/assets/images/assembly/bottomPlate/mbotboard1.jpg" title="Assemble the Robotics Control Board standoffs 1"><img src="/assets/images/assembly/bottomPlate/mbotboard1.jpg" width="300" height="300"></a>
+        <a href="/assets/images/assembly/bottomPlate/mbotboard2.jpg" title="Assemble the Robotics Control Board standoffs 2"><img src="/assets/images/assembly/bottomPlate/mbotboard2.jpg" width="300" height="300"></a>
     </div>
 
-7. Connect the wires to MBot Board
+7. Connect the wires to Robotics Control Board
 
     1. Arrange the wires through the bottom plate as shown in the image below.
-    2. Examine the pins. In the case illustrated in the image, both the left and right motor have the green wire connected to the GND pin. We will use this info to connect to the MBot Board.
-    3. Identify the GND pin on the MBot Board and connect the wires to it accordingly. Ensure the green wire is connected to the GND pin.
+    2. Examine the pins. In the case illustrated in the image, both the left and right motor have the green wire connected to the GND pin. We will use this info to connect to the Robotics Control Board.
+    3. Identify the GND pin on the Robotics Control Board and connect the wires to it accordingly. Ensure the green wire is connected to the GND pin.
 
 
     <div class="popup-gallery">
-        <a href="/assets/images/assembly/bottomPlate/connectwire1.jpg" title="Connect the wires to MBot Board 1"><img src="/assets/images/assembly/bottomPlate/connectwire1.jpg" width="200" height="200"></a>
-        <a href="/assets/images/assembly/bottomPlate/connectwire2.jpg" title="Connect the wires to MBot Board 2"><img src="/assets/images/assembly/bottomPlate/connectwire2.jpg" width="400" height="400"></a>
-        <a href="/assets/images/assembly/bottomPlate/connectwire3.jpg" title="Connect the wires to MBot Board 3"><img src="/assets/images/assembly/bottomPlate/connectwire3.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/bottomPlate/connectwire1.jpg" title="Connect the wires to Robotics Control Board 1"><img src="/assets/images/assembly/bottomPlate/connectwire1.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/bottomPlate/connectwire2.jpg" title="Connect the wires to Robotics Control Board 2"><img src="/assets/images/assembly/bottomPlate/connectwire2.jpg" width="400" height="400"></a>
+        <a href="/assets/images/assembly/bottomPlate/connectwire3.jpg" title="Connect the wires to Robotics Control Board 3"><img src="/assets/images/assembly/bottomPlate/connectwire3.jpg" width="200" height="200"></a>
     </div>
 
 
-8. Final step: attach the MBot Board to the bottom plate
+8. Final step: attach the Robotics Control Board to the bottom plate
 
     <a class="image-link" href="/assets/images/assembly/bottomPlate/attachboard.jpg">
         <img src="/assets/images/assembly/bottomPlate/attachboard.jpg" alt="" style="max-width:400px;"/>
@@ -313,17 +315,26 @@ Now let's put all 3 parts together!
     |     4-40 thumb screw 3/8"|8| 
 
     <div class="popup-gallery">
-        <a href="/assets/images/assembly/final/final1.jpg" title="Final assemble 1"><img src="/assets/images/assembly/final/final1.jpg" width="200" height="200"></a>
-        <a href="/assets/images/assembly/final/final2.jpg" title="Final assemble 2"><img src="/assets/images/assembly/final/final2.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/final/final1.jpg" title="Final assemble 1"><img src="/assets/images/assembly/final/final1.jpg" width="270" height="200"></a>
+        <a href="/assets/images/assembly/final/final2.jpg" title="Final assemble 2"><img src="/assets/images/assembly/final/final2.jpg" width="300" height="200"></a>
     </div>
 
 2. Connect all the cables and power
 
     | Components     | #         | 
     |:-------------|:---- -------|
-    |  DC power “Y” cable |1| 
     |  12V Power Bank |1| 
+    |  DC power “Y” cable |1| 
     |  9" USB-C Cable |1| 
+    |  9" USB Micro Cable |1| 
 
+    1. Use the "Y" Cable to connect the power bank and the Robotics Control Board
+    2. Use the USB Micro Cable to connect the power bank and the Jetson
+    3. Use the USB-C Cable to connect the Robotics Control Board and Jetson
+    4. Plug in the Lidar's USB to the Jetson
+
+    <a class="image-link" href="/assets/images/assembly/final/final3.jpg">
+        <img src="/assets/images/assembly/final/final3.jpg" alt="" style="max-width:200px;"/>
+    </a> 
 
 Yay! Now you have a complete version of MBot!

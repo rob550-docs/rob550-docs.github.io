@@ -25,17 +25,19 @@ last_modified_at: 2023-09-15 17:37:48 -0500
     | Metal ball               |1 |
     | Bottom Acrylic Sheet     |1 |
     | 1/8" spacer              |1 |
+    | 1/16" spacer             |1 |
     | M2 hex nuts              |2 |
     | M2 x 12mm screw          |2 | 
     | Caster housing           |1 |
 
-    Collect all the necessary components and assemble them as illustrated in the images below.
+    Gather all required components and assemble them as depicted in the images below. Though the second and third images only show one spacer there, you need to stack the two spacers one on top of another during your assembly.
 
     <div class="popup-gallery">
-        <a href="/assets/images/assembly/bottomPlate/caster1.jpg" title="Mount caster 1"><img src="/assets/images/assembly/bottomPlate/caster1.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/bottomPlate/caster1_1.jpg" title="Mount caster 1"><img src="/assets/images/assembly/bottomPlate/caster1_1.jpg" width="200" height="200"></a>
         <a href="/assets/images/assembly/bottomPlate/caster2.jpg" title="Mount caster 2"><img src="/assets/images/assembly/bottomPlate/caster2.jpg" width="200" height="200"></a>
         <a href="/assets/images/assembly/bottomPlate/caster3.jpg" title="Mount caster 3"><img src="/assets/images/assembly/bottomPlate/caster3.jpg" width="200" height="200"></a>
     </div>
+
 
 
 2. Mount the motor brackets

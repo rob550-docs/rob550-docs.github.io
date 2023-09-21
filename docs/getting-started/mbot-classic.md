@@ -3,7 +3,7 @@ layout: default
 title: Mbot Assembly
 parent: Getting Started
 nav_order: 1
-last_modified_at: 2023-09-15 17:37:48 -0500
+last_modified_at: 2023-09-18 14:37:48 -0500
 ---
 
 

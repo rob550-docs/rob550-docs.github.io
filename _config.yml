@@ -14,3 +14,20 @@ logo: "/assets/images/robotics-logo.svg"
 favicon_ico: "/assets/images/mbot-logo.png"
 
 url: "https://rob550-docs.github.io"
+
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red

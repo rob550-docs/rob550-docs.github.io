@@ -155,12 +155,6 @@ Do not install Chromium as it will interfere with the Snap installation. Use the
 
 4. Now you have a connection set up, you can connect to it under `remote explorer`
 
-### 7. Configuring the environment
-1. Install `curl` and `venv` module for Python 3.8
-    ```
-    $ sudo apt install curl python3.8-venv
-    ```
-
 
 ## Calibrating and Flashing the MBot
 
@@ -168,5 +162,13 @@ Do not install Chromium as it will interfere with the Snap installation. Use the
 ## Install the MBot Code
 
 
+## Configuring the environment
+1. Install `curl` and `venv` module for Python 3.8
+    ```
+    $ sudo apt install curl python3.8-venv
+    ```
+
+
+---
 
 > Part of this doc is based on the [Q-engineering Blog](https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html) and Tom Gao's setup document.

@@ -3,12 +3,13 @@ layout: default
 title: MBot System Setup
 parent: Getting Started
 nav_order: 2
-last_modified_at: 2023-09-21 17:37:48 -0500
+last_modified_at: 2023-09-22 17:37:48 -0500
 ---
 
 
 > This guide will walk you through the steps needed to setup the MBot Classic system
- 
+
+
 ### Contents
 * TOC
 {:toc}
@@ -37,7 +38,7 @@ Now you have a SD card with Jetson Nano Ubuntu 20 image.
     <img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/embedded/images/jetsonNano/gettingStarted/Jetson_Nano-Getting_Started-Setup-Insert_microSD-B01.png" alt="Image from NVIDIA" style="max-width:300px;"/>
     </a>
 
-2. Plug in mouse, keyboard, Ethernet cable, HDMI cable with external monitor.
+2. Plug in mouse, keyboard, Ethernet cable (Or Wifi dongle), HDMI cable with external monitor.
 3. Turn on the power bank and ensure that the power cables are connected as per the assembly guide.
 
 If everything runs successfully, you will have an Ubuntu20 system ready for use.
@@ -46,10 +47,14 @@ If everything runs successfully, you will have an Ubuntu20 system ready for use.
 Username: jetson <br>
 Password: jetson
 
+### 3. Setup Wifi
 
-### 3. Configuring the Jetson
+1. If you are using home wifi, just connect it as you normally do
+2. If you are using MWireless, connect to the wifi following the University's 
+[instruction](https://documentation.its.umich.edu/content/wifi-manually-configuring-your-ubuntu-linux-device-mwireless).
 
-> The following configuration is based on the [Q-engineering Blog](https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html) and Tom Gao's setup document.
+
+### 4. Configuring the Jetson
 
 1. Run the well-known update, upgrade and autoremove cycle
 
@@ -77,7 +82,7 @@ Password: jetson
 {: .warning }
 Do not install Chromium as it will interfere with the Snap installation. Use the preinstalled Morzilla Firefox.
 
-### 4. Configuring remote access
+### 5. Configuring remote desktop access - NoMachine
 
 1. Install NoMachine server
     1. Go to the NoMachine for ARM [website](https://downloads.nomachine.com/linux/?id=30&distro=Arm) and download `ARMv8 DEB`.
@@ -129,7 +134,28 @@ Do not install Chromium as it will interfere with the Snap installation. Use the
     <img src="/assets/images/system-setup/nomachine-interface.png" alt=" " style="max-width:400px;"/>
     </a>
 
-### 5. Configuring the environment
+### 6. Configuring SSH access - VSCode
+1. Install the `Remote Development` extension pack
+
+    <a class="image-link" href="/assets/images/system-setup/vscode_ssh1.png">
+    <img src="/assets/images/system-setup/vscode_ssh1.png" alt=" " style="max-width:400px;"/>
+    </a>
+
+2. Add the SSH connection
+
+    <a class="image-link" href="/assets/images/system-setup/vscode_ssh2.png">
+    <img src="/assets/images/system-setup/vscode_ssh2.png" alt=" " style="max-width:400px;"/>
+    </a>
+
+3. Input connection `ssh hostname@ip_address`
+
+    <a class="image-link" href="/assets/images/system-setup/vscode_ssh3.png">
+    <img src="/assets/images/system-setup/vscode_ssh3.png" alt=" " style="max-width:400px;"/>
+    </a>
+
+4. Now you have a connection set up, you can connect to it under `remote explorer`
+
+### 7. Configuring the environment
 1. Install `curl` and `venv` module for Python 3.8
     ```
     $ sudo apt install curl python3.8-venv
@@ -141,3 +167,6 @@ Do not install Chromium as it will interfere with the Snap installation. Use the
 
 ## Install the MBot Code
 
+
+
+> Part of this doc is based on the [Q-engineering Blog](https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html) and Tom Gao's setup document.

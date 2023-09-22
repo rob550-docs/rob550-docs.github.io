@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Getting Started
 nav_order: 2
-last_modified_at: 2023-09-20 17:37:48 -0500
+last_modified_at: 2023-09-21 17:37:48 -0500
 ---
 
 
@@ -14,6 +14,13 @@ last_modified_at: 2023-09-20 17:37:48 -0500
 {:toc}
 
 ## Setup Jetson Nano System
+
+### What do you need
+1. SD card for main storage
+2. USB keyboard and mouse
+3. Computer display (HDMI or DP)
+4. Ethernet Cable
+5. Wifi dongle
 
 ### 1. Flash the image
 
@@ -42,17 +49,95 @@ Password: jetson
 
 ### 3. Configuring the Jetson
 
-> The following configuration is based on the [Q-engineering Blog](https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html#:~:text=The%20Jetson%20Nano%20comes%20with,20.04%20on%20the%20Jetson%20Nano.) and Tom Gao's setup document.
+> The following configuration is based on the [Q-engineering Blog](https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html) and Tom Gao's setup document.
 
 1. Run the well-known update, upgrade and autoremove cycle
 
-```
-$ sudo apt update
-$ sudo apt upgrade
-$ sudo apt autoremove
-```
+    ```
+    $ sudo apt update
+    $ sudo apt upgrade
+    $ sudo apt autoremove
+    ```
 
-<!-- Resume from 
-the section: Starting Ubuntu 20.04 on your Nano. -->
+2. Delete the directory /usr/share/vulkan/icd.d to prevent lavapipe warnings when using Jtop
 
+    ```
+    $ sudo rm -rf /usr/share/vulkan/icd.d
+    ```
+
+    While there are additional steps included in the Q-engineering post, they appear irrelevant to the current image provided in their GitHub repository at the time of writing this post. Therefore, I've omitted those steps for now. Should they become necessary in the future, I will update this post accordingly.
+
+    Please note: If you experience any errors related to `nvidia-l4t-init` when running the upgrade command, a solution is provided in the Q-engineering [post](https://qengineering.eu/install-ubuntu-20.04-on-jetson-nano.html).
+
+    ```
+    $ sudo apt-mark hold ‘nvidia-l4t-*’ 
+    ```
+    - If you wish to prevent upgrades during system updates for all packages that start with 'nvidia-l4t-', run this command.
+
+{: .warning }
+Do not install Chromium as it will interfere with the Snap installation. Use the preinstalled Morzilla Firefox.
+
+### 4. Configuring remote access
+
+1. Install NoMachine server
+    1. Go to the NoMachine for ARM [website](https://downloads.nomachine.com/linux/?id=30&distro=Arm) and download `ARMv8 DEB`.
+    2. Navigate to the directory where the file located and run `$ sudo dpkg -i nomachinex.x.x_x_arm64.deb`
+
+2. Make sure the jetson has auto login, this step is necessary to run headlessly using NoMachine
+    - Edit `/etc/gdm3/custom.conf` if needed to have the file has the content below:
+    
+    ```
+    $ sudo nano /etc/gdm3/custom.conf
+    ```
+    ```
+    ...
+    [daemon]
+    AutomaticLoginEnable=true
+    AutomaticLogin=jetson
+    ...
+    ```
+3. Enable NetworkManager service
+    ```
+    $ sudo systemctl enable --now NetworkManager
+    ```
+4. Configure NoMachine
+    1. Edit `/usr/NX/etc/server.cfg`
+    ```
+    $ sudo nano /usr/NX/etc/server.cfg
+    ```
+    2. Enable the following keys (remove the prepending #):
+    ```    
+    CreateDisplay 1
+    DisplayOwner "jetson"
+    DisplayGeometry 1600x900
+    ```
+        - Note that `ctrl + w` is search in nano, this is a very long file and it can really make you dizzy to scroll and look.
+    3. reboot the jetson
+    ```
+    $ sudo reboot
+    ```
+    Right after shutting down (screen turned black), **unplug** HDMI cable and look for the blinking light on the Wifi dongle. 
+
+    {: .warning }
+    Do not plug in the HDMI if using the headless setup at any point when the jetson is powered. This could potentially interfere with the display settings and cause the display to freeze. Same goes for leaving it plugged in and then unplugging after it has already started the booting process.
+
+5. Remote access
+
+    If everthing works, you should see blinking light on the Wifi dongle. Now you can remotely access to the Jetson on your laptop using NoMachine.
+
+    <a class="image-link" href="/assets/images/system-setup/nomachine-interface.png">
+    <img src="/assets/images/system-setup/nomachine-interface.png" alt=" " style="max-width:400px;"/>
+    </a>
+
+### 5. Configuring the environment
+1. Install `curl` and `venv` module for Python 3.8
+    ```
+    $ sudo apt install curl python3.8-venv
+    ```
+
+
+## Calibrating and Flashing the MBot
+
+
+## Install the MBot Code
 

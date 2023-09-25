@@ -1,0 +1,113 @@
+---
+layout: default
+title: MBot System Setup
+parent: Student Guide
+nav_order: 2
+last_modified_at: 2023-09-25 17:37:48 -0500
+---
+
+
+> This guide will walk you through the steps needed to setup the MBot Classic system
+
+
+### Contents
+* TOC
+{:toc}
+
+## Setup Jetson Nano System
+
+### What do you need
+1. SD card for main storage
+2. USB keyboard and mouse
+3. Computer display (HDMI or DP)
+4. Wifi dongle
+
+### 1. Flash the image
+
+1. Download the latest Jetson image from this [drive folder](https://drive.google.com/drive/folders/10ffPzANIETzGku317sOp2aiBFxPmd7Kn). 
+    - We have the customized Ubuntu 20 over the official image from the NVIDIA website because the official one comes with Ubuntu 18, which is too outdated for our needs.
+2. Download [Balena Etcher](https://etcher.balena.io/) then flash the OS image to your SD card.
+
+
+### 2. Boot the Jetson Nano
+
+1. Insert the SD card into your Jetson. The SD card slot is located on the side opposite the USB ports. (You might need to remove the camera mount to insert the card.)
+
+    <a class="image-link" href="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/embedded/images/jetsonNano/gettingStarted/Jetson_Nano-Getting_Started-Setup-Insert_microSD-B01.png">
+    <img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/embedded/images/jetsonNano/gettingStarted/Jetson_Nano-Getting_Started-Setup-Insert_microSD-B01.png" alt="Image from NVIDIA" style="max-width:300px;"/>
+    </a>
+
+2. Plug in mouse, keyboard, Wifi dongle, HDMI cable with external monitor.
+3. Turn on the power bank and ensure that the power cables are connected as per the assembly guide.
+
+If everything runs successfully, you will have an Ubuntu20 system ready for use.
+
+{: .note }
+Username: mbot <br>
+Password: i<3robots!
+
+### 3. Setup Wifi and update the system
+
+1. If you are using home wifi, just connect it as you normally do
+2. If you are using MWireless, run the following commands and enter your credentials when prompted
+```bash
+$ cd ~/Downloads
+$ ./SecureW2_JoinNow.run
+```
+
+3. Run the well-known update, upgrade cycle
+    ```bash
+    $ sudo apt update
+    $ sudo apt upgrade
+    ```
+
+
+---
+
+Under Construction
+
+
+### 4. VSCode Remote - SSH extension
+
+1. Install the `Remote Development` extension pack
+
+    <a class="image-link" href="/assets/images/system-setup/vscode_ssh1.png">
+    <img src="/assets/images/system-setup/vscode_ssh1.png" alt=" " style="max-width:400px;"/>
+    </a>
+
+2. Add the SSH connection
+
+    <a class="image-link" href="/assets/images/system-setup/vscode_ssh2.png">
+    <img src="/assets/images/system-setup/vscode_ssh2.png" alt=" " style="max-width:400px;"/>
+    </a>
+
+3. Input connection `ssh hostname@ip_address`
+
+    <a class="image-link" href="/assets/images/system-setup/vscode_ssh3.png">
+    <img src="/assets/images/system-setup/vscode_ssh3.png" alt=" " style="max-width:400px;"/>
+    </a>
+
+4. Now you have a connection set up, you can connect to it under `remote explorer`
+
+### 5. Remote Desktop access - NoMachine
+1. Download NoMachine to your laptop from the [official site](https://www.nomachine.com/).
+    - NoMachine is a remote access software and it is pre-installed on the Jetson. 
+2. Get your ip address 
+    - Open a terminal on Jetson and run `ifconfig wlan0`, record your ip address, you will need it later    
+    <a class="image-link" href="/assets/images/system-setup/ifconfig.png">
+    <img src="/assets/images/system-setup/ifconfig.png" alt=" " style="max-width:600px;"/>
+    </a>
+
+3. **Unplug** your HDMI cable, connect to Jetson using NoMachine
+    - First, open NoMachine on your laptop.
+    - Then, connect to Jetson as shown in the image below. You will need your IP address for this step.
+    <div class="popup-gallery">
+        <a href="/assets/images/system-setup/nomachine1.png" title="NoMachine 1"><img src="/assets/images/system-setup/nomachine1.png" width="200" height="200"></a>
+
+    </div>
+
+## Calibrating and Flashing the MBot
+
+
+## Install the MBot Code
+

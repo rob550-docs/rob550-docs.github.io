@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Mbot Classic Assembly
-parent: Getting Started
+parent: Student Guide
 nav_order: 1
 last_modified_at: 2023-09-18 14:37:48 -0500
 ---
@@ -341,9 +341,3 @@ Now let's put all 3 parts together!
 
 Yay! Now you have a complete version of MBot!
 
-## Misc
-### How to charge the power bank
-1. Connect the charger to the power bank
-2. Push the switch of the power bank to position "I" to make the charging circuit breakout. 
-3. The LED indicator on the AC-DC charger head showing RED means the charging process is working. 
-4. The LED indicator on the AC-DC charger head showing GREEN means the charging process has completed. 

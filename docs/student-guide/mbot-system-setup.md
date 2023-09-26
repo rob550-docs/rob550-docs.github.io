@@ -62,6 +62,8 @@ $ ./SecureW2_JoinNow.run     # this is wifi setup script
     ```
  
 ### 4. VSCode Remote - SSH extension
+In this step, we are going to establish remote access using VSCode on your laptop to connect to the Jetson remotely. After completing this step, we can download and modify files on the Jetson.
+
 1. Get your Jetson's IP address 
     - Open a terminal on Jetson and run `ifconfig wlan0`, record your ip address, you will need it later    
 
@@ -75,13 +77,14 @@ $ ./SecureW2_JoinNow.run     # this is wifi setup script
     <img src="/assets/images/system-setup/vscode_ssh1.png" alt=" " style="max-width:400px;"/>
     </a>
 
-2. Add the SSH connection
-
+3. Add the SSH connection
+    >Note that your laptop needs to connect to MWireless as well.
+    
     <a class="image-link" href="/assets/images/system-setup/vscode_ssh2.png">
     <img src="/assets/images/system-setup/vscode_ssh2.png" alt=" " style="max-width:400px;"/>
     </a>
 
-3. Input connection `ssh hostname@ip_address`
+4. Input connection `ssh hostname@ip_address`
 
     Here your hostname should be `mbot`, ip_address is from step 1.
 
@@ -89,17 +92,19 @@ $ ./SecureW2_JoinNow.run     # this is wifi setup script
     <img src="/assets/images/system-setup/vscode_ssh3.png" alt=" " style="max-width:400px;"/>
     </a>
 
-4. Select the default config file. Note that different operating systems may have different paths, but this isn't necessarily a problem. Here in the image, we select the one contains user name.
+5. Select the default config file. Note that different operating systems may have different paths, but this isn't necessarily a problem. Here in the image, we select the one contains user name.
 
     <a class="image-link" href="/assets/images/system-setup/vscode_ssh4.png">
     <img src="/assets/images/system-setup/vscode_ssh4.png" alt=" " style="max-width:400px;"/>
     </a>
 
-5. Navigate to the "Remote Explorer" tab and click the refresh button. You should see your Jetson's IP address listed under the SSH section, indicating that your connection has been set up. 
+6. Navigate to the "Remote Explorer" tab and click the refresh button. You should see your Jetson's IP address listed under the SSH section, indicating that your connection has been set up. 
     - Click on "Connect in New Window" and enter the password `i<3robots!`. After this, your SSH session should be up and running.
     - To end the session, click on the tab on the bottom left corner labeled `SSH: xx.x.xxx.xx`. A pop-up menu with the `close remote connection` option will appear.
 
 ### 5. Install dependencies and services
+At this point, you should be able to connect to the Jetson using VSCode extension.
+Next, we are going to download and modify some files on Jetson.
 
 1. Open a new Terminal in the VSCode remote session, then run:
 ```bash
@@ -153,16 +158,30 @@ $ ./install_mbot_services.sh
 1. Download NoMachine to your laptop from the [official site](https://www.nomachine.com/).
     - NoMachine is a remote access software and it is pre-installed on the Jetson. 
  
-2. **Unplug** your HDMI cable, connect to Jetson using NoMachine
-    - First, open NoMachine on your laptop.
-    - Then, connect to Jetson as shown in the image below. You will need your IP address for this step, you can check IP address from [MBot IP registry](https://mbot-project-development.github.io/mbot_ip_registry/).
+2. Connect to Jetson using NoMachine
+    - First, **unplug** your HDMI cable
+    - Then, open NoMachine on your laptop, connect to Jetson as shown in the image below. You will need your IP address for this step, you can check IP address from [MBot IP registry](https://mbot-project-development.github.io/mbot_ip_registry/).
 
         <a class="image-link" href="/assets/images/system-setup/nomachine1.png">
         <img src="/assets/images/system-setup/nomachine1.png" alt=" " style="max-width:400px;"/>
         </a>
     - Finally, enter the username: `mbot`, password: `i<3robots!` to log in.
 
+Now you have completed all the setup for Jetson!
+
 ## Calibrating and Flashing the MBot
+1. Download the firmware code from this [github repo](https://github.com/MBot-Project-Development/mbot_firmware).
+    - Recommend to use VSCode remote extenstion + GitHub CLI 
+2. Go to `mbot_firmware/src/mbot.h` line 34, change the drive to be differential 
+
+    ```c
+    //Define drive type of this robot. See mbot_params.h.
+    //#define MBOT_DRIVE_TYPE OMNI_120_DRIVE
+    #define MBOT_DRIVE_TYPE DIFFERENTIAL_DRIVE
+    ```
+3. Compile  
+    - The calibration script, `mbot_calibrate_classic.uf2`
+    - The MBot firmware, `mbot.uf2`
 
 
 ## Install the MBot Code

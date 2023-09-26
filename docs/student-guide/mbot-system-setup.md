@@ -3,11 +3,11 @@ layout: default
 title: MBot System Setup
 parent: Student Guide
 nav_order: 2
-last_modified_at: 2023-09-25 17:37:48 -0500
+last_modified_at: 2023-09-26 17:37:48 -0500
 ---
 
 
-> This guide will walk you through the steps needed to setup the MBot Classic system
+> This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
 
 
 ### Contents
@@ -52,7 +52,7 @@ Password: i<3robots!
 2. If you are using MWireless, run the following commands and enter your credentials when prompted
 ```bash
 $ cd ~/Downloads
-$ ./SecureW2_JoinNow.run
+$ ./SecureW2_JoinNow.run     # this is wifi setup script
 ```
 
 3. Run the well-known update, upgrade cycle
@@ -60,16 +60,16 @@ $ ./SecureW2_JoinNow.run
     $ sudo apt update
     $ sudo apt upgrade
     ```
-
-
----
-
-Under Construction
-
-
+ 
 ### 4. VSCode Remote - SSH extension
+1. Get your Jetson's IP address 
+    - Open a terminal on Jetson and run `ifconfig wlan0`, record your ip address, you will need it later    
 
-1. Install the `Remote Development` extension pack
+    <a class="image-link" href="/assets/images/system-setup/ifconfig.png">
+    <img src="/assets/images/system-setup/ifconfig.png" alt=" " style="max-width:400px;"/>
+    </a>
+
+2. On your laptop, install VSCode `Remote Development` extension pack
 
     <a class="image-link" href="/assets/images/system-setup/vscode_ssh1.png">
     <img src="/assets/images/system-setup/vscode_ssh1.png" alt=" " style="max-width:400px;"/>
@@ -83,28 +83,84 @@ Under Construction
 
 3. Input connection `ssh hostname@ip_address`
 
+    Here your hostname should be `mbot`, ip_address is from step 1.
+
     <a class="image-link" href="/assets/images/system-setup/vscode_ssh3.png">
     <img src="/assets/images/system-setup/vscode_ssh3.png" alt=" " style="max-width:400px;"/>
     </a>
 
-4. Now you have a connection set up, you can connect to it under `remote explorer`
+4. Select the default config file. Note that different operating systems may have different paths, but this isn't necessarily a problem. Here in the image, we select the one contains user name.
 
-### 5. Remote Desktop access - NoMachine
-1. Download NoMachine to your laptop from the [official site](https://www.nomachine.com/).
-    - NoMachine is a remote access software and it is pre-installed on the Jetson. 
-2. Get your ip address 
-    - Open a terminal on Jetson and run `ifconfig wlan0`, record your ip address, you will need it later    
-    <a class="image-link" href="/assets/images/system-setup/ifconfig.png">
-    <img src="/assets/images/system-setup/ifconfig.png" alt=" " style="max-width:600px;"/>
+    <a class="image-link" href="/assets/images/system-setup/vscode_ssh4.png">
+    <img src="/assets/images/system-setup/vscode_ssh4.png" alt=" " style="max-width:400px;"/>
     </a>
 
-3. **Unplug** your HDMI cable, connect to Jetson using NoMachine
-    - First, open NoMachine on your laptop.
-    - Then, connect to Jetson as shown in the image below. You will need your IP address for this step.
-    <div class="popup-gallery">
-        <a href="/assets/images/system-setup/nomachine1.png" title="NoMachine 1"><img src="/assets/images/system-setup/nomachine1.png" width="200" height="200"></a>
+5. Navigate to the "Remote Explorer" tab and click the refresh button. You should see your Jetson's IP address listed under the SSH section, indicating that your connection has been set up. 
+    - Click on "Connect in New Window" and enter the password `i<3robots!`. After this, your SSH session should be up and running.
+    - To end the session, click on the tab on the bottom left corner labeled `SSH: xx.x.xxx.xx`. A pop-up menu with the `close remote connection` option will appear.
 
-    </div>
+### 5. Install dependencies and services
+
+1. Open a new Terminal in the VSCode remote session, then run:
+```bash
+$ git clone https://github.com/MBot-Project-Development/mbot_sys_utils.git
+```
+
+2. Run the following commands to execute install scripts
+```bash
+$ cd mbot_sys_utils/
+# execute install scripts
+$ sudo ./install_scripts/install_mbot_dependencies.sh
+$ ./install_scripts/install_lcm.sh
+```
+
+3. Setup the MBot configuration
+```bash
+$ cd mbot_sys_utils/
+# copy the config file to boot directory
+$ sudo cp mbot_config.txt /boot/firmware/
+# edit the config
+$ sudo nano /boot/firmware/mbot_config.txt
+```
+- `mbot_hostname`: give the robot a unique hostname in this file, it should match the name written on the mbot.
+
+4. Install udev rules and services 
+```bash
+# install udev rules
+$ cd ~/mbot_sys_utils/udev_rules
+$ ./install_rules.sh
+# Install the services needed to start the networking and report the robot’s IP
+$ cd ~/mbot_sys_utils/services
+$ ./install_mbot_services.sh
+```
+
+5. Testing
+
+    Restart the robot with `sudo reboot`, the Jetson will start to reboot and the connection will drop. You will need to reload the VSCode remote window. 
+    - If everything is successful, the robot should publish its IP address to the [MBot IP registry](https://mbot-project-development.github.io/mbot_ip_registry/) as stipulated in the mbot_config.txt file.
+    - If your hostname does not appear, you can execute the following steps for troubleshooting:
+        ```bash
+        $ cd ~/mbot_sys_utils
+        $ ./systemctl_report.sh 
+        ```
+        The output will list the status of all the services, `mbot-start-network.service` and `mbot-start-network.service` both need to be `active`. If the status is "failed", use journalctl to see error logs of the service which might give a better idea of what's going wrong.
+        ```bash
+        $ journalctl -u mbot-publish-info.service
+        ```
+        If the error message is still vague, ask the instructor for help.
+
+### 6. Remote Desktop access - NoMachine
+1. Download NoMachine to your laptop from the [official site](https://www.nomachine.com/).
+    - NoMachine is a remote access software and it is pre-installed on the Jetson. 
+ 
+2. **Unplug** your HDMI cable, connect to Jetson using NoMachine
+    - First, open NoMachine on your laptop.
+    - Then, connect to Jetson as shown in the image below. You will need your IP address for this step, you can check IP address from [MBot IP registry](https://mbot-project-development.github.io/mbot_ip_registry/).
+
+        <a class="image-link" href="/assets/images/system-setup/nomachine1.png">
+        <img src="/assets/images/system-setup/nomachine1.png" alt=" " style="max-width:400px;"/>
+        </a>
+    - Finally, enter the username: `mbot`, password: `i<3robots!` to log in.
 
 ## Calibrating and Flashing the MBot
 

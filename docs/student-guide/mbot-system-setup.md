@@ -84,9 +84,9 @@ In this step, we are going to establish remote access using VSCode on your lapto
     <img src="/assets/images/system-setup/vscode_ssh2.png" alt=" " style="max-width:400px;"/>
     </a>
 
-4. Input connection `ssh hostname@ip_address`
+4. Input connection `ssh user_name@ip_address`
 
-    Here your hostname should be `mbot`, ip_address is from step 1.
+    Here your user_name should be `mbot`, ip_address is from step 4.1.
 
     <a class="image-link" href="/assets/images/system-setup/vscode_ssh3.png">
     <img src="/assets/images/system-setup/vscode_ssh3.png" alt=" " style="max-width:400px;"/>
@@ -150,7 +150,7 @@ $ ./install_mbot_services.sh
         ```
         The output will list the status of all the services, `mbot-start-network.service` and `mbot-start-network.service` both need to be `active`. If the status is "failed", use journalctl to see error logs of the service which might give a better idea of what's going wrong.
         ```bash
-        $ journalctl -u mbot-publish-info.service
+        $ sudo journalctl -u mbot-publish-info.service
         ```
         If the error message is still vague, ask the instructor for help.
 

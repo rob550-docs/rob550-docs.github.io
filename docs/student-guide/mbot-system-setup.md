@@ -167,10 +167,12 @@ $ ./install_mbot_services.sh
         </a>
     - Finally, enter the username: `mbot`, password: `i<3robots!` to log in.
 
-Now you have completed all the setup for Jetson!
+{: .highlight }
+Now you have completed all the setup for Jetson! <br>At this point, the robot should publish its IP to the registry each time it turns on. The IP might change occasionally. You can now use VSCode, SSH, or NoMachine to interface with the MBot by using the IP it reports to the registry. 
+
 
 ## Calibrating and Flashing the MBot
-1. Download the [firmware code](https://github.com/MBot-Project-Development/mbot_firmware) and [lcm message](https://github.com/MBot-Project-Development/mbot_lcm_base/tree/main)
+1. Download the [firmware code](https://github.com/MBot-Project-Development/mbot_firmware) and [lcm base](https://github.com/MBot-Project-Development/mbot_lcm_base/tree/main)
     - Recommend to use VSCode remote extenstion + GitHub CLI 
 2. Modify the code to compile the binary files
     1. Go to `mbot_firmware/src/mbot.h` line 34, change the drive to be differential 
@@ -207,18 +209,20 @@ Now you have completed all the setup for Jetson!
         - The MBot firmware, `mbot_firmware/build/src/mbot.uf2`
 
 3. Calibrate the MBot
-
+    
+    In this step, we are going to use NoMachine to access to the MBot. 
     We will flash the calibration script onto the Pico to calibrate it before we flash it.
 
     The calibration script `mbot_calibrate_classic.uf2` detects the motor and encoder polarity and then calibrates the motor coefficients. The robot will move around for this step so you will need clear space on the floor (preferably on the same type of surface that you plan to use the robots on).
 
-    1. Unplug the Robotics Control Board by disconnecting the barrel plug from the battery (leave the USB that powers the Jetson plugged in). Also unplug the USB that connects the Pico to the Jetson.
+    1. Close the remote connection on VSCode and then connect the robot using NoMachine.
+    2. Unplug the Robotics Control Board by disconnecting the barrel plug from the battery (leave the USB that powers the Jetson plugged in). Also unplug the USB that connects the Pico to the Jetson.
 
         <a class="image-link" href="/assets/images/system-setup/flash-prep.png">
         <img src="/assets/images/system-setup/flash-prep.png" alt=" " style="max-width:300px;"/>
         </a>
 
-    2. To put the Pico in flashing mode. Hold down the BOOTSEL button on the Pico board (it’s near the USB port). With the button held down, plug the Pico’s Type C cord back. Then release the button. The Pico should now show up as a device in NoMachine.
+    3. To put the Pico in flashing mode, hold down the BOOTSEL button on the Pico board (it’s near the USB port). With the button held down, plug the Pico’s Type C cord back. Then release the button. The Pico should now show up as a device in NoMachine.
 
         <a class="image-link" href="/assets/images/system-setup/bootsel.png">
         <img src="/assets/images/system-setup/bootsel.png" alt=" " style="max-width:270px;"/>
@@ -229,9 +233,9 @@ Now you have completed all the setup for Jetson!
 
 
 
-    3. Plug the barrel plug that powers the Robotics Control Board back into the battery.
-    4. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot.
-    5. Open the Pico device folder in NoMachine. Drag and drop the script `mbot_calibrate_classic.uf2` into the folder. The Pico will reboot automatically, and will then run its calibration routine. **Don’t touch the robot while it does this procedure.**
+    4. Plug the barrel plug that powers the Robotics Control Board back into the battery.
+    5. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot.
+    6. Open the Pico device folder in NoMachine. Drag and drop the script `mbot_calibrate_classic.uf2` into the folder. The Pico will reboot automatically, and will then run its calibration routine. **Don’t touch the robot while it does this procedure.**
     
 
 4. Flash the MBot Firmware onto the Pico. 
@@ -243,3 +247,55 @@ Now you have completed all the setup for Jetson!
 
 ## Install the MBot Code
 
+This step will pull all the code utilities for the MBot Web App, SLAM, sensor drivers, and communication with the Robotics Control Board.
+
+1. Clone the necessary repos
+    - [RP Lidar Driver](https://github.com/MBot-Project-Development/rplidar_lcm_driver)
+    - [MBot Autonomy](https://github.com/MBot-Project-Development/mbot_autonomy)
+    - [MBot Bridge](https://github.com/MBot-Project-Development/mbot_bridge)
+
+2. Install the MBot Web App
+    1. Download the latest web app release and unpack it
+    ```bash
+    $ wget https://github.com/MBot-Project-Development/mbot_web_app/releases/download/v1.1.0/mbot_web_app-v1.1.0.tar.gz
+    $ tar -xvzf mbot_web_app-v1.1.0.tar.gz
+    ```
+    2. Install the web app dependencies
+    ```bash
+    $ cd mbot_web_app-v1.1.0/
+    $ ./install_nginx.sh
+    $ ./install_python_deps.sh
+    ```
+
+    3. Build and install the app
+    ```bash
+    $ ./deploy_app.sh --no-rebuild
+    ```
+        - It’s now safe to delete the folder `mbot_web_app-v1.1.0/` and the tar file `mbot_web_app-v1.1.0.tar.gz.`
+
+    {: .highlight }
+    The web app should now be available!
+
+    {: .note }
+    You can use the web app by going to your browser and typing in the robot’s IP address. <br>
+    If the firmware is flashed and the serial server is running, you should be able to drive the robot through the webapp. Toggle drive mode on then use the keys AWSDQE to drive the robot.
+
+
+3. Install the RPLidar driver
+```bash
+$ cd ~/rplidar_lcm_driver/
+$ ./scripts/install.sh
+```
+4. Install the MBot Autonomy code
+```bash
+$ cd ~/mbot_autonomy/
+$ ./scripts/install.sh
+```
+- The autonomy code includes SLAM and a motion controller program.
+
+5. Install the MBot Bridge and API (**ERROR**)
+```bash
+$ cd ~/mbot_bridge/
+$ ./scripts/install.sh
+```
+- The MBot Bridge includes a server that bridges student code with the MBot software, as well as APIs in C++ and Python.

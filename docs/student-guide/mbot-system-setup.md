@@ -170,19 +170,76 @@ $ ./install_mbot_services.sh
 Now you have completed all the setup for Jetson!
 
 ## Calibrating and Flashing the MBot
-1. Download the firmware code from this [github repo](https://github.com/MBot-Project-Development/mbot_firmware).
+1. Download the [firmware code](https://github.com/MBot-Project-Development/mbot_firmware) and [lcm message](https://github.com/MBot-Project-Development/mbot_lcm_base/tree/main)
     - Recommend to use VSCode remote extenstion + GitHub CLI 
-2. Go to `mbot_firmware/src/mbot.h` line 34, change the drive to be differential 
+2. Modify the code to compile the binary files
+    1. Go to `mbot_firmware/src/mbot.h` line 34, change the drive to be differential 
+        ```c
+        //Define drive type of this robot. See mbot_params.h.
+        //#define MBOT_DRIVE_TYPE OMNI_120_DRIVE
+        #define MBOT_DRIVE_TYPE DIFFERENTIAL_DRIVE
+        ```
 
-    ```c
-    //Define drive type of this robot. See mbot_params.h.
-    //#define MBOT_DRIVE_TYPE OMNI_120_DRIVE
-    #define MBOT_DRIVE_TYPE DIFFERENTIAL_DRIVE
-    ```
-3. Compile  
-    - The calibration script, `mbot_calibrate_classic.uf2`
-    - The MBot firmware, `mbot.uf2`
+    2. Install lcm related stuff
+        ```bash
+        $ cd ~/mbot_lcm_base
+        $ ./scripts/install.sh
+        ```
 
+    3. Run the setup script
+        ```bash
+        $ cd ~/mbot_firmware
+        $ ./setup.sh
+        ```
+        - If doesn't work, uncomment `git checkout master` in `setup.sh` and then run it again
+
+    4. Build firmware
+        ```bash
+        $ cd ~/mbot_firmware
+        $ mkdir build
+        $ cd build
+        $ cmake ..
+        $ make
+        ```
+
+    5. You can find the `.uf2` under `/build`
+        - The calibration script, `mbot_firmware/build/tests/mbot_calibrate_classic.uf2`
+        - The MBot firmware, `mbot_firmware/build/src/mbot.uf2`
+
+3. Calibrate the MBot
+
+    We will flash the calibration script onto the Pico to calibrate it before we flash it.
+
+    The calibration script `mbot_calibrate_classic.uf2` detects the motor and encoder polarity and then calibrates the motor coefficients. The robot will move around for this step so you will need clear space on the floor (preferably on the same type of surface that you plan to use the robots on).
+
+    1. Unplug the Robotics Control Board by disconnecting the barrel plug from the battery (leave the USB that powers the Jetson plugged in). Also unplug the USB that connects the Pico to the Jetson.
+
+        <a class="image-link" href="/assets/images/system-setup/flash-prep.png">
+        <img src="/assets/images/system-setup/flash-prep.png" alt=" " style="max-width:300px;"/>
+        </a>
+
+    2. To put the Pico in flashing mode. Hold down the BOOTSEL button on the Pico board (it’s near the USB port). With the button held down, plug the Pico’s Type C cord back. Then release the button. The Pico should now show up as a device in NoMachine.
+
+        <a class="image-link" href="/assets/images/system-setup/bootsel.png">
+        <img src="/assets/images/system-setup/bootsel.png" alt=" " style="max-width:270px;"/>
+        </a>
+        <a class="image-link" href="/assets/images/system-setup/pico-nomachine.png">
+        <img src="/assets/images/system-setup/pico-nomachine.png" alt=" " style="max-width:300px;"/>
+        </a>
+
+
+
+    3. Plug the barrel plug that powers the Robotics Control Board back into the battery.
+    4. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot.
+    5. Open the Pico device folder in NoMachine. Drag and drop the script `mbot_calibrate_classic.uf2` into the folder. The Pico will reboot automatically, and will then run its calibration routine. **Don’t touch the robot while it does this procedure.**
+    
+
+4. Flash the MBot Firmware onto the Pico. 
+
+    The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation. We will be repeating the flashing procedure.
+
+    1. Repeat steps 3.1-3.3 from the calibration instructions to put the Pico into flashing mode.
+    2. Open the Pico device folder in NoMachine. Drag and drop the script `mbot.uf2` into the folder. The Pico will reboot automatically.
 
 ## Install the MBot Code
 

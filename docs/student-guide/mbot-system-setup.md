@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Student Guide
 nav_order: 2
-last_modified_at: 2023-09-26 17:37:48 -0500
+last_modified_at: 2023-09-28 13:37:48 -0500
 ---
 
 
@@ -231,12 +231,12 @@ Now you have completed all the setup for Jetson! <br>At this point, the robot sh
         <img src="/assets/images/system-setup/pico-nomachine.png" alt=" " style="max-width:300px;"/>
         </a>
 
-
-
     4. Plug the barrel plug that powers the Robotics Control Board back into the battery.
     5. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot.
     6. Open the Pico device folder in NoMachine. Drag and drop the script `mbot_calibrate_classic.uf2` into the folder. The Pico will reboot automatically, and will then run its calibration routine. **Don’t touch the robot while it does this procedure.**
-    
+
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/PLdOf24KXX0?si=x7MH2hQUU5CnSrA4" title="YouTube video player" frameborder="10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 4. Flash the MBot Firmware onto the Pico. 
 
@@ -278,7 +278,7 @@ This step will pull all the code utilities for the MBot Web App, SLAM, sensor dr
 
     {: .note }
     You can use the web app by going to your browser and typing in the robot’s IP address. <br>
-    If the firmware is flashed and the serial server is running, you should be able to drive the robot through the webapp. Toggle drive mode on then use the keys AWSDQE to drive the robot.
+    If the firmware is flashed and the serial server is running, you should be able to drive the robot through the webapp. Toggle drive mode on then use the keys WSQE to drive the robot.
 
 
 3. Install the RPLidar driver
@@ -293,9 +293,19 @@ $ ./scripts/install.sh
 ```
 - The autonomy code includes SLAM and a motion controller program.
 
-5. Install the MBot Bridge and API (**ERROR**)
-```bash
-$ cd ~/mbot_bridge/
-$ ./scripts/install.sh
-```
-- The MBot Bridge includes a server that bridges student code with the MBot software, as well as APIs in C++ and Python.
+5. Install the MBot Bridge and API 
+
+    Firstly, go to `scripts/install.sh` and change all the lines with `python` to `python3`, otherwise it gives error:
+    ```
+    Traceback (most recent call last):
+        File "setup.py", line 5, in <module>
+        import setuptools
+    ImportError: No module named setuptools
+    ```
+    
+    Then run the following:
+    ```bash
+    $ cd ~/mbot_bridge/
+    $ ./scripts/install.sh
+    ```
+    - The MBot Bridge includes a server that bridges student code with the MBot software, as well as APIs in C++ and Python.

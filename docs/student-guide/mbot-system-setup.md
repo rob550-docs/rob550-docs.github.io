@@ -3,12 +3,18 @@ layout: default
 title: MBot System Setup
 parent: Student Guide
 nav_order: 2
-last_modified_at: 2023-09-28 13:37:48 -0500
+last_modified_at: 2023-10-3 13:37:48 -0500
 ---
 
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
 
+The following items are needed:
+1. microSD card for main storage
+2. SD adapter
+2. USB keyboard and mouse
+3. Computer display (HDMI or DP)
+4. Wifi dongle
 
 ### Contents
 * TOC
@@ -16,18 +22,17 @@ last_modified_at: 2023-09-28 13:37:48 -0500
 
 ## Setup Jetson Nano System
 
-### What do you need
-1. SD card for main storage
-2. USB keyboard and mouse
-3. Computer display (HDMI or DP)
-4. Wifi dongle
-
 ### 1. Flash the image
 
-1. Download the latest Jetson image from this [drive folder](https://drive.google.com/drive/folders/10ffPzANIETzGku317sOp2aiBFxPmd7Kn). 
-    - We have the customized Ubuntu 20 over the official image from the NVIDIA website because the official one comes with Ubuntu 18, which is too outdated for our needs.
+1. Download the latest Jetson image from this [drive folder](https://drive.google.com/drive/folders/10ffPzANIETzGku317sOp2aiBFxPmd7Kn) to your laptop.
+    - There are multiple images in the folder, download `mbot-jetson-jul31.img.xz`.
+    - We use the customized Ubuntu 20 instead of the official image from the NVIDIA website because the official one comes with Ubuntu 18, which is too outdated for our needs.
 2. Download [Balena Etcher](https://etcher.balena.io/) then flash the OS image to your SD card.
+    1. Open the Balena Etcher
+    2. Plug in the SD card to your laptop using SD card reader
+    3. Following the steps on Balena Etcher
 
+Now, you have an SD card with the Ubuntu system flashed on it. We will boot up the Jetson using this SD card.
 
 ### 2. Boot the Jetson Nano
 
@@ -40,7 +45,7 @@ last_modified_at: 2023-09-28 13:37:48 -0500
 2. Plug in mouse, keyboard, Wifi dongle, HDMI cable with external monitor.
 3. Turn on the power bank and ensure that the power cables are connected as per the assembly guide.
 
-If everything runs successfully, you will have an Ubuntu20 system ready for use.
+If everything runs successfully, you will have an Ubuntu 20 system ready for use.
 
 {: .note }
 Username: mbot <br>
@@ -62,7 +67,7 @@ $ ./SecureW2_JoinNow.run     # this is wifi setup script
     ```
  
 ### 4. VSCode Remote - SSH extension
-In this step, we are going to establish remote access using VSCode on your laptop to connect to the Jetson remotely. After completing this step, we can download and modify files on the Jetson.
+In this step, we are going to establish remote access using the VSCode extension. After this setup, you will be able to access the Jetson remotely using your laptop.
 
 1. Get your Jetson's IP address 
     - Open a terminal on Jetson and run `ifconfig wlan0`, record your ip address, you will need it later    
@@ -108,7 +113,7 @@ Next, we are going to download and modify some files on Jetson.
 
 1. Open a new Terminal in the VSCode remote session, then run:
 ```bash
-$ git clone https://github.com/MBot-Project-Development/mbot_sys_utils.git
+$ git clone https://gitlab.eecs.umich.edu/rob550-f23/mbot_sys_utils.git
 ```
 
 2. Run the following commands to execute install scripts
@@ -142,33 +147,33 @@ $ ./install_mbot_services.sh
 5. Testing
 
     Restart the robot with `sudo reboot`, the Jetson will start to reboot and the connection will drop. You will need to reload the VSCode remote window. 
-    - If everything is successful, the robot should publish its IP address to the [MBot IP registry](https://mbot-project-development.github.io/mbot_ip_registry/) as stipulated in the mbot_config.txt file.
+    - If the setup was successful, the robot should publish its IP address to the [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry), you can find `your_hostname.json` file under `/data` folder and check your robot's IP address there.
     - If your hostname does not appear, you can execute the following steps for troubleshooting:
         ```bash
         $ cd ~/mbot_sys_utils
         $ ./systemctl_report.sh 
         ```
-        The output will list the status of all the services, `mbot-start-network.service` and `mbot-start-network.service` both need to be `active`. If the status is "failed", use journalctl to see error logs of the service which might give a better idea of what's going wrong.
-        ```bash
-        $ sudo journalctl -u mbot-publish-info.service
-        ```
-        If the error message is still vague, ask the instructor for help.
+        The output will list the status of all the services, `mbot-start-network.service` and `mbot-start-network.service` both need to be `active`. If the status is "failed", ask the instructor for help.
+
+    {: .note }
+    Every time the robot starts, an update to the JSON file is pushed to the registry. This is useful when running headless. Without a monitor, the IP registry may be the only way to check your current IP since it might change randomly.
 
 ### 6. Remote Desktop access - NoMachine
 1. Download NoMachine to your laptop from the [official site](https://www.nomachine.com/).
     - NoMachine is a remote access software and it is pre-installed on the Jetson. 
  
 2. Connect to Jetson using NoMachine
-    - First, **unplug** your HDMI cable
-    - Then, open NoMachine on your laptop, connect to Jetson as shown in the image below. You will need your IP address for this step, you can check IP address from [MBot IP registry](https://mbot-project-development.github.io/mbot_ip_registry/).
+    - First, **unplug** your HDMI cable if it is still connected
+    - Then, open NoMachine on your laptop, connect to Jetson as shown in the image below. You will need your IP address for this step, you can check IP address from [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry).
 
         <a class="image-link" href="/assets/images/system-setup/nomachine1.png">
         <img src="/assets/images/system-setup/nomachine1.png" alt=" " style="max-width:400px;"/>
         </a>
     - Finally, enter the username: `mbot`, password: `i<3robots!` to log in.
+    - Note: if the NoMachine desktop freezes, you can always restart the robot by turning the power off and then back on.
 
 {: .highlight }
-Now you have completed all the setup for Jetson! <br>At this point, the robot should publish its IP to the registry each time it turns on. The IP might change occasionally. You can now use VSCode, SSH, or NoMachine to interface with the MBot by using the IP it reports to the registry. 
+Now you have completed all the setup for Jetson!
 
 
 ## Calibrating and Flashing the MBot

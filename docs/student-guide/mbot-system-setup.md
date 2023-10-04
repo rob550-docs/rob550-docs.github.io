@@ -67,7 +67,7 @@ $ ./SecureW2_JoinNow.run     # this is wifi setup script
     ```
  
 ### 4. VSCode Remote - SSH extension
-In this step, we are going to establish remote access using the VSCode extension. After this setup, you will be able to access the Jetson remotely using your laptop.
+> In this step, we are going to establish remote access using the VSCode extension. After this setup, you will be able to access the Jetson remotely using your laptop.
 
 1. Get your Jetson's IP address 
     - Open a terminal on Jetson and run `ifconfig wlan0`, record your ip address, you will need it later    
@@ -107,19 +107,22 @@ In this step, we are going to establish remote access using the VSCode extension
     - Click on "Connect in New Window" and enter the password `i<3robots!`. After this, your SSH session should be up and running.
     - To end the session, click on the tab on the bottom left corner labeled `SSH: xx.x.xxx.xx`. A pop-up menu with the `close remote connection` option will appear.
 
-### 5. Install dependencies and services
+
+{: .highlight }
 At this point, you should be able to connect to the Jetson using VSCode extension.
-Next, we are going to download and modify some files on Jetson.
+
+### 5. Install dependencies and services
+> In this step, we are going to access the Jetson remotely, edit config files and eventually gives
+your robot a unique name.
 
 1. Open a new Terminal in the VSCode remote session, then run:
 ```bash
 $ git clone https://gitlab.eecs.umich.edu/rob550-f23/mbot_sys_utils.git
 ```
 
-2. Run the following commands to execute install scripts
+2. Run the following commands to install system utilities 
 ```bash
 $ cd mbot_sys_utils/
-# execute install scripts
 $ sudo ./install_scripts/install_mbot_dependencies.sh
 $ ./install_scripts/install_lcm.sh
 ```
@@ -159,6 +162,8 @@ $ ./install_mbot_services.sh
     Every time the robot starts, an update to the JSON file is pushed to the registry. This is useful when running headless. Without a monitor, the IP registry may be the only way to check your current IP since it might change randomly.
 
 ### 6. Remote Desktop access - NoMachine
+> In this step, we are going to set up NoMachine access. Upon completion, you will be able to access the Desktop UI. This is unlike the VSCode extension, which allows access to the Jetson only over Terminal.
+
 1. Download NoMachine to your laptop from the [official site](https://www.nomachine.com/).
     - NoMachine is a remote access software and it is pre-installed on the Jetson. 
  
@@ -177,30 +182,26 @@ Now you have completed all the setup for Jetson!
 
 
 ## Calibrating and Flashing the MBot
-1. Download the [firmware code](https://github.com/MBot-Project-Development/mbot_firmware) and [lcm base](https://github.com/MBot-Project-Development/mbot_lcm_base/tree/main)
-    - Recommend to use VSCode remote extenstion + GitHub CLI 
-2. Modify the code to compile the binary files
-    1. Go to `mbot_firmware/src/mbot.h` line 34, change the drive to be differential 
-        ```c
-        //Define drive type of this robot. See mbot_params.h.
-        //#define MBOT_DRIVE_TYPE OMNI_120_DRIVE
-        #define MBOT_DRIVE_TYPE DIFFERENTIAL_DRIVE
-        ```
+> In this session, we are going to work on setup of the Control Board.
 
-    2. Install lcm related stuff
+1. Download code base
+    1. Fork [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) to your group first, you will need to modify the firmware code for course assignment later, then clone your forked firmware codebase to Jetson
+    2. Clone [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) to Jetson
+    
+    Recommend to use VSCode remote extenstion + Clone with HTTPS
+
+2. Compile the firmware code to get .uf2 binary files
+    1. Install lcm related stuff
         ```bash
         $ cd ~/mbot_lcm_base
         $ ./scripts/install.sh
         ```
-
-    3. Run the setup script
+    2. Run the firmware setup script
         ```bash
         $ cd ~/mbot_firmware
         $ ./setup.sh
         ```
-        - If doesn't work, uncomment `git checkout master` in `setup.sh` and then run it again
-
-    4. Build firmware
+    3. Build firmware
         ```bash
         $ cd ~/mbot_firmware
         $ mkdir build
@@ -213,21 +214,21 @@ Now you have completed all the setup for Jetson!
         - The calibration script, `mbot_firmware/build/tests/mbot_calibrate_classic.uf2`
         - The MBot firmware, `mbot_firmware/build/src/mbot.uf2`
 
-3. Calibrate the MBot
-    
-    In this step, we are going to use NoMachine to access to the MBot. 
-    We will flash the calibration script onto the Pico to calibrate it before we flash it.
+3. Calibrate the MBot and flash the MBot Firmware onto the Pico. 
+    - In this step, we are going to flash the calibration script onto the Pico to calibrate it before we flash the firmware.
+    - The calibration script `mbot_calibrate_classic.uf2` detects the motor and encoder polarity and then calibrates the motor coefficients. The robot will move around for this step so you will need clear space on the floor (preferably on the same type of surface that you plan to use the robots on).
 
-    The calibration script `mbot_calibrate_classic.uf2` detects the motor and encoder polarity and then calibrates the motor coefficients. The robot will move around for this step so you will need clear space on the floor (preferably on the same type of surface that you plan to use the robots on).
+    For this step, there are 2 options to proceed:
 
-    1. Close the remote connection on VSCode and then connect the robot using NoMachine.
-    2. Unplug the Robotics Control Board by disconnecting the barrel plug from the battery (leave the USB that powers the Jetson plugged in). Also unplug the USB that connects the Pico to the Jetson.
+    **1. Using VSCode Extention**
 
-        <a class="image-link" href="/assets/images/system-setup/flash-prep.png">
-        <img src="/assets/images/system-setup/flash-prep.png" alt=" " style="max-width:300px;"/>
-        </a>
+    Placeholder
 
-    3. To put the Pico in flashing mode, hold down the BOOTSEL button on the Pico board (it’s near the USB port). With the button held down, plug the Pico’s Type C cord back. Then release the button. The Pico should now show up as a device in NoMachine.
+
+    **2. Using NoMachine**  
+    1. Terminate VSCode's remote connection and establish a connection through NoMachine.
+    2. Disconnect the battery's barrel plug and the USB C from the Control Board while leaving the Jetson power on. Essentially, make sure there are no cables connected to the Control Board.
+    3. To put the Pico in flashing mode, hold down the `BOOTSEL` button on the Pico board. With the button held down, plug the Pico’s Type C cord back. Then release the button. The Pico should now show up as a device in NoMachine.
 
         <a class="image-link" href="/assets/images/system-setup/bootsel.png">
         <img src="/assets/images/system-setup/bootsel.png" alt=" " style="max-width:270px;"/>
@@ -240,24 +241,22 @@ Now you have completed all the setup for Jetson!
     5. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot.
     6. Open the Pico device folder in NoMachine. Drag and drop the script `mbot_calibrate_classic.uf2` into the folder. The Pico will reboot automatically, and will then run its calibration routine. **Don’t touch the robot while it does this procedure.**
 
-
         <iframe width="560" height="315" src="https://www.youtube.com/embed/PLdOf24KXX0?si=x7MH2hQUU5CnSrA4" title="YouTube video player" frameborder="10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-4. Flash the MBot Firmware onto the Pico. 
+    The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation.
 
-    The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation. We will be repeating the flashing procedure.
-
-    1. Repeat steps 3.1-3.3 from the calibration instructions to put the Pico into flashing mode.
+    1. Repeat steps 1-3 from the calibration instructions to put the Pico into flashing mode.
     2. Open the Pico device folder in NoMachine. Drag and drop the script `mbot.uf2` into the folder. The Pico will reboot automatically.
 
 ## Install the MBot Code
 
-This step will pull all the code utilities for the MBot Web App, SLAM, sensor drivers, and communication with the Robotics Control Board.
+1. Clone the necessary repos to your Jetson 
+    - Clone [RP Lidar Driver](https://gitlab.eecs.umich.edu/rob550-f23/rplidar_lcm_driver)
+    - Clone [MBot Bridge](https://github.com/MBot-Project-Development/mbot_bridge)
+    - Firstly fork [MBot Autonomy](https://github.com/MBot-Project-Development/mbot_autonomy) to your group 
+    and then clone the forked code to Jetson
 
-1. Clone the necessary repos
-    - [RP Lidar Driver](https://github.com/MBot-Project-Development/rplidar_lcm_driver)
-    - [MBot Autonomy](https://github.com/MBot-Project-Development/mbot_autonomy)
-    - [MBot Bridge](https://github.com/MBot-Project-Development/mbot_bridge)
+    Recommend to use VSCode remote extenstion + Clone with HTTPS
 
 2. Install the MBot Web App
     1. Download the latest web app release and unpack it
@@ -276,7 +275,6 @@ This step will pull all the code utilities for the MBot Web App, SLAM, sensor dr
     ```bash
     $ ./deploy_app.sh --no-rebuild
     ```
-        - It’s now safe to delete the folder `mbot_web_app-v1.1.0/` and the tar file `mbot_web_app-v1.1.0.tar.gz.`
 
     {: .highlight }
     The web app should now be available!
@@ -299,16 +297,6 @@ $ ./scripts/install.sh
 - The autonomy code includes SLAM and a motion controller program.
 
 5. Install the MBot Bridge and API 
-
-    Firstly, go to `scripts/install.sh` and change all the lines with `python` to `python3`, otherwise it gives error:
-    ```
-    Traceback (most recent call last):
-        File "setup.py", line 5, in <module>
-        import setuptools
-    ImportError: No module named setuptools
-    ```
-    
-    Then run the following:
     ```bash
     $ cd ~/mbot_bridge/
     $ ./scripts/install.sh

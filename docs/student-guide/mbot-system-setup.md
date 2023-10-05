@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Student Guide
 nav_order: 2
-last_modified_at: 2023-10-3 13:37:48 -0500
+last_modified_at: 2023-10-05 13:37:48 -0500
 ---
 
 
@@ -12,9 +12,9 @@ last_modified_at: 2023-10-3 13:37:48 -0500
 The following items are needed:
 1. microSD card for main storage
 2. SD adapter
-2. USB keyboard and mouse
-3. Computer display (HDMI or DP)
-4. Wifi dongle
+3. USB keyboard and mouse
+4. Computer display (HDMI or DP)
+
 
 ### Contents
 * TOC
@@ -42,7 +42,7 @@ Now, you have an SD card with the Ubuntu system flashed on it. We will boot up t
     <img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/embedded/images/jetsonNano/gettingStarted/Jetson_Nano-Getting_Started-Setup-Insert_microSD-B01.png" alt="Image from NVIDIA" style="max-width:300px;"/>
     </a>
 
-2. Plug in mouse, keyboard, Wifi dongle, HDMI cable with external monitor.
+2. Plug in mouse, keyboard, HDMI cable with external monitor.
 3. Turn on the power bank and ensure that the power cables are connected as per the assembly guide.
 
 If everything runs successfully, you will have an Ubuntu 20 system ready for use.

@@ -3,7 +3,7 @@ layout: default
 title: Mbot Classic Assembly
 parent: Student Guide
 nav_order: 1
-last_modified_at: 2023-09-18 14:37:48 -0500
+last_modified_at: 2023-10-05 14:37:48 -0500
 ---
 
 
@@ -205,32 +205,22 @@ Now let's move to the middle part.
     </div>
 
 
-5. Attach the camera with the camera mount
+5. Attach the camera and camera mount to middle plate
 
     | Components     | #         | 
     |:-------------|:---- -------|
     | camera mount |1| 
-    | M2 x 8mm Screws        |4| 
-    | M2 Nuts     |4| 
+    | M2 x 6mm Screws        |4| 
+    | M2.5 x 8mm Screws     |2| 
 
-    Align the four holes on both the camera and the camera mount, using four sets of screws and nuts to tighten them. Arrange the cable as shown in the image, and pay attention to which side is the front or back.
+    Attach the camera mount beneath the middle plate, ensuring the screw slot faces up, then tighten it like the image below. Following this, attach the camera to the mount.
 
-    <a class="image-link" href="/assets/images/assembly/middlePlate/cameramount.jpg">
-    <img src="/assets/images/assembly/middlePlate/cameramount.jpg" alt="" style="max-width:400px;"/>
-    </a>
+    <div class="popup-gallery">
+        <a href="/assets/images/assembly/middlePlate/cameramount1.jpg" title="Attach camera mount to plate 1"><img src="/assets/images/assembly/middlePlate/cameramount1.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/middlePlate/cameramount2.jpg" title="Attach camera mount to plate 2"><img src="/assets/images/assembly/middlePlate/cameramount2.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/middlePlate/cameramount3.jpg" title="Attach camera to camera mount"><img src="/assets/images/assembly/middlePlate/cameramount3.jpg" width="200" height="200"></a>
+    </div>
 
-6. Attach the camera/camera mount to the middle plate
-
-    | Components     | #         | 
-    |:-------------|:---- -------|
-    | M2.5 x 12mm Screws        |2| 
-    | M2.5 Nuts      |2| 
-
-    Align the two holes on both the camera mount and the middle plate, using two sets of screws and nuts to tighten them.
-
-    <a class="image-link" href="/assets/images/assembly/middlePlate/cam2plate.jpg">
-    <img src="/assets/images/assembly/middlePlate/cam2plate.jpg" alt="" style="max-width:400px;"/>
-    </a>
 
 If you have successfully assembled the middle plate, the result should look like this:
 
@@ -305,6 +295,7 @@ If you have successfully assembled the top plate, the result should look like th
     <img src="/assets/images/assembly/topPlate/topfinish.jpg" alt="" style="max-width:400px;"/>
 </a> 
 
+
 Now let's put all 3 parts together!
 
 
@@ -317,8 +308,8 @@ Now let's put all 3 parts together!
     |     4-40 thumb screw 3/8"|8| 
 
     <div class="popup-gallery">
-        <a href="/assets/images/assembly/final/final1.jpg" title="Final assemble 1"><img src="/assets/images/assembly/final/final1.jpg" width="270" height="200"></a>
-        <a href="/assets/images/assembly/final/final2.jpg" title="Final assemble 2"><img src="/assets/images/assembly/final/final2.jpg" width="300" height="200"></a>
+        <a href="/assets/images/assembly/final/3parts.jpg" title="Final assemble 1"><img src="/assets/images/assembly/final/3parts.jpg" width="260" height="200"></a>
+        <a href="/assets/images/assembly/final/final.png" title="Final assemble 2"><img src="/assets/images/assembly/final/final.png" width="340" height="200"></a>
     </div>
 
 2. Connect all the cables and power
@@ -329,14 +320,16 @@ Now let's put all 3 parts together!
     |  DC power “Y” cable |1| 
     |  9" USB-C Cable |1| 
     |  9" USB Micro Cable |1| 
+    |Wifi dongle | 1|
 
-    1. Use the "Y" Cable to connect the power bank and the Robotics Control Board
-    2. Use the USB Micro Cable to connect the power bank and the Jetson
-    3. Use the USB-C Cable to connect the Robotics Control Board and Jetson
-    4. Plug in the Lidar's USB to the Jetson
+    1. Plug in WiFi dongle to Jetson
+    2. Use the "Y" Cable to connect the power bank and the Robotics Control Board
+    3. Use the USB Micro Cable to connect the power bank and the Jetson
+    4. Use the USB-C Cable to connect the Robotics Control Board and Jetson
+    5. Plug in the Lidar's USB to the Jetson
 
-    <a class="image-link" href="/assets/images/assembly/final/final3.jpg">
-        <img src="/assets/images/assembly/final/final3.jpg" alt="" style="max-width:200px;"/>
+    <a class="image-link" href="/assets/images/assembly/final/wiring.png">
+        <img src="/assets/images/assembly/final/wiring.png" alt="" style="max-width:600px;"/>
     </a> 
 
 Yay! Now you have a complete version of MBot!

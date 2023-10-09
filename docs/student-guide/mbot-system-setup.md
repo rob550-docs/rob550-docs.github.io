@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Student Guide
 nav_order: 2
-last_modified_at: 2023-10-05 13:37:48 -0500
+last_modified_at: 2023-10-09 17:37:48 -0500
 ---
 
 
@@ -185,8 +185,8 @@ Now you have completed all the setup for Jetson!
 > In this session, we are going to work on setup of the Control Board.
 
 1. Download code base
-    1. Fork [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) to your group first, you will need to modify the firmware code for course assignment later, then clone your forked firmware codebase to Jetson
-    2. Clone [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) to Jetson
+    1. **Fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) to your group first, you will need to modify the firmware code for course assignment later, **then clone** your forked firmware codebase to Jetson
+    2. **Clone** [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) to Jetson
     
     Recommend to use VSCode remote extenstion + Clone with HTTPS
 
@@ -220,16 +220,48 @@ Now you have completed all the setup for Jetson!
 
     For this step, there are 2 options to proceed:
 
-    **1. Using VSCode Extention**
+    **1. Using VSCode Extention + Picotool**
+    1. Establish VSCode’s remote connection 
+    2. Installing [picotool](https://github.com/raspberrypi/picotool)
+    ```bash
+    $ wget https://github.com/raspberrypi/picotool/archive/refs/tags/1.1.1.zip
+    $ unzip 1.1.1.zip
+    $ cd picotool-1.1.1
+    $ mkdir build && cd build
+    $ export PICO_SDK_PATH=~/mbot_firmware/lib/pico-sdk
+    $ cmake ..
+    $ make
+    $ sudo make install
+    ```
+    3. Disconnect the battery's barrel plug and the USB C from the Control Board while leaving the Jetson power on. Essentially, make sure there are no cables connected to the Control Board.
+    4. To put the Pico in BOOTSEL mode, or say bootloader mode: Press and hold the `BOOTSEL` button on the board. While holding the `BOOTSEL` button down, connect the USB C back to Pico. Then release the button. 
+    5. Load the calibration file
+    ```bash
+    $ cd mbot_firmware 
+    $ picotool load build/tests/mbot_calibrate_classic.uf2
+    ```
+    6. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot.
+    ```bash
+    $ picotool reboot
+    ```
+    7. The Pico will then run its calibration routine. **Don’t touch the robot while it does this procedure.**
 
-    Placeholder
+    The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation.
+
+    - Repeat the step c and d above, but this time run
+    ```bash
+    $ cd mbot_firmware 
+    $ picotool load build/src/mbot.uf2
+    $ picotool reboot
+    ```
 
 
     **2. Using NoMachine**  
     1. Terminate VSCode's remote connection and establish a connection through NoMachine.
     2. Disconnect the battery's barrel plug and the USB C from the Control Board while leaving the Jetson power on. Essentially, make sure there are no cables connected to the Control Board.
-    3. To put the Pico in flashing mode, hold down the `BOOTSEL` button on the Pico board. With the button held down, plug the Pico’s Type C cord back. Then release the button. The Pico should now show up as a device in NoMachine.
-
+    3. To put the Pico in BOOTSEL mode, hold down the `BOOTSEL` button on the Pico board. With the button held down, plug the Pico’s Type C cord back. Then release the button. 
+        - While in this mode, the device will mount as a mass storage peripheral (like a flash drive). During this time, you can load programs onto it by dragging and dropping .uf2 files onto the device.
+        
         <a class="image-link" href="/assets/images/system-setup/bootsel.png">
         <img src="/assets/images/system-setup/bootsel.png" alt=" " style="max-width:270px;"/>
         </a>
@@ -237,7 +269,7 @@ Now you have completed all the setup for Jetson!
         <img src="/assets/images/system-setup/pico-nomachine.png" alt=" " style="max-width:300px;"/>
         </a>
 
-    4. Plug the barrel plug that powers the Robotics Control Board back into the battery.
+    4. Plug the barrel plug back into Robotics Control Board.
     5. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot.
     6. Open the Pico device folder in NoMachine. Drag and drop the script `mbot_calibrate_classic.uf2` into the folder. The Pico will reboot automatically, and will then run its calibration routine. **Don’t touch the robot while it does this procedure.**
 
@@ -251,10 +283,10 @@ Now you have completed all the setup for Jetson!
 ## Install the MBot Code
 
 1. Clone the necessary repos to your Jetson 
-    - Clone [RP Lidar Driver](https://gitlab.eecs.umich.edu/rob550-f23/rplidar_lcm_driver)
-    - Clone [MBot Bridge](https://github.com/MBot-Project-Development/mbot_bridge)
-    - Firstly fork [MBot Autonomy](https://github.com/MBot-Project-Development/mbot_autonomy) to your group 
-    and then clone the forked code to Jetson
+    - **Clone** [RP Lidar Driver](https://gitlab.eecs.umich.edu/rob550-f23/rplidar_lcm_driver)
+    - **Clone** [MBot Bridge](https://github.com/MBot-Project-Development/mbot_bridge)
+    - **Fork** [MBot Autonomy]( ) to your group 
+    and **then clone** the forked code to Jetson
 
     Recommend to use VSCode remote extenstion + Clone with HTTPS
 

@@ -3,7 +3,7 @@ layout: default
 title: How-to Guide
 parent: Student Guide
 nav_order: 3
-last_modified_at: 2023-09-22 15:37:48 -0500
+last_modified_at: 2023-10-05 15:37:48 -0500
 ---
 
 
@@ -13,7 +13,7 @@ last_modified_at: 2023-09-22 15:37:48 -0500
 
 ## Turn on and off the robot
 
-Assuming you have finish the headless setup
+Assuming you have finished the headless setup
 - To turn on, just switch on the power bank to `I` position
 - To turn off
     - NoMachine GUI: use the Ubuntu system poweroff

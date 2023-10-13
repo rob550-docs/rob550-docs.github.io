@@ -14,7 +14,7 @@
 Now we are hosting it locally and can access to the website from http://localhost:4000.
 
 ### 2. Modify the existed articles
-All the articles are located under `\docs`.
+All the articles are located under `/docs`.
 ```
 .
 ├── staff-guide

@@ -36,7 +36,7 @@ Now, you have an SD card with the Ubuntu system flashed on it. We will boot up t
 
 ### 2. Boot the Jetson Nano
 
-1. Insert the SD card into your Jetson. The SD card slot is located on the side opposite the USB ports. (You might need to remove the camera mount to insert the card.)
+1. Insert the SD card into your Jetson. The SD card slot is located on the side opposite the USB ports. 
 
     <a class="image-link" href="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/embedded/images/jetsonNano/gettingStarted/Jetson_Nano-Getting_Started-Setup-Insert_microSD-B01.png">
     <img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/embedded/images/jetsonNano/gettingStarted/Jetson_Nano-Getting_Started-Setup-Insert_microSD-B01.png" alt="Image from NVIDIA" style="max-width:300px;"/>
@@ -159,7 +159,7 @@ $ ./install_mbot_services.sh
         The output will list the status of all the services, `mbot-start-network.service` and `mbot-start-network.service` both need to be `active`. If the status is "failed", ask the instructor for help.
 
     {: .note }
-    Every time the robot starts, an update to the JSON file is pushed to the registry. This is useful when running headless. Without a monitor, the IP registry may be the only way to check your current IP since it might change randomly.
+    Every time the robot starts, an update to the IP JSON file is pushed to the registry. This is useful when running headless. Without a monitor, the IP registry is one way to check your current IP since it might change randomly. You can also check your IP address on the OLED screen on the side of the robot which we will set up later.
 
 ### 6. Remote Desktop access - NoMachine
 > In this step, we are going to set up NoMachine access. Upon completion, you will be able to access the Desktop UI. This is unlike the VSCode extension, which allows access to the Jetson only over Terminal.

@@ -1,11 +1,12 @@
 ---
 layout: default
-title: How-to Guide
+title: MBot Classic User Manuel
 parent: Student Guide
 nav_order: 3
-last_modified_at: 2023-10-05 15:37:48 -0500
+last_modified_at: 2023-10-14 15:37:48 -0500
 ---
 
+> This manuel gives you instruction on how to use the bot.
 
 ### Contents
 * TOC

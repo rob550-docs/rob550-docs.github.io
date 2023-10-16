@@ -33,7 +33,7 @@ $ sudo apt-get install doxygen
     -  If you want to have an additional functionality such as generating graphs, you would need to install Graphviz separately.
 
 ## Config Doxygen
-1. Create workspace and then create Doxyfile
+1. Create workspace, and put the source code there if you don't have the code already, and then create Doxyfile
 ```bash
 $ mkdir botlab_ws
 $ doxygen -g config_file_name
@@ -60,7 +60,7 @@ $ mkdir doxygen_ws
 $ doxygen Doxyfile
 ```
 
-Created a doxygen workspace where the doxygen will output the document to. And the `/html` is all you need. We can read the document locally by access the `/html/index.html` page. Below is my file system for example.
+Within the workspace where your `Doxyfile` and other source code is at, create a doxygen workspace where the doxygen will output the document to. And the `/html` is all you need. We can read the document locally by access the `/html/index.html` page. Below is my file system for example.
 ```
 botlab_ws
 ├── Doxyfile
@@ -77,4 +77,4 @@ $ cd botlab_ws/doxygen_ws
 $ mv html docs
 ```
 
-Clone the `doxygen_docs` repository, replace your `docs` folder with the old one and push, the GitHub Pages will be automatically updated.
+Clone the `doxygen_docs` repository to your machine, replace the old one with your `docs` folder and push, the GitHub Pages will be automatically updated.

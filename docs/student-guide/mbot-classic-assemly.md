@@ -86,27 +86,30 @@ last_modified_at: 2023-10-05 14:37:48 -0500
 
 5. Put the wheels on
 
+    {: .text-red-300 .fs-6}
+    **Under Editing...**
+
     | Components               |# | 
     |:-----------------------  |:-|
     | Scooter Wheels 84 X 24 mm  |2 |
+    | M3x20mm screws |3|
     | Hex Key  |1 | 
 
-    1. If your wheels are not assembled yet, you need to assemble it first
+    Follow the steps below: 
+    1. first, press fit the machined wheel adaptor into one side of the wheels, ensuring a part of it sticks out. 
+    2. Then press fit the flat metal piece into the opposite side, aligning the three holes. 
+    3. Insert the M3x20mm screws to secure the parts together, as demonstrated in the second step. The third and fourth steps show how to screw in the wheel adapter using the hex wrench.
 
-        Follow the steps below: first, press fit the machined wheel adaptor into one side of the wheels, ensuring a part of it sticks out. Then press fit the flat metal piece into the opposite side, aligning the three holes. Finally, insert the M3x20mm screws to secure the parts together, as demonstrated in the second step. The third and fourth steps show how to screw in the wheel adapter using the hex wrench.
+    <a class="image-link" href="/assets/images/assembly/bottomPlate/assemblewheel.jpg">
+        <img src="/assets/images/assembly/bottomPlate/assemblewheel.jpg" alt="" style="max-width:500px;"/>
+    </a>
 
-        <a class="image-link" href="/assets/images/assembly/bottomPlate/assemblewheel.jpg">
-            <img src="/assets/images/assembly/bottomPlate/assemblewheel.jpg" alt="" style="max-width:400px;"/>
-        </a>
+    Then you can directly put the wheel on, use the hex key to tight the wheels. Note that it is necessary to leave a nominal space between the wheel and the screw head of the motor, as depicted in the image below. 
 
-    2. If your wheels are assembled already
-
-        Then you can directly put the wheel on, use the hex key to tight the wheels. Note that it is necessary to leave a nominal space between the wheel and the screw head of the motor, as depicted in the image below. 
-
-        <div class="popup-gallery">
-            <a href="/assets/images/assembly/bottomPlate/wheelon1.jpg" title="Mount the wheel on 1"><img src="/assets/images/assembly/bottomPlate/wheelon1.jpg" width="300" height="300"></a>
-            <a href="/assets/images/assembly/bottomPlate/wheelon2.jpg" title="Mount the wheel on 2"><img src="/assets/images/assembly/bottomPlate/wheelon2.jpg" width="200" height="200"></a>
-        </div>
+    <div class="popup-gallery">
+        <a href="/assets/images/assembly/bottomPlate/wheelon1.jpg" title="Mount the wheel on 1"><img src="/assets/images/assembly/bottomPlate/wheelon1.jpg" width="340" height="300"></a>
+        <a href="/assets/images/assembly/bottomPlate/wheelon2.jpg" title="Mount the wheel on 2"><img src="/assets/images/assembly/bottomPlate/wheelon2.jpg" width="200" height="200"></a>
+    </div>
 
 6. Assemble the Robotics Control Board standoffs
 
@@ -131,23 +134,23 @@ last_modified_at: 2023-10-05 14:37:48 -0500
 
 
     <div class="popup-gallery">
-        <a href="/assets/images/assembly/bottomPlate/connectwire1.jpg" title="Connect the wires to Robotics Control Board 1"><img src="/assets/images/assembly/bottomPlate/connectwire1.jpg" width="200" height="200"></a>
-        <a href="/assets/images/assembly/bottomPlate/connectwire2.jpg" title="Connect the wires to Robotics Control Board 2"><img src="/assets/images/assembly/bottomPlate/connectwire2.jpg" width="400" height="400"></a>
-        <a href="/assets/images/assembly/bottomPlate/connectwire3.jpg" title="Connect the wires to Robotics Control Board 3"><img src="/assets/images/assembly/bottomPlate/connectwire3.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/bottomPlate/connectwire1.jpg" title="Connect the wires to Robotics Control Board 1"><img src="/assets/images/assembly/bottomPlate/connectwire1.jpg" width="150" height="200"></a>
+        <a href="/assets/images/assembly/bottomPlate/connectwire2.jpg" title="Connect the wires to Robotics Control Board 2"><img src="/assets/images/assembly/bottomPlate/connectwire2.jpg" width="300" height="400"></a>
+        <a href="/assets/images/assembly/bottomPlate/connectwire3.jpg" title="Connect the wires to Robotics Control Board 3"><img src="/assets/images/assembly/bottomPlate/connectwire3.jpg" width="150" height="200"></a>
     </div>
 
 
 8. Final step: attach the Robotics Control Board to the bottom plate
 
     <a class="image-link" href="/assets/images/assembly/bottomPlate/attachboard.jpg">
-        <img src="/assets/images/assembly/bottomPlate/attachboard.jpg" alt="" style="max-width:400px;"/>
+        <img src="/assets/images/assembly/bottomPlate/attachboard.jpg" alt="" style="max-width:300px;"/>
     </a>
 
 
 If you have successfully assembled the bottom plate, the result should look like this:
  
 <a class="image-link" href="/assets/images/assembly/bottomPlate/bottom_finish.jpg">
-  <img src="/assets/images/assembly/bottomPlate/bottom_finish.jpg" alt="" style="max-width:400px;"/>
+  <img src="/assets/images/assembly/bottomPlate/bottom_finish.jpg" alt="" style="max-width:300px;"/>
 </a>
 
 Now let's move to the middle part.
@@ -221,6 +224,14 @@ Now let's move to the middle part.
         <a href="/assets/images/assembly/middlePlate/cameramount3.jpg" title="Attach camera to camera mount"><img src="/assets/images/assembly/middlePlate/cameramount3.jpg" width="200" height="200"></a>
     </div>
 
+6. Connect the jumper wires
+
+    | Components     | #         | 
+    |:-------------|:-----------|
+    | jumper wires   |1| 
+
+    {: .text-red-300 .fs-6}
+    **Under Editing...**
 
 If you have successfully assembled the middle plate, the result should look like this:
 
@@ -232,24 +243,8 @@ Now let's move to the top part.
 
 
 ## Top Assembly
-
-1. Attach the RPLidar standoffs to the Lidar
-
-    | Components     | #         | 
-    |:-------------|:---- -------|
-    | RPLidar A1 |1| 
-    | M2.5 standoffs        |4| 
-    | M2.5 Screws   |4|
-    
-    Attach four standoffs to the Lidar as shown in the image below.
-
-    <div class="popup-gallery">
-        <a href="/assets/images/assembly/topPlate/lidarstandoff1.jpg" title="Attach lidar standoff 1"><img src="/assets/images/assembly/topPlate/lidarstandoff1.jpg" width="225" height="225"></a>
-        <a href="/assets/images/assembly/topPlate/lidarstandoff2.jpg" title="Attach lidar standoff 2"><img src="/assets/images/assembly/topPlate/lidarstandoff2.jpg" width="200" height="200"></a>
-    </div>
-
-
-2. Attach the RPLidar USB Interface to the underside of the top plate
+ 
+1. Attach the RPLidar USB Interface to the underside of the top plate
 
     | Components     | #         | 
     |:-------------|:---- -------|
@@ -266,7 +261,7 @@ Now let's move to the top part.
         <a href="/assets/images/assembly/topPlate/attachusb.jpg" title="Attach USB Interface to plate 4"><img src="/assets/images/assembly/topPlate/attachusb.jpg" width="380" ></a>
     </div>
 
-3. Attach the RPLidar to the upper side of the top plate
+2. Attach the RPLidar to the upper side of the top plate
 
     | Components     | #         | 
     |:-------------|:---- -------|
@@ -277,7 +272,7 @@ Now let's move to the top part.
         <a href="/assets/images/assembly/topPlate/attachlidar2.jpg" title="Attach lidar to plate 2"><img src="/assets/images/assembly/topPlate/attachlidar2.jpg" width="200" height="200"></a>
     </div>
 
-4. Plug in the USB cord to the RPLidar USB Interface, and fastening it with a zip tie
+3. Plug in the USB cord to the RPLidar USB Interface, and fastening it with a zip tie
 
     | Components     | #         | 
     |:-------------|:---- -------|
@@ -288,6 +283,16 @@ Now let's move to the top part.
         <a href="/assets/images/assembly/topPlate/plugusb1.jpg" title="Plug in USB 1"><img src="/assets/images/assembly/topPlate/plugusb1.jpg" width="225" height="225"></a>
         <a href="/assets/images/assembly/topPlate/plugusb2.jpg" title="Plug in USB 2"><img src="/assets/images/assembly/topPlate/plugusb2.jpg" width="200" height="200"></a>
     </div>
+
+4. Attach OLED to the top plate
+
+    | Components     | #         | 
+    |:-------------|:---- -------|
+    | OLED screen |1| 
+    | Jumper wires 4PIN head|1|
+
+    {: .text-red-300 .fs-6}
+    **Under Editing...**
 
 If you have successfully assembled the top plate, the result should look like this:
 

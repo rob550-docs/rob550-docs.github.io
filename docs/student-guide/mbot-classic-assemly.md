@@ -3,7 +3,7 @@ layout: default
 title: Mbot Classic Assembly
 parent: Student Guide
 nav_order: 1
-last_modified_at: 2023-10-05 14:37:48 -0500
+last_modified_at: 2023-10-16 14:37:48 -0500
 ---
 
 

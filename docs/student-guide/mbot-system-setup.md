@@ -17,8 +17,9 @@ The following items are needed:
 
 
 ### Contents
-* TOC
+- TOC
 {:toc}
+
 
 ## Setup Jetson Nano System
 
@@ -59,6 +60,7 @@ Password: i<3robots!
 $ cd ~/Downloads
 $ ./SecureW2_JoinNow.run     # this is wifi setup script
 ```
+- If you have message saying "...Configured Network is however not in range", it is likely that you have entered the wrong password, end the process and re-run the command.
 
 3. Run the well-known update, upgrade cycle
     ```bash
@@ -70,7 +72,8 @@ $ ./SecureW2_JoinNow.run     # this is wifi setup script
 > In this step, we are going to establish remote access using the VSCode extension. After this setup, you will be able to access the Jetson remotely using your laptop.
 
 1. Get your Jetson's IP address 
-    - Open a terminal on Jetson and run `ifconfig wlan0`, record your ip address, you will need it later    
+
+    Open a terminal on Jetson and run `ifconfig wlan0`, record your ip address, you will need it later. You can either write it down on paper, or use [wormhole tool](how-to-guide.html#how-transfer-file-from-mbot-to-your-laptop---wormhole) to send it in a txt file to your laptop.    
 
     <a class="image-link" href="/assets/images/system-setup/ifconfig.png">
     <img src="/assets/images/system-setup/ifconfig.png" alt=" " style="max-width:400px;"/>
@@ -112,8 +115,11 @@ $ ./SecureW2_JoinNow.run     # this is wifi setup script
 At this point, you should be able to connect to the Jetson using VSCode extension.
 
 ### 5. Install dependencies and services
-> In this step, we are going to access the Jetson remotely, edit config files and eventually gives
-your robot a unique name.
+> In this step, we are going to access the Jetson remotely, edit config files and eventually gives your robot a unique name.
+
+{: .text-red-300 .fs-6}
+**Under Editing...**
+
 
 1. Open a new Terminal in the VSCode remote session, then run:
 ```bash

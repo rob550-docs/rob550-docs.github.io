@@ -21,7 +21,7 @@ The following items are needed:
 {:toc}
 
 
-## Setup Jetson Nano System
+## Set up Jetson Nano System
 
 ### 1. Flash the image
 
@@ -117,12 +117,13 @@ At this point, you should be able to connect to the Jetson using VSCode extensio
 ### 5. Install dependencies and services
 > In this step, we are going to access the Jetson remotely, edit config files and eventually gives your robot a unique name.
 
-{: .text-red-300 .fs-6}
-**Under Editing...**
-
-
-1. Open a new Terminal in the VSCode remote session, then run:
+1. It is always a good practice to create a dedicated workspace when working on large-scale projects. Open a new Terminal in the VSCode remote session, then run:
 ```bash
+$ mkdir mbot_ws 
+```
+2. Clone the system utility code to your Jetson
+```bash
+$ cd mbot_ws
 $ git clone https://gitlab.eecs.umich.edu/rob550-f23/mbot_sys_utils.git
 ```
 
@@ -130,42 +131,46 @@ $ git clone https://gitlab.eecs.umich.edu/rob550-f23/mbot_sys_utils.git
 ```bash
 $ cd mbot_sys_utils/
 $ sudo ./install_scripts/install_mbot_dependencies.sh
+# you should see "Jetson Nano detected Done Installing!" at the end
 $ ./install_scripts/install_lcm.sh
+# you should see "Done! LCM is now installed." at the end
 ```
 
 3. Setup the MBot configuration
 ```bash
-$ cd mbot_sys_utils/
 # copy the config file to boot directory
 $ sudo cp mbot_config.txt /boot/firmware/
 # edit the config
 $ sudo nano /boot/firmware/mbot_config.txt
 ```
 - `mbot_hostname`: give the robot a unique hostname in this file, it should match the name written on the mbot.
+- `new_wifi_ssid` and `new_wifi_password`: you can also set up your home wifi here, enter your home Wi-Fi name and password accordingly.
 
 4. Install udev rules and services 
 ```bash
 # install udev rules
-$ cd ~/mbot_sys_utils/udev_rules
+$ cd ~/mbot_ws/mbot_sys_utils/udev_rules
 $ ./install_rules.sh
 # Install the services needed to start the networking and report the robot’s IP
-$ cd ~/mbot_sys_utils/services
+$ cd ~/mbot_ws/mbot_sys_utils/services
 $ ./install_mbot_services.sh
 ```
 
-5. Testing
-
-    Restart the robot with `sudo reboot`, the Jetson will start to reboot and the connection will drop. You will need to reload the VSCode remote window. 
-    - If the setup was successful, the robot should publish its IP address to the [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry), you can find `your_hostname.json` file under `/data` folder and check your robot's IP address there.
-    - If your hostname does not appear, you can execute the following steps for troubleshooting:
+5. Restart the robot to test
+    ```bash
+    $ sudo reboot
+    ```
+    - The Jetson will start to reboot and the connection will drop. You will need to reload the VSCode remote window. 
+    - If the setup was successful, the robot should publish its IP address to the [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry), you can find `your_hostname.json` file under `/data` folder and check your robot's IP address there. Also the OLED screen on the side will light up and print the system info.
+    - If your hostname does not appear, or OLED doesn't work, you can execute the following steps for troubleshooting:
         ```bash
-        $ cd ~/mbot_sys_utils
+        $ cd ~/mbot_ws/mbot_sys_utils
         $ ./systemctl_report.sh 
         ```
         The output will list the status of all the services, `mbot-start-network.service` and `mbot-start-network.service` both need to be `active`. If the status is "failed", ask the instructor for help.
 
     {: .note }
-    Every time the robot starts, an update to the IP JSON file is pushed to the registry. This is useful when running headless. Without a monitor, the IP registry is one way to check your current IP since it might change randomly. You can also check your IP address on the OLED screen on the side of the robot which we will set up later.
+    Every time the robot starts, an update to the IP JSON file is pushed to the registry. This is useful when running headless, the IP registry is one way to check your current IP since it might change randomly. You can also check your IP address on the OLED screen on the side of the robot.
 
 ### 6. Remote Desktop access - NoMachine
 > In this step, we are going to set up NoMachine access. Upon completion, you will be able to access the Desktop UI. This is unlike the VSCode extension, which allows access to the Jetson only over Terminal.
@@ -187,29 +192,29 @@ $ ./install_mbot_services.sh
 Now you have completed all the setup for Jetson!
 
 
-## Calibrating and Flashing the MBot
+## Set up MBot firmware
 > In this session, we are going to work on setup of the Control Board.
 
-1. Download code base
+### 1. Compile the firmware files
+1. Download code base to `/mbot_ws`. Recommend to use VSCode remote extenstion + Clone with HTTPS
     1. **Fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) to your group first, you will need to modify the firmware code for course assignment later, **then clone** your forked firmware codebase to Jetson
     2. **Clone** [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) to Jetson
     
-    Recommend to use VSCode remote extenstion + Clone with HTTPS
 
 2. Compile the firmware code to get .uf2 binary files
     1. Install lcm related stuff
         ```bash
-        $ cd ~/mbot_lcm_base
+        $ cd ~/mbot_ws/mbot_lcm_base
         $ ./scripts/install.sh
         ```
     2. Run the firmware setup script
         ```bash
-        $ cd ~/mbot_firmware
+        $ cd ~/mbot_ws/mbot_firmware
         $ ./setup.sh
         ```
     3. Build firmware
         ```bash
-        $ cd ~/mbot_firmware
+        $ cd ~/mbot_ws/mbot_firmware
         $ mkdir build
         $ cd build
         $ cmake ..
@@ -220,71 +225,76 @@ Now you have completed all the setup for Jetson!
         - The calibration script, `mbot_firmware/build/tests/mbot_calibrate_classic.uf2`
         - The MBot firmware, `mbot_firmware/build/src/mbot.uf2`
 
-3. Calibrate the MBot and flash the MBot Firmware onto the Pico. 
-    - In this step, we are going to flash the calibration script onto the Pico to calibrate it before we flash the firmware.
-    - The calibration script `mbot_calibrate_classic.uf2` detects the motor and encoder polarity and then calibrates the motor coefficients. The robot will move around for this step so you will need clear space on the floor (preferably on the same type of surface that you plan to use the robots on).
+### 2. How to use Minicom
+Before we start the calibration routine, it's important to note that there are outputs embedded in the calibration code. But, how do we view these outputs? The answer -- Minicom!
 
-    For this step, there are 2 options to proceed:
+Minicom is a program designed for serial communication that connects devices to a Linux PC via serial ports. This tool is commonly utilized for interacting with embedded systems and serial consoles. In this case, we will use Minicom to read the pico printouts from the Jetson module.
 
-    **1. Using VSCode Extention + Picotool**
-    1. Establish VSCode’s remote connection 
-    2. Installing [picotool](https://github.com/raspberrypi/picotool)
+1. Install Minicom
     ```bash
-    $ wget https://github.com/raspberrypi/picotool/archive/refs/tags/1.1.1.zip
-    $ unzip 1.1.1.zip
-    $ cd picotool-1.1.1
-    $ mkdir build && cd build
-    $ export PICO_SDK_PATH=~/mbot_firmware/lib/pico-sdk
-    $ cmake ..
-    $ make
-    $ sudo make install
+    $ sudo apt-get install minicom
     ```
-    3. Disconnect the battery's barrel plug and the USB C from the Control Board while leaving the Jetson power on. Essentially, make sure there are no cables connected to the Control Board.
-    4. To put the Pico in BOOTSEL mode, or say bootloader mode: Press and hold the `BOOTSEL` button on the board. While holding the `BOOTSEL` button down, connect the USB C back to Pico. Then release the button. 
-    5. Load the calibration file
+2. Before using Minicom, we need to identify the serial port that our device is connected to. This can be done by running the following command:
     ```bash
-    $ cd mbot_firmware 
-    $ picotool load build/tests/mbot_calibrate_classic.uf2
+    $ dmesg | grep tty
     ```
-    6. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot.
+    This command will produce lots of output. You can plug and unplug the device several times to ascertain that you are correctly identifying the device. You are looking for the last few lines of the output that starts with `/dev/tty`.
+3. Once you've identified the port, start Minicom with the following command, replacing `/dev/ttyACM0` and `9600` with your port and baud rate, respectively:
     ```bash
-    $ picotool reboot
+    $ minicom -D /dev/ttyACM0 -b 9600
     ```
-    7. The Pico will then run its calibration routine. **Don’t touch the robot while it does this procedure.**
+    In this command, -D indicates the serial port device, and -b sets the communication speed or baud rate.
+    
+    You should see something like this:
 
-    The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation.
-
-    - Repeat the step c and d above, but this time run
-    ```bash
-    $ cd mbot_firmware 
-    $ picotool load build/src/mbot.uf2
-    $ picotool reboot
-    ```
+    <a class="image-link" href="/assets/images/system-setup/minicom_result.png">
+    <img src="/assets/images/system-setup/minicom_result.png" alt=" " style="max-width:300px;"/>
+    </a>
+3. To exit Minicom, press `CTRL-A` to get to command mode, then press `X` to quit.
 
 
-    **2. Using NoMachine**  
-    1. Terminate VSCode's remote connection and establish a connection through NoMachine.
-    2. Disconnect the battery's barrel plug and the USB C from the Control Board while leaving the Jetson power on. Essentially, make sure there are no cables connected to the Control Board.
-    3. To put the Pico in BOOTSEL mode, hold down the `BOOTSEL` button on the Pico board. With the button held down, plug the Pico’s Type C cord back. Then release the button. 
-        - While in this mode, the device will mount as a mass storage peripheral (like a flash drive). During this time, you can load programs onto it by dragging and dropping .uf2 files onto the device.
-        
-        <a class="image-link" href="/assets/images/system-setup/bootsel.png">
-        <img src="/assets/images/system-setup/bootsel.png" alt=" " style="max-width:270px;"/>
-        </a>
-        <a class="image-link" href="/assets/images/system-setup/pico-nomachine.png">
-        <img src="/assets/images/system-setup/pico-nomachine.png" alt=" " style="max-width:300px;"/>
-        </a>
+### 3. Calibrate the MBot and flash the firmware
+> In this step, we are going to flash the calibration script onto the Pico to calibrate it before we flash the firmware.
 
-    4. Plug the barrel plug back into Robotics Control Board.
-    5. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot.
-    6. Open the Pico device folder in NoMachine. Drag and drop the script `mbot_calibrate_classic.uf2` into the folder. The Pico will reboot automatically, and will then run its calibration routine. **Don’t touch the robot while it does this procedure.**
+The calibration script `mbot_calibrate_classic.uf2` detects the motor and encoder polarity and then calibrates the motor coefficients. The robot will move around for this step so you will need clear space on the floor (preferably on the same type of surface that you plan to use the robots on).
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/PLdOf24KXX0?si=x7MH2hQUU5CnSrA4" title="YouTube video player" frameborder="10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-    The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation.
+There are 2 options to proceed calibration routine:
+#### Via the command-line tool (Recommended)
+1. placeholder
+2. placeholder
 
-    1. Repeat steps 1-3 from the calibration instructions to put the Pico into flashing mode.
-    2. Open the Pico device folder in NoMachine. Drag and drop the script `mbot.uf2` into the folder. The Pico will reboot automatically.
+#### Via BOOTSEL Mode  
+1. Initiate a remote connection with VSCode.
+2. Temporarily disconnect the Control Board by removing both the battery's barrel plug and USB-C while keeping the Jetson powered on. Ensure no cables are connected to the Control Board.
+3. Enter the Pico bootloader mode (BOOTSEL mode) in the following order: press and hold the BOOTSEL button on the board; reconnect the USB-C to Pico (while holding down the BOOTSEL button); release the button; and finally, reconnect the power barrel plug.
+
+    <a class="image-link" href="/assets/images/system-setup/bootsel.png">
+    <img src="/assets/images/system-setup/bootsel.png" alt=" " style="max-width:270px;"/>
+    </a>
+
+4. Upload the calibration file by entering the following commands:
+```bash
+$ cd ~/mbot_ws/mbot_firmware 
+$ sudo picotool load build/tests/mbot_calibrate_classic.uf2
+```
+
+5. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot.
+```bash
+$ sudo picotool reboot
+```
+6. The Pico will reboot automatically, and will then run its calibration routine. Allow the Pico to finish its calibration routine without interference.
+
+    <iframe width="400" height="220" src="https://www.youtube.com/embed/PLdOf24KXX0?si=x7MH2hQUU5CnSrA4" title="YouTube video player" frameborder="10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation.
+
+- Repeat the step 2 and 3 above to put the Pico to bootloader mode, but this time run
+```bash
+$ cd ~/mbot_ws/mbot_firmware
+$ sudo picotool load build/src/mbot.uf2
+$ sudo picotool reboot
+```
 
 ## Install the MBot Code
 
@@ -299,6 +309,7 @@ Now you have completed all the setup for Jetson!
 2. Install the MBot Web App
     1. Download the latest web app release and unpack it
     ```bash
+    $ cd mbot_ws
     $ wget https://github.com/MBot-Project-Development/mbot_web_app/releases/download/v1.1.0/mbot_web_app-v1.1.0.tar.gz
     $ tar -xvzf mbot_web_app-v1.1.0.tar.gz
     ```

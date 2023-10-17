@@ -226,45 +226,56 @@ Now you have completed all the setup for Jetson!
         - The MBot firmware, `mbot_firmware/build/src/mbot.uf2`
 
 ### 2. How to use Minicom
-Before we start the calibration routine, it's important to note that there are outputs embedded in the calibration code. But, how do we view these outputs? The answer -- Minicom!
+Here we introduce you the tool Minicom. It is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts from the Jetson module.
 
-Minicom is a program designed for serial communication that connects devices to a Linux PC via serial ports. This tool is commonly utilized for interacting with embedded systems and serial consoles. In this case, we will use Minicom to read the pico printouts from the Jetson module.
+1. Run the following command to start minicom
+    ```bash
+    $ minicom -D /dev/mbot_tty -b 115200
+    ```
+    `-D` indicates the serial port device, and `-b` sets the communication speed or baud rate.
 
-1. Install Minicom
+    To make the command easier to use, run the following:
     ```bash
-    $ sudo apt-get install minicom
+    # add alias to shell file
+    $ echo "alias start-minicom='minicom -D /dev/mbot_tty -b 115200'" >> ~/.bashrc
+    $ source ~/.bashrc
+    # Now you can use the minicom by just entering `start-minicom` in the terminal
+    $ start-minicom
     ```
-2. Before using Minicom, we need to identify the serial port that our device is connected to. This can be done by running the following command:
-    ```bash
-    $ dmesg | grep tty
-    ```
-    This command will produce lots of output. You can plug and unplug the device several times to ascertain that you are correctly identifying the device. You are looking for the last few lines of the output that starts with `/dev/tty`.
-3. Once you've identified the port, start Minicom with the following command, replacing `/dev/ttyACM0` and `9600` with your port and baud rate, respectively:
-    ```bash
-    $ minicom -D /dev/ttyACM0 -b 9600
-    ```
-    In this command, -D indicates the serial port device, and -b sets the communication speed or baud rate.
-    
-    You should see something like this:
-
-    <a class="image-link" href="/assets/images/system-setup/minicom_result.png">
-    <img src="/assets/images/system-setup/minicom_result.png" alt=" " style="max-width:300px;"/>
-    </a>
 3. To exit Minicom, press `CTRL-A` to get to command mode, then press `X` to quit.
 
+{: .note}
+When you're working on calibrating the MBot and flashing the firmware, it's suggested to have a second terminal open to run the minicom, in case you run into any errors.
 
 ### 3. Calibrate the MBot and flash the firmware
-> In this step, we are going to flash the calibration script onto the Pico to calibrate it before we flash the firmware.
+In this step, we are going to flash the calibration script onto the Pico to calibrate it before we flash the firmware. There are 2 options to proceed calibration routine:
 
-The calibration script `mbot_calibrate_classic.uf2` detects the motor and encoder polarity and then calibrates the motor coefficients. The robot will move around for this step so you will need clear space on the floor (preferably on the same type of surface that you plan to use the robots on).
+**1. Via the command-line tool (Recommended)**
+1. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot, preferably on the same type of surface that you plan to use the robots on.
+2. Run the following command, the Pico will reboot automatically, and will then run its calibration routine right away. Allow the Pico to finish its calibration routine without interference. 
+```bash
+$ cd ~/mbot_ws/mbot_firmware
+# upload the calibration scripts
+$ sudo ./upload.sh build/tests/mbot_calibrate_classic.uf2
+```
+Note that the during the calibration routine, robot should turning in **counter clockwise** circle first then turning **clockwise**. If it is not executing in this order, you might have wrong motor polarity. Modify it in the `mbot_firmware/tests/mbot_calibrate_classic.c` to be either 1 or -1.
+    ```
+    #define MOT_LEFT_POL 1    
+    #define MOT_RIGHT_POL 1
+    ```
 
+    Here is a video of expected routine:
 
-There are 2 options to proceed calibration routine:
-#### Via the command-line tool (Recommended)
-1. placeholder
-2. placeholder
+    <iframe width="400" height="227" src="https://www.youtube.com/embed/iIghZzf8ZQY?si=w_ultg6PtCwJVr2_" title="YouTube video player" frameborder="2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-#### Via BOOTSEL Mode  
+The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation.
+
+```bash
+$ cd ~/mbot_ws/mbot_firmware
+$ sudo ./upload.sh build/src/mbot.uf2
+```
+
+**2. Via BOOTSEL Mode**
 1. Initiate a remote connection with VSCode.
 2. Temporarily disconnect the Control Board by removing both the battery's barrel plug and USB-C while keeping the Jetson powered on. Ensure no cables are connected to the Control Board.
 3. Enter the Pico bootloader mode (BOOTSEL mode) in the following order: press and hold the BOOTSEL button on the board; reconnect the USB-C to Pico (while holding down the BOOTSEL button); release the button; and finally, reconnect the power barrel plug.
@@ -284,8 +295,6 @@ $ sudo picotool load build/tests/mbot_calibrate_classic.uf2
 $ sudo picotool reboot
 ```
 6. The Pico will reboot automatically, and will then run its calibration routine. Allow the Pico to finish its calibration routine without interference.
-
-    <iframe width="400" height="220" src="https://www.youtube.com/embed/PLdOf24KXX0?si=x7MH2hQUU5CnSrA4" title="YouTube video player" frameborder="10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation.
 

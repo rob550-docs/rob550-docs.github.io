@@ -35,7 +35,7 @@ last_modified_at: 2023-10-14 15:37:48 -0500
     ```
 
     {: .warning }
-    All 200-level numbers are designated for development purposes only. Therefore, students should **only** use 300-level numbers when creating new channels.
+    All 200-level numbers are reserved for development purposes only. Therefore, students should **only** use 300-level numbers when creating new channels.
 4. Make and install `mbot_lcm_base` by running
     ```bash
     $ cd ~/mbot_lcm_base
@@ -48,9 +48,10 @@ last_modified_at: 2023-10-14 15:37:48 -0500
 7. Make and upload the firmware by executing the following commands same as introduced in the system setup:
     ```bash
     # Compile the firmware
-    $ cd ~/mbot_firmware/build
+    $ cd ~/mbot_ws/mbot_firmware/build
     $ cmake ..
     $ make  
     # Upload to the control board
-    $ ./upload.sh mbot_firmware/build/src/mbot.uf2
+    $ cd ~/mbot_ws/mbot_firmware
+    $ sudo ./upload.sh build/src/mbot.uf2
     ```

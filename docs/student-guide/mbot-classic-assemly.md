@@ -295,7 +295,7 @@ Now let's move to the top part.
 
 4. Attach OLED to the top plate and wire up the bootloader control lines
 
-You must first build the OLED/Bootload cable assembly which is shown.  This cable plugs into the Jetson or RasPi 40pin header, the OLED module, and the Control board and allows both communicating with the OLED and controlling the run and bootload modes on the control board. (TODO: add pic of cable and pinout diagram of Jetson/RPi).
+    You must first build the OLED/Bootload cable assembly which is shown.  This cable plugs into the Jetson or RasPi 40pin header, the OLED module, and the Control board and allows both communicating with the OLED and controlling the run and bootload modes on the control board. (TODO: add pic of cable and pinout diagram of Jetson/RPi).
 
     | Components     | #         | 
     |:-------------|:---- -------|

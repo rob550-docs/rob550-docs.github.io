@@ -18,7 +18,7 @@ last_modified_at: 2023-10-16 14:37:48 -0500
 {:toc}
 
 ## Bottom Assembly
-1. Mount the caster to the bottom
+1. Mount the caster to the bottom.
 
     | Components               |# | 
     |:-----------------------  |:-|
@@ -30,7 +30,7 @@ last_modified_at: 2023-10-16 14:37:48 -0500
     | M2 x 12mm screw          |2 | 
     | Caster housing           |1 |
 
-    Gather all required components and assemble them as depicted in the images below. Though the second and third images only show one spacer there, you need to stack the two spacers one on top of another during your assembly.
+    Gather all required components and assemble them as depicted in the images below. Though the second and third images only show one spacer there, you need to stack both spacers one on top of another during your assembly in order to match the height of the wheels.
 
     <div class="popup-gallery">
         <a href="/assets/images/assembly/bottomPlate/caster1_1.jpg" title="Mount caster 1"><img src="/assets/images/assembly/bottomPlate/caster1_1.jpg" width="200" height="200"></a>
@@ -59,7 +59,7 @@ last_modified_at: 2023-10-16 14:37:48 -0500
 
     | Components     | #         | 
     |:-------------|:---- -------|
-    | M2.5 x 6mm Screws        |4| 
+    | M2.5 x 6mm Nylock Screws        |4| 
     | Gear Motors w/ Wiring & Encoders |2| 
     
     Collect all the necessary components and assemble them as illustrated in the images below. Note that you need to align unthreaded holes in motor vertically to the holes in the motor mount, while the wires should face the back of the MBot as shown in the second figure.
@@ -70,7 +70,7 @@ last_modified_at: 2023-10-16 14:37:48 -0500
         <a href="/assets/images/assembly/bottomPlate/motormount3.jpg" title="Mount motor 3"><img src="/assets/images/assembly/bottomPlate/motormount3.jpg" width="200" height="200"></a>
     </div>
 
-4. Mount the tall 1.5” aluminum standoffs
+4. Mount the short 1.5” aluminum standoffs
 
     | Components               |# | 
     |:-----------------------  |:-|
@@ -104,7 +104,7 @@ last_modified_at: 2023-10-16 14:37:48 -0500
         <img src="/assets/images/assembly/bottomPlate/assemblewheel.jpg" alt="" style="max-width:500px;"/>
     </a>
 
-    Then you can directly put the wheel on, use the hex key to tight the wheels. Note that it is necessary to leave a nominal space between the wheel and the screw head of the motor, as depicted in the image below. 
+    Then you can directly put the wheel on, use the hex key to tight the wheels. Note that it is necessary to leave a bit of space between the wheel and the screw head of the motor, as depicted in the image below, otherwise the wheel hub will rub against the screws holding the motor causing excess friction or jamming the motors.
 
     <div class="popup-gallery">
         <a href="/assets/images/assembly/bottomPlate/wheelon1.jpg" title="Mount the wheel on 1"><img src="/assets/images/assembly/bottomPlate/wheelon1.jpg" width="340" height="300"></a>
@@ -126,7 +126,16 @@ last_modified_at: 2023-10-16 14:37:48 -0500
         <a href="/assets/images/assembly/bottomPlate/mbotboard2.jpg" title="Assemble the Robotics Control Board standoffs 2"><img src="/assets/images/assembly/bottomPlate/mbotboard2.jpg" width="300" height="300"></a>
     </div>
 
-7. Connect the wires to Robotics Control Board
+7. Connect the wires to Robotics Control Board.  The rainbow cables have the following signals:
+
+    | Wire Color   | Signal     | 
+    |:-------------|:-----------|
+    | Red          | Encoder B  |
+    | Orange       | Encoder A  |
+    | Yellow       | 3.3 V    |
+    | Green        | GND    |
+    | Blue         | Motor-    |
+    | Violet       | Motor+    |
 
     1. Arrange the wires through the bottom plate as shown in the image below.
     2. Examine the pins. In the case illustrated in the image, both the left and right motor have the green wire connected to the GND pin. We will use this info to connect to the Robotics Control Board.
@@ -140,7 +149,7 @@ last_modified_at: 2023-10-16 14:37:48 -0500
     </div>
 
 
-8. Final step: attach the Robotics Control Board to the bottom plate
+9. Final step: attach the Robotics Control Board to the bottom plate
 
     <a class="image-link" href="/assets/images/assembly/bottomPlate/attachboard.jpg">
         <img src="/assets/images/assembly/bottomPlate/attachboard.jpg" alt="" style="max-width:300px;"/>

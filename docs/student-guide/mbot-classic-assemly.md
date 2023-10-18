@@ -149,7 +149,7 @@ last_modified_at: 2023-10-16 14:37:48 -0500
     </div>
 
 
-9. Final step: attach the Robotics Control Board to the bottom plate
+8. Final step: attach the Robotics Control Board to the bottom plate
 
     <a class="image-link" href="/assets/images/assembly/bottomPlate/attachboard.jpg">
         <img src="/assets/images/assembly/bottomPlate/attachboard.jpg" alt="" style="max-width:300px;"/>

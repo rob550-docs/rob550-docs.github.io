@@ -135,7 +135,7 @@ last_modified_at: 2023-10-16 14:37:48 -0500
     | Yellow       | 3.3 V    |
     | Green        | GND    |
     | Blue         | Motor-    |
-    | Violet       | Motor+    |
+    | Black       | Motor+    |
 
     1. Arrange the wires through the bottom plate as shown in the image below.
     2. Examine the pins. In the case illustrated in the image, both the left and right motor have the green wire connected to the GND pin. We will use this info to connect to the Robotics Control Board.
@@ -293,12 +293,16 @@ Now let's move to the top part.
         <a href="/assets/images/assembly/topPlate/plugusb2.jpg" title="Plug in USB 2"><img src="/assets/images/assembly/topPlate/plugusb2.jpg" width="200" height="200"></a>
     </div>
 
-4. Attach OLED to the top plate
+4. Attach OLED to the top plate and wire up the bootloader control lines
+
+You must first build the OLED/Bootload cable assembly which is shown.  This cable plugs into the Jetson or RasPi 40pin header, the OLED module, and the Control board and allows both communicating with the OLED and controlling the run and bootload modes on the control board.
+
+[TODO: add pic of cable and pinout diagram of Jetson/RPi]
 
     | Components     | #         | 
     |:-------------|:---- -------|
     | OLED screen |1| 
-    | Jumper wires 4PIN head|1|
+    | OLED cable assembly 4PIN head|1|
 
     {: .text-red-300 .fs-6}
     **Under Editing...**

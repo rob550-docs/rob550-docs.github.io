@@ -156,11 +156,11 @@ last_modified_at: 2023-10-16 14:37:48 -0500
     </a>
 
 
-If you have successfully assembled the bottom plate, the result should look like this:
+    If you have successfully assembled the bottom plate, the result should look like this:
  
-<a class="image-link" href="/assets/images/assembly/bottomPlate/bottom_finish.jpg">
-  <img src="/assets/images/assembly/bottomPlate/bottom_finish.jpg" alt="" style="max-width:300px;"/>
-</a>
+    <a class="image-link" href="/assets/images/assembly/bottomPlate/bottom_finish.jpg">
+        <img src="/assets/images/assembly/bottomPlate/bottom_finish.jpg" alt="" style="max-width:300px;"/>
+    </a>
 
 Now let's move to the middle part.
 

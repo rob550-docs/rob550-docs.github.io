@@ -280,17 +280,21 @@ Now let's move to the middle part.
     | Components     | #         | 
     |:-------------|:---- -------|
     | camera mount |1| 
+    | transparent spacer for camera|1|
     | M2 x 8mm Screws        |4| 
     | M2.5 x 8mm Screws     |2| 
 
     Note that the OLED mount and the camera mount are both white, but they are different!   
 
-    Attach the camera mount below the middle plate with the screw slot facing upwards, as shown in the image. Next, attach the camera to the mount and **put a laser cut spacer between camera and the mount** to protect the components on the camera's back.
+    Attach the camera mount below the middle plate with the screw slot facing upwards, as shown in the image. Next, attach the camera to the mount and put the transparent spacer between camera and the mount to protect the components on the camera's electronics.
 
     <div class="popup-gallery">
         <a href="/assets/images/assembly/middlePlate/cameramount1.jpg" title="Attach camera mount to plate 1"><img src="/assets/images/assembly/middlePlate/cameramount1.jpg" width="200" height="200"></a>
         <a href="/assets/images/assembly/middlePlate/cameramount2.jpg" title="Attach camera mount to plate 2"><img src="/assets/images/assembly/middlePlate/cameramount2.jpg" width="200" height="200"></a>
+   </div>
+    <div class="popup-gallery">
         <a href="/assets/images/assembly/middlePlate/cameramount3.jpg" title="Attach camera to camera mount"><img src="/assets/images/assembly/middlePlate/cameramount3.jpg" width="200" height="200"></a>
+        <a href="/assets/images/assembly/middlePlate/cameramount4.jpg" title="Attach camera to camera mount"><img src="/assets/images/assembly/middlePlate/cameramount4.jpg" width="200" height="200"></a>
     </div>
 
 7. Assemble the jumper wires

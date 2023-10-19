@@ -13,3 +13,6 @@ last_modified_at: 2023-10-19 14:20:48 -0500
     - Check if the robot type has changed to diff drive in `src/mbot.h`: #define MBOT_DRIVE_TYPE DIFFERENTIAL_DRIVE
 2. IP registry
     - The IP registry token needs to be updates in `mbot_sys_utils/mbot_config.txt`
+
+3. `mbot_autonomy`
+    - Change/check the MOTION CONTROLLER in `mbot_autonomy/CMakeLists.txt` 

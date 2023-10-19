@@ -3,9 +3,11 @@ layout: default
 title: MBot System Setup
 parent: Student Guide
 nav_order: 2
-last_modified_at: 2023-10-19 13:37:48 -0500
+last_modified_at: 2023-10-19 16:37:48 -0500
 ---
 
+{: .important}
+A major update is scheduled for release next Tuesday, please note that this guide is still a work in progress.
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
 
@@ -197,8 +199,7 @@ Now you have completed all the setup for Jetson!
 
 ### 1. Compile the firmware files
 1. Download code base to `/mbot_ws`. Recommend to use VSCode remote extenstion + Clone with HTTPS
-    1. **Fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) to your group first, you will need to modify the firmware code for course assignment later, **then clone** your forked firmware codebase to Jetson
-    2. **Clone** [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) to Jetson
+    - **Fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) and [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to Jetson
     
 
 2. Compile the firmware code to get .uf2 binary files

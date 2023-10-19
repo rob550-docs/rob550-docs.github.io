@@ -3,7 +3,7 @@ layout: default
 title: LCM Guide
 parent: Student Guide
 nav_order: 4
-last_modified_at: 2023-10-14 15:37:48 -0500
+last_modified_at: 2023-10-19 15:37:48 -0500
 ---
 
 > The guide introduces you how to leverage LCM for your project.
@@ -38,7 +38,7 @@ last_modified_at: 2023-10-14 15:37:48 -0500
     All 200-level numbers are reserved for development purposes only. Therefore, students should **only** use 300-level numbers when creating new channels.
 4. Make and install `mbot_lcm_base` by running
     ```bash
-    $ cd ~/mbot_lcm_base
+    $ cd ~/mbot_ws/mbot_lcm_base
     $ ./scripts/install.sh
     ```
     Now your lcm base is good to go. Next we want to update the firmware base.

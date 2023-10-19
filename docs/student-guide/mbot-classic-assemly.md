@@ -281,12 +281,17 @@ Now let's move to the middle part.
     |:-------------|:---- -------|
     | camera mount |1| 
     | transparent spacer for camera|1|
-    | M2 x 8mm Screws        |4| 
+    | M2 x 6mm Screws        |4| 
     | M2.5 x 8mm Screws     |2| 
+    | M2.5 threaded inserts |2|
 
-    Note that the OLED mount and the camera mount are both white, but they are different!   
+    Note that the OLED mount and the camera mount are both white and look similar, but they are different!  
 
-    Attach the camera mount below the middle plate with the screw slot facing upwards, as shown in the image. Next, attach the camera to the mount and put the transparent spacer between camera and the mount to protect the components on the camera's electronics.
+    1. Insert the threaded inserts into the camera mount, you need soldering iron for this to heat up the inserts.
+    2. Attach the camera mount below the middle plate with the screw slot facing upwards, as shown in the image.
+    2. Next, attach the camera to the mount and put the transparent spacer between camera and the mount to protect the components on the camera's electronics.
+
+        Note: If you can't find M2 x 6mm screws, M2 x 8mm will also work. However, please be cautious when using the longer screws for the top two holes, as they will stick out and against the middle plate. Avoid overtightening those top two screws.
 
     <div class="popup-gallery">
         <a href="/assets/images/assembly/middlePlate/cameramount1.jpg" title="Attach camera mount to plate 1"><img src="/assets/images/assembly/middlePlate/cameramount1.jpg" width="200" height="200"></a>
@@ -393,22 +398,19 @@ Now let's move to the top part.
     |:-------------|:---- -------|
     | OLED screen |1| 
     | OLED mount  |1|
-    | M2 x 8mm screws  |2|
+    | M2 x 8mm screws  |4|
     | M2.5 x 8mm screws |2|
     | M2.5 threaded inserts |2|
     | OLED cable assembly | 1 |
 
-    Note that the OLED mount and the camera mount are both white, but they are different!
+    Note that the OLED mount and the camera mount are both white and look similar, but they are different!
 
-    1. Insert the threaded inserts into the OLED mount, you need soldering iron for this. 
-        - Check out this [Youtube video](https://youtube.com/shorts/iw2qNMok5ok?si=9-KOjTUthGDLyQjg)
-        - It's important to note that the soldering iron should not make direct contact with the OLED mount. The purpose of the soldering iron is to heat up the threaded insert. This process will allow the insert to melt into the 3D printed mount for a secure fit. 
-            <div class="popup-gallery">
-            <a href="/assets/images/assembly/topPlate/oled_mount1.jpg" title="Inserts in mount 1"><img src="/assets/images/assembly/topPlate/oled_mount1.jpg" width="200" height="225"></a>
-            <a href="/assets/images/assembly/topPlate/oled_mount2.jpg" title="Inserts in mount 2"><img src="/assets/images/assembly/topPlate/oled_mount2.jpg" width="200" height="200"></a>
-            </div>
-
-    2. Secure the OLED screen to the mount using two M2 x 8mm screws.
+    1. Insert the threaded inserts into the OLED mount, you need soldering iron for this to heat up the inserts.
+        <div class="popup-gallery">
+        <a href="/assets/images/assembly/topPlate/oled_mount1.jpg" title="Inserts in mount 1"><img src="/assets/images/assembly/topPlate/oled_mount1.jpg" width="200" height="225"></a>
+        <a href="/assets/images/assembly/topPlate/oled_mount2.jpg" title="Inserts in mount 2"><img src="/assets/images/assembly/topPlate/oled_mount2.jpg" width="200" height="200"></a>
+        </div>
+    2. Secure the OLED screen to the mount using four M2 x 8mm screws.
     3. Attach the mount to the right side of the robot (the side with the 6PIN connector) using M2.5 x 8mm screws.
     4. Connect the 4PIN connector to the OLED, ensuring that the pins align with the marked positions.
 

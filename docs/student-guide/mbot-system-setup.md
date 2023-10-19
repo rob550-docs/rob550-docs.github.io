@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Student Guide
 nav_order: 2
-last_modified_at: 2023-10-09 17:37:48 -0500
+last_modified_at: 2023-10-19 13:37:48 -0500
 ---
 
 
@@ -54,8 +54,8 @@ Password: i<3robots!
 
 ### 3. Setup Wifi and update the system
 
-1. If you are using home wifi, just connect it as you normally do
-2. If you are using MWireless, run the following commands and enter your credentials when prompted
+1. If you are using home wifi, just connect the Jetson to your home wifi as you normally do
+2. If you are using MWireless, open a terminal on Jetson and run the following commands and enter your credentials when prompted
 ```bash
 $ cd ~/Downloads
 $ ./SecureW2_JoinNow.run     # this is wifi setup script
@@ -69,7 +69,7 @@ $ ./SecureW2_JoinNow.run     # this is wifi setup script
     ```
  
 ### 4. VSCode Remote - SSH extension
-> In this step, we are going to establish remote access using the VSCode extension. After this setup, you will be able to access the Jetson remotely using your laptop.
+> In this step, we are going to establish remote access using the VSCode extension. After this setup, you will be able to access the Jetson remotely using your laptop, external monitor will be no longer needed.
 
 1. Get your Jetson's IP address 
 
@@ -176,11 +176,11 @@ $ ./install_mbot_services.sh
 > In this step, we are going to set up NoMachine access. Upon completion, you will be able to access the Desktop UI. This is unlike the VSCode extension, which allows access to the Jetson only over Terminal.
 
 1. Download NoMachine to your laptop from the [official site](https://www.nomachine.com/).
-    - NoMachine is a remote access software and it is pre-installed on the Jetson. 
+    - NoMachine is a remote access software and it is pre-installed on our customized Jetson. 
  
 2. Connect to Jetson using NoMachine
     - First, **unplug** your HDMI cable if it is still connected
-    - Then, open NoMachine on your laptop, connect to Jetson as shown in the image below. You will need your IP address for this step, you can check IP address from [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry).
+    - Then, open NoMachine on your laptop, connect to Jetson as shown in the image below. You will need your IP address for this step.
 
         <a class="image-link" href="/assets/images/system-setup/nomachine1.png">
         <img src="/assets/images/system-setup/nomachine1.png" alt=" " style="max-width:400px;"/>

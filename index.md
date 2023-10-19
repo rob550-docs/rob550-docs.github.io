@@ -7,8 +7,8 @@ last_modified_at: 2023-10-05 15:37:48 -0500
 
 <div style="display: flex;">
   <div style="flex: 43%; margin-right: 2%;">
-        <a class="image-link" href="/assets/images/mbot_portrait.jpg">
-            <img src="/assets/images/mbot_portrait.jpg" alt="" style="max-width:300px;"/>
+        <a class="image-link" href="/assets/images/mbot1.jpg">
+            <img src="/assets/images/mbot1.jpg" alt="" style="max-width:300px;"/>
         </a> 
   </div>
   <div style="flex: 55%;">

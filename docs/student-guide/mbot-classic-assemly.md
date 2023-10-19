@@ -9,8 +9,8 @@ last_modified_at: 2023-10-16 14:37:48 -0500
 
 > This guide will walk you through the steps needed to assemble the MBot Classic. 
 
-<a class="image-link" href="/assets/images/assembly/mbot.jpg">
-    <img src="/assets/images/assembly/mbot.jpg" alt="" style="max-width:200px;"/>
+<a class="image-link" href="/assets/images/mbot1.jpg">
+    <img src="/assets/images/mbot1.jpg" alt="" style="max-width:200px;"/>
 </a>
 
 ### Contents
@@ -283,6 +283,8 @@ Now let's move to the middle part.
     | M2 x 8mm Screws        |4| 
     | M2.5 x 8mm Screws     |2| 
 
+    Note that the OLED mount and the camera mount are both white, but they are different!   
+
     Attach the camera mount below the middle plate with the screw slot facing upwards, as shown in the image. Next, attach the camera to the mount and **put a laser cut spacer between camera and the mount** to protect the components on the camera's back.
 
     <div class="popup-gallery">
@@ -392,10 +394,25 @@ Now let's move to the top part.
     | M2.5 threaded inserts |2|
     | OLED cable assembly | 1 |
 
-    1. Insert the threaded inserts into the OLED mount.
+    Note that the OLED mount and the camera mount are both white, but they are different!
+
+    1. Insert the threaded inserts into the OLED mount, you need soldering iron for this. 
+        - Check out this [Youtube video](https://youtube.com/shorts/iw2qNMok5ok?si=9-KOjTUthGDLyQjg)
+        - It's important to note that the soldering iron should not make direct contact with the OLED mount. The purpose of the soldering iron is to heat up the threaded insert. This process will allow the insert to melt into the 3D printed mount for a secure fit. 
+            <div class="popup-gallery">
+            <a href="/assets/images/assembly/topPlate/oled_mount1.jpg" title="Inserts in mount 1"><img src="/assets/images/assembly/topPlate/oled_mount1.jpg" width="200" height="225"></a>
+            <a href="/assets/images/assembly/topPlate/oled_mount2.jpg" title="Inserts in mount 2"><img src="/assets/images/assembly/topPlate/oled_mount2.jpg" width="200" height="200"></a>
+            </div>
+
     2. Secure the OLED screen to the mount using two M2 x 8mm screws.
-    3. Attach the mount to the right side of the robot (the side with the 6PIN connector).
+    3. Attach the mount to the right side of the robot (the side with the 6PIN connector) using M2.5 x 8mm screws.
     4. Connect the 4PIN connector to the OLED, ensuring that the pins align with the marked positions.
+
+    <div class="popup-gallery">
+    <a href="/assets/images/assembly/topPlate/oled1.jpg" title="Attach OLED 1"><img src="/assets/images/assembly/topPlate/oled1.jpg" width="200" height="225"></a>
+    <a href="/assets/images/assembly/topPlate/oled2.jpg" title="Attach OLED 2"><img src="/assets/images/assembly/topPlate/oled2.jpg" width="190" height="200"></a>
+    <a href="/assets/images/assembly/topPlate/oled3.jpg" title="Attach OLED 2"><img src="/assets/images/assembly/topPlate/oled3.jpg" width="200" height="200"></a>
+    </div>
 
 5. Put the top plate on the rest of the robot body
 
@@ -403,14 +420,16 @@ Now let's move to the top part.
     |:-------------|:---- -------|
     |     4-40 thumb screw 3/8"|4| 
 
+    <a class="image-link" href="/assets/images/assembly/topPlate/top2rest.jpg">
+        <img src="/assets/images/assembly/topPlate/top2rest.jpg" alt="" style="max-width:300px;"/>
+    </a>
+
 If you have successfully assembled the top plate, the result should look like this:
 
 <a class="image-link" href="/assets/images/assembly/topPlate/topfinish.jpg">
     <img src="/assets/images/assembly/topPlate/topfinish.jpg" alt="" style="max-width:400px;"/>
 </a> 
 
-
-Now let's put all 3 parts together!
 
 
 ## Final Wiring

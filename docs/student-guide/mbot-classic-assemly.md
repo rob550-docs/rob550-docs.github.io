@@ -67,7 +67,7 @@ First, before assembling all the parts, you need to solder the encoder to the mo
     |:-------------|:---- -------|
     | M2.5 x 8mm Screws        |8| 
     | Motor Mount (3D printed) |2| 
-    | M2.5 threaded inserts    |2|
+    | M2.5 threaded inserts    |4|
 
     1. Insert the threaded inserts into the motor mount, you need soldering iron for this to heat up the inserts.
     2. Assemble them as illustrated in the images below. When attaching the mount to the bottom plate, ensure that the slot faces inward.

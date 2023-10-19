@@ -3,11 +3,11 @@ layout: default
 title: MBot System Setup
 parent: Student Guide
 nav_order: 2
-last_modified_at: 2023-10-19 16:37:48 -0500
+last_modified_at: 2023-10-19 17:35:48 -0500
 ---
 
 {: .important}
-A major update is scheduled for release next Tuesday, please note that this guide is still a work in progress.
+A major update is scheduled for release next Tuesday (10/24), please note that this guide is still a work in progress.
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
 

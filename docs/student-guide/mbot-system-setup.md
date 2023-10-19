@@ -335,7 +335,7 @@ $ sudo picotool reboot
     ```
 
     {: .highlight }
-    The web app should now be available!
+    The web app should now be available! You don't have to re-run any of these steps; the web app will automatically start when you start the robot.
 
     {: .note }
     You can use the web app by going to your browser and typing in the robot’s IP address. <br>
@@ -344,19 +344,19 @@ $ sudo picotool reboot
 
 3. Install the RPLidar driver
 ```bash
-$ cd ~/rplidar_lcm_driver/
+$ cd ~/mbot_ws/rplidar_lcm_driver/
 $ ./scripts/install.sh
 ```
 4. Install the MBot Autonomy code
 ```bash
-$ cd ~/mbot_autonomy/
+$ cd ~/mbot_ws/mbot_autonomy/
 $ ./scripts/install.sh
 ```
 - The autonomy code includes SLAM and a motion controller program.
 
 5. Install the MBot Bridge and API 
     ```bash
-    $ cd ~/mbot_bridge/
+    $ cd ~/mbot_ws/mbot_bridge/
     $ ./scripts/install.sh
     ```
     - The MBot Bridge includes a server that bridges student code with the MBot software, as well as APIs in C++ and Python.

@@ -67,8 +67,10 @@ First, before assembling all the parts, you need to solder the encoder to the mo
     |:-------------|:---- -------|
     | M2.5 x 8mm Screws        |8| 
     | Motor Mount (3D printed) |2| 
+    | M2.5 threaded inserts    |2|
 
-    Collect all the necessary components and assemble them as illustrated in the images below. When attaching the mount to the bottom plate, ensure that the slot faces inward.
+    1. Insert the threaded inserts into the motor mount, you need soldering iron for this to heat up the inserts.
+    2. Assemble them as illustrated in the images below. When attaching the mount to the bottom plate, ensure that the slot faces inward.
 
     <div class="popup-gallery">
         <a href="/assets/images/assembly/bottomPlate/bracketmount1.jpg" title="Mount motor brackets 1"><img src="/assets/images/assembly/bottomPlate/bracketmount1.jpg" width="200" height="200"></a>
@@ -252,7 +254,7 @@ Now let's move to the middle part.
     | Components     | #         | 
     |:-------------|:---- -------|
     |    2.5" Aluminum standoffs|4| 
-    |    M2 x 12mm Screws  |4| 
+    |    M2.5 x 8mm Screws  |4| 
 
     <a class="image-link" href="/assets/images/assembly/middlePlate/middleplatestandoff.jpg">
         <img src="/assets/images/assembly/middlePlate/middleplatestandoff.jpg" alt="" style="max-width:400px;"/>

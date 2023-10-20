@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Student Guide
 nav_order: 2
-last_modified_at: 2023-10-19 17:35:48 -0500
+last_modified_at: 2023-10-20 16:35:48 -0500
 ---
 
 {: .important}
@@ -15,100 +15,71 @@ The following items are needed:
 1. microSD card for main storage
 2. SD adapter
 3. USB keyboard and mouse
-4. Computer display (HDMI or DP)
 
 
 ### Contents
 - TOC
 {:toc}
 
-
 ## Set up Jetson Nano System
-
 ### 1. Flash the image
-
 1. Download the latest Jetson image from this [drive folder](https://drive.google.com/drive/folders/10ffPzANIETzGku317sOp2aiBFxPmd7Kn) to your laptop.
-    - There are multiple images in the folder, download `mbot-jetson-jul31.img.xz`.
+    - There are multiple images in the folder, download `jetson-rob550_oct19.img.xz`.
     - We use the customized Ubuntu 20 instead of the official image from the NVIDIA website because the official one comes with Ubuntu 18, which is too outdated for our needs.
-2. Download [Balena Etcher](https://etcher.balena.io/) then flash the OS image to your SD card.
-    1. Open the Balena Etcher
-    2. Plug in the SD card to your laptop using SD card reader
-    3. Following the steps on Balena Etcher
+2. Download [Balena Etcher](https://etcher.balena.io/) then flash the OS image to your SD card. Plug in the SD card to your laptop using SD card reader then following the steps on Balena Etcher
 
-Now, you have an SD card with the Ubuntu system flashed on it. We will boot up the Jetson using this SD card.
+You now have an SD card with Ubuntu flashed on it for the Jetson. Keep the card in your laptop for now and proceed to the next step.
 
-### 2. Boot the Jetson Nano
+### 2. Set up system utilities
 
+If the flash succeeded, you'll find two partitions: a 124MB Volume and a 27GB Volume. Locate `mbot_config.txt` in the 124MB volume. Modify it as follows:
+- Set `mbot_hostname` following this format: `mbot-<section>-<team#>-<unique_name>`
+    - For example: if you are in the AM section team 6, and your unique_name is johndoe, you should name the robot as `mbot-AM-team6-johndoe`
+- Enter your home Wi-Fi details for `new_wifi_ssid` and `new_wifi_password` if you intend to use it at home later.
+
+### 3. Boot the Jetson Nano
 1. Insert the SD card into your Jetson. The SD card slot is located on the side opposite the USB ports. 
 
     <a class="image-link" href="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/embedded/images/jetsonNano/gettingStarted/Jetson_Nano-Getting_Started-Setup-Insert_microSD-B01.png">
     <img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/akamai/embedded/images/jetsonNano/gettingStarted/Jetson_Nano-Getting_Started-Setup-Insert_microSD-B01.png" alt="Image from NVIDIA" style="max-width:300px;"/>
     </a>
 
-2. Plug in mouse, keyboard, HDMI cable with external monitor.
-3. Turn on the power bank and ensure that the power cables are connected as per the assembly guide.
-
-If everything runs successfully, you will have an Ubuntu 20 system ready for use.
+2. Turn on the power bank and ensure that the power cables are connected as per the assembly guide.
+3. If everything runs smoothly, the OLED screen on the side will light up, and your robot named in the second step should appear in the [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry).
+4. You can check the Jetson's IP address on the OLED screen or locate the related JSON file in the [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry) data folder.
 
 {: .note }
-Username: mbot <br>
-Password: i<3robots!
+Every time the robot starts, an update to the IP JSON file is pushed to the registry. 
 
-### 3. Setup Wifi and update the system
-
-1. If you are using home wifi, just connect the Jetson to your home wifi as you normally do
-2. If you are using MWireless, open a terminal on Jetson and run the following commands and enter your credentials when prompted
-```bash
-$ cd ~/Downloads
-$ ./SecureW2_JoinNow.run     # this is wifi setup script
-```
-- If you have message saying "...Configured Network is however not in range", it is likely that you have entered the wrong password, end the process and re-run the command.
-
-3. Run the well-known update, upgrade cycle
-    ```bash
-    $ sudo apt update
-    $ sudo apt upgrade
-    ```
- 
 ### 4. VSCode Remote - SSH extension
-> In this step, we are going to establish remote access using the VSCode extension. After this setup, you will be able to access the Jetson remotely using your laptop, external monitor will be no longer needed.
+> In this step, we are going to establish remote access using the VSCode extension. After this setup, you will be able to access the Jetson remotely using your laptop.
 
-1. Get your Jetson's IP address 
-
-    Open a terminal on Jetson and run `ifconfig wlan0`, record your ip address, you will need it later. You can either write it down on paper, or use [wormhole tool](how-to-guide.html#how-transfer-file-from-mbot-to-your-laptop---wormhole) to send it in a txt file to your laptop.    
-
-    <a class="image-link" href="/assets/images/system-setup/ifconfig.png">
-    <img src="/assets/images/system-setup/ifconfig.png" alt=" " style="max-width:400px;"/>
-    </a>
-
-2. On your laptop, install VSCode `Remote Development` extension pack
+1. On your laptop, install VSCode `Remote Development` extension pack
 
     <a class="image-link" href="/assets/images/system-setup/vscode_ssh1.png">
     <img src="/assets/images/system-setup/vscode_ssh1.png" alt=" " style="max-width:400px;"/>
     </a>
 
-3. Add the SSH connection
+2. Add the SSH connection
     >Note that your laptop needs to connect to MWireless as well.
     
     <a class="image-link" href="/assets/images/system-setup/vscode_ssh2.png">
     <img src="/assets/images/system-setup/vscode_ssh2.png" alt=" " style="max-width:400px;"/>
     </a>
 
-4. Input connection `ssh user_name@ip_address`
-
-    Here your user_name should be `mbot`, ip_address is from step 4.1.
+3. Input connection `ssh mbot@your_mbot_ip_address`
 
     <a class="image-link" href="/assets/images/system-setup/vscode_ssh3.png">
     <img src="/assets/images/system-setup/vscode_ssh3.png" alt=" " style="max-width:400px;"/>
     </a>
 
-5. Select the default config file. Note that different operating systems may have different paths, but this isn't necessarily a problem. Here in the image, we select the one contains user name.
+4. Select the default config file. Note that different operating systems may have different paths, but this isn't necessarily a problem. Here in the image, we select the one contains user name.
 
     <a class="image-link" href="/assets/images/system-setup/vscode_ssh4.png">
     <img src="/assets/images/system-setup/vscode_ssh4.png" alt=" " style="max-width:400px;"/>
     </a>
 
-6. Navigate to the "Remote Explorer" tab and click the refresh button. You should see your Jetson's IP address listed under the SSH section, indicating that your connection has been set up. 
+5. Navigate to the "Remote Explorer" tab and click the refresh button. You should see your Jetson's IP address listed under the SSH section, indicating that your connection has been set up. 
     - Click on "Connect in New Window" and enter the password `i<3robots!`. After this, your SSH session should be up and running.
     - To end the session, click on the tab on the bottom left corner labeled `SSH: xx.x.xxx.xx`. A pop-up menu with the `close remote connection` option will appear.
 
@@ -116,73 +87,18 @@ $ ./SecureW2_JoinNow.run     # this is wifi setup script
 {: .highlight }
 At this point, you should be able to connect to the Jetson using VSCode extension.
 
-### 5. Install dependencies and services
-> In this step, we are going to access the Jetson remotely, edit config files and eventually gives your robot a unique name.
+{: .note }
+Username: mbot <br>
+Password: i<3robots!
 
-1. It is always a good practice to create a dedicated workspace when working on large-scale projects. Open a new Terminal in the VSCode remote session, then run:
-```bash
-$ mkdir mbot_ws 
-```
-2. Clone the system utility code to your Jetson
-```bash
-$ cd mbot_ws
-$ git clone https://gitlab.eecs.umich.edu/rob550-f23/mbot_sys_utils.git
-```
-
-2. Run the following commands to install system utilities 
-```bash
-$ cd mbot_sys_utils/
-$ sudo ./install_scripts/install_mbot_dependencies.sh
-# you should see "Jetson Nano detected Done Installing!" at the end
-$ ./install_scripts/install_lcm.sh
-# you should see "Done! LCM is now installed." at the end
-```
-
-3. Setup the MBot configuration
-```bash
-# copy the config file to boot directory
-$ sudo cp mbot_config.txt /boot/firmware/
-# edit the config
-$ sudo nano /boot/firmware/mbot_config.txt
-```
-- `mbot_hostname`: give the robot a unique hostname in this file, it should match the name written on the mbot.
-- `new_wifi_ssid` and `new_wifi_password`: you can also set up your home wifi here, enter your home Wi-Fi name and password accordingly.
-
-4. Install udev rules and services 
-```bash
-# install udev rules
-$ cd ~/mbot_ws/mbot_sys_utils/udev_rules
-$ ./install_rules.sh
-# Install the services needed to start the networking and report the robot’s IP
-$ cd ~/mbot_ws/mbot_sys_utils/services
-$ ./install_mbot_services.sh
-```
-
-5. Restart the robot to test
-    ```bash
-    $ sudo reboot
-    ```
-    - The Jetson will start to reboot and the connection will drop. You will need to reload the VSCode remote window. 
-    - If the setup was successful, the robot should publish its IP address to the [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry), you can find `your_hostname.json` file under `/data` folder and check your robot's IP address there. Also the OLED screen on the side will light up and print the system info.
-    - If your hostname does not appear, or OLED doesn't work, you can execute the following steps for troubleshooting:
-        ```bash
-        $ cd ~/mbot_ws/mbot_sys_utils
-        $ ./systemctl_report.sh 
-        ```
-        The output will list the status of all the services, `mbot-start-network.service` and `mbot-start-network.service` both need to be `active`. If the status is "failed", ask the instructor for help.
-
-    {: .note }
-    Every time the robot starts, an update to the IP JSON file is pushed to the registry. This is useful when running headless, the IP registry is one way to check your current IP since it might change randomly. You can also check your IP address on the OLED screen on the side of the robot.
-
-### 6. Remote Desktop access - NoMachine
-> In this step, we are going to set up NoMachine access. Upon completion, you will be able to access the Desktop UI. This is unlike the VSCode extension, which allows access to the Jetson only over Terminal.
+### 5. Remote Desktop access - NoMachine
+> In this step, we are going to set up NoMachine access. Upon completion, you will be able to access the Jetson with a Desktop UI. 
 
 1. Download NoMachine to your laptop from the [official site](https://www.nomachine.com/).
     - NoMachine is a remote access software and it is pre-installed on our customized Jetson. 
  
 2. Connect to Jetson using NoMachine
-    - First, **unplug** your HDMI cable if it is still connected
-    - Then, open NoMachine on your laptop, connect to Jetson as shown in the image below. You will need your IP address for this step.
+    - Open NoMachine on your laptop, connect to Jetson as shown in the image below. You will need your IP address for this step.
 
         <a class="image-link" href="/assets/images/system-setup/nomachine1.png">
         <img src="/assets/images/system-setup/nomachine1.png" alt=" " style="max-width:400px;"/>
@@ -198,9 +114,13 @@ Now you have completed all the setup for Jetson!
 > In this session, we are going to work on setup of the Control Board.
 
 ### 1. Compile the firmware files
-1. Download code base to `/mbot_ws`. Recommend to use VSCode remote extenstion + Clone with HTTPS
-    - **Fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) and [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to Jetson
-    
+1. It is always a good practice to create a dedicated workspace when working on large-scale projects. Open a new Terminal in the VSCode remote session, then create a new folder called `mbot_ws`:
+```bash
+$ mkdir mbot_ws 
+```
+
+    Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) and [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to Jetson `/mbot_ws`.
+        
 
 2. Compile the firmware code to get .uf2 binary files
     1. Install lcm related stuff
@@ -221,10 +141,11 @@ Now you have completed all the setup for Jetson!
         $ cmake ..
         $ make
         ```
-
-    5. You can find the `.uf2` under `/build`
+    4. Now you will have 2 relevant `.uf2` files under `/build`
         - The calibration script, `mbot_firmware/build/tests/mbot_calibrate_classic.uf2`
         - The MBot firmware, `mbot_firmware/build/src/mbot.uf2`
+    
+    5. 
 
 ### 2. How to use Minicom
 Here we introduce you the tool Minicom. It is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts from the Jetson module.
@@ -233,7 +154,15 @@ Here we introduce you the tool Minicom. It is a program designed for serial comm
     ```bash
     $ minicom -D /dev/mbot_tty -b 115200
     ```
-    `-D` indicates the serial port device, and `-b` sets the communication speed or baud rate.
+    - `-D` indicates the serial port device, and `-b` sets the communication speed or baud rate.
+    - If the minicom command doesn't work, run this: `ls /dev | grep mbot`
+    ```bash
+    $ mbot@mbot-0018-shaw:/dev$ ls /dev | grep mbot
+    mbot_lcm
+    mbot_tty
+    ```
+    If you do not see the 2 outputs above, unplug the USB which connect Jetson and Pico, then plug back in.
+
 
     To make the command easier to use, run the following:
     ```bash
@@ -253,13 +182,17 @@ In this step, we are going to flash the calibration script onto the Pico to cali
 
 **1. Via the command-line tool (Recommended)**
 1. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot, preferably on the same type of surface that you plan to use the robots on.
-2. Run the following command, the Pico will reboot automatically, and will then run its calibration routine right away. Allow the Pico to finish its calibration routine without interference. 
-```bash
-$ cd ~/mbot_ws/mbot_firmware
-# upload the calibration scripts
-$ sudo ./upload.sh build/tests/mbot_calibrate_classic.uf2
-```
-Note that the during the calibration routine, robot should turning in **counter clockwise** circle first then turning **clockwise**. If it is not executing in this order, you might have wrong motor polarity. Modify it in the `mbot_firmware/tests/mbot_calibrate_classic.c` to be either 1 or -1.
+2. Run the following command, the Pico will reboot automatically, and will then run its calibration routine right away. Allow the Pico to finish its calibration routine without interference.
+
+    {: .warning}
+    Hold off on running this command until the robot is placed on the floor.
+
+    ```bash
+    $ cd ~/mbot_ws/mbot_firmware
+    # upload the calibration scripts
+    $ sudo ./upload.sh build/tests/mbot_calibrate_classic.uf2
+    ```
+Note that during the calibration routine, robot should turning in **counter clockwise** circle first then turning **clockwise**. If it is not executing in this order, you might have wrong motor polarity. Modify it in the `mbot_firmware/tests/mbot_calibrate_classic.c` to be either 1 or -1.
     ```
     #define MOT_LEFT_POL 1    
     #define MOT_RIGHT_POL 1
@@ -308,13 +241,9 @@ $ sudo picotool reboot
 
 ## Install the MBot Code
 
-1. Clone the necessary repos to your Jetson 
-    - **Clone** [RP Lidar Driver](https://gitlab.eecs.umich.edu/rob550-f23/rplidar_lcm_driver)
-    - **Clone** [MBot Bridge](https://github.com/MBot-Project-Development/mbot_bridge)
-    - **Fork** [MBot Autonomy]( ) to your group 
-    and **then clone** the forked code to Jetson
-
-    Recommend to use VSCode remote extenstion + Clone with HTTPS
+1. Clone the necessary repos to your Jetson under folder `mbot_ws`
+    - **Clone** [RP Lidar Driver](https://gitlab.eecs.umich.edu/rob550-f23/rplidar_lcm_driver) and [MBot Bridge](https://github.com/MBot-Project-Development/mbot_bridge)
+    - **Fork** [MBot Autonomy]( ) to your group and **then clone** the forked code to Jetson
 
 2. Install the MBot Web App
     1. Download the latest web app release and unpack it

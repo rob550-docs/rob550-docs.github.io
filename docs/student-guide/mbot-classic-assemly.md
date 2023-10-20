@@ -3,7 +3,7 @@ layout: default
 title: Mbot Classic Assembly
 parent: Student Guide
 nav_order: 1
-last_modified_at: 2023-10-19 12:37:48 -0500
+last_modified_at: 2023-10-20 16:37:48 -0500
 ---
 
 
@@ -67,9 +67,9 @@ First, before assembling all the parts, you need to solder the encoder to the mo
     |:-------------|:---- -------|
     | M2.5 x 8mm Screws        |8| 
     | Motor Mount (3D printed) |2| 
-    | M2.5 threaded inserts    |4|
+    | M2.5 threaded inserts    |8|
 
-    1. Insert the threaded inserts into the motor mount, you need soldering iron for this to heat up the inserts.
+    1. Insert the threaded inserts into the motor mount's bottom plate, you need soldering iron for this to heat up the inserts.
     2. Assemble them as illustrated in the images below. When attaching the mount to the bottom plate, ensure that the slot faces inward.
 
     <div class="popup-gallery">

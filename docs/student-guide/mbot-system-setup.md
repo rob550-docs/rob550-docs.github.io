@@ -23,8 +23,7 @@ The following items are needed:
 
 ## Set up Jetson Nano System
 ### 1. Flash the image
-1. Download the latest Jetson image from this [drive folder](https://drive.google.com/drive/folders/10ffPzANIETzGku317sOp2aiBFxPmd7Kn) to your laptop.
-    - There are multiple images in the folder, download `jetson-rob550_oct19.img.xz`.
+1. Download the customized Jetson image `jetson-rob550_oct19.img.xz` from this [link](https://drive.google.com/file/d/1shMJB0Bw3ebVNyrqmjEK5RyhIonqVlQh/view?usp=sharing).
     - We use the customized Ubuntu 20 instead of the official image from the NVIDIA website because the official one comes with Ubuntu 18, which is too outdated for our needs.
 2. Download [Balena Etcher](https://etcher.balena.io/) then flash the OS image to your SD card. Plug in the SD card to your laptop using SD card reader then following the steps on Balena Etcher
 
@@ -144,8 +143,6 @@ $ mkdir mbot_ws
     4. Now you will have 2 relevant `.uf2` files under `/build`
         - The calibration script, `mbot_firmware/build/tests/mbot_calibrate_classic.uf2`
         - The MBot firmware, `mbot_firmware/build/src/mbot.uf2`
-    
-    5. 
 
 ### 2. How to use Minicom
 Here we introduce you the tool Minicom. It is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts from the Jetson module.

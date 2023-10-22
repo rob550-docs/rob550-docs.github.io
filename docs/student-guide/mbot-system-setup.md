@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Student Guide
 nav_order: 2
-last_modified_at: 2023-10-20 16:35:48 -0500
+last_modified_at: 2023-10-21 21:35:48 -0500
 ---
 
 {: .important}
@@ -239,8 +239,8 @@ $ sudo picotool reboot
 ## Install the MBot Code
 
 1. Clone the necessary repos to your Jetson under folder `mbot_ws`
-    - **Clone** [RP Lidar Driver](https://gitlab.eecs.umich.edu/rob550-f23/rplidar_lcm_driver) and [MBot Bridge](https://github.com/MBot-Project-Development/mbot_bridge)
-    - **Fork** [MBot Autonomy]( ) to your group and **then clone** the forked code to Jetson
+    - **Clone** [RP Lidar Driver](https://gitlab.eecs.umich.edu/rob550-f23/rplidar_lcm_driver) and [MBot Bridge](https://gitlab.eecs.umich.edu/rob550-f23/mbot_bridge)
+    - **Fork** [MBot Autonomy](https://gitlab.eecs.umich.edu/rob550-f23/mbot_autonomy)to your group and **then clone** the forked code to Jetson
 
 2. Install the MBot Web App
     1. Download the latest web app release and unpack it

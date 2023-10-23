@@ -44,7 +44,7 @@ If the flash succeeded, the SD card will have two partitions: a 124MB Volume for
     </a>
 
 2. Turn on the power bank and ensure that the power cables are connected as per the assembly guide.
-3. If everything runs smoothly, the OLED screen on the side will light up, and your robot named in the second step should appear in the [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry).
+3. If everything runs smoothly, the OLED screen on the side will light up after a minute or so, and the robot hostname you used in the second step should appear in the [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry).
 4. You can check the Jetson's IP address on the OLED screen or locate the related JSON file in the [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry) data folder.
 
 {: .note }

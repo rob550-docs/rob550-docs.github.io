@@ -18,15 +18,15 @@ $ sudo apt-get install doxygen
 ## Clone the doxygen repo
 Clone the doxygen repo to your local mbot workspace.
 The Doxyfile is designed to use in this file structure:
-```
-.
+```bash
 ├── doxygen_docs
-│   ├── docs
-│   ├── Doxyfile
-│   ├── main_page.md
+│   ├── docs                    # docs source file
+│   ├── Doxyfile                # config file
+│   ├── include
+│   │   └── doxygen_grouping.h  # where module grouping defined
+│   ├── main_page.md            # main page of the doxygen site
 │   └── mbot-logo.png
-├── mbot_firmware
-└── example_project1
+└── mbot_firmware
 ```
 
 ## Generate the doc  

@@ -23,15 +23,15 @@ The following items are needed:
 
 ## Set up Jetson Nano System
 ### 1. Flash the image
-1. Download the customized Jetson image `jetson-rob550_oct19.img.xz` from this [link](https://drive.google.com/file/d/1shMJB0Bw3ebVNyrqmjEK5RyhIonqVlQh/view?usp=sharing).
-    - We use the customized Ubuntu 20 instead of the official image from the NVIDIA website because the official one comes with Ubuntu 18, which is too outdated for our needs.
-2. Download [Balena Etcher](https://etcher.balena.io/) then flash the OS image to your SD card. Plug in the SD card to your laptop using SD card reader then following the steps on Balena Etcher
+1. Download the custom Jetson image `jetson-rob550_oct19.img.xz` from this [link](https://drive.google.com/file/d/1shMJB0Bw3ebVNyrqmjEK5RyhIonqVlQh/view?usp=sharing).
+    - We use a custom image with Ubuntu 20.04 instead of the official image from NVIDIA because the official uses Ubuntu 18.04, which is outdated.
+2. Download [Balena Etcher](https://etcher.balena.io/) then flash the OS image to your SD card. Plug in the SD card to your laptop using SD card reader then following the steps in Balena Etcher
 
-You now have an SD card with Ubuntu flashed on it for the Jetson. Keep the card in your laptop for now and proceed to the next step.
+You now have an SD card with Ubuntu 20.04 flashed on it for the Jetson. Keep the card in your laptop for now and proceed to the next step.
 
 ### 2. Set up system utilities
 
-If the flash succeeded, you'll find two partitions: a 124MB Volume and a 27GB Volume. Locate `mbot_config.txt` in the 124MB volume. Modify it as follows:
+If the flash succeeded, the SD card will have two partitions: a 124MB Volume formatted as fat32 and a 27GB Volume formated as ext4. When you insert the SD card in your laptop, it should mount the smaller fat32 partition.  Find the file `mbot_config.txt` on this volume and modify it as follows:
 - Set `mbot_hostname` following this format: `mbot-<section>-<team#>-<unique_name>`
     - For example: if you are in the AM section team 6, and your unique_name is johndoe, you should name the robot as `mbot-AM-team6-johndoe`
 - Enter your home Wi-Fi details for `new_wifi_ssid` and `new_wifi_password` if you intend to use it at home later.

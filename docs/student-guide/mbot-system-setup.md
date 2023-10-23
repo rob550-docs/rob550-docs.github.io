@@ -118,7 +118,7 @@ Now you have completed all the setup for Jetson!
 $ mkdir mbot_ws 
 ```
 
-    Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) and [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to Jetson `/mbot_ws`.
+Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) and [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to Jetson `/mbot_ws`.
         
 
 2. Compile the firmware code to get .uf2 binary files

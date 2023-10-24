@@ -144,40 +144,15 @@ Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_fir
         - The calibration script, `mbot_firmware/build/tests/mbot_calibrate_classic.uf2`
         - The MBot firmware, `mbot_firmware/build/src/mbot.uf2`
 
-### 2. How to use Minicom
-Here we introduce you the tool Minicom. It is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts from the Jetson module.
 
-1. Run the following command to start minicom
-    ```bash
-    $ minicom -D /dev/mbot_tty -b 115200
-    ```
-    - `-D` indicates the serial port device, and `-b` sets the communication speed or baud rate.
-    - If the minicom command doesn't work, run this: `ls /dev | grep mbot`
-    ```bash
-    $ mbot@mbot-0018-shaw:/dev$ ls /dev | grep mbot
-    mbot_lcm
-    mbot_tty
-    ```
-    If you do not see the 2 outputs above, unplug the USB which connect Jetson and Pico, then plug back in.
-
-
-    To make the command easier to use, run the following:
-    ```bash
-    # add alias to shell file
-    $ echo "alias start-minicom='minicom -D /dev/mbot_tty -b 115200'" >> ~/.bashrc
-    $ source ~/.bashrc
-    # Now you can use the minicom by just entering `start-minicom` in the terminal
-    $ start-minicom
-    ```
-3. To exit Minicom, press `CTRL-A` to get to command mode, then press `X` to quit.
-
-{: .note}
-When you're working on calibrating the MBot and flashing the firmware, it's suggested to have a second terminal open to run the minicom, in case you run into any errors.
-
-### 3. Calibrate the MBot and flash the firmware
+### 2. Calibrate the MBot and flash the firmware
 In this step, we are going to flash the calibration script onto the Pico to calibrate it before we flash the firmware. There are 2 options to proceed calibration routine:
 
 **1. Via the command-line tool (Recommended)**
+
+{: .highlight }
+Note: This method will not work currently.  We are working on an update to the command-line tool.  Please unplug the 3-pin connector with white and green wires from thew 
+
 1. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot, preferably on the same type of surface that you plan to use the robots on.
 2. Run the following command, the Pico will reboot automatically, and will then run its calibration routine right away. Allow the Pico to finish its calibration routine without interference.
 
@@ -236,7 +211,41 @@ $ sudo picotool load build/src/mbot.uf2
 $ sudo picotool reboot
 ```
 
-## Install the MBot Code
+### 3. Using Minicom
+Here we introduce you the tool Minicom. It is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts from the Jetson module.
+
+1. Run the following command to start minicom
+    ```bash
+    $ minicom -D /dev/mbot_tty -b 115200
+    ```
+    - `-D` indicates the serial port device, and `-b` sets the communication speed or baud rate.
+    - If the minicom command doesn't work, run this: `ls /dev | grep mbot`
+    ```bash
+    $ mbot@mbot-0018-shaw:/dev$ ls /dev | grep mbot
+    mbot_lcm
+    mbot_tty
+    ```
+    If you do not see the 2 outputs above, unplug the USB which connect Jetson and Pico, then plug back in.
+
+
+    To make the command easier to use, run the following:
+    ```bash
+    # add alias to shell file
+    $ echo "alias start-minicom='minicom -D /dev/mbot_tty -b 115200'" >> ~/.bashrc
+    $ source ~/.bashrc
+    # Now you can use the minicom by just entering `start-minicom` in the terminal
+    $ start-minicom
+    ```
+3. To exit Minicom, press `CTRL-A` to get to command mode, then press `X` to quit.
+
+{: .note}
+When you're working on calibrating the MBot and flashing the firmware, it's suggested to have a second terminal open to run the minicom, in case you run into any errors.
+
+
+### Install the rest of the MBot Code
+
+{: .highlight }
+    The rest of the code repositories will be posted soon, for now, you should be able to get started on the Botlab, and can wait to do the following steps.
 
 1. Clone the necessary repos to your Jetson under folder `mbot_ws`
     - **Clone** [RP Lidar Driver](https://gitlab.eecs.umich.edu/rob550-f23/rplidar_lcm_driver) and [MBot Bridge](https://gitlab.eecs.umich.edu/rob550-f23/mbot_bridge)

@@ -151,7 +151,7 @@ In this step, we are going to flash the calibration script onto the Pico to cali
 **1. Via the command-line tool (Recommended)**
 
 {: .highlight }
-Note: This method will not work currently.  We are working on an update to the command-line tool.  Please unplug the 3-pin connector with white and green wires from thew 
+Note: This method will not work currently.  We are working on an update to the command-line tool.  Please unplug the 3-pin connector with white and green wires from the MBot Control Board and use the RESET and BOOTSEL button to enter bootload mode on the Pico.
 
 1. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot, preferably on the same type of surface that you plan to use the robots on.
 2. Run the following command, the Pico will reboot automatically, and will then run its calibration routine right away. Allow the Pico to finish its calibration routine without interference.
@@ -245,7 +245,7 @@ When you're working on calibrating the MBot and flashing the firmware, it's sugg
 ### Install the rest of the MBot Code
 
 {: .highlight }
-    The rest of the code repositories will be posted soon, for now, you should be able to get started on the Botlab, and can wait to do the following steps.
+Note: the rest of the code repositories will be posted soon, for now, you should be able to get started on the Botlab, and can wait to do the following steps.
 
 1. Clone the necessary repos to your Jetson under folder `mbot_ws`
     - **Clone** [RP Lidar Driver](https://gitlab.eecs.umich.edu/rob550-f23/rplidar_lcm_driver) and [MBot Bridge](https://gitlab.eecs.umich.edu/rob550-f23/mbot_bridge)

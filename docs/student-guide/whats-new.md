@@ -25,7 +25,7 @@ $ ./install_mbot_services.sh
 ```
 
 {: .important }
-To students who have tried to flash .uf2 file: <br> When you start the robot, it runs the latest flashed UR2 file. If you have only flashed `mbot_calibrate_classic.uf2` and not `mbot.uf2` yet, the robot will perform the calibration routine each time it restarts, becareful that the robot might start moving in such case.
+To students who have tried to flash .uf2 file: <br> When you start the robot, it runs the latest flashed UR2 file. If you have only flashed `mbot_calibrate_classic.uf2` and not `mbot.uf2` yet, the robot will perform the calibration routine each time it restarts, be careful that the robot might start moving in such case.
 
 Next turn off the power and turn it back on.
 To check if the updates are loaded successfully, run

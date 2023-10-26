@@ -7,7 +7,7 @@ last_modified_at: 2023-10-21 21:35:48 -0500
 ---
 
 {: .new}
-An update which all students are required to apply has been released. If you have finished [Set up Jetson Nano System](#set-up-jetson-nano-system) section, please check [What's new - 10/25](https://rob550-docs.github.io/docs/student-guide/whats-new.html). Othereise, set up the Jetson Nano system first.
+An update which all students are required to apply has been released. If you have finished [Set up Jetson Nano System](#set-up-jetson-nano-system) section, please check [What's new - 10/25](https://rob550-docs.github.io/docs/student-guide/whats-new.html). Otherwise, set up the Jetson Nano system first.
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
 

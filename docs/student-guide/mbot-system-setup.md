@@ -2,12 +2,12 @@
 layout: default
 title: MBot System Setup
 parent: Student Guide
-nav_order: 2
+nav_order: 3
 last_modified_at: 2023-10-21 21:35:48 -0500
 ---
 
-{: .important}
-A major update is scheduled for release next Tuesday (10/24), please note that this guide is still a work in progress.
+{: .new}
+An update which all students are required to apply has been released. If you have finished [Set up Jetson Nano System](#set-up-jetson-nano-system) section, please check [What's new - 10/25](https://rob550-docs.github.io/docs/student-guide/whats-new.html). Othereise, set up the Jetson Nano system first.
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
 
@@ -118,9 +118,8 @@ Now you have completed all the setup for Jetson!
 $ mkdir mbot_ws 
 ```
 
-Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) and [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to Jetson `/mbot_ws`.
+    Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) and [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to Jetson `/mbot_ws`.
         
-
 2. Compile the firmware code to get .uf2 binary files
     1. Install lcm related stuff
         ```bash
@@ -150,8 +149,8 @@ In this step, we are going to flash the calibration script onto the Pico to cali
 
 **1. Via the command-line tool (Recommended)**
 
-{: .highlight }
-Note: This method will not work currently.  We are working on an update to the command-line tool.  Please unplug the 3-pin connector with white and green wires from the MBot Control Board and use the RESET and BOOTSEL button to enter bootload mode on the Pico.
+{: .new }
+Update 10/25: This method is working now!
 
 1. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot, preferably on the same type of surface that you plan to use the robots on.
 2. Run the following command, the Pico will reboot automatically, and will then run its calibration routine right away. Allow the Pico to finish its calibration routine without interference.
@@ -162,7 +161,7 @@ Note: This method will not work currently.  We are working on an update to the c
     ```bash
     $ cd ~/mbot_ws/mbot_firmware
     # upload the calibration scripts
-    $ sudo ./upload.sh build/tests/mbot_calibrate_classic.uf2
+    $ sudo ./upload.sh flash build/tests/mbot_calibrate_classic.uf2
     ```
 Note that during the calibration routine, robot should turning in **counter clockwise** circle first then turning **clockwise**. If it is not executing in this order, you might have wrong motor polarity. Modify it in the `mbot_firmware/tests/mbot_calibrate_classic.c` to be either 1 or -1.
     ```
@@ -178,7 +177,7 @@ The calibration script will have saved parameters onto the Pico’s memory. We c
 
 ```bash
 $ cd ~/mbot_ws/mbot_firmware
-$ sudo ./upload.sh build/src/mbot.uf2
+$ sudo ./upload.sh flash build/src/mbot.uf2
 ```
 
 **2. Via BOOTSEL Mode**

@@ -2,7 +2,7 @@
 layout: default
 title: How-to Guide
 parent: Student Guide
-nav_order: 3
+nav_order: 4
 last_modified_at: 2023-10-19 13:37:48 -0500
 ---
 

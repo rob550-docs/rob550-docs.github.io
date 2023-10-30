@@ -2,7 +2,7 @@
 layout: default
 title: MBot Hardware Design
 nav_order: 4
-last_modified_at: 2023-10-23 12:20:48 -0500
+last_modified_at: 2023-10-30 14:20:48 -0500
 ---
 
 ### Contents
@@ -24,3 +24,11 @@ last_modified_at: 2023-10-23 12:20:48 -0500
 
 <iframe src="/assets/pdfs/Schematic_MBotControlBoard_V1.0.pdf" style="width:100%; height:400px;" frameborder="0"></iframe>
 
+### 3D CAD model 
+{: .py-2 }
+
+[Open Model in new tab](https://a360.co/3FDWpSI){: .btn target="_blank" }
+{: .py-1 }
+<a class="image-link" href="/assets/images/cad-model.png">
+    <img src="/assets/images/cad-model.png" alt="" style="max-width:600px;"/>
+</a>

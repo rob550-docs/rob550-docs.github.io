@@ -3,7 +3,7 @@ layout: default
 title: LCM Guide
 parent: Student Guide
 nav_order: 5
-last_modified_at: 2023-10-19 15:37:48 -0500
+last_modified_at: 2023-10-30 15:37:48 -0500
 ---
 
 > The guide introduces you how to leverage LCM for your project.
@@ -36,7 +36,18 @@ last_modified_at: 2023-10-19 15:37:48 -0500
 
     {: .warning }
     All 200-level numbers are reserved for development purposes only. Therefore, students should **only** use 300-level numbers when creating new channels.
-4. Make and install `mbot_lcm_base` by running
+4. Add the new defined type to `mbot_msgs/CMakeLists.txt` in `lcm_wrap_types` 
+```cpp
+lcm_wrap_types(
+  ...  
+  lcmtypes/slam_status_t.lcm
+  lcmtypes/exploration_status_t.lcm
+  ...
+  lcmtypes/mbot_example_t.lcm
+)
+```
+
+5. Make and install `mbot_lcm_base` by running
     ```bash
     $ cd ~/mbot_ws/mbot_lcm_base
     $ ./scripts/install.sh

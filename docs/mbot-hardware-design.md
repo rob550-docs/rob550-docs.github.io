@@ -2,7 +2,7 @@
 layout: default
 title: MBot Hardware Design
 nav_order: 4
-last_modified_at: 2023-10-30 14:20:48 -0500
+last_modified_at: 2023-10-31 14:20:48 -0500
 ---
 
 ### Contents
@@ -32,3 +32,7 @@ last_modified_at: 2023-10-30 14:20:48 -0500
 <a class="image-link" href="/assets/images/cad-model.png">
     <img src="/assets/images/cad-model.png" alt="" style="max-width:600px;"/>
 </a>
+
+### CAD STEP File
+{: .py-2 }
+[Click to download](https://drive.google.com/file/d/1D-Uv0bTrep5dP9hqFcUJzacKScKZ9SKs){: .btn target="_blank" }

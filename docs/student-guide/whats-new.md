@@ -1,12 +1,28 @@
 ---
 layout: default
-title: What's new - 10/25
+title: What's new - 11/02
 parent: Student Guide
 nav_order: 1
-last_modified_at: 2023-10-25 15:37:48 -0500
+last_modified_at: 2023-11-02 10:03:48 -0500
 ---
 
-## Update 1: system utility
+- TOC
+{:toc}
+
+## What's new - 11/02
+New LCM types have been added to [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) for [mbot_autonomy](https://gitlab.eecs.umich.edu/rob550-f23/mbot_autonomy) use. Students need to pull the updates to their forked lcm repo, and then run the following commands to re-compile and install the new lcm types.
+```bash
+$ cd mbot_lcm_base
+$ ./scripts/install.sh
+```
+
+After this update, please proceed to the "Install the Rest of the MBot Code" section and follow the steps provided.
+
+---
+
+## What's new - 10/25
+**Update 1: system utility**
+
 Some system utility files have been updated. To retrieve these updates from upstream, please execute the following commands.
 
 ```bash
@@ -40,7 +56,8 @@ Connected to active WiFi network 'exmaple'. Done.
 Autostart is set to run 
 ```
 
-## Update 2: firmware
+**Update 2: firmware**
+
 - If you just fisnihed **Set up Jetson Nano System** section, you don't need to do the Update 2. You can skip this and proceed the **Set up MBot firmware** section now.
 - If you have forked the [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f23/mbot_firmware) already, you need to update your forked code `mbot_firmware` with the upstream repo. The command line tool to do calibration and uploading firmware is fixed.
 

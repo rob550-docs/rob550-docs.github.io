@@ -12,7 +12,7 @@ last_modified_at: 2023-11-02 10:03:48 -0500
 ## What's new - 11/02
 New LCM types have been added to [mbot_lcm_base](https://gitlab.eecs.umich.edu/rob550-f23/mbot_lcm_base) for [mbot_autonomy](https://gitlab.eecs.umich.edu/rob550-f23/mbot_autonomy) use. Students need to pull the updates to their forked lcm repo, and then run the following commands to re-compile and install the new lcm types.
 ```bash
-$ cd mbot_lcm_base
+$ cd ~/mbot_ws/mbot_lcm_base
 $ ./scripts/install.sh
 ```
 

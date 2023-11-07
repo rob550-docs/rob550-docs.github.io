@@ -1,7 +1,7 @@
 ---
 layout: default
-title: How-to Guide
-parent: Student Guide
+title: Misc
+parent: How-to Guide
 nav_order: 4
 last_modified_at: 2023-10-19 13:37:48 -0500
 ---
@@ -45,8 +45,3 @@ $ wormhole send file_you_want_to_send
 # then on your laptop, receive the file:
 $ wormhole receive code-wormhole-generated
 ```
-
-## How to calibrate the camera
-
-{: .text-red-300 .fs-6}
-**Under Editing...**

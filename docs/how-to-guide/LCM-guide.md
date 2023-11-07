@@ -1,8 +1,8 @@
 ---
 layout: default
 title: LCM Guide
-parent: Student Guide
-nav_order: 5
+parent: How-to Guide
+nav_order: 3
 last_modified_at: 2023-11-02 18:37:48 -0500
 ---
 

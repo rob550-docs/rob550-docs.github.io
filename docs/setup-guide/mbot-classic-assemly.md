@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Mbot Classic Assembly
-parent: Student Guide
-nav_order: 2
+parent: Setup Guide
+nav_order: 1
 last_modified_at: 2023-10-20 16:37:48 -0500
 ---
 

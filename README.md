@@ -20,7 +20,7 @@ All the articles are located under `/docs`.
 ├── staff-guide
 │   ├── index.md
 │   └── jetson-image.md
-├── student-guide
+├── setup-guide
 │   ├── index.md
 │   ├── mbot-classic-assemly.md
 │   ├── mbot-how-to-guide.md

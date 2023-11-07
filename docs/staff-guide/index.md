@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Staff Guide
-nav_order: 5
+nav_order: 7
 has_children: true
 last_modified_at: 2023-10-05 14:37:48 -0500
 ---

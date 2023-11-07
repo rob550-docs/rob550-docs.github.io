@@ -1,16 +1,13 @@
 ---
 layout: default
 title: MBot System Setup
-parent: Student Guide
-nav_order: 3
-last_modified_at: 2023-11-02 19:03:48 -0500
+parent: Setup Guide
+nav_order: 2
+last_modified_at: 2023-11-06 16:03:48 -0500
 ---
 
 {: .new}
-[mbot_autonomy](https://gitlab.eecs.umich.edu/rob550-f23/mbot_autonomy) is released! Details in [What's new - 11/02](https://rob550-docs.github.io/docs/student-guide/whats-new.html)
-
-{: .new}
-An update which all students are required to apply has been released. If you have finished [Set up Jetson Nano System](#set-up-jetson-nano-system) section, please check [What's new - 10/25](https://rob550-docs.github.io/docs/student-guide/whats-new.html). Otherwise, set up the Jetson Nano system first.
+[mbot_autonomy](https://gitlab.eecs.umich.edu/rob550-f23/mbot_autonomy) is released! Details in [What's new - 11/02](https://rob550-docs.github.io/docs/whats-new.html)
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
 

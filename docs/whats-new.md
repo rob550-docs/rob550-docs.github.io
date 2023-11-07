@@ -1,8 +1,7 @@
 ---
 layout: default
 title: What's new - 11/02
-parent: Student Guide
-nav_order: 1
+nav_order: 2
 last_modified_at: 2023-11-02 10:03:48 -0500
 ---
 

@@ -7,7 +7,7 @@ last_modified_at: 2023-11-06 16:03:48 -0500
 ---
 
 {: .new}
-[mbot_autonomy](https://gitlab.eecs.umich.edu/rob550-f23/mbot_autonomy) is released! Details in [What's new - 11/02](https://rob550-docs.github.io/docs/whats-new.html)
+[mbot_autonomy](https://gitlab.eecs.umich.edu/rob550-f23/mbot_autonomy) is released! Details in [What's new - 11/02](/docs/whats-new)
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
 

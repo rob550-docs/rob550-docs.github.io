@@ -29,8 +29,8 @@ last_modified_at: 2023-10-31 14:20:48 -0500
 
 [Open Model in new tab](https://a360.co/3FDWpSI){: .btn target="_blank" }
 {: .py-1 }
-<a class="image-link" href="/assets/images/cad-model.png">
-    <img src="/assets/images/cad-model.png" alt="" style="max-width:600px;"/>
+<a class="image-link" href="/assets/images/how-to/cad-model.png">
+    <img src="/assets/images/how-to/cad-model.png" alt="" style="max-width:600px;"/>
 </a>
 
 ### CAD STEP File

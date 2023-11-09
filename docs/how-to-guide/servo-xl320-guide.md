@@ -80,7 +80,7 @@ You will need to specify your port name when using the XL320 library we provide.
 
 - **Option 2: Using VSCode Extension "Serial Monitor"**
 
-    Download the Extension "Serial Montior", then open the panel by clicking Terminal -> New Terminal. You should see you have a new tab: Serial Monitor terminal, you can check detected port name there.
+    Download the VSCode Extension "Serial Montior", then open the panel by clicking Terminal -> New Terminal. You should see you have a new tab: Serial Monitor, where you can check detected port name there.
 
     <a class="image-link" href="/assets/images/how-to/xl320-guide/serial_monitor.png">
     <img src="/assets/images/how-to/xl320-guide/serial_monitor.png" alt=" " style="max-width:400px;"/>
@@ -88,8 +88,22 @@ You will need to specify your port name when using the XL320 library we provide.
 
 
 ### 4. Clone the codebase
+Run the following commands to install the xl320 library
 ```bash
-$ cd mbot_ws
-$ git clone [placeholder]
+$ cd ~/mbot_ws
+$ git clone https://gitlab.eecs.umich.edu/rob550-f23/mbot_xl320_library.git
+$ cd mbot_xl320_library
+$ ./install.sh
 ```
-this is under editting...
+
+Now the library is ready to use. There are two python scripts under `/examples` for reference. 
+```bash
+$ sudo python3 rotate_in_circle.py
+# and
+$ sudo python3 rotate_full_range.py
+```
+
+To uninstall, run:
+```bash
+$ sudo pip3 uninstall -y mbot_xl320_library dynamixel_sdk
+```

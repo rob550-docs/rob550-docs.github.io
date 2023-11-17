@@ -173,4 +173,19 @@ To uninstall, run:
 ```bash
 $ sudo pip3 uninstall -y mbot_xl320_library dynamixel_sdk
 ```
-- Please do not uninstall it by `sudo rm -rf mbot_xl320_library`, this will cause error when you re-install it.
+After uninstalling, if you want to remove the folder, run:
+```bash
+$ sudo rm -rf mbot_xl320_library
+```
+- Please do not uninstall it directly by `sudo rm -rf mbot_xl320_library`, this will cause error when you re-install it.
+
+## Troubleshooting
+If you have errors saying: 
+```
+"[RxPacketError] Hardware error occurred. Check the error at Control Table (Hardware Error Status)!"
+```
+```
+"[TxRxResult] There is no status packet!"
+```
+There could be many reasons behind this issue. 
+If everything still functions but you continue to see these errors, try unplugging and then replugging the wires to ensure all connections are secure.

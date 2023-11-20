@@ -3,7 +3,7 @@ layout: default
 title: LCM Guide
 parent: How-to Guide
 nav_order: 4
-last_modified_at: 2023-11-02 18:37:48 -0500
+last_modified_at: 2023-11-20 14:37:48 -0500
 ---
 
 > The guide introduces you how to leverage LCM for your project.
@@ -30,12 +30,13 @@ last_modified_at: 2023-11-02 18:37:48 -0500
     ```cpp
     enum message_topics{
         ...
-        MBOT_EXAMPLE = 301
+        MBOT_EXAMPLE = 200
     };
     ```
 
     {: .warning }
-    All 200-level numbers are reserved for development purposes only. Therefore, students should **only** use 300-level numbers when creating new channels.
+    The channel number is limited to a maximum of 255 due to the 8-bit limit. The numbers 0 and 255 might reserved for special purposes. Therefore, 254 is your highest usable value for channel identifiers. 
+
 4. Add the new defined type to `mbot_msgs/CMakeLists.txt`:
 ```cpp
 set(LCM_FILES
@@ -54,9 +55,10 @@ set(LCM_FILES
     ```
     Now your lcm base is good to go. Next we want to update the firmware base.
 
-5. Add the same channel and number from step 3 to the enum in `mbot_firmware/comms/include/comms/mbot_channels.h`
-6. Register new LCM channel by adding it to `register_topics()` in `mbot_firmware/src/mbot.c`
-7. Make and upload the firmware by executing the following commands same as introduced in the system setup:
+6. Add the same channel and number from step 3 to the enum in `mbot_firmware/comms/include/comms/mbot_channels.h`
+7. Register new LCM channel by adding it to `register_topics()` in `mbot_firmware/src/mbot.c`, remember to define the callback functions for subscriptions.
+
+8. Make and upload the firmware by executing the following commands same as introduced in the system setup:
     ```bash
     # Compile the firmware
     $ cd ~/mbot_ws/mbot_firmware/build
@@ -66,3 +68,16 @@ set(LCM_FILES
     $ cd ~/mbot_ws/mbot_firmware
     $ sudo ./upload.sh build/src/mbot.uf2
     ```
+
+9. To publish your newly defined message from mbot_autonomy, you need to use an LCM instance to either publish to or subscribe from channels with the messages or callback functions.
+
+    Check the code in `mbot_autonomy/src/planning/motion_planner_server.cpp` as example
+    ```cpp
+    //...
+    lcm_.subscribe(PATH_REQUEST_CHANNEL, &MotionPlannerServer::handleRequest, this);
+    //...
+    lcm_.publish(CONTROLLER_PATH_CHANNEL, &path);
+    ```
+    - `lcm_.subscribe` listens for messages on PATH_REQUEST_CHANNEL. When a message is received, it triggers the callback function `handleRequest`. The `this` pointer refers to the current instance of the class.
+        - `The MotionPlannerServer::handleRequest` callback function is where we define the preferred actions to take when data arrives.
+    - `lcm_.publish` sends the `path` message on CONTROLLER_PATH_CHANNEL.

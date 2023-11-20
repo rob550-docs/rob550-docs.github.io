@@ -81,3 +81,8 @@ set(LCM_FILES
     - `lcm_.subscribe` listens for messages on PATH_REQUEST_CHANNEL. When a message is received, it triggers the callback function `handleRequest`. The `this` pointer refers to the current instance of the class.
         - `The MotionPlannerServer::handleRequest` callback function is where we define the preferred actions to take when data arrives.
     - `lcm_.publish` sends the `path` message on CONTROLLER_PATH_CHANNEL.
+
+---
+
+{: .text-grey-dk-000 .fs-2} 
+*Thanks to Jeeho Ahn for contribution.*

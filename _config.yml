@@ -15,9 +15,10 @@ favicon_ico: "/assets/images/mbot-logo.png"
 
 url: "https://rob550-docs.github.io"
 
-callouts_level: quiet # or loud
+callouts_level: quiet # or loud 
 callouts:
   highlight:
+    title: Highlight
     color: yellow
   important:
     title: Important
@@ -31,3 +32,8 @@ callouts:
   warning:
     title: Warning
     color: red
+  sanity_check:
+    title: Sanity Check
+    color: brown
+
+    

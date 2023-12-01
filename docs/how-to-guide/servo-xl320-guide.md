@@ -2,6 +2,7 @@
 layout: default
 title: Servo XL320 Guide
 parent: How-to Guide
+grand_parent: Botlab
 nav_order: 2
 last_modified_at: 2023-11-16 17:37:48 -0500
 ---

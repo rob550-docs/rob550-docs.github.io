@@ -2,6 +2,7 @@
 layout: default
 title: Camera Calibration
 parent: How-to Guide
+grand_parent: Botlab
 nav_order: 1
 last_modified_at: 2023-11-06 18:37:48 -0500
 ---

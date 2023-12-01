@@ -2,6 +2,7 @@
 layout: default
 title: MBot Hardware Design
 nav_order: 5
+parent: Botlab
 last_modified_at: 2023-10-31 14:20:48 -0500
 ---
 

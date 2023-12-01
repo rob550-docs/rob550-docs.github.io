@@ -2,6 +2,7 @@
 layout: default
 title: System Service Guide
 parent: How-to Guide
+grand_parent: Botlab
 nav_order: 3
 last_modified_at: 2023-11-20 16:45:48 -0500
 ---

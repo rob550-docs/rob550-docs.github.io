@@ -1,8 +1,8 @@
 ---
-title: Welcome
+title: Welcome!
 layout: home
 nav_order: 1
-last_modified_at: 2023-10-05 15:37:48 -0500
+last_modified_at: 2023-11-30 15:37:48 -0500
 ---
 
 <div style="display: flex;">
@@ -12,14 +12,13 @@ last_modified_at: 2023-10-05 15:37:48 -0500
         </a> 
   </div>
   <div style="flex: 55%;">
-    <p> 
-    Welcome! Whatever brought you here, we're glad you've arrived.
+<p>
+    <h3>Welcome to our site! </h3>
+    <br> 
+    Designed for educational use, here we offer insights into the hardware and software of the ROB 550 Robotic Systems Laboratory at the University of Michigan.
     <br><br>
+    Our course comprises two main segments: Armlab and Botlab. In Armlab, we focus on a 5 DOF manipulator with 7 Dynamixel servo motors. Botlab introduces the Mbot Classic, a differential-drive robot equipped with a robotics control board and NVIDIA Jetson Nano.
+</p>
 
-    This site functions as an informative platform, primarily for class use. It introduces the hardware and software employed in the ROB 550 Robotic Systems Laboratory at the University of Michigan.
-    <br><br>
-
-    The primary robot utilized in this course is named Mbot Classic. It is a differential-drive robot that integrates a robotics control board with the NVIDIA Jetson Nano.
-    </p>
   </div>
 </div>

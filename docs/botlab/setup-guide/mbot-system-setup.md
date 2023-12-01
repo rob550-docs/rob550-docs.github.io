@@ -2,12 +2,10 @@
 layout: default
 title: MBot System Setup
 parent: Setup Guide
+grand_parent: Botlab
 nav_order: 2
-last_modified_at: 2023-11-06 16:03:48 -0500
+last_modified_at: 2023-11-30 16:03:48 -0500
 ---
-
-{: .new}
-[mbot_autonomy](https://gitlab.eecs.umich.edu/rob550-f23/mbot_autonomy) is released! Details in [What's new - 11/02](/docs/whats-new)
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
 
@@ -149,9 +147,6 @@ In this step, we are going to flash the calibration script onto the Pico to cali
 
 **1. Via the command-line tool (Recommended)**
 
-{: .new }
-Update 10/25: This method is working now!
-
 1. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot, preferably on the same type of surface that you plan to use the robots on.
 2. Run the following command, the Pico will reboot automatically, and will then run its calibration routine right away. Allow the Pico to finish its calibration routine without interference.
 
@@ -242,9 +237,6 @@ When you're working on calibrating the MBot and flashing the firmware, it's sugg
 
 
 ### Install the rest of the MBot Code
-
-{: .new }
-Update 11/02: All repos under this section are released!
 
 1. Clone the necessary repos to your Jetson under folder `mbot_ws`
     - **Clone** [RP Lidar Driver](https://gitlab.eecs.umich.edu/rob550-f23/rplidar_lcm_driver) and [MBot Bridge](https://gitlab.eecs.umich.edu/rob550-f23/mbot_bridge)

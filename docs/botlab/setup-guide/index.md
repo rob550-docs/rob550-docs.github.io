@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Setup Guide
-nav_order: 3
+nav_order: 1
 has_children: true
+parent: Botlab
 last_modified_at: 2023-09-25 14:37:48 -0500
 ---
  

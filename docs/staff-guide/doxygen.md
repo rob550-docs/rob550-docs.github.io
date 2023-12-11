@@ -6,7 +6,7 @@ nav_order: 2
 last_modified_at: 2023-10-23 15:20:48 -0500
 ---
 
-> The guide introduces how the code library was generated. The content in this doc is only true for Ubuntu users
+> The guide introduces how the "MBot Software Library" under botlab was generated. The content in this doc is only true for Ubuntu users.
 
 ## Install Doxygen
 ```bash

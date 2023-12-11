@@ -35,6 +35,10 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
     </button>
     {%- endif -%}
+    <!-- If node has a redirect_url, it uses that; 
+         otherwise, it falls back to node.url. 
+         Additionally, if node.new_tab is true, the link will open in a new tab. 
+    -->
     <a href="{{ node.redirect_url | default: node.url | relative_url }}" class="nav-list-link"{% if node.new_tab %} target="_blank"{% endif %}>
       {{ node.title }}
     </a>

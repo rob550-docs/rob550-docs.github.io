@@ -6,7 +6,10 @@ nav_order: 1
 last_modified_at: 2023-09-25 14:37:48 -0500
 ---
 
-> Here is a guide on how to create a Jetson image. This document is derived from Tom's [notes](https://docs.google.com/document/d/1DL1buhZbwojC9O3xb2TjWVmkTUn2K0N1wiEUgWrj55I/edit#heading=h.dkx7mdu5b7jr).
+> Here is a guide on how to create a customized Jetson image specifically for ROB550.
+
+{: .note}
+This document is derived from Tom's [notes](https://docs.google.com/document/d/1DL1buhZbwojC9O3xb2TjWVmkTUn2K0N1wiEUgWrj55I/edit#heading=h.dkx7mdu5b7jr) and is never finished, sorry for the inconvenience if you are reading UwU
 
 ### Contents
 * TOC

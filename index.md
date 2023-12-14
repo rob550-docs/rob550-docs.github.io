@@ -13,7 +13,7 @@ last_modified_at: 2023-11-30 15:37:48 -0500
   </div>
   <div style="flex: 55%;">
 <p>
-    <h3>Welcome to our site! </h3>
+    <h3>Welcome to ROB 550 site! </h3>
     <br> 
     Designed for educational use, here we offer insights into the hardware and software of the ROB 550 Robotic Systems Laboratory at the University of Michigan.
     <br><br>

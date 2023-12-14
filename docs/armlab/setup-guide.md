@@ -152,7 +152,7 @@ Open a terminal and navigate to the folder `/launch`. Run the provided command. 
 ```bash
 $ ./launch_armlab.sh
 ```
-- This one starts all the components we need: camera, apriltag, interbotix_arm.
+- This one starts all 3 nodes we need: camera, apriltag, interbotix_arm.
 
 Then in a new terminal, run the following command:
 ```bash
@@ -163,34 +163,6 @@ $ ./launch_control_station.sh
 
 {: .note}
 These two `.sh` files combine multiple single-line commands that we need to start the project, making it simpler to initiate everything from a single location and with fewer open windows.
-
-### To launch individual node
-- Start Realsense2 node
-    ```bash
-    $ ros2 launch realsense2_camera rs_l515_launch.py
-    ```
-- Start AprilTag Dectection node 
-    ```bash
-    $ ros2 run apriltag_ros apriltag_node --ros-args \
-        -r image_rect:=/camera/color/image_raw \
-        -r camera_info:=/camera/color/camera_info \
-        --params-file `ros2 pkg prefix apriltag_ros`/share/apriltag_ros/cfg/tags_Standard41h12.yaml
-    ```
-- Start the arm node
-    ```bash
-    $ ros2 launch interbotix_xsarm_control xsarm_control.launch.py robot_model:=rx200
-    ```
-    - This command will launch rviz with the virtual robot model, the model would show exactly how the arm moving.
-    - More can be learned from the official [ROS 2 Quickstart Guide](https://docs.trossenrobotics.com/interbotix_xsarms_docs/ros_interface/ros2/quickstart.html)
-- Start the camera calibration node
-    ```bash
-    $ cd ~/image_pipeline
-    $ source install/setup.bash
-    $ ros2 run camera_calibration cameracalibrator --size 6x8 --square 0.025 \
-        --no-service-check --ros-args \
-        -r image:=/camera/color/image_raw  \
-        -p camera:=/camera
-    ```
 
 
 ### Result 
@@ -210,17 +182,4 @@ Otherwise the arm loses torque will then splash on the board  : D
 
 {: .sanity_check}
 At this stage, you should have the nodes and control station GUI launched, indicating that you have completed the setup for Armlab. You can now proceed to the checkpoints if you wish.
-
-## Fetch from upstream
-There may be changes made during the semester. To keep your codebase in sync with the upstream code, you will sometimes need to fetch updates from the original repository. Here's how to do it:
-1. First, commit and push your local changes to synchronize them with the cloud. Then, click the `Update fork` button on the webpage of your team's repository. GitLab will automatically fetch and merge everything for you on the remote side. 
-    <a class="image-link" href="/assets/images/armlab/setup-guide/update-fork.png">
-    <img src="/assets/images/armlab/setup-guide/update-fork.png" alt="" style="max-width:600px;"/>
-    </a>
-    - Alternatively, if you are comfortable with git commands, you can add a remote branch, then fetch and merge locally.
-2. Next, pull the updated team code locally:
-    1. Run “git fetch”  - to fetch the latest updates
-    2. Run “git status” - git will tell you that your branch is behind
-    3. Run “git pull” - this time git will pull the code for you, and the changes will be applied locally
-
 

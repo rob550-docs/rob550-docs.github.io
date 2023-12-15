@@ -12,7 +12,7 @@ last_modified_at: true
 
 logo: "/assets/images/robotics-logo.svg"
 favicon_ico: "/assets/images/mbot-logo.png"
-
+math: katex
 url: "https://rob550-docs.github.io"
 
 callouts_level: quiet # or loud 

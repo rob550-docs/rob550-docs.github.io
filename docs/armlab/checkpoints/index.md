@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Checkpoints
-nav_order: 3
+nav_order: 2
 parent: Armlab
 has_children: true
 last_modified_at: 2023-12-12 14:37:48 -0500

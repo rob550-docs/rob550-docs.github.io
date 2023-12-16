@@ -73,7 +73,7 @@ Key elements to include in your drawing are:
 - The tag's edges.
 
 An example of the expected result is provided for reference:
-<a class="image-link" href="/assets/images/armlab/checkpoints/checkpoint2-validate-apriltag.png"><img src="/assets/images/armlab/checkpoints/checkpoint2-validate-apriltag.png" alt="Overview of the software architecture" style="max-width:600px;"/>
+<a class="image-link" href="/assets/images/armlab/checkpoints/checkpoint2-validate-apriltag.png"><img src="/assets/images/armlab/checkpoints/checkpoint2-validate-apriltag.png" alt="" style="max-width:600px;"/>
 </a>
 
 While your result doesn't have to be identical, the goal is to verify the accuracy of the detection. A good indication of accurate detection is if your drawing aligns well with the real-world objects. This alignment ensures the reliability of the AprilTag detection output.

@@ -34,7 +34,7 @@ There are 2 ways to control the arm:
 1. Manual Mode
 
     <a class="image-link" href="/assets/images/armlab/checkpoints/checkpoint1-motion.png">
-    <img src="/assets/images/armlab/checkpoints/checkpoint1-motion.png" alt="Overview of the software architecture" style="max-width:600px;"/>
+    <img src="/assets/images/armlab/checkpoints/checkpoint1-motion.png" alt="" style="max-width:600px;"/>
     </a>
 
     1. First, click on “INITIALIZE ARM” to set the arm to its initial position. This will allow you to check the “Direct Control” box and use the slider. Moving the slider will adjust all joints of the arm.

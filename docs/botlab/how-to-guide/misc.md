@@ -34,8 +34,8 @@ There is a command-line tool, called [wormhole](https://magic-wormhole.readthedo
 
 The scenario with the wormhole tool is as follows: If you've recorded a log file on the Jetson, or just have some files need to transfer it to your laptop without uploading it to Github, you can use wormhole for this purpose. Below is an example of its usage:
 
-<a class="image-link" href="/assets/images/how-to/wormhole-tool.png">
-<img src="/assets/images/how-to/wormhole-tool.png" alt=" " style="max-width:600px;"/>
+<a class="image-link" href="/assets/images/botlab/how-to/wormhole-tool.png">
+<img src="/assets/images/botlab/how-to/wormhole-tool.png" alt=" " style="max-width:600px;"/>
 </a>
 
 ```bash

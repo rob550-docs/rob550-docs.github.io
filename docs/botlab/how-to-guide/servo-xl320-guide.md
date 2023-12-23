@@ -19,12 +19,12 @@ last_modified_at: 2023-11-16 17:37:48 -0500
 2. Once the header is in place, proceed to connect all the components as illustrated in the second image.
 3. Next, attach the power cable to the control board as shown in the third image. We use the power bank to power the control board, and use the servo port to power the two XL320 servos. For clarity, see the fourth image. Note that we are using the SV2 port, make sure to connect the GND pin and the 6V pin accordingly on both ends.
     <div class="popup-gallery">
-        <a href="/assets/images/how-to/xl320-guide/xl320_soldering.jpg" title=""><img src="/assets/images/how-to/xl320-guide/xl320_soldering.jpg" width="200" height="200"></a>
-        <a href="/assets/images/how-to/xl320-guide/xl320_daisychain.png" title=""><img src="/assets/images/how-to/xl320-guide/xl320_daisychain.png" width="200" height="200"></a>
+        <a href="/assets/images/botlab/how-to/xl320-guide/xl320_soldering.jpg" title=""><img src="/assets/images/botlab/how-to/xl320-guide/xl320_soldering.jpg" width="200" height="200"></a>
+        <a href="/assets/images/botlab/how-to/xl320-guide/xl320_daisychain.png" title=""><img src="/assets/images/botlab/how-to/xl320-guide/xl320_daisychain.png" width="200" height="200"></a>
     </div>
     <div class="popup-gallery">
-        <a href="/assets/images/how-to/xl320-guide/xl320_to_board1.jpg" title=" "><img src="/assets/images/how-to/xl320-guide/xl320_to_board1.jpg" width="200" height="200"></a>
-        <a href="/assets/images/how-to/xl320-guide/xl320_to_board2.jpg" title=" "><img src="/assets/images/how-to/xl320-guide/xl320_to_board2.jpg" width="200" height="200"></a>
+        <a href="/assets/images/botlab/how-to/xl320-guide/xl320_to_board1.jpg" title=" "><img src="/assets/images/botlab/how-to/xl320-guide/xl320_to_board1.jpg" width="200" height="200"></a>
+        <a href="/assets/images/botlab/how-to/xl320-guide/xl320_to_board2.jpg" title=" "><img src="/assets/images/botlab/how-to/xl320-guide/xl320_to_board2.jpg" width="200" height="200"></a>
     </div>
 
 ### Option 2: Using the custom UART to XL320 board 
@@ -43,8 +43,8 @@ last_modified_at: 2023-11-16 17:37:48 -0500
     - 3-Pin Rectangular Connector: Insert the wires in the order of yellow, blue, green.
     - 1-Pin Rectangular Connector: Connect the white wire.
 
-        <a class="image-link" href="/assets/images/how-to/xl320-guide/xl320_uart3.jpg">
-        <img src="/assets/images/how-to/xl320-guide/xl320_uart3.jpg" alt=" " style="max-width:300px;"/>
+        <a class="image-link" href="/assets/images/botlab/how-to/xl320-guide/xl320_uart3.jpg">
+        <img src="/assets/images/botlab/how-to/xl320-guide/xl320_uart3.jpg" alt=" " style="max-width:300px;"/>
         </a>
 
 2. Connect connectors to UART board, Jetson, and Control board
@@ -64,20 +64,20 @@ last_modified_at: 2023-11-16 17:37:48 -0500
     The third and fourth images show where to connect the 3-pin and 1-pin connectors to the Jetson Nano.
 
     <div class="popup-gallery">
-        <a href="/assets/images/how-to/xl320-guide/xl320_uart2.jpg" title=""><img src="/assets/images/how-to/xl320-guide/xl320_uart2.jpg" width="200" height="200"></a>
-        <a href="/assets/images/how-to/xl320-guide/xl320_uart1.jpg" title=""><img src="/assets/images/how-to/xl320-guide/xl320_uart1.jpg" width="200" height="200"></a>
+        <a href="/assets/images/botlab/how-to/xl320-guide/xl320_uart2.jpg" title=""><img src="/assets/images/botlab/how-to/xl320-guide/xl320_uart2.jpg" width="200" height="200"></a>
+        <a href="/assets/images/botlab/how-to/xl320-guide/xl320_uart1.jpg" title=""><img src="/assets/images/botlab/how-to/xl320-guide/xl320_uart1.jpg" width="200" height="200"></a>
     </div>
     <div class="popup-gallery">
-        <a href="/assets/images/how-to/xl320-guide/xl320_uart4.jpg" title=""><img src="/assets/images/how-to/xl320-guide/xl320_uart4.jpg" width="200" height="200"></a>
-        <a href="/assets/images/how-to/xl320-guide/xl320_uart6.jpg" title=""><img src="/assets/images/how-to/xl320-guide/xl320_uart6.jpg" width="200" height="200"></a>
+        <a href="/assets/images/botlab/how-to/xl320-guide/xl320_uart4.jpg" title=""><img src="/assets/images/botlab/how-to/xl320-guide/xl320_uart4.jpg" width="200" height="200"></a>
+        <a href="/assets/images/botlab/how-to/xl320-guide/xl320_uart6.jpg" title=""><img src="/assets/images/botlab/how-to/xl320-guide/xl320_uart6.jpg" width="200" height="200"></a>
     </div>
 
 3. Connect the 2 servos to the UART board
 
     The result should look like the image below:
 
-    <a class="image-link" href="/assets/images/how-to/xl320-guide/xl320_uart5.jpg">
-    <img src="/assets/images/how-to/xl320-guide/xl320_uart5.jpg" alt=" " style="max-width:300px;"/>
+    <a class="image-link" href="/assets/images/botlab/how-to/xl320-guide/xl320_uart5.jpg">
+    <img src="/assets/images/botlab/how-to/xl320-guide/xl320_uart5.jpg" alt=" " style="max-width:300px;"/>
     </a>
 
 ## Preparation 
@@ -91,8 +91,8 @@ Using Dynamixel Wizard, you can change the servo's ID, check the port name, and 
 2. Then plug the USB into the laptop and open the Dynamixel Wizard. 
     - Click "Scan": the application will begin scanning for any connected servos. This process may take some time. 
     - Click "Options": a window will appear as shown below, where you can deselect some options to speed up the scanning process. For instance, you can narrow the ID range, choose the default baud rate, and select only Protocol 2.0 since the XL320 uses Protocol 2.0.
-    <a class="image-link" href="/assets/images/how-to/xl320-guide/dynamixel_wizard1.png">
-    <img src="/assets/images/how-to/xl320-guide/dynamixel_wizard1.png" alt=" " style="max-width:400px;"/>
+    <a class="image-link" href="/assets/images/botlab/how-to/xl320-guide/dynamixel_wizard1.png">
+    <img src="/assets/images/botlab/how-to/xl320-guide/dynamixel_wizard1.png" alt=" " style="max-width:400px;"/>
     </a>
 
 ### 2. Check your servo's ID  
@@ -102,8 +102,8 @@ In the image below, you will notice that there are two servos: one with ID 1 and
 
 If you're unsure which servo is which, you can identify each one by toggling the LED switch on and off. This will allow you to visually confirm which servo you are configuring.
 
-<a class="image-link" href="/assets/images/how-to/xl320-guide/dynamixel_wizard2.png">
-<img src="/assets/images/how-to/xl320-guide/dynamixel_wizard2.png" alt=" " style="max-width:400px;"/>
+<a class="image-link" href="/assets/images/botlab/how-to/xl320-guide/dynamixel_wizard2.png">
+<img src="/assets/images/botlab/how-to/xl320-guide/dynamixel_wizard2.png" alt=" " style="max-width:400px;"/>
 </a>
 
 
@@ -134,8 +134,8 @@ You will need to specify your port name when using the XL320 library we provide:
 
         Download the VSCode Extension "Serial Montior", then open the panel by clicking Terminal -> New Terminal. You should see you have a new tab: Serial Monitor, where you can check detected port name there.
 
-        <a class="image-link" href="/assets/images/how-to/xl320-guide/serial_monitor.png">
-        <img src="/assets/images/how-to/xl320-guide/serial_monitor.png" alt=" " style="max-width:400px;"/>
+        <a class="image-link" href="/assets/images/botlab/how-to/xl320-guide/serial_monitor.png">
+        <img src="/assets/images/botlab/how-to/xl320-guide/serial_monitor.png" alt=" " style="max-width:400px;"/>
         </a>
 
 

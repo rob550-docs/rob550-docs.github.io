@@ -4,7 +4,7 @@ title: MBot System Setup
 parent: Setup Guide
 grand_parent: Botlab
 nav_order: 2
-last_modified_at: 2023-11-30 16:03:48 -0500
+last_modified_at: 2023-12-23 16:03:48 -0500
 ---
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
@@ -21,7 +21,7 @@ The following items are needed:
 
 ## Set up Jetson Nano System
 ### 1. Flash the image
-1. Download the custom Jetson image `jetson-rob550_oct19.img.xz` from this [link](https://drive.google.com/file/d/1shMJB0Bw3ebVNyrqmjEK5RyhIonqVlQh/view?usp=sharing).
+1. Download the custom Jetson image `jetson-rob550_oct19.img.xz` from this [link](https://www.dropbox.com/scl/fi/yxhb7gynpxxj639clfbpt/jetson-rob550_oct19.img.xz?rlkey=fq3c2ltk3bkr0fr8vvd1i4u4h&dl=0).
     - We use a custom image with Ubuntu 20.04 instead of the official image from NVIDIA because the official uses Ubuntu 18.04, which is outdated.
 2. Download [Balena Etcher](https://etcher.balena.io/) then flash the OS image to your SD card. Plug in the SD card to your laptop using SD card reader then following the steps in Balena Etcher
 
@@ -53,27 +53,27 @@ Every time the robot starts, an update to the IP JSON file is pushed to the regi
 
 1. On your laptop, install VSCode `Remote Development` extension pack
 
-    <a class="image-link" href="/assets/images/system-setup/vscode_ssh1.png">
-    <img src="/assets/images/system-setup/vscode_ssh1.png" alt=" " style="max-width:400px;"/>
+    <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh1.png">
+    <img src="/assets/images/botlab/system-setup/vscode_ssh1.png" alt=" " style="max-width:400px;"/>
     </a>
 
 2. Add the SSH connection
     >Note that your laptop needs to connect to MWireless as well.
     
-    <a class="image-link" href="/assets/images/system-setup/vscode_ssh2.png">
-    <img src="/assets/images/system-setup/vscode_ssh2.png" alt=" " style="max-width:400px;"/>
+    <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh2.png">
+    <img src="/assets/images/botlab/system-setup/vscode_ssh2.png" alt=" " style="max-width:400px;"/>
     </a>
 
 3. Input connection `ssh mbot@your_mbot_ip_address`
 
-    <a class="image-link" href="/assets/images/system-setup/vscode_ssh3.png">
-    <img src="/assets/images/system-setup/vscode_ssh3.png" alt=" " style="max-width:400px;"/>
+    <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh3.png">
+    <img src="/assets/images/botlab/system-setup/vscode_ssh3.png" alt=" " style="max-width:400px;"/>
     </a>
 
 4. Select the default config file. Note that different operating systems may have different paths, but this isn't necessarily a problem. Here in the image, we select the one contains user name.
 
-    <a class="image-link" href="/assets/images/system-setup/vscode_ssh4.png">
-    <img src="/assets/images/system-setup/vscode_ssh4.png" alt=" " style="max-width:400px;"/>
+    <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh4.png">
+    <img src="/assets/images/botlab/system-setup/vscode_ssh4.png" alt=" " style="max-width:400px;"/>
     </a>
 
 5. Navigate to the "Remote Explorer" tab and click the refresh button. You should see your Jetson's IP address listed under the SSH section, indicating that your connection has been set up. 
@@ -97,8 +97,8 @@ Password: i<3robots!
 2. Connect to Jetson using NoMachine
     - Open NoMachine on your laptop, connect to Jetson as shown in the image below. You will need your IP address for this step.
 
-        <a class="image-link" href="/assets/images/system-setup/nomachine1.png">
-        <img src="/assets/images/system-setup/nomachine1.png" alt=" " style="max-width:400px;"/>
+        <a class="image-link" href="/assets/images/botlab/system-setup/nomachine1.png">
+        <img src="/assets/images/botlab/system-setup/nomachine1.png" alt=" " style="max-width:400px;"/>
         </a>
     - Finally, enter the username: `mbot`, password: `i<3robots!` to log in.
     - Note: if the NoMachine desktop freezes, you can always restart the robot by turning the power off and then back on.
@@ -180,8 +180,8 @@ $ sudo ./upload.sh flash build/src/mbot.uf2
 2. Temporarily disconnect the Control Board by removing both the battery's barrel plug and USB-C while keeping the Jetson powered on. Ensure no cables are connected to the Control Board.
 3. Enter the Pico bootloader mode (BOOTSEL mode) in the following order: press and hold the BOOTSEL button on the board; reconnect the USB-C to Pico (while holding down the BOOTSEL button); release the button; and finally, reconnect the power barrel plug.
 
-    <a class="image-link" href="/assets/images/system-setup/bootsel.png">
-    <img src="/assets/images/system-setup/bootsel.png" alt=" " style="max-width:270px;"/>
+    <a class="image-link" href="/assets/images/botlab/system-setup/bootsel.png">
+    <img src="/assets/images/botlab/system-setup/bootsel.png" alt=" " style="max-width:270px;"/>
     </a>
 
 4. Upload the calibration file by entering the following commands:

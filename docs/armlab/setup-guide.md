@@ -84,6 +84,11 @@ At this point, you should have your team forked Armlab codebase downloaded/clone
 
 ## Installation
 To use the code, firstly, we need to install all the dependencies/SDKs we need. 
+
+{: .important}
+Use an Ethernet cable for a stable connection when running scripts. If an Ethernet cable is not available, connect to the "MWireless" network instead of "MGuest". "MGuest" may lack stability, potentially leading to interruptions or failures during the installation process.
+
+
 ### 1. Install all the dependencies and packages
     
 If this is your first time setting up, you need to install the necessary dependencies and packages. Open a terminal and navigate to folder `/install_scripts`. Then, run the following command:
@@ -91,6 +96,11 @@ If this is your first time setting up, you need to install the necessary depende
 $ ./install_Dependencies.sh
 ```
 - Wait until it's complete before proceeding to the next step.
+- **Tip:** The "TAB" key is a handy tool for auto-completing your input commands. For instance, try typing "./install_De" and then press the "TAB" key. This should automatically complete the rest of the command for you.
+- **Note:** If the auto-complete feature does not work, it often indicates insufficient permissions for the install script file, which may also prevent the file from running. To address this, grant the necessary permissions using the command:
+    ```bash
+    $ chmod +x ./install_Dependencies.sh
+    ```
 
 ### 2. Install interbotix arm 
 
@@ -130,12 +140,14 @@ Run the following command:
 ```bash
 $ echo "export ROS_DOMAIN_ID=your_station_number" >> ~/.bashrc
 ```
-- Note, replace `your_station_number` with the actual number on the wall next to your station's desk
+- Note, replace `your_station_number` with the actual number on the wall next to your station's desk. For example station 1 should have: `$ echo "export ROS_DOMAIN_ID=1" >> ~/.bashrc`
+- **Set up ROS_DOMAIN_ID is crucial. Ensure it's done correctly to prevent chaos in the lab.**{: .text-red-200} 
 - To check if you set it successfully, **open a new terminal** and run:
 ```bash
 $ printenv | grep ROS
 ```
     - where you should see the output has all the environmental variables related to ROS, and you should see ROS_DOMAIN_ID=the_number_you_set print out in the terminal
+    
 
 
 ### 6. Reboot

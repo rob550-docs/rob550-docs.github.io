@@ -95,12 +95,13 @@ If this is your first time setting up, you need to install the necessary depende
 ```bash
 $ ./install_Dependencies.sh
 ```
-- Wait until it's complete before proceeding to the next step.
 - **Tip:** The "TAB" key is a handy tool for auto-completing your input commands. For instance, try typing "./install_De" and then press the "TAB" key. This should automatically complete the rest of the command for you.
 - **Note:** If the auto-complete feature does not work, it often indicates insufficient permissions for the install script file, which may also prevent the file from running. To address this, grant the necessary permissions using the command:
     ```bash
     $ chmod +x ./install_Dependencies.sh
     ```
+
+Wait until it's complete before proceeding to the next step.
 
 ### 2. Install interbotix arm 
 
@@ -117,7 +118,7 @@ During the installation, you'll encounter prompts. For prompts related to AprilT
 {: .warning}
 Be cautious with the prompts and enter **exactly** what is specified in the image. We install the perception module separately. If you enter 'Yes' to the perceptoin module, it will result in the installation of a duplicate AprilTag module, leading to configuration issues.
 
-- Wait until it's complete before proceeding to the next step.
+Wait until it's complete before proceeding to the next step.
 
 ### 3. Move config files
 
@@ -129,10 +130,12 @@ $ ./install_LaunchFiles.sh
 
 ### 4. Install camera calibration package
 
-**Open a new terminal**, then run the following command:
+**Open a new terminal window to run the following command.** If you use an existing terminal, the installation will fail.
 ```bash
 $ ./install_Calibration.sh
 ```
+
+Wait until it’s complete before proceeding to the next step.
 
 ### 5. Set up ROS_DOMAIN_ID
 

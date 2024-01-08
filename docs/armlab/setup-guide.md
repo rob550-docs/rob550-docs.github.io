@@ -3,7 +3,7 @@ layout: default
 title: Setup Guide
 nav_order: 1
 parent: Armlab
-last_modified_at: 2024-01-04 14:37:48 -0500
+last_modified_at: 2024-01-08 14:37:48 -0500
 ---
 
 > This guide will walk you through the setup steps you need before starting Armlab.
@@ -163,7 +163,7 @@ $ sudo reboot
 After successfully installing all the necessary components for the workstation, now it is time to test.
 
 ### To launch everything
-Open a terminal and navigate to the folder `/launch`. Run the provided command. Remember that to halt any node, use `ctrl + C` in its respective terminal. Until you stop this node, the terminal will be occupied. If you need to run another command, open a new terminal.
+First, connect the camera USB and arm USB to the lab laptop, then open a terminal and navigate to the folder `/launch`. Run the provided command. Remember that to halt any node, use `ctrl + C` in its respective terminal. Until you stop this node, the terminal will be occupied. If you need to run another command, open a new terminal.
 ```bash
 $ ./launch_armlab.sh
 ```

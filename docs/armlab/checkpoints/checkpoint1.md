@@ -51,15 +51,9 @@ There are 2 ways to control the arm:
 Have team members try to pick up a block manually using the sliders and the open/close gripper buttons on the control station GUI.
 
 ### Task 1.2 Waypoints Following
-Create a new `execute` state and associate it with the execute function in `src/state_machine.py`.
-
-Enable transitions as follows:
-1. From the `idle` state to the `execute` state after clicking on "Execute" button.
-2. From the `execute` state to `estop` after clicking on "EMERGENCY STOP".
-3. Upon completion, the `execute` state should automatically transition back to `idle`.
-
-Use the existing function `execute(self)` in this script for your implementation.
-- In the function, set up a simple waypoint follower that executes the plan below by using the `RXarm.set_positions()` function, and uses `time.sleep(t)` for a reasonable amount of time for the arm to get to the waypoint.  
+Implement the `execute` state and associate it with the execute function in `src/state_machine.py`. Use the existing function `execute(self)` in this script for your implementation.
+- In the function, set up a simple waypoint follower that executes the plan below by using the `self.rxarm.set_positions()` function, and uses `time.sleep(t)` for a reasonable amount of time for the arm to get to the waypoint.
+- At the end of the function, set `self.next_state` equal to `"idle"` to transition back to the idle state.
 - The configuration space waypoints the arm should follow are given below and are stored as `self.waypoints` in the `src/state_machine.py` script as well.
 
 ```python

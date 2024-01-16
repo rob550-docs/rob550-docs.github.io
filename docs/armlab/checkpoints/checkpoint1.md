@@ -7,6 +7,8 @@ grand_parent: Armlab
 last_modified_at: 2023-12-13 14:37:48 -0500
 ---
 
+**DUE: 1/25/24**
+
 The first checkpoint is meant to be an introduction to using the GUI of the lab and to start working with the RGB-D camera. The interaction with the GUI will be under the Basic Motion section of the checkpoint, and the interaction with the RGB-D camera will be through the Camera Calibration portion of the checkpoint.
 
 

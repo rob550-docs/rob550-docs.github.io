@@ -7,6 +7,8 @@ grand_parent: Armlab
 last_modified_at: 2023-12-15 14:37:48 -0500
 ---
 
+**DUE: 2/15/24**
+
 In this part, we will first build a block detector, and then implement inverse kinematics, and eventually achieve the click-to-grab level of autonomous where you can click on the control station, and the arm will pick up the block you clicked on.
 
 ### Contents

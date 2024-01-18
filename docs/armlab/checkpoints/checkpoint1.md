@@ -92,6 +92,10 @@ Hints:
 - To create a button on the GUI, you can edit the `src/control_station.py` script, and use the block of code under “User Buttons” as a guide.
 - Consider utilizing the status message bar at the bottom of the GUI window to provide instructions or using it for your own debug purpose.
 
+Collect for report:
+- Teach your robot to cycle swapping blocks at locations (-100, 225) and (100, 225) through an intermediate location at (250,75).  
+- Report how many times you can cycle (if you can do 10, feel free to stop) and include a plot of joint angles over time for 1 cycle.
+
 {: .sanity_check}
 Anyone using your control station should be able to manually move the arm and record waypoints by clicking on your GUI. After recording, they should also be able to execute the path-following feature through the GUI interface. Successfully accomplishing this indicates that you have completed task 1.3.
 
@@ -143,7 +147,7 @@ Collect for report:
 - Task 1.2
     - Record a video of your robot playing back the waypoints 
 - Task 1.3
-    - Demonstrate the teach-and-repeat in a video by recording the process of teaching the robot and repeating at least once the cycle task
+    - Demonstrate the teach-and-repeat in a video by recording the process of teaching the robot and repeating at least once the cycle task from the "collect for report" subsection
 - Task 1.4/1.5: 
     - Record a screenshot or video of the GUI reporting world coordinates of the mouse cursor when hovering over the image using the intrinsic and extrinsic calibrations.
     - Record the reported position (x,y,z) of the center of the top of a stack of large blocks placed at the following locations for a stack size of [0,1,2,4,6] blocks (total of 20 measurements): (0,175), (-300, -75), (300, -75), (300, 325)

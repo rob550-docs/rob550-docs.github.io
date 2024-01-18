@@ -100,7 +100,7 @@ Record for report:
 - Report the equations used to turn [u,v,d] coordinates in the image frames to [x,y,z] coordinates in the world frame.
 - Describe how you verified the calibration was correct, what additional steps you took to correct it, and provide evidence for the accuracy of your calibration.
 
-Question to consider:
+Questions to consider:
 - How do the extrinsic matrices compare with the hand-measured ones? 
 - What are the sources of error, and how large are they? 
 - Is it sufficient to rely on this nominal matrix for finding points in the world?
@@ -116,6 +116,12 @@ Instructions:
 
 Finally, apply a perspective transform. This will change your image's perspective to resemble a bird's-eye view, providing a different angle of the workspace.
 
+Record for report:
+- Quantitatively or qualitatively, assess your calibration routine using the grid point projection. 
+- Which points did you use for your perspective transformation? Report the homography matrix.
+
+Questions to consider:
+- What does each of the entries of your homography matrix represent?
 
 ## Forward Kinematics
 For this part, you will work on implementing Forward Kinematics to determine the location of the end effector in the global frame.

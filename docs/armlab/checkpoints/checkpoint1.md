@@ -131,7 +131,7 @@ Question to consider:
 - What are the sources of error and how large are they? 
 
 ### Task 1.5 Extrinsic Camera Calibration
-Using physical measurements of the lab apparatus, come up with a rough extrinsic matrix for the camera. Use extrinsic matrix and the camera intrinsic matrix to map image coordinates (u,v,d) to world coordinates. Have them displayed in the GUI. 
+Using physical measurements of the lab apparatus, come up with a rough extrinsic matrix for the camera. Use the extrinsic matrix and the camera intrinsic matrix to map image coordinates (u,v,d) to world coordinates. Have them displayed in the GUI. 
 
 You may also use the `realsense-viewer` program to find a readout of the camera’s accelerometer, which should give you an approximation of the orientation of the sensor. Launch the program by running `$ realsense-viewer` in the terminal.
 

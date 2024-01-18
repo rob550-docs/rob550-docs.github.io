@@ -94,7 +94,7 @@ Hints:
 
 Collect for report:
 - Teach your robot to cycle swapping blocks at locations (-100, 225) and (100, 225) through an intermediate location at (250,75).  
-- Report how many times you can cycle (if you can do 10, feel free to stop) and include a plot of joint angles over time for 1 cycle.
+- Report how many times you can cycle (if you can do 10, feel free to stop) and include a plot of joint angles over time for 1 cycle. Hint: Use [`ros2 bag`](https://github.com/ros2/rosbag2) to record the `/rx200/joint_states` topic.
 - **Optional:** include a 3D plot of the end effector position by sending recorded joint angles through your FK equations.
 
 {: .sanity_check}

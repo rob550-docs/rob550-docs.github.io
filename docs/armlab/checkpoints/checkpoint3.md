@@ -58,17 +58,16 @@ After completing the FK and IK implementation and testing, you can now work towa
 A simplified process may look like the following:
 1. After launching the GUI, calibrate the camera using the button you created on the GUI
 2. Ensure the calibration works by moving the cursor around on the video stream on the GUI and reading the global position output
-3. Left click on a position in the frame within the reachable area of the RX200 arm
-The arm should then be able to move the end effector to that global position and close the gripper
+3. Left click on a position in the frame within the reachable area of the RX200 arm. The arm should then be able to move the end effector to that global position and close the gripper
 4. Left click again on another position in the frame that is within the reachable area of the RX200 arm to drop whatever was grabbed in the previous step
 
 This is a test to ensure that the kinematics you implemented in kinematics.py work and is capable of computing the correct joint positions to move the end effector to a desired position.
 
 ### Task 3.3 click-to-grab/click-to-place
-Implement click-to-grab/click-to-place such that you can click on a block in the video, and the arm will move to the grasp location; then, a second click will tell the arm to move to a drop-off location. Initially, you only need to implement this for blocks on the ground plane because it will help tune performance for the competition later. 
+Implement click-to-grab/click-to-place such that you can click on a block in the video frame, and the arm will move to the grasp location; then, a second click will tell the arm to move to a drop-off location. Initially, you only need to implement this for blocks on the ground plane because it will help tune performance for the competition later. 
 
 Consider to implement:
-- The arm joints will load down due to gravity, make sure to “approach” the goal points from above and move slowly down. Calculate a reasonable vertical offset will be helpful.
+- The arm joints will load down due to gravity, make sure to “approach” the goal points from above and move slowly down. Calculating a reasonable vertical offset will be helpful.
 
 Record for report:
 - Describe the algorithm you used to create and execute the RX200 arm motion plan.

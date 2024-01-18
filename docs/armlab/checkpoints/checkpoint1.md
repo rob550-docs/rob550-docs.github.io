@@ -93,7 +93,7 @@ Hints:
 - Consider utilizing the status message bar at the bottom of the GUI window to provide instructions or using it for your own debug purpose.
 
 Collect for report:
-- Teach your robot to cycle swapping blocks at locations (-100, 225) and (100, 225) through an intermediate location at (250,75).  
+- Teach your robot to cycle swapping blocks at locations (-100, 225) and (100, 225) through an intermediate location at (250,75). Coordinates are in mm, relative to the world frame. See [the board diagram](/docs/armlab/checkpoints#board).
 - Report how many times you can cycle (if you can do 10, feel free to stop) and include a plot of joint angles over time for 1 cycle. Hint: Use [`ros2 bag`](https://github.com/ros2/rosbag2) to record the `/rx200/joint_states` topic.
 - **Optional:** include a 3D plot of the end effector position by sending recorded joint angles through your FK equations.
 
@@ -116,9 +116,10 @@ $ ros2 topic echo /the_topic_you_want_to_check
 ```
 - The k matrix from camera info usually means intrinsic matrix. 
 
-To perform the intrinsic calibration, use the ROS camera calibration package, which should already be installed from the setup guide. You can find official documentation on using the camera_calibration package with a checkerboard [here](https://navigation.ros.org/tutorials/docs/camera_calibration.html#tutorial-steps). 
+To perform the intrinsic calibration, use the ROS camera calibration package, which should already be installed from the setup guide.
 
 - You need to firstly start the Realsense2 node, then start the camera calibration node. Details on starting the relevant nodes are in the [How to start ROS nodes guide](/docs/armlab/how-to-guide/how-to-start-nodes).
+- You can find official documentation on using the camera_calibration package with a checkerboard [here](https://navigation.ros.org/tutorials/docs/camera_calibration.html#tutorial-steps). You don't need to run any of the terminal commands on this page.
 - The ROS camera calibration package will also identify lens distortion parameters, which can be used to reduce video distortion. However, this might not be essential since the Realsense camera usually has low distortion in the imaging area of interest. The distortion for the depth camera is unknown. 
 - Make sure that you save the calibration values obtained from this process. A pixel in the depth image from the ROS driver is a 16-bit integer representing a distance from the camera frame in millimeters.  
 
@@ -131,9 +132,9 @@ Question to consider:
 - What are the sources of error and how large are they? 
 
 ### Task 1.5 Extrinsic Camera Calibration
-Using physical measurements of the lab apparatus, come up with a rough extrinsic matrix for the camera. Use the extrinsic matrix and the camera intrinsic matrix to map image coordinates (u,v,d) to world coordinates. Have them displayed in the GUI. 
+Using physical measurements of the lab apparatus, come up with a rough extrinsic matrix for the camera. Use the extrinsic matrix and the camera intrinsic matrix to map image coordinates (u,v,d) to world coordinates. Have them displayed in the GUI.
 
-You may also use the `realsense-viewer` program to find a readout of the camera’s accelerometer, which should give you an approximation of the orientation of the sensor. Launch the program by running `$ realsense-viewer` in the terminal.
+You may also use the `realsense-viewer` program to find a readout of the camera’s accelerometer, which should give you an approximation of the orientation of the sensor. Launch the program by running `$ realsense-viewer` in the terminal. To see the accelerometer, enable the Motion Module then click on the "2D" text on the top right.
 
 Assumptions: 
 1. X axis of the world frame are parallel to U axes of the sensor 

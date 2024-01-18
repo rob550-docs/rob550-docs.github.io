@@ -80,7 +80,7 @@ When you click on "Execute" or your newly defined button, your arm should follow
 ### Task 1.3 Teach and repeat
 **Teach and repeat** is a common technique for programming robotic arms to carry out repetitive tasks. It's user-friendly, allowing control of the robot without needing advanced skills. The task at hand is to create a system that interprets a set of distinct waypoints in the robot's joint space, guiding the arm along a path that connects these points.
 
-Your objective for this task is to get comfortable with the codebase. This means learning how to make the robot move to certain joint positions. Getting this right is essential for your future tasks in kinematics.
+Your objective for this task is to get comfortable with the codebase. This means learning how to make the robot move to certain joint positions. Getting this right is essential for your future tasks in kinematics. To make the arm move smoothly, you will want to check the angular displacements of each joint between waypoints and generate `move_time` and `accel_time` parameters for the `set_joint_position` command so the largest joint displacement moves consistently at some maximum angular speed.
 
 Building on task 1.2, where you executed the provided waypoints, your next step is to 'teach' the robot the pattern you want it to follow. This process involves recording the robot arm's joint positions at specific locations. Your task now is to implement this feature in the GUI. You have the freedom to choose the implementation method, but ensure it is user-friendly and intuitive. 
 
@@ -95,6 +95,7 @@ Hints:
 Collect for report:
 - Teach your robot to cycle swapping blocks at locations (-100, 225) and (100, 225) through an intermediate location at (250,75).  
 - Report how many times you can cycle (if you can do 10, feel free to stop) and include a plot of joint angles over time for 1 cycle.
+- **Optional:** include a 3D plot of the end effector position by sending recorded joint angles through your FK equations.
 
 {: .sanity_check}
 Anyone using your control station should be able to manually move the arm and record waypoints by clicking on your GUI. After recording, they should also be able to execute the path-following feature through the GUI interface. Successfully accomplishing this indicates that you have completed task 1.3.

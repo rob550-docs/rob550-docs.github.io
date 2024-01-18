@@ -20,7 +20,7 @@ It's time to showcase your hard work and effort!
 
 ## Event 1: Pick ‘n sort! (300 points)
 ### Task Setup
-Based on your selected level, specific blocks (cubes) will be placed on the positive half-plane and in front of the robotic arm. Your team need to sort small blocks to the left and large ones to the right of the arm.
+Based on your selected level, specific blocks (cubes) will be placed on the positive half-plane (in front of the robotic arm). Your team need to sort small blocks to the left and large ones to the right of the arm in the negative half plane.
 
 Requirements:
 - Choose only one level for completion.
@@ -84,17 +84,17 @@ Requirements:
 
 ## Event 4: Stack ‘em high! (500 points)
 ### Task Setup
-Blocks will be placed in a specific configuration based on your selected level, and your team need to stack up the blocks in one stack in rainbow color order vertically. 
+Blocks will be placed in a specific configuration based on your selected level, and your team needs to stack up the blocks in rainbow color order vertically. 
 
 Requirements:
 - Choose only one level for the task.
 - Complete the task within 600 seconds.
-- For Level 1, align only the large blocks in this rainbow sequence.
-- For Levels 2 & 3: Stack up both large and small blocks in separate stack, each following the rainbow color order.
+- For Level 1, align only the large blocks in rainbow sequence (red on bottom).
+- For Levels 2 & 3: Stack up both large and small blocks in separate stacks, each following the rainbow color order.
 - For Level 3: Stack the semi-circle and arch blocks so that they form a rectangle when put together (order = semi-circle, arch, semi-circle, arch, and so on). Stack in rainbow color order.
 
 ### Level Setup
-- Level 1 - only small blocks (6, ROYGBV)
+- Level 1 - only large blocks (6, ROYGBV)
 - Level 2 - big (6, ROYGBV) & small blocks (6, ROYGBV). Possibly stacked but no more than four blocks high.
 - Level 3 - small blocks (6, ROYGBV), and semi-circle (3) & arch blocks (3). Possibly stacked but no more than four blocks high.
 
@@ -106,7 +106,7 @@ Requirements:
 
 ## Bonus Event: To the sky!
 ### Task Setup
-For this task, use only large blocks and stack them in any color order you choose. You have the freedom to add any number of blocks to the board, but they must not be pre-stacked. Your goal is to stack them as high as possible, pushing the limit of how many blocks you can stack. The challenge is to see just how high your stack can reach!
+For this task, use only large blocks and stack them in any color order you choose. You have the freedom to add any number of blocks to the board, but they must not be pre-stacked. You can add blocks to the board as the arm is moving. Your goal is to stack them as high as possible, pushing the limit of how many blocks you can stack. The challenge is to see just how high your stack can reach!
 
 **You cannot use “click” to pick and place.**
 

@@ -81,7 +81,7 @@ While your result doesn't have to be identical, the goal is to verify the accura
 
 
 ### Task 2.2 Camera Calibration Using GUI
-Add a workspace calibration procedure. This procedure should be initiated by one of the user buttons in the GUI, integrated into the state machine as a `calibration state`. 
+Add a workspace calibration procedure. This procedure should be initiated by one of the user buttons in the GUI, integrated into the state machine as a `calibration` state. 
 
 The procedure will display status messages at the bottom of the GUI window, which will guide users through the calibration steps. Additionally, pressing this button will not only have the calibration results, but also apply a projective transform to adjust the camera's perspective.
 
@@ -111,7 +111,7 @@ After obtaining the calibration result, we need to validate the result.
 
 Instructions:
 - Project a grid of points onto the image. These points should correspond to the corners of the grid on your workspace. 
-    - In `camera.py`, you will find variable defining the world coordinates of your workspace's grid corners `self.grid_points`. Use these for your projection. You should employ the `projectGridInRGBImage()` function to project these grid points onto the image.
+    - In `camera.py`, you will find the variable `self.grid_points` defining the world coordinates of your workspace's grid corners. Use these for your projection. You should employ the `projectGridInRGBImage()` function to project these grid points onto the image.
 - After projecting the grid points, to compare them to the actual corners of the workspace in the image, select the “User 2” radio box in the GUI, which activates the grid view. There's no need to modify `control_station.py` for this functionality as long as you implement the `projectGridInRGBImage()` function correctly. 
 
 Finally, apply a perspective transform. This will change your image's perspective to resemble a bird's-eye view, providing a different angle of the workspace.

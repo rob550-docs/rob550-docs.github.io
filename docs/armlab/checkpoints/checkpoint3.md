@@ -49,11 +49,11 @@ Implement an inverse kinematics function that returns the joint angles that reac
 
 Record for report:
 - Include a schematic diagram of the arm with all relevant FK and IK parameters
-    - Precisely specify the IK function by writing the equations, explaining them, and referencing the source file and lines
+- Precisely specify the IK function by writing the equations, explaining them, and referencing the source file and lines
 
 ## Click to Grab/Drop
 ### Intro
-After completing the FK and IK implementation and testing, you can now work toward grabbing a block that is within the reachable space of the RX200. This can be done using a click-to-grab or click-to-drop setup.
+After completing the FK and IK implementation and testing, you can now work toward grabbing a block that is within the reachable space of the RX200. This can be done using a click-to-grab & click-to-drop setup.
 
 A simplified process may look like the following:
 1. After launching the GUI, calibrate the camera using the button you created on the GUI
@@ -61,9 +61,9 @@ A simplified process may look like the following:
 3. Left click on a position in the frame within the reachable area of the RX200 arm. The arm should then be able to move the end effector to that global position and close the gripper
 4. Left click again on another position in the frame that is within the reachable area of the RX200 arm to drop whatever was grabbed in the previous step
 
-This is a test to ensure that the kinematics you implemented in kinematics.py work and is capable of computing the correct joint positions to move the end effector to a desired position.
+This is a test to ensure that the kinematics you implemented in kinematics.py work and are capable of computing the correct joint positions to move the end effector to a desired position.
 
-### Task 3.3 click-to-grab/click-to-place
+### Task 3.3 Click-to-grab/click-to-place
 Implement click-to-grab/click-to-place such that you can click on a block in the video frame, and the arm will move to the grasp location; then, a second click will tell the arm to move to a drop-off location. Initially, you only need to implement this for blocks on the ground plane because it will help tune performance for the competition later. 
 
 Consider to implement:
@@ -73,8 +73,8 @@ Record for report:
 - Describe the algorithm you used to create and execute the RX200 arm motion plan.
 
 ## Checkpoint Submission
-- Part 1
-    - Record a video demonstrating click to grab & click to place.
+### Part 1
+- Record a video demonstrating click to grab & click to place. (Please show the view of control station gui as well as real world view in your video)
 
-- Part 2
-    - Record a video demonstrating your block detection system. Identify at least the large red, green, and blue blocks.
+### Part 2
+- Record a video demonstrating your block detection system. Identify at least the large red, green, and blue blocks.

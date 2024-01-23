@@ -4,7 +4,7 @@ title: Checkpoint 2
 nav_order: 2
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-01-22 22:00:00 -0500
+last_modified_at: 2024-01-23 10:18:00 -0500
 ---
 
 **DUE: 2/8/24**
@@ -85,7 +85,7 @@ Add a workspace calibration procedure. This procedure should be initiated by one
 
 The procedure will display status messages at the bottom of the GUI window, which will guide users through the calibration steps. Additionally, pressing this button will not only have the calibration results, but also apply a projective transform to adjust the camera's perspective.
 
-As you may have noticed, the camera is not facing directly down to the board but is at a position and orientation offset. In order to work with our workspace as if you were looking at it from above (which will be much more helpful for the future tasks), you'll need to apply a projective transformation, to make camera view to appear as though it's viewing from directly above the board, rather than from an angle. To do this, you'll first determine the homography matrix using reference points in the image frame, then apply the transform to change the perspective from the "trapezoid" to a rectangle. An example of doing this on the image plane is given in the `homography_transform.py` script in the `armlab_opencv_examples` repo.
+As you may have noticed, the camera is not facing directly down to the board but is at a position and orientation offset. In order to work with our workspace as if you were looking at it from above (which will be much more helpful for the future tasks), you'll need to apply a projective transformation. To do this, you'll first determine the homography matrix using reference points in the image frame, then apply the transform to change the perspective from the "trapezoid" to a rectangle. An example of doing this on the image plane is given in the `homography_transform.py` script in the `armlab_opencv_examples` repo.
 
 Keep in mind that the points that you want to apply the projective transform on (the corner of the board) have known world coordinates, and you have the necessary information to transform those world coordinates into image coordinates using the intrinsic and extrinsic parameters.
 

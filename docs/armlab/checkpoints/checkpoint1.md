@@ -4,7 +4,7 @@ title: Checkpoint 1
 nav_order: 1
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2023-12-13 14:37:48 -0500
+last_modified_at: 2024-01-18 12:00:00 -0500
 ---
 
 **DUE: 1/25/24**

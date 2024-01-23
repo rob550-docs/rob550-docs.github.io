@@ -150,7 +150,10 @@ Record for report:
 ### Part 1
 - Rotate the camera, then demonstrate the calibration procedure in a video
 - With the camera rotated, record the reported position (x,y,z) of the center of the top of a stack of large blocks placed at the following locations for a stack size of [0,1,2,4,6] blocks (total of 4x5=20 measurements):
-    - (0,175), (-300, -75), (300, -75), (300, 325)
+    - (0,175)
+    - (-300, -75)
+    - (300, -75)
+    - (300, 325)
 
 ### Part 2
 Record a video showing your Forward Kinematics results and arm positions while manually driving the end effector the following positions:

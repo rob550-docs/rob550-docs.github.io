@@ -20,9 +20,9 @@ In the previous checkpoint, we estimated the extrinsic parameters of the camera 
 ### Intro
 Apriltags are a commonly used fiducial system in robotics and computer vision. For information about Apriltags see [here](https://april.eecs.umich.edu/software/apriltag). 
 
-Each tag is a member of a family and has a specific ID. In order to have the tags detected in an image and the tag location published as a ROS message, You will need to specify the IDs of the tags you wish to detect in the configuration file.
+Each tag is a member of a family and has a specific ID. In order to have the tags detected in an image and the tag location published as a ROS message, the IDs of the tags you wish to detect must be in the configuration file. The default configuation file has these filled in already, so you will only need to change the configuration file if you want to detect a tag with an ID beyond 8.
 
-To specify the configuration, you will need to modify the `tags_Standard41h12.yaml` file in `/install_scripts/config` and copy it to `/opt/ros/humble/share/apriltag_ros/cfg/`, which is what we did during the setup guide, by running `./install_LaunchFiles.sh`. This is a global config file so it will affect the settings of the current active user account. The tag's family and ID are displayed on the tag sticker. You can refer to the sticker to check these details, especially when replacing the tag or using additional ones.
+If you wish to modify the Apriltag configuration, you will need to modify the `tags_Standard41h12.yaml` file in `/install_scripts/config` and copy it to `/opt/ros/humble/share/apriltag_ros/cfg/`, which is what we did during the setup guide, by running `./install_LaunchFiles.sh`. This is a global config file so it will affect the settings of the current active user account. The tag's family and ID are displayed on the tag sticker. You can refer to the sticker to check these details, especially when replacing the tag or using additional ones.
 
 Once the AprilTag detection node is initiated, it detects all tags within the camera's field of view and publishes ROS messages with details of the detection, including the tag's ID and location. Next, let's take a look at actual commands and their outputs.
 

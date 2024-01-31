@@ -87,7 +87,7 @@ The procedure will display status messages at the bottom of the GUI window, whic
 
 **Extrinsic Matrix**
 
-Similar to the extrinsic matrix you calculated before using measurements of the board, the Apriltags can be used to calculate an extrinsic matrix automatically. This is done with [perspective n-Point](https://docs.opencv.org/4.x/d5/d1f/calib3d_solvePnP.html) pose computation, which takes in known image coordinates (from the detector) and know world coordinates (from measuring the board). An example of how to do this is found in the `solve_extrinsics.py` script in the `armlab_opencv_examples` repo.
+Similar to the extrinsic matrix you calculated before using measurements of the board, the Apriltags can be used to calculate an extrinsic matrix automatically. This is done with [perspective n-point](https://docs.opencv.org/4.x/d5/d1f/calib3d_solvePnP.html) pose computation, which takes in known image coordinates (from the detector) and known world coordinates (from measuring the board). An example of how to do this is found in the `solve_extrinsics.py` script in the `armlab_opencv_examples` repo.
 
 **Homography**
 

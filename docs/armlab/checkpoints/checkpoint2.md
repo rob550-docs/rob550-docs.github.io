@@ -1,10 +1,10 @@
----
+![image](https://github.com/rob550-docs/rob550-docs.github.io/assets/61474669/8d07a9cd-b586-4b58-ac19-87e1cf0382e6)---
 layout: default
 title: Checkpoint 2
 nav_order: 2
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-01-23 10:18:00 -0500
+last_modified_at: 2024-01-30 21:00:00 -0500
 ---
 
 **DUE: 2/8/24**
@@ -83,19 +83,28 @@ While your result doesn't have to be identical, the goal is to verify the accura
 ### Task 2.2 Camera Calibration Using GUI
 Add a workspace calibration procedure. This procedure should be initiated by one of the user buttons in the GUI, integrated into the state machine as a `calibration` state. 
 
-The procedure will display status messages at the bottom of the GUI window, which will guide users through the calibration steps. Additionally, pressing this button will not only have the calibration results, but also apply a projective transform to adjust the camera's perspective.
+The procedure will display status messages at the bottom of the GUI window, which will guide users through the calibration steps if you choose a manual or semi-automatic calibration. This button will not only find the extrinsic matrix, but also apply a projective transform to adjust the camera's perspective.
+
+**Extrinsic Matrix**
+
+Similar to the extrinsic matrix you calculated before using measurements of the board, the Apriltags can be used to calculate an extrinsic matrix automatically. This is done with [perspective n-Point](https://docs.opencv.org/4.x/d5/d1f/calib3d_solvePnP.html) pose computation, which takes in known image coordinates (from the detector) and know world coordinates (from measuring the board). An example of how to do this is found in the `solve_extrinsics.py` script in the `armlab_opencv_examples` repo.
+
+**Homography**
 
 As you may have noticed, the camera is not facing directly down to the board but is at a position and orientation offset. In order to work with our workspace as if you were looking at it from above (which will be much more helpful for the future tasks), you'll need to apply a projective transformation. To do this, you'll first determine the homography matrix using reference points in the image frame, then apply the transform to change the perspective from the "trapezoid" to a rectangle. An example of doing this on the image plane is given in the `homography_transform.py` script in the `armlab_opencv_examples` repo.
 
-Keep in mind that the points that you want to apply the projective transform on (the corner of the board) have known world coordinates, and you have the necessary information to transform those world coordinates into image coordinates using the intrinsic and extrinsic parameters.
+The source points you use to compute the homography matrix should either be the corners of the board or the Apriltag positions. If you choose Apriltag positions, you already have those pixel coordinates from the detector. If you choose to use the board corners, you know their world coordinates and you have the necessary information to transform those world coordinates into image coordinates using the intrinsic and extrinsic parameters. The destination points are ones that you choose yourself based on where you want the transformed points to be on the final image frame. As an example, you would want the transformed points to form a rectangle, while being spaced apart the right amount to not stretch the board.
+
+**Combined**
+
+After the calibration is performed, update the display under the video in the GUI to show the world coordinates of the mouse location as you hover over the video. Measurements only need to be valid for points on or above the board.
 
 Hints:
 - A manual calibration might go as follows (this is the "semi-automatic" calibration):
     1. Use mouse clicks to get pixel locations of known locations in the workspace. Repeat with the depth frame and use an affine transformation to register the two together if necessary.  
     2. Using the intrinsic matrix you find for the RGB camera along with any depth calibration you determine, create a function that takes pixel coordinates from the image and returns world coordinates.
 - Alternatively, you may implement an auto-calibration routine using Apriltags visible in the workspace, or possibly by detecting the grid in the image. This is the “automatic” calibration.
-
-After the calibration is performed, update the display under the video in the GUI to show the world coordinates of the mouse location as you hover over the video. Measurements only need to be valid for points on or above the board.
+- Don't forget to undo your homography transformation when you go from mouse coordinates to world coordinates.
 
 Record for report:
 - Report your extrinsic matrix and depth calibration function. 
@@ -114,9 +123,8 @@ After obtaining the calibration result, we need to validate the result.
 Instructions:
 - Project a grid of points onto the image. These points should correspond to the corners of the grid on your workspace. 
     - In `camera.py`, you will find the variable `self.grid_points` defining the world coordinates of your workspace's grid corners. Use these for your projection. You should employ the `projectGridInRGBImage()` function to project these grid points onto the image.
-- After projecting the grid points, to compare them to the actual corners of the workspace in the image, select the “User 2” radio box in the GUI, which activates the grid view. There's no need to modify `control_station.py` for this functionality as long as you implement the `projectGridInRGBImage()` function correctly. 
-
-Finally, apply a perspective transform. This will change your image's perspective to resemble a bird's-eye view, providing a different angle of the workspace.
+- After projecting the grid points, to compare them to the actual corners of the workspace in the image, select the “User 2” radio box in the GUI, which activates the grid view. There's no need to modify `control_station.py` for this functionality as long as you implement the `projectGridInRGBImage()` function correctly.
+- Finally, apply a perspective transform. This will change your image's perspective to resemble a bird's-eye view, providing a different angle of the workspace.
 
 Record for report:
 - Quantitatively or qualitatively, assess your calibration routine using the grid point projection. 

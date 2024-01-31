@@ -1,4 +1,4 @@
-![image](https://github.com/rob550-docs/rob550-docs.github.io/assets/61474669/8d07a9cd-b586-4b58-ac19-87e1cf0382e6)---
+---
 layout: default
 title: Checkpoint 2
 nav_order: 2

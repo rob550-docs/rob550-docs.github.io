@@ -3,7 +3,7 @@ layout: default
 title: Troubleshooting
 parent: Staff Guide
 nav_order: 3
-last_modified_at: 2023-10-20 14:37:48 -0500
+last_modified_at: 2024-02-08 14:37:48 -0500
 ---
 
 > Here are the notes on all the issues we have encountered during the semester, along with their possible solutions.
@@ -12,6 +12,7 @@ last_modified_at: 2023-10-20 14:37:48 -0500
 * TOC
 {:toc}
 
+## MBot setup related
 ### Services are failed
 - Use `journalctl` to see error logs of the service can usually give a better idea of what's going wrong.
     ```bash
@@ -67,3 +68,30 @@ last_modified_at: 2023-10-20 14:37:48 -0500
     $ cd ~/mbot_ws/mbot_sys_utils
     $ ./systemctl_report.sh 
     ```
+
+## MBot firmware related
+We can use minicom to monitor the firmware upload process, when upload the mbot firmware gives error code, check the `mbot_firmware/mbot/src/utils/utils.c`, sanity checks are defined there.
+
+For example, here the error code is -2:
+```bash                                     
+initializinging motors...                          
+initializinging encoders...                        
+Starting heartbeat LED...                          
+Initializing IMU...
+Initializing the Bosch IMU...
+Success!
+CTL Mode=1
+ROM Version=2dad
+RAM Version=0
+Product ID=83
+Revision ID=3
+Host CRC: 84604394                                                   
+Setting Matrix Config...                                             
+Installing Sensors...                                                
+IDs: A41, F00                                                        
+ERROR: manuf_id does not match FUJITSU_MANUF_ID                      
+ERROR: prod_id does not match PROD_ID_MB85RC04V                      
+Initializing LCM serial communication...                             
+starting comms on core 1...                                          
+Failed to validate FRAM Data! Error code: -2
+```

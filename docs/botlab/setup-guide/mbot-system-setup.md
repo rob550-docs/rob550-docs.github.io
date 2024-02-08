@@ -4,7 +4,7 @@ title: MBot System Setup
 parent: Setup Guide
 grand_parent: Botlab
 nav_order: 2
-last_modified_at: 2023-12-23 16:03:48 -0500
+last_modified_at: 2024-02-08 12:03:48 -0500
 ---
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
@@ -105,6 +105,41 @@ Password: i<3robots!
 
 {: .highlight }
 Now you have completed all the setup for Jetson!
+
+## Update system utilities
+The `mbot_sys_utils` has been updated after the OS image was generated, and we need to update the settings accordingly. This step is essential for the firmware set up later.
+
+1. Pull the latest changes from the `mbot_sys_utils` repository:
+```bash
+$ cd ~/mbot_sys_utils
+$ git pull
+```
+2. Append the last line of `mbot_config.txt` to the system configuration:
+```bash
+$ tail -n 1 mbot_config.txt | sudo tee -a /boot/firmware/mbot_config.txt > /dev/null 
+```
+To verify the update, execute the command below, and you should see the output "autostart=run" in your terminal. Ensure this output is present before proceeding to the next step.
+```bash
+$ tail -n 1 /boot/firmware/mbot_config.txt && echo ""
+```
+3. Install the services manually:
+```bash
+$ cd ~/mbot_sys_utils/services
+$ ./install_mbot_services.sh
+```
+After installation, power off the device, then turn it back on and reconnect.
+
+4. Ensure the updates are properly loaded by checking the log:
+```bash
+$ code /var/log/mbot/mbot_start_networking.log
+```
+At the bottom of this log file, if you see the message "Autostart is set to run", that means your update was successful.
+```
+===== 2023-10-24 22:09:19 =====
+hostname set to 'mbot-0000-example'
+Connected to active WiFi network 'exmaple'. Done.
+Autostart is set to run 
+```
 
 
 ## Set up MBot firmware

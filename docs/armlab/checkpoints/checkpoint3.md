@@ -4,8 +4,10 @@ title: Checkpoint 3
 nav_order: 3
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-01-22 22:00:00 -0500
+last_modified_at: 2024-02-13 22:00:00 -0500
 ---
+
+Update 2/13/24: Removed requirement of pink blocks in the block detector.
 
 **DUE: 2/15/24**
 
@@ -24,7 +26,7 @@ You can take many approaches to detect the blocks' shapes, colors, and orientati
 Using OpenCV is a good starting point. To evaluate your block detector implementation, use the sample images in the `armlab_opencv_examples` repository or gather images from your workspace.
 
 ### Task 3.1 Block Detector
-Implement a block detector capable of detecting red, orange, yellow, green, blue, purple, and pink blocks and determining their location in the workspace.
+Implement a block detector capable of detecting red, orange, yellow, green, blue, and purple blocks and determining their location in the workspace.
 We recommend you develop a standalone program based on the OpenCV and Python tutorial first. Afterward, integrate these functions into the Camera class in `camera.py`.
 
 Record for report:

@@ -35,4 +35,4 @@ last_modified_at: 2023-12-23 14:20:48 -0500
 
 ### CAD STEP File
 {: .py-2 }
-[Click to download](https://drive.google.com/file/d/1D-Uv0bTrep5dP9hqFcUJzacKScKZ9SKs){: .btn target="_blank" }
+[Click to download](https://www.dropbox.com/scl/fi/pqqv7auzamibjmqkde0ee/MBot-Classic-Jetson-Nano-Full-Assembly.stp?rlkey=vllsbdbvedzpoi7u19yh7uqnc&dl=0){: .btn target="_blank" }

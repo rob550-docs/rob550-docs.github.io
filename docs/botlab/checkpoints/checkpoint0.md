@@ -4,7 +4,7 @@ title: Checkpoint 0
 nav_order: 1
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2023-12-23 14:37:48 -0500
+last_modified_at: 2024-02-22 17:37:48 -0500
 ---
 
 IMPORTANT AND CRITICAL: 
@@ -23,6 +23,11 @@ Failure to adhere to these warnings may result in a penalty to your grade.
 
 --- 
 
+### Contents
+* TOC
+{:toc}
+
+
 ## Assembly and Setup
 ### Task 0.1 Assembly
 Following the instruction in the [assembly guide](/docs/botlab/setup-guide/mbot-classic-assemly) and assemble your robot.
@@ -30,11 +35,18 @@ Following the instruction in the [assembly guide](/docs/botlab/setup-guide/mbot-
 ### Task 0.2 Software Setup
 Following the instructions in the [mbot system setup guide](/docs/botlab/setup-guide/mbot-system-setup) and setup the software on your robot.
 
-### Task 0.3 Gripper Design 
-Objective: Design and construct a target lifting mechanism for your MBot. This is an iterative process, so start the project early and continuously refine your design.
+### Task 0.3 Design Lab 
+The main development goal of BotLab is to finish the [final competition](/docs/botlab/checkpoints/competition). One part of this competition involves target lifting, where you need to design and build a lifting mechanism for your MBot, for exmaple, make mbot a forklift.
 
-Resources: Utilize the tools and materials available at the Makerspace. Remember, the key to success is experimentation and regular improvement.
+There are 3D printers available in both the lab and the Makerspace that you can use to create your design.
 
-Team Strategy: Each team member's robot does not need to have a unique gripper. However, for the final challenge, consider the benefits of equipping each robot with a mechanism. This could be the team's best design applied to all available robots, or employing different strategic approaches for each robot.
+In the competition, you don’t need a unique gripper for each team member’s robot. You can use the team’s best design for all robots or try different strategic approaches for each one. Remember, designing such a mechanism is an iterative process, so start the project early and continue refining your design.
 
-Documentation: Ensure you document your gripper design. This includes **detailed drawings, a Bill of Materials (BOM), and step-by-step construction instructions**.
+{: .required_for_report }
+Ensure you document your gripper design which includes: <br> 1) Detailed drawings <br> 2) Bill of Materials (BOM) <br> 3) Step-by-step construction instructions
+
+
+## Checkpoint Submission
+No submission is required for this checkpoint. 
+
+After completing Checkpoint 0, you should have a functional mbot ready for development and a basic understanding of the ultimate development goal – the final competition.

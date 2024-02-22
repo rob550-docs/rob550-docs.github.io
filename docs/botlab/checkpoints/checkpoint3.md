@@ -4,7 +4,7 @@ title: Checkpoint 3
 nav_order: 5
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-01-02 16:37:48 -0500
+last_modified_at: 2024-02-22 17:37:48 -0500
 ---
 
 Using the SLAM algorithm implemented previously, you can now construct a map of an environment using the MBot simulator. You will implement additional capabilities for the MBot: path planning using A* and autonomous exploration of an environment.
@@ -27,9 +27,9 @@ Once your planner is implemented, test it by constructing a map using your SLAM 
 
 astar_test & astar_test_files can be used to test the performance of your A* planner.
 
-Required For the Report:
-- Provide a figure showing the planned path in an environment of your creation with the actual path driven by your robot overlayed on top. 
-- Using astar_test_files, report statistics on your path planning execution times for each of the example problems in the data/astar folder -- you simply need to run astar_test_files after implementing your algorithm. If your algorithm is optimal and fast, great. If not please discuss possible reasons and strategies for improvement.
+{: .required_for_report } 
+1) Provide a figure showing the planned path in an environment of your creation with the actual path driven by your robot overlayed on top. <br>
+<br> 2) Using astar_test_files, report statistics on your path planning execution times for each of the example problems in the data/astar folder -- you simply need to run astar_test_files after implementing your algorithm. If your algorithm is optimal and fast, great. If not please discuss possible reasons and strategies for improvement.
 
 ## Task 3.3 Map Exploration
 
@@ -39,12 +39,15 @@ We have provided an algorithm for finding the frontiers -- the borders between f
 
 Plan and execute a path to drive to the frontier. Continue driving until the map is fully explored, i.e. no frontiers exist. Once you have finished exploring the map, return to the starting position. Your robot needs to be within 0.05m of the starting position. The state machine controlling the exploration process is located in `mbot/mbot_autonomy/src/planning/exploration.h/.cpp`.
 
-Required For the Report: 
-- Explain the strategy used for finding frontiers and any other details about your implementation that you found important for making your algorithm work.
+{: .required_for_report } 
+Explain the strategy used for finding frontiers and any other details about your implementation that you found important for making your algorithm work.
 
 ## Task 3.4 Map Localization with Estimated and Unknown Starting Position:
 
 For the advanced competition tasks, you will be asked to localize on a map where you do not know, or must estimate your initial position. This will require initializing your particles in some distribution in open space on the map, and converging on a pose.
 
-Required for report:  
-- Explain the methods used for initial localization.
+{: .required_for_report } 
+Explain the methods used for initial localization.
+
+## Checkpoint Submission
+No submission is required for this checkpoint. 

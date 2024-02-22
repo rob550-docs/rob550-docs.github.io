@@ -4,7 +4,7 @@ title: Checkpoint 2
 nav_order: 4
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-01-02 16:37:48 -0500
+last_modified_at: 2024-02-22 17:37:48 -0500
 ---
 
 During the SLAM part of the lab, you will build an increasingly sophisticated algorithm for mapping and localizing in the environment. You will begin by constructing an occupancy grid using known poses. Following that, you’ll implement Monte Carlo Localization in a known map. Finally, you will put each of these pieces together to create a full SLAM system.  Much of this can be initiated using only logs and when you are ready to use the actual robot.
@@ -47,8 +47,8 @@ An occupancy grid maps the space surrounding the robot by assigning probabilitie
 
 For this task, construct occupancy grid maps using the ground-truth poses provided in the log files. You can process these poses for map construction by enabling the `--mapping-only` command-line option when executing the slam program. This approach isolates the mapping function, using the specified poses from the log file.
 
-Required For the Report:
-- Plot your map from the log file drive_maze.log.
+{: .required_for_report } 
+Plot your map from the log file `drive_maze.log`.
 
 ## Monte Carlo Localization
 As discussed in the lecture, Monte Carlo Localization (MCL) is a particle-filter-based localization algorithm. Implementation of MCL requires three key components: 
@@ -71,10 +71,8 @@ Implement an action (or motion) model using some combination of sensors. This co
 
 Refer to Chapter 5 of Probabilistic Robotics for a discussion of common action models. You can base your implementation on the pseudo-code in this chapter. There are two action models that are discussed in detail, the Velocity Model (Sec. 5.3) and the Odometry Model (Sec. 5.4).
 
-Required For the Report:
-- Describe the action model you used. Include the equations you used.
-- Include a table of the values of any uncertainty parameters.  
-- Explain how you chose these values.
+{: .required_for_report } 
+Describe the action model you utilized, including the equations employed. Additionally, provide a table listing the values of any uncertainty parameters, and explain how you chose these values.
 
 ### Task 2.2.2 Sensor Model & Particle Filter
 Implement a sensor model that calculates the likelihood of a pose given a laser scan and an occupancy grid map. The skeleton of the sensor model can be found in `mbot/mbot_autonomy/slam/sensor_model.h/.cpp`.  
@@ -87,9 +85,9 @@ Refer to Chapter 4 of Probabilistic Robotics for information implementing the pa
 
 Hint: In case of slow performance of your sensor model, consider increasing the ray stride in the MovingLaserScan call.
 
-Required For the Report:
-- Report in a table the time it takes to update the particle filter for 100, 500 and 1000 particles. Estimate the maximum number of particles your filter can support running at 10Hz.
-- Using your particle filter on mbot_example_logs/drive_square.log, plot 300 particles at regular intervals along the path taken.     
+{: .required_for_report } 
+1) Report in a table the time it takes to update the particle filter for 100, 500 and 1000 particles. Estimate the maximum number of particles your filter can support running at 10Hz.
+<br> 2) Using your particle filter on `mbot_example_logs/drive_square.log`, plot 300 particles at regular intervals along the path taken.     
 
 ## Simultaneous Localization and Mapping (SLAM)
 ### Task 2.3
@@ -101,9 +99,9 @@ You have now implemented mapping using known poses and localization using a know
 
 NOTE: The above logic is already implemented for you. Your goal for this task is to make sure your localization and mapping are accurate enough to provide a stable estimate of the robot pose and map. You will need good SLAM performance to succeed at the robot navigation task.
 
-Required For the Report:
-- Create a block diagram of how the SLAM system components interact
-- Compare the estimated poses from your SLAM system against the ground-truth poses in drive_maze_full_rays.log. Use this to estimate the accuracy of your system and include statistics such as RMS error etc.
+{: .required_for_report } 
+1) Create a block diagram of how the SLAM system components interact
+<br> 2) Compare the estimated poses from your SLAM system against the ground-truth poses in `drive_maze_full_rays.log`. Use this to estimate the accuracy of your system and include statistics such as RMS error etc.
 
 
 ## Checkpoint Submission

@@ -4,7 +4,7 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-01-01 14:37:48 -0500
+last_modified_at: 2024-02-22 17:37:48 -0500
 ---
 
 We want to be able to control the robot’s position, but to do this we need to be able to tell the robot how to move. The control signal we have to move the robot is a motor PWM command, which effectively commands how much effort we wish the motors to produce.  
@@ -23,12 +23,12 @@ The calibration program for the pico measures the robot’s motion to determine 
 ### Task 1.1
 You should perform the calibration several times and record your results in a file for comparison. We will collect this data to determine the consistency of the MBot’s drive system across all bots.
 
-Required For the Report:
-- Report the motor calibration with variance for the robot on a concrete floor (like in the lab)
 
-Questions to Consider:
-- How much variation is there in the calibration?
-- What do you think is the source of variation?
+{: .required_for_report }
+Report the motor calibration with variance for the robot on a concrete floor (like in the lab) 
+<br><br> Questions to Consider:
+<br> 1) How much variation is there in the calibration?
+<br> 2) What do you think is the source of variation?
 
 
 ## Odometry
@@ -37,8 +37,8 @@ The odometry functions are implemented in `odometry.c` and the estimated positio
 ### Task 1.2
 You should test the odometry implementation we provided, by moving the robot by known distances and turning by known angles. If you are unsatisfied with the accuracy of the odometry, you can include some of the features discussed in lecture and additional IMU data to improve the accuracy.
 
-Required For the Report:
-- Evaluate the performance of your odometry system with, and/or without, the improvements you made.
+{: .required_for_report }
+Evaluate the performance of your odometry system with, and/or without, the improvements you made.
 
 ## Wheel Speed PID Controller
 The file `mbot_firmware/src/mbot.c` includes the main control function `mbot_loop(repeating_timer_t *rt)`. This function reads sensor data, estimates the current state, and updates motor commands. The motor controller operates in various modes, including PWM mode, motor velocity mode, and body velocity mode.
@@ -55,14 +55,11 @@ Features you should consider adding/changing for your controller:
 
 To test your updated controller, you can modify the Python scripts: `drive_test.py`, `drive_square.py`, and `mbot_teleop.py`, using them to create commands that challenge and evaluate your controller's performance.
 
-Required For the Report:
-- Describe in detail your final controller.
-- Give a table of parameters (gains, filter parameters, etc.) for the controller.
-- Evaluate the performance of your controller
-
-Questions to Consider:
-- How did you tune the parameters in your controller? What metric did you use to decide it was sufficiently tuned?
-- What additional features did you implement, and what were the effects?
+{: .required_for_report } 
+Provide a detailed description of your final controller, including a table of parameters (gains, filter parameters, etc.). Additionally, include an evaluation of the controller's performance. 
+<br><br>Questions to Consider:
+<br> 1) How did you tune the parameters in your controller? What metric did you use to decide it was sufficiently tuned?
+<br> 2) What additional features did you implement, and what were the effects?
 
 
 ## Motion Controller
@@ -71,10 +68,10 @@ The motion controller on the MBot is the interface between the planner and the l
 ### Task 1.4
 Implement this motion controller in `mbot/mbot_autonomy/src/mbot/motion_controller.cpp`. This program will run on the embedded computer.  
 
-Required For the Report:
-- Describe and document your motion control algorithm for getting between waypoints.
-- Include a plot of your robot’s dead reckoning estimated pose as the robot is commanded to drive a 1m square 4 times.
-- Include a plot of the robot's linear and rotational velocity as it drives one loop around the square
+{: .required_for_report }
+Describe and document your motion control algorithm for getting between waypoints. 
+<br> 1) Include a plot of your robot’s dead reckoning estimated pose as the robot is commanded to drive a 1m square 4 times.
+<br> 2) Include a plot of the robot's linear and rotational velocity as it drives one loop around the square
 
 ## Checkpoint Submission
 <br>

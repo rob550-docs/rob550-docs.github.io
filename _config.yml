@@ -35,5 +35,7 @@ callouts:
   sanity_check:
     title: Sanity Check
     color: brown
-
-    
+  required_for_report:
+    title: Required For the Report
+    color: cyan
+    opacity: 0.05

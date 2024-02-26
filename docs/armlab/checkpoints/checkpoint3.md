@@ -4,12 +4,8 @@ title: Checkpoint 3
 nav_order: 3
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-02-13 22:00:00 -0500
+last_modified_at: 2024-02-26 15:00:00 -0500
 ---
-
-Update 2/13/24: Removed requirement of pink blocks in the block detector.
-
-**DUE: 2/15/24**
 
 In this part, we will first build a block detector, and then implement inverse kinematics, and eventually achieve the click-to-grab level of autonomous where you can click on the control station, and the arm will pick up the block you clicked on.
 
@@ -29,9 +25,9 @@ Using OpenCV is a good starting point. To evaluate your block detector implement
 Implement a block detector capable of detecting red, orange, yellow, green, blue, and purple blocks and determining their location in the workspace.
 We recommend you develop a standalone program based on the OpenCV and Python tutorial first. Afterward, integrate these functions into the Camera class in `camera.py`.
 
-Record for report:
-- Describe the methods you used to implement the block detection and any strategies you implemented to limit false positive detections and enhance the robustness of the detector
-- Describe how you verified the accuracy of your block detector and provide evidence of its performance. Create a plot that communicates this information (for example: visualize the uncertainty vs. location on the board using a heatmap).
+{: .required_for_report }
+1) Describe the methods you used to implement the block detection and any strategies you implemented to limit false positive detections and enhance the robustness of the detector <br>
+2) Describe how you verified the accuracy of your block detector and provide evidence of its performance. Create a plot that communicates this information (for example: visualize the uncertainty vs. location on the board using a heatmap).
 
 ## Inverse Kinematics
 For this checkpoint, you will work on implementing the Inverse Kinematics to determine the joint positions required to move the end effector to a location in the global frame.
@@ -49,9 +45,9 @@ In `kinematics.py`, the code is set up for a simplified IK function that takes a
 ### Task 3.2 Inverse Kinematics
 Implement an inverse kinematics function that returns the joint angles that reach a position in the workspace. This function should return error messages if the specified end effector configuration is not reachable, and it should be able to handle degenerate poses.
 
-Record for report:
-- Include a schematic diagram of the arm with all relevant FK and IK parameters
-- Precisely specify the IK function by writing the equations, explaining them, and referencing the source file and lines
+{: .required_for_report }
+1) Include a schematic diagram of the arm with all relevant FK and IK parameters <br>
+2) Precisely specify the IK function by writing the equations, explaining them, and referencing the source file and lines
 
 ## Click to Grab/Drop
 ### Intro
@@ -71,8 +67,8 @@ Implement click-to-grab/click-to-place such that you can click on a block in the
 Consider to implement:
 - The arm joints will load down due to gravity, make sure to “approach” the goal points from above and move slowly down. Calculating a reasonable vertical offset will be helpful.
 
-Record for report:
-- Describe the algorithm you used to create and execute the RX200 arm motion plan.
+{: .required_for_report }
+Describe the algorithm you used to create and execute the RX200 arm motion plan.
 
 ## Checkpoint Submission
 ### Part 1

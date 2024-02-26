@@ -4,10 +4,8 @@ title: Checkpoint 1
 nav_order: 1
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-01-18 12:00:00 -0500
+last_modified_at: 2024-02-26 15:00:00 -0500
 ---
-
-**DUE: 1/25/24**
 
 The first checkpoint is meant to be an introduction to using the GUI of the lab and to start working with the RGB-D camera. The interaction with the GUI will be under the Basic Motion section of the checkpoint, and the interaction with the RGB-D camera will be through the Camera Calibration portion of the checkpoint.
 
@@ -92,10 +90,10 @@ Hints:
 - To create a button on the GUI, you can edit the `src/control_station.py` script, and use the block of code under “User Buttons” as a guide.
 - Consider utilizing the status message bar at the bottom of the GUI window to provide instructions or using it for your own debug purpose.
 
-Collect for report:
-- Teach your robot to cycle swapping blocks at locations (-100, 225) and (100, 225) through an intermediate location at (250,75). Coordinates are in mm, relative to the world frame. See [the board diagram](/docs/armlab/checkpoints#board).
-- Report how many times you can cycle (if you can do 10, feel free to stop) and include a plot of joint angles over time for 1 cycle. Hint: Use [`ros2 bag`](https://github.com/ros2/rosbag2) to record the `/rx200/joint_states` topic.
-- **Optional:** include a 3D plot of the end effector position by sending recorded joint angles through your FK equations.
+{: .required_for_report }
+1) Teach your robot to cycle swapping blocks at locations (-100, 225) and (100, 225) through an intermediate location at (250,75). Coordinates are in mm, relative to the world frame. See [the board diagram](/docs/armlab/checkpoints#board). <br>
+2) Report how many times you can cycle (if you can do 10, feel free to stop) and include a plot of joint angles over time for 1 cycle. Hint: Use [`ros2 bag`](https://github.com/ros2/rosbag2) to record the `/rx200/joint_states` topic. <br><br>
+**Optional:** include a 3D plot of the end effector position by sending recorded joint angles through your FK equations.
 
 {: .sanity_check}
 Anyone using your control station should be able to manually move the arm and record waypoints by clicking on your GUI. After recording, they should also be able to execute the path-following feature through the GUI interface. Successfully accomplishing this indicates that you have completed task 1.3.
@@ -123,13 +121,13 @@ To perform the intrinsic calibration, use the ROS camera calibration package, wh
 - The ROS camera calibration package will also identify lens distortion parameters, which can be used to reduce video distortion. However, this might not be essential since the Realsense camera usually has low distortion in the imaging area of interest. The distortion for the depth camera is unknown. 
 - Make sure that you save the calibration values obtained from this process. A pixel in the depth image from the ROS driver is a 16-bit integer representing a distance from the camera frame in millimeters.  
 
-Collect for report: 
-- Record your average intrinsic calibration after performing the checkerboard calibration 3-5 times. Compare it to the factory calibration.
-
-Question to consider:
-- How do the matrices compare? 
-- Do you trust your own calibration or the factory calibration more?
-- What are the sources of error and how large are they? 
+{: .required_for_report }
+Record your average intrinsic calibration after performing the checkerboard calibration 3-5 times. Compare it to the factory calibration.
+<br><br>
+Question to consider: <br>
+1) How do the matrices compare? <br>
+2) Do you trust your own calibration or the factory calibration more?<br>
+3) What are the sources of error and how large are they? 
 
 ### Task 1.5 Extrinsic Camera Calibration
 Using physical measurements of the lab apparatus, come up with a rough extrinsic matrix for the camera. Use the extrinsic matrix and the camera intrinsic matrix to map image coordinates (u,v,d) to world coordinates. Have them displayed in the GUI.
@@ -141,8 +139,8 @@ Assumptions:
 2. YZ plane of the camera frame is parallel to the YZ plane of the world
 3. Camera frame is at the front surface of the sensor
 
-Collect for report: 
-- Record your extrinsic matrix
+{: .required_for_report }
+Record your extrinsic matrix
 
 ## Checkpoint Submission
 

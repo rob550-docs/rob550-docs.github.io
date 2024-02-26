@@ -4,12 +4,8 @@ title: Checkpoint 2
 nav_order: 2
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-01-31 13:00:00 -0500
+last_modified_at: 2024-02-26 15:00:00 -0500
 ---
-
-**DUE: 2/8/24**
-
-Update 1/31: Improve clarity of task 2.2
 
 ### Contents
 * TOC
@@ -108,15 +104,15 @@ Hints:
 - Alternatively, you may implement an auto-calibration routine using Apriltags visible in the workspace, or possibly by detecting the grid in the image. This is the “automatic” calibration.
 - Don't forget to undo your homography transformation when you go from mouse coordinates to world coordinates.
 
-Record for report:
-- Report your extrinsic matrix and depth calibration function. 
-- Report the equations used to turn [u,v,d] coordinates in the image frames to [x,y,z] coordinates in the world frame.
-- Describe how you verified the calibration was correct, what additional steps you took to correct it, and provide evidence for the accuracy of your calibration.
-
-Questions to consider:
-- How do the extrinsic matrices compare with the hand-measured ones? 
-- What are the sources of error, and how large are they? 
-- Is it sufficient to rely on this nominal matrix for finding points in the world?
+{: .required_for_report }
+1) Report your extrinsic matrix and depth calibration function. <br>
+2) Report the equations used to turn [u,v,d] coordinates in the image frames to [x,y,z] coordinates in the world frame. <br>
+3) Describe how you verified the calibration was correct, what additional steps you took to correct it, and provide evidence for the accuracy of your calibration.
+<br><br>
+Questions to consider: <br>
+1) How do the extrinsic matrices compare with the hand-measured ones? <br>
+2) What are the sources of error, and how large are they? <br>
+3) Is it sufficient to rely on this nominal matrix for finding points in the world?
 
 
 ### Task 2.3 Validate the Calibration
@@ -128,12 +124,12 @@ Instructions:
 - After projecting the grid points, to compare them to the actual corners of the workspace in the image, select the “User 2” radio box in the GUI, which activates the grid view. There's no need to modify `control_station.py` for this functionality as long as you implement the `projectGridInRGBImage()` function correctly.
 - Finally, apply a perspective transform. This will change your image's perspective to resemble a bird's-eye view, providing a different angle of the workspace.
 
-Record for report:
-- Quantitatively or qualitatively, assess your calibration routine using the grid point projection. 
-- Which points did you use for your perspective transformation? Report the homography matrix.
-
-Questions to consider:
-- What does each of the entries of your homography matrix represent?
+{: .required_for_report }
+1) Quantitatively or qualitatively, assess your calibration routine using the grid point projection. <br>
+2) Which points did you use for your perspective transformation? Report the homography matrix.
+<br><br>
+Questions to consider:<br>
+What does each of the entries of your homography matrix represent?
 
 ## Forward Kinematics
 For this part, you will work on implementing Forward Kinematics to determine the location of the end effector in the global frame.
@@ -152,10 +148,10 @@ Refer to the technical drawing of the RX200 arm on the [manufacturer's website](
 
 The end effector position is defined by $$(x, y, z, \varphi, \theta, \psi)$$ where the orientation uses the common ZYZ Euler angle convention.  You should display the coordinates of the center of the gripper (End Effector) in your GUI using the text labels provided in the upper left. 
 
-Record for report:
-- Include a DH table or screw vectors and M matrix for the RX200 arm in your report.
-- Include a schematic of the arm with DH frames or screw vectors indicated
-- Describe how you verified that your arm tooltip achieved expected workspace coordinates for your test cases, estimate the error, and justify the accuracy of your measurements.
+{: .required_for_report }
+1) Include a DH table or screw vectors and M matrix for the RX200 arm in your report. <br>
+2) Include a schematic of the arm with DH frames or screw vectors indicated <br>
+3) Describe how you verified that your arm tooltip achieved expected workspace coordinates for your test cases, estimate the error, and justify the accuracy of your measurements.
 
 
 ## Checkpoint Submission

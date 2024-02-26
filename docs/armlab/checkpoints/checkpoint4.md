@@ -4,7 +4,7 @@ title: Checkpoint 4
 nav_order: 4
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2023-12-15 14:37:48 -0500
+last_modified_at: 2024-02-26 15:00:00 -0500
 ---
 
 ### Contents
@@ -23,10 +23,9 @@ This will be similar to the teach-and-repeat planner, except you will need to au
 ## Task 4.1 Final Tuning
 Implement logic for the final competitions into your state machine.
 
-Record for report:
-- Evaluate the performance of your system during the competition
-    - Include performance and discussion on the detection and manipulation of the arch and semi-circle blocks.
-- Discuss what improvements could be made to improve performance
+{: .required_for_report }
+1) Evaluate the performance of your system during the competition. Include performance and discussion on the detection and manipulation of the arch and semi-circle blocks. <br>
+2) Discuss what improvements could be made to improve performance
 
 ## Checkpoint Submission
 Nothing to submit! Get ready for competition and enjoy : D

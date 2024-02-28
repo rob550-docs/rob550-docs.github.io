@@ -1,12 +1,12 @@
 ---
 layout: default
-title: LCM for development
+title: LCM for Beginner
 parent: Staff Guide
 nav_order: 5
-last_modified_at: 2024-02-09 14:20:48 -0500
+last_modified_at: 2024-02-28 14:20:48 -0500
 ---
 
-> This guide introduces LCM system to the development team working on a differential drive MBot, specifically targeting absolute beginners.
+> This guide introduces LCM system to developers working on a differential drive MBot, specifically targeting absolute beginners.
 
 Assume that you have finished all the steps under [botlab setup guide](/docs/botlab/setup-guide/mbot-system-setup). In this post, we'll focus on an example of sending desired velocity commands from the Jetson Nano to the control board to make the MBot move using LCM.
 

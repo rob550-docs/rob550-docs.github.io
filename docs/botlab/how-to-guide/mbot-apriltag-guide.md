@@ -13,6 +13,9 @@ last_modified_at: 2024-02-28 13:37:48 -0500
 * TOC
 {:toc}
 
+## Video Tutorial
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lj6BLw9VjKw?si=65Hc5XuWc4SzB3yd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 ## Installation
 ### Installing the Apriltag Library
 First, clone the Apriltag library from the official [GitHub repository](https://github.com/AprilRobotics/apriltag):
@@ -141,4 +144,3 @@ Side Note #1: If you are familiar with ROS and are looking for functionality sim
 
 Side Note #2: To learn more about LCM, we have 2 posts might be helpful: [LCM for Beginner](/docs/staff-guide/lcm-for-beginner) and [Advanced LCM Guide](/docs/botlab/how-to-guide/advanced-LCM-guide).
 
-## Video Tutorial

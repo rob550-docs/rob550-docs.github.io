@@ -4,7 +4,7 @@ title: mbot_apriltag Guide
 parent: How-to Guide
 grand_parent: Botlab
 nav_order: 1
-last_modified_at: 2024-02-28 13:37:48 -0500
+last_modified_at: 2024-03-04 16:37:48 -0500
 ---
 
 > This guide explains how to use the `mbot_apriltag` example code.
@@ -28,6 +28,7 @@ Then, follow the installation [instructions](https://github.com/AprilRobotics/ap
 $ cd apriltag
 $ cmake -B build -DCMAKE_BUILD_TYPE=Release
 $ sudo cmake --build build --target install
+$ echo 'export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.8/site-packages' >> ~/.bashrc
 ```
 
 ### Cloning `mbot_apriltag` repository
@@ -36,38 +37,20 @@ $ cd ~/mbot_ws
 $ git clone https://gitlab.eecs.umich.edu/rob550-f23/mbot_apriltag
 ```
 
+### Install dependencies
+```bash
+$ pip install Flask
+```
+
 Your codebase is now ready for use!
 
 ## Testing the Setup
-To test your camera, execute the command below and then visit `http://your_mbot_ip:5001/video` in your web browser:
+To test your camera, **open a new terminal**, then execute the command below and then visit `http://your_mbot_ip:5001/video` in your web browser:
 ```bash
+$ cd ~/mbot_ws/mbot_apriltag/scripts
 $ python3 video_streamer.py
 ```
-- This script is for testing the video stream to ensure your camera is operational and the installation was successful.
-
-### Troubleshooting
-If you encounter the following runtime error: "ImportError: libapriltag.so.3: cannot open shared object file: No such file or directory," follow these steps:
-
-1. Verify the Installation Location
-
-    The library is typically installed in /usr/local/lib or /usr/lib. Check these locations:
-    ```bash
-    $ ls /usr/local/lib | grep libapriltag
-    ```
-    ```bash
-    $ ls /usr/lib | grep libapriltag
-    ```
-    - If you see "libapriltag.so.3" in the output, proceed to the next step.
-
-2. Update the Library Cache
-
-    If the library is in a standard location but still not found, you may need to update your system's library cache. Run the following command to refresh it:
-
-    ```bash
-    $ sudo ldconfig
-    ```
-    - After updating, try running video_streamer.py again to check if the issue is resolved.
-
+- This script is for testing the video stream to ensure your camera is operational.
 
 ## Camera Calibration
 To find the intrinsic matrix of the mbot camera, we need to perform the camera calibratoin.
@@ -116,6 +99,29 @@ Run the following command and visit `http://your_mbot_ip:5001/video`
 $ python3 apriltag_streamer.py
 ```
 - It runs apriltag detection. When a tag is detected, the pose estimation results will be displayed on the screen.
+
+### Troubleshooting
+If you encounter the following runtime error: "ImportError: libapriltag.so.3: cannot open shared object file: No such file or directory," follow these steps:
+
+1. Verify the Installation Location
+
+    The library is typically installed in /usr/local/lib or /usr/lib. Check these locations:
+    ```bash
+    $ ls /usr/local/lib | grep libapriltag
+    ```
+    ```bash
+    $ ls /usr/lib | grep libapriltag
+    ```
+    - If you see "libapriltag.so.3" in the output, proceed to the next step.
+
+2. Update the Library Cache
+
+    If the library is in a standard location but still not found, you may need to update your system's library cache. Run the following command to refresh it:
+
+    ```bash
+    $ sudo ldconfig
+    ```
+    - After updating, try running video_streamer.py again to check if the issue is resolved.
 
 You should now have a basic understanding of how AprilTag detection operates and how it can be applied in our projects. The values displayed on the screen are in **millimeters**. You can use a physical tape measure to verify the accuracy of the detection.
 

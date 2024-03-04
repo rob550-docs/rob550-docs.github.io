@@ -4,7 +4,7 @@ title: MBot System Setup
 parent: Setup Guide
 grand_parent: Botlab
 nav_order: 2
-last_modified_at: 2024-02-08 12:03:48 -0500
+last_modified_at: 2024-03-04 16:03:48 -0500
 ---
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
@@ -29,7 +29,7 @@ You now have an SD card with Ubuntu 20.04 flashed on it for the Jetson. Keep the
 
 ### 2. Set up system utilities
 
-If the flash succeeded, the SD card will have two partitions: a 124MB Volume formatted as fat32 and a 27GB Volume formated as ext4. When you insert the SD card in your laptop, it should mount the smaller fat32 partition.  Find the file `mbot_config.txt` on this volume and modify it as follows:
+If the flash succeeded, the SD card will have two partitions: a 134MB Volume formatted as fat32 and a 27GB Volume formated as ext4. When you insert the SD card in your laptop, it should mount the smaller fat32 partition.  Find the file `mbot_config.txt` on this volume and modify it as follows:
 - Set `mbot_hostname` following this format: `mbot-<section>-<team#>-<unique_name>`
     - For example: if you are in the AM section team 6, and your unique_name is johndoe, you should name the robot as `mbot-AM-team6-johndoe`
 - Enter your home Wi-Fi details for `new_wifi_ssid` and `new_wifi_password` if you intend to use it at home later.
@@ -243,7 +243,7 @@ $ sudo picotool reboot
 ### 3. Using Minicom
 Here we introduce you the tool Minicom. It is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts from the Jetson module.
 
-1. Run the following command to start minicom
+- After flashing the firmware to the Pico, run the following command to start minicom
     ```bash
     $ minicom -D /dev/mbot_tty -b 115200
     ```
@@ -255,20 +255,13 @@ Here we introduce you the tool Minicom. It is a program designed for serial comm
     mbot_tty
     ```
     If you do not see the 2 outputs above, unplug the USB which connect Jetson and Pico, then plug back in.
+- To exit Minicom, press `CTRL-A` to get to command mode, then press `X` to quit.
 
+**Successful Firmware Flashing:** After flashing the firmware successfully, Minicom will display your encoder counts, IMU values, and more.
+Manually turning the wheel will update the encoder counts in the Minicom terminal.
 
-    To make the command easier to use, run the following:
-    ```bash
-    # add alias to shell file
-    $ echo "alias start-minicom='minicom -D /dev/mbot_tty -b 115200'" >> ~/.bashrc
-    $ source ~/.bashrc
-    # Now you can use the minicom by just entering `start-minicom` in the terminal
-    $ start-minicom
-    ```
-3. To exit Minicom, press `CTRL-A` to get to command mode, then press `X` to quit.
-
-{: .note}
-When you're working on calibrating the MBot and flashing the firmware, it's suggested to have a second terminal open to run the minicom, in case you run into any errors.
+**Unsuccessful Firmware Flashing:** If the firmware doesn't flash correctly, repeat the calibration and firmware flashing steps.
+Open a second terminal window with Minicom to monitor its outputs for troubleshooting.
 
 
 ### Install the rest of the MBot Code

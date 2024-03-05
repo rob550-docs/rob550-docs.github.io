@@ -27,6 +27,10 @@ The following items are needed:
 
 You now have an SD card with Ubuntu 20.04 flashed on it for the Jetson. Keep the card in your laptop for now and proceed to the next step.
 
+{: .warning }
+If you do the flashing on a Windows computer, you may see many file explorer windows and error messages pop up when you insert the SD card and when you finish flashing. Those are expected, and you can safely close the file explorer windows and dismiss the error messages. However, if Windows asks you to format the SD card through a popup dialog box, close the message through the "Cancel" button and **do not** click the "Format Disk" button. The flashing done through Balena Etcher already formats the card, and this formatting is incompatible with Windows, causing all the error popups.
+
+
 ### 2. Set up system utilities
 
 If the flash succeeded, the SD card will have two partitions: a 134MB Volume formatted as fat32 and a 27GB Volume formated as ext4. When you insert the SD card in your laptop, it should mount the smaller fat32 partition.  Find the file `mbot_config.txt` on this volume and modify it as follows:

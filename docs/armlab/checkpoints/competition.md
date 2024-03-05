@@ -4,12 +4,10 @@ title: Competition
 nav_order: 5
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-01-18 12:00:00 -0500
+last_modified_at: 2024-03-05 12:00:00 -0500
 ---
 
 It's time to showcase your hard work and effort!
-
-Update 2/7: Edits for clarity. Also change some point values.
 
 <a class="image-link" href="https://i.imgflip.com/3t9jkg.jpg"><img src="https://i.imgflip.com/3t9jkg.jpg" alt="" style="max-width:400px;"/>
 </a>

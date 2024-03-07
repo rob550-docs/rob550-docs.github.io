@@ -4,7 +4,7 @@ title: MBot System Setup
 parent: Setup Guide
 grand_parent: Botlab
 nav_order: 2
-last_modified_at: 2024-03-04 16:03:48 -0500
+last_modified_at: 2024-03-07 14:42:48 -0500
 ---
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
@@ -126,6 +126,12 @@ To verify the update, execute the command below, and you should see the output "
 ```bash
 $ tail -n 1 /boot/firmware/mbot_config.txt && echo ""
 ```
+    - If there is no output "autostart=run" in your terminal, check your `mbot_config.txt` file by running
+    ```bash
+    $ sudo nano /boot/firmware/mbot_config.txt
+    ```
+        - If "autostart=run" is not at a new line at the bottom of the file, but append after mbot_ip_list_token, please move it to the next line and save the file.
+        - This issue depends how you edit your `mbot_config.txt` after flashing the SD card. Some editing tools automatically insert a newline character at the end of the last line, preventing this issue from occurring, while others do not.
 3. Install the services manually:
 ```bash
 $ cd ~/mbot_sys_utils/services

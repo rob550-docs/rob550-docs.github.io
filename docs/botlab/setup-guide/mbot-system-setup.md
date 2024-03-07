@@ -188,9 +188,7 @@ $ mkdir mbot_ws
 
 
 ### 2. Calibrate the MBot and flash the firmware
-In this step, we are going to flash the calibration script onto the Pico to calibrate it before we flash the firmware. There are 2 options to proceed calibration routine:
-
-**1. Via the command-line tool (Recommended)**
+In this step, we are going to flash the calibration script onto the Pico to calibrate it before we flash the firmware.
 
 1. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot, preferably on the same type of surface that you plan to use the robots on.
 2. Run the following command, the Pico will reboot automatically, and will then run its calibration routine right away. Allow the Pico to finish its calibration routine without interference.
@@ -220,37 +218,7 @@ $ cd ~/mbot_ws/mbot_firmware
 $ sudo ./upload.sh flash build/src/mbot.uf2
 ```
 
-**2. Via BOOTSEL Mode**
-1. Initiate a remote connection with VSCode.
-2. Temporarily disconnect the Control Board by removing both the battery's barrel plug and USB-C while keeping the Jetson powered on. Ensure no cables are connected to the Control Board.
-3. Enter the Pico bootloader mode (BOOTSEL mode) in the following order: press and hold the BOOTSEL button on the board; reconnect the USB-C to Pico (while holding down the BOOTSEL button); release the button; and finally, reconnect the power barrel plug.
-
-    <a class="image-link" href="/assets/images/botlab/system-setup/bootsel.png">
-    <img src="/assets/images/botlab/system-setup/bootsel.png" alt=" " style="max-width:270px;"/>
-    </a>
-
-4. Upload the calibration file by entering the following commands:
-```bash
-$ cd ~/mbot_ws/mbot_firmware 
-$ sudo picotool load build/tests/mbot_calibrate_classic.uf2
-```
-
-5. Place the MBot on the floor in a spot with at least 2 feet of clear space all around the robot.
-```bash
-$ sudo picotool reboot
-```
-6. The Pico will reboot automatically, and will then run its calibration routine. Allow the Pico to finish its calibration routine without interference.
-
-The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation.
-
-- Repeat the step 2 and 3 above to put the Pico to bootloader mode, but this time run
-```bash
-$ cd ~/mbot_ws/mbot_firmware
-$ sudo picotool load build/src/mbot.uf2
-$ sudo picotool reboot
-```
-
-### 3. Using Minicom
+### 3. Using Minicom to verify
 Here we introduce you the tool Minicom. It is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts from the Jetson module.
 
 - After flashing the firmware to the Pico, run the following command to start minicom
@@ -277,8 +245,14 @@ Open a second terminal window with Minicom to monitor its outputs for troublesho
 To make running minicom easier, consider creating a [permanent alias](https://askubuntu.com/questions/154640/how-to-add-an-alias-to-a-command-in-terminal) by editing your .bashrc file.
 Adding the line `alias start-minicom='minicom -D /dev/mbot_tty -b 115200'` to the end of your .bashrc file will let you run minicom using the command `start-minicom`.
 
+### 4. Manually enter bootloader mode
 
-### Install the rest of the MBot Code
+If the firmware was successfully flashed, skip this step and proceed to the next.
+
+If your firmware flashing was not successful because the `./upload.sh` script from step two doesn't work for your mbot, you can manually enter the bootloader mode (namely let pico ready to get the firmware) by following instructions [here](/docs/botlab/how-to-guide/manually-enter-bootloader). 
+
+
+## Install the rest of the MBot Code
 
 1. Clone the necessary repos to your Jetson under folder `mbot_ws`
     - **Clone** [RP Lidar Driver](https://gitlab.eecs.umich.edu/rob550-f23/rplidar_lcm_driver) and [MBot Bridge](https://gitlab.eecs.umich.edu/rob550-f23/mbot_bridge)

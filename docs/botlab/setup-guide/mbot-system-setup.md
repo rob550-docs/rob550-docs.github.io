@@ -243,7 +243,7 @@ Open a second terminal window with Minicom to monitor its outputs for troublesho
 
 {: .note }
 To make running minicom easier, consider creating a [permanent alias](https://askubuntu.com/questions/154640/how-to-add-an-alias-to-a-command-in-terminal) by editing your .bashrc file.
-Adding the line `alias start-minicom='minicom -D /dev/mbot_tty -b 115200'` to the end of your .bashrc file will let you run minicom using the command `start-minicom`.
+Add the line `alias start-minicom='minicom -D /dev/mbot_tty -b 115200'` to the end of your .bashrc file, then run the command `source ~/.bashrc` in a terminal. This will let you run minicom using the command `start-minicom`.
 
 ### 4. Manually enter bootloader mode
 

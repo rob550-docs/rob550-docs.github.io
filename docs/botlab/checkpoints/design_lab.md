@@ -4,7 +4,7 @@ title: Design Lab
 nav_order: 6
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-01-02 16:37:48 -0500
+last_modified_at: 2024-03-13 16:37:48 -0500
 ---
 
 The main development goal of Botlab is to finish the [final competition](/docs/botlab/checkpoints/competition). One part of this competition involves identifying, lifting, moving, and stacking a crate/pallet similar to a forklift in a factory.

@@ -53,7 +53,7 @@ Features you should consider adding/changing for your controller:
 - Implement a low-pass filter on the wheel velocity estimates to minimize discretization noise, particularly at low speeds.
 - Introduce acceleration and deceleration limits for the robot to prevent abrupt movements by filtering the command setpoints.
 
-To test your updated controller, you can modify the Python scripts: `drive_test.py`, `drive_square.py`, and `mbot_teleop.py`, using them to create commands that challenge and evaluate your controller's performance.
+To test your updated controller, you can modify the Python and C++ scripts: `mbot_firmware/python/mbot_test_drive.py`, `mbot_firmware/python/mbot_move_simple.py`, and `mbot_autonomy/src/mbot/drive_square.cpp`, using them to create commands that challenge and evaluate your controller's performance.
 
 {: .required_for_report } 
 Provide a detailed description of your final controller, including a table of parameters (gains, filter parameters, etc.). Additionally, include an evaluation of the controller's performance. 

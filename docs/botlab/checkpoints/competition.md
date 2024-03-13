@@ -1,10 +1,10 @@
 ---
 layout: default
 title: Competition
-nav_order: 6
+nav_order: 7
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-01-02 16:37:48 -0500
+last_modified_at: 2024-03-13 16:37:48 -0500
 ---
 
 <a class="image-link" href="/assets/images/botlab/checkpoints/doge-meme.png">
@@ -34,13 +34,14 @@ Timed run:
 
 ### Event 2: Heavy Lift [300 points max]
 
-Begin from your initial position and use the camera along with AprilTags to identify a target. Once located, drive towards the target, collect it, and then proceed to a designated spot to drop it. 
+Begin from your initial position and use the camera along with AprilTags to identify a target (any order). Once located, drive towards the target, collect it, and then proceed to a designated drop-off location, i.e., a target to stack it on. Designated drop-off targets will be given on the day of the competition.
 
-Continue this process for any additional blocks, and after completing the task with all targets, return to your starting position. This entire activity can be efficiently executed using only the camera and visual servoing techniques. We will position 1 to 3 targets within a defined area of 1 meter.
+Continue this process for any additional blocks, and after completing the task with all targets, return to your starting position. This entire activity can be efficiently executed using only the camera and visual-servoing techniques. We will position 1 to 3 targets within a defined area of 1 meter.
+
 
 Points:
 - +50 points - each per target lifted
-- +50 points - each per target placed
+- +50 points - each per target successfully stacked
 
 ### Event 3: Maze Explorer [400 points max]
 
@@ -62,13 +63,13 @@ Points:
 
 ### Event 4: Warehouse [500 points max]
 
-The warehouse arena will look something like the graphic below, your MBot will move the targets (green box, arrow indicating pick up direction) to the red spaces.
+Below is an example of what the warehouse arena will look like. Your MBot will move the pick-up targets (green boxes, arrow indicating pick up direction) to the drop-off targets (red boxes, to be stacked on top of).
 
 <a class="image-link" href="/assets/images/botlab/checkpoints/competition.png">
 <img src="/assets/images/botlab/checkpoints/competition.png" alt=" " style="max-width:400px;"/>
 </a>
 
 Points:
-- [+100 points] Level 1: from the starting location, retrieve the single target and move to its location within three minutes.
-- [+150 points] Level 2: retrieve 2 targets and move to the drop off location within an additional three minutes.
-- [+250 points]  Level 3: retrieve 4 targets and move to the drop off location within an additional six minutes.
+- [+100 points] Level 1: from the starting location, retrieve a single green target and stack it on a red drop-off target within 3 minutes.
+- [+150 points] Level 2: retrieve 2 green targets and stack each on a drop-off location within an additional 3 minutes (6 minutes total).
+- [+250 points]  Level 3: retrieve 4 green targets and stack each on a drop-off location within an additional 6 minutes (12 minutes total).

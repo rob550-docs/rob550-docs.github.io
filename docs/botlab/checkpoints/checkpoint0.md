@@ -4,7 +4,7 @@ title: Checkpoint 0
 nav_order: 1
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-02-22 17:37:48 -0500
+last_modified_at: 2024-03-13 15:37:48 -0500
 ---
 
 IMPORTANT AND CRITICAL: 
@@ -36,14 +36,9 @@ Following the instruction in the [assembly guide](/docs/botlab/setup-guide/mbot-
 Following the instructions in the [mbot system setup guide](/docs/botlab/setup-guide/mbot-system-setup) and setup the software on your robot.
 
 ### Task 0.3 Design Lab 
-The main development goal of BotLab is to finish the [final competition](/docs/botlab/checkpoints/competition). One part of this competition involves target lifting, where you need to design and build a lifting mechanism for your MBot, for exmaple, make mbot a forklift.
+The main development goal of Botlab is to finish the [final competition](/docs/botlab/checkpoints/competition). One part of this competition involves identifying, lifting, moving, and stacking a crate/pallet similar to a forklift in a factory.
 
-There are 3D printers available in both the lab and the Makerspace that you can use to create your design.
-
-In the competition, you don’t need a unique gripper for each team member’s robot. You can use the team’s best design for all robots or try different strategic approaches for each one. Remember, designing such a mechanism is an iterative process, so start the project early and continue refining your design.
-
-{: .required_for_report }
-Ensure you document your gripper design which includes: <br> 1) Detailed drawings <br> 2) Bill of Materials (BOM) <br> 3) Step-by-step construction instructions
+The specifics of this component of Botlab can be found in the [Designlab section](/docs/botlab/checkpoints/design_lab) of this documentation. Although there are no specific Checkpoints associated with Designlab, you will need to incorporate this design and functionality into your work throughout the project, so be sure to keep this on your mind! Success of this will be evaluated through the competition as well as the report requirements seen in the documentation.
 
 
 ## Checkpoint Submission

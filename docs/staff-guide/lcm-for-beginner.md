@@ -3,7 +3,7 @@ layout: default
 title: LCM for Beginner
 parent: Staff Guide
 nav_order: 5
-last_modified_at: 2024-02-28 14:20:48 -0500
+last_modified_at: 2024-03-14 14:20:48 -0500
 ---
 
 > This guide introduces LCM system to developers working on a differential drive MBot, specifically targeting absolute beginners.
@@ -110,5 +110,5 @@ lc.publish("MBOT_VEL_CMD", msg.encode())
 
 When developing, ensure your code resets the velocities to 0 after completion of the logic. Failing to do so may result in the wheels continuing to run, even after the program has been terminated.
 
-The line `lc = lcm.LCM("udpm://239.255.76.67:7667?ttl=0")` configures UDP multicast communication, specifying the multicast address, port, and TTL for the packets. This URL is the default setting. For more on UDP Multicast Setup, see [LCM's multicast setup documentation]((https://lcm-proj.github.io/lcm/content/multicast-setup.html)).
+The line `lc = lcm.LCM("udpm://239.255.76.67:7667?ttl=0")` configures UDP multicast communication, specifying the multicast address, port, and TTL for the packets. This URL is the default setting. For more on UDP Multicast Setup, see [LCM's multicast setup documentation](https://lcm-proj.github.io/lcm/content/multicast-setup.html).
 

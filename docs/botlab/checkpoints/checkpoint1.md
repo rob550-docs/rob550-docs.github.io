@@ -7,6 +7,8 @@ grand_parent: Botlab
 last_modified_at: 2024-02-22 17:37:48 -0500
 ---
 
+UPDATE 3/14/24: Change Task 1.4 to specify that changing the motion controller is optional.
+
 We want to be able to control the robot’s position, but to do this we need to be able to tell the robot how to move. The control signal we have to move the robot is a motor PWM command, which effectively commands how much effort we wish the motors to produce.  
 
 However, it would be most convenient to be able to command the velocities of the robot from a higher level in order to move the robot in the environment. One simple way to control the robot speed is to control the speed of each wheel. This can be accomplished in a few different methods:
@@ -66,7 +68,7 @@ Provide a detailed description of your final controller, including a table of pa
 The motion controller on the MBot is the interface between the planner and the low level controller. It reads in a planned path (`robot_path_t`) on the `CONTROLLER_PATH` channel and executes the planned motion of the robot. 
 
 ### Task 1.4
-Implement this motion controller in `mbot/mbot_autonomy/src/mbot/motion_controller.cpp`. This program will run on the embedded computer.  
+Study the motion controller in `mbot/mbot_autonomy/src/mbot/motion_controller.cpp`. This program will run on the Jetson Nano. The stock controller implements basic PID waypoint following, which is sufficient to follow a given path, although it may be wise to implement a more advanced motion controller such as carrot following or smooth pursuit.
 
 {: .required_for_report }
 Describe and document your motion control algorithm for getting between waypoints. 

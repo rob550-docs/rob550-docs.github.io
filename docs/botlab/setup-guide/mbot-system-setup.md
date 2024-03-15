@@ -4,7 +4,7 @@ title: MBot System Setup
 parent: Setup Guide
 grand_parent: Botlab
 nav_order: 2
-last_modified_at: 2024-03-07 14:42:48 -0500
+last_modified_at: 2024-03-15 14:42:48 -0500
 ---
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
@@ -46,8 +46,10 @@ If the flash succeeded, the SD card will have two partitions: a 134MB Volume for
     </a>
 
 2. Turn on the power bank and ensure that the power cables are connected as per the assembly guide.
-3. If everything runs smoothly, the OLED screen on the side will light up after a minute or so, and the robot hostname you used in the second step should appear in the [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry).
-4. You can check the Jetson's IP address on the OLED screen or locate the related JSON file in the [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry) data folder.
+3. Please allow a minute or so for it to initialize. Once the initialization is complete, the OLED screen on the side of the mbot will display the MBot's IP address. This information is crucial for connecting to your MBot remotely.
+4. You can check your mbot's IP address on the OLED screen; you can also locate your MBot's IP address through the [MBot IP registry](https://gitlab.eecs.umich.edu/rob550-f23/mbot_ip_registry) repository:
+    - Go to the repository’s history, search for the hostname of your MBot, which you established in the `mbot_config.txt` file. Within the history, find the JSON file corresponding to your MBot's hostname. This file contains your MBot’s IP address among other details.
+
 
 {: .note }
 Every time the robot starts, an update to the IP JSON file is pushed to the registry. 
@@ -68,7 +70,7 @@ Every time the robot starts, an update to the IP JSON file is pushed to the regi
     <img src="/assets/images/botlab/system-setup/vscode_ssh2.png" alt=" " style="max-width:400px;"/>
     </a>
 
-3. Input connection `ssh mbot@your_mbot_ip_address`
+3. Input connection: `ssh mbot@your_mbot_ip_address`
 
     <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh3.png">
     <img src="/assets/images/botlab/system-setup/vscode_ssh3.png" alt=" " style="max-width:400px;"/>
@@ -80,13 +82,13 @@ Every time the robot starts, an update to the IP JSON file is pushed to the regi
     <img src="/assets/images/botlab/system-setup/vscode_ssh4.png" alt=" " style="max-width:400px;"/>
     </a>
 
-5. Navigate to the "Remote Explorer" tab and click the refresh button. You should see your Jetson's IP address listed under the SSH section, indicating that your connection has been set up. 
-    - Click on "Connect in New Window" and enter the password `i<3robots!`. After this, your SSH session should be up and running.
-    - To end the session, click on the tab on the bottom left corner labeled `SSH: xx.x.xxx.xx`. A pop-up menu with the `close remote connection` option will appear.
+5. Navigate to the "Remote Explorer" tab and click the refresh button. You should see your Jetson's IP address listed under the SSH section, indicating that your connection has been saved. 
+    - **To start a remote connection:** Click on "Connect in New Window" and enter the password `i<3robots!`. After this, your SSH session should be up and running.
+    - **To end a remote connection:** Click on the tab at the bottom left corner of the VS Code window labeled SSH: xx.x.xxx.xx. A pop-up menu will appear with the option to "close remote connection".
 
 
 {: .highlight }
-At this point, you should be able to connect to the Jetson using VSCode extension.
+At this point, you should be able to connect to your MBot using VSCode extension. 
 
 {: .note }
 Username: mbot <br>
@@ -111,9 +113,16 @@ Password: i<3robots!
 Now you have completed all the setup for Jetson!
 
 ## Update system utilities
-The `mbot_sys_utils` has been updated after the OS image was generated, and we need to update the settings accordingly. This step is essential for the firmware set up later.
+With the setup now complete, you have the capability to connect to your MBot remotely through **the VSCode terminal**.
 
-1. Pull the latest changes from the `mbot_sys_utils` repository:
+Firstly establish a remote connection to your MBot. Once the remote connection is set, open a terminal within VSCode. In the VSCode terminal, navigate to the home directory by entering the command `cd ~`. 
+
+In the home directory, you will find a folder named `mbot_sys_utils`. The `mbot_sys_utils` has been updated after the OS image was generated, and we need to update the settings accordingly. This step is essential for the firmware set up later.
+
+**Note: Your laptop is now just a gateway for the SSH connection to your MBot. All programming is executed on the MBot, not on your laptop. When we mention opening a terminal in this guide later, we're referring to using a VSCode terminal to access your MBot.**
+
+
+1. Pull the latest changes from the `mbot_sys_utils` repository using the following commands: <br>
 ```bash
 $ cd ~/mbot_sys_utils
 $ git pull
@@ -137,9 +146,9 @@ $ tail -n 1 /boot/firmware/mbot_config.txt && echo ""
 $ cd ~/mbot_sys_utils/services
 $ ./install_mbot_services.sh
 ```
-After installation, power off the device, then turn it back on and reconnect.
+4. After installation, power off the device, your VS Code connection will drop at this point, then turn the power back on and reconnect to the MBot using VS Code.
 
-4. Ensure the updates are properly loaded by checking the log:
+5. Ensure the updates are properly loaded by checking the log:
 ```bash
 $ code /var/log/mbot/mbot_start_networking.log
 ```

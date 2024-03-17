@@ -265,7 +265,7 @@ If your firmware flashing was not successful because the `./upload.sh` script fr
 
 1. Clone the necessary repos to your Jetson under folder `mbot_ws`
     - **Clone** [RP Lidar Driver](https://gitlab.eecs.umich.edu/rob550-f23/rplidar_lcm_driver) and [MBot Bridge](https://gitlab.eecs.umich.edu/rob550-f23/mbot_bridge)
-    - **Fork** [MBot Autonomy](https://gitlab.eecs.umich.edu/rob550-f23/mbot_autonomy)to your group and **then clone** the forked code to Jetson
+    - **Fork** [MBot Autonomy](https://gitlab.eecs.umich.edu/rob550-f23/mbot_autonomy) to your group and **then clone** the forked code to Jetson
 
 2. Install the MBot Web App
     1. Download the latest web app release and unpack it

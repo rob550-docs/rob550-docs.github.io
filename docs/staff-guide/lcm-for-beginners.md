@@ -1,9 +1,9 @@
 ---
 layout: default
-title: LCM for Beginner
+title: LCM for Beginners
 parent: Staff Guide
 nav_order: 5
-last_modified_at: 2024-03-14 14:20:48 -0500
+last_modified_at: 2024-03-17 14:20:48 -0500
 ---
 
 > This guide introduces LCM system to developers working on a differential drive MBot, specifically targeting absolute beginners.

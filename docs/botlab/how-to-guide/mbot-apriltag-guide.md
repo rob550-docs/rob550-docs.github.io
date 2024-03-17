@@ -148,5 +148,5 @@ The lcm message structure can be found under `mbot_lcm_base/mbot_msgs/lcmtypes`.
 
 Side Note #1: If you are familiar with ROS and are looking for functionality similar to `ros2 topic echo`, LCM does not offer a direct command-line tool for echoing messages. To observe the content of messages, you have to implement a subscriber script.
 
-Side Note #2: To learn more about LCM, we have 2 posts might be helpful: [LCM for Beginner](/docs/staff-guide/lcm-for-beginner) and [Advanced LCM Guide](/docs/botlab/how-to-guide/advanced-LCM-guide).
+Side Note #2: To learn more about LCM, we have 2 posts might be helpful: [LCM for Beginners](/docs/staff-guide/lcm-for-beginners) and [Advanced LCM Guide](/docs/botlab/how-to-guide/advanced-LCM-guide).
 

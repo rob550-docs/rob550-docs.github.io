@@ -270,7 +270,7 @@ If your firmware flashing was not successful because the `./upload.sh` script fr
 2. Install the MBot Web App
     1. Download the latest web app release and unpack it
     ```bash
-    $ cd mbot_ws
+    $ cd ~/mbot_ws
     $ wget https://github.com/MBot-Project-Development/mbot_web_app/releases/download/v1.1.0/mbot_web_app-v1.1.0.tar.gz
     $ tar -xvzf mbot_web_app-v1.1.0.tar.gz
     ```

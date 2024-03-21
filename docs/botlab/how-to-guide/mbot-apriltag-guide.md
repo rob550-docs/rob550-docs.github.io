@@ -51,6 +51,7 @@ $ cd ~/mbot_ws/mbot_apriltag/scripts
 $ python3 video_streamer.py
 ```
 - This script is for testing the video stream to ensure your camera is operational.
+- If it doesn't work, please scroll down to the [Camera Troubleshooting](#camera-troubleshooting) section.
 
 ## Camera Calibration
 To find the intrinsic matrix of the mbot camera, we need to perform the camera calibratoin.
@@ -150,3 +151,38 @@ Side Note #1: If you are familiar with ROS and are looking for functionality sim
 
 Side Note #2: To learn more about LCM, we have 2 posts might be helpful: [LCM for Beginners](/docs/staff-guide/lcm-for-beginners) and [Advanced LCM Guide](/docs/botlab/how-to-guide/advanced-LCM-guide).
 
+
+---
+
+## Camera Troubleshooting
+> This section is to troubleshoot when the video_streamer.py doesn't work.
+
+1. Verify the camera is connected properly and is recognized by your system. Run the following commands in your vscode terminal:
+    ```bash
+    ls /dev/video*
+    ```
+    My result looks like this, meaning that my camera has ID 0 and is recognized. If you do not have similar output, something is wrong.
+    ```bash
+    mbot@mbot-shaw-test02:~$ ls /dev/video*
+    /dev/video0
+    ```
+    Follow these steps to troubleshoot:
+    - Ensure the camera cable is correctly connected at both ends, double check if the contacts on the cable is facing the correct side.
+    - Test your camera with another student's functioning setup.
+    - Test your Jetson with another student's working camera with your setup. 
+
+    If these steps confirm your camera and connection slot are functional, proceed to the next step.
+
+2. Verify if [nvarguscamerasrc](https://docs.nvidia.com/jetson/archives/r35.2.1/DeveloperGuide/text/SD/CameraDevelopment/CameraSoftwareDevelopmentSolution.html) plugin is properly installed and working. Run this in your vscode terminal:
+   ```bash
+   gst-inspect-1.0 nvarguscamerasrc
+   ```
+   - Look for 'Factory Details' and 'Plugin Details' in the terminal prints to confirm its presence. If you see errors like "Command not found" or "No such element or plugin," the plugin may not be correctly installed. Note that GStreamer should already be installed on Ubuntu20. 
+    - press `q` to exit
+
+3. Verify if the `nvarguscamerasrc` is working properly by recording a video using it. Run this in your vscode terminal:
+   ```bash
+   gst-launch-1.0 nvarguscamerasrc num-buffers=200 ! 'video/x-raw(memory:NVMM), width=1280, height=720, framerate=20/1, format=NV12' ! omxh264enc ! qtmux ! filesink location=test.mp4
+   ```
+   - It tells GStreamer to capture 200 frames and then stop, and save the video `test.mp4` to the current directory.
+   - To watch the video, you can directly open the `test.mp4` on vscode.

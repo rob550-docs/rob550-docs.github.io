@@ -67,7 +67,7 @@ set(LCM_FILES
     $ make  
     # Upload to the control board
     $ cd ~/mbot_ws/mbot_firmware
-    $ sudo ./upload.sh build/src/mbot.uf2
+    $ sudo ./upload.sh flash build/src/mbot.uf2
     ```
 
 9. To publish your newly defined message from mbot_autonomy, you need to use an LCM instance to either publish to or subscribe from channels with the messages or callback functions.

@@ -22,7 +22,7 @@ For this phase, we have provided some LCM logs containing sensor data from the M
 
 To play back these recorded LCM sessions on a laptop (with Java), you can use the lcm-logplayer-gui
 ```
-$ lcm-logplayer-gui data/
+$ lcm-logplayer-gui log_file.log
 ```
 You can also run the command line version, lcm-log-player, if the system does not have Java. In the GUI version you can turn off LCM channels with a checkbox. The same functionality is available in the command line version, check the help with:
 ```

@@ -30,9 +30,9 @@ $ lcm-logplayer --help
 ```
 Similarly, to record your own lcm logs, for testing or otherwise, you can use the lcm-logger:
 ```
-$ lcm-logger -c SLAM_POSE_CHANNEL my_lcm_log.log 
+$ lcm-logger -c SLAM_POSE my_lcm_log.log 
 ```
-This example would store data from the OPTITRACK_CHANNEL in the file `my_lcm_log.log`. With no channels specified, all channels will be recorded over the interval.  
+This example would store data from the SLAM_POSE channel in the file `my_lcm_log.log`. With no channels specified, all channels will be recorded over the interval.  
  
 ### Accounting for Scan Speed
 The laser rangefinder beam rotates 360 degrees at a sufficiently slow rate such that the robot may move a non-negligible distance in that time. Therefore, you will need to estimate the actual pose of the robot when each beam was sent to determine the cell in which the beam terminated. 

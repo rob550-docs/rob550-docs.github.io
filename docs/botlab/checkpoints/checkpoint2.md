@@ -4,8 +4,10 @@ title: Checkpoint 2
 nav_order: 4
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-02-22 17:37:48 -0500
+last_modified_at: 2024-04-02 12:16:00 -0500
 ---
+
+UPDATE 4/2/24: Fix mbot_slam commands
 
 During the SLAM part of the lab, you will build an increasingly sophisticated algorithm for mapping and localizing in the environment. You will begin by constructing an occupancy grid using known poses. Following that, you’ll implement Monte Carlo Localization in a known map. Finally, you will put each of these pieces together to create a full SLAM system.  Much of this can be initiated using only logs and when you are ready to use the actual robot.
 
@@ -58,12 +60,12 @@ As discussed in the lecture, Monte Carlo Localization (MCL) is a particle-filter
 
 In these tasks, you’ll run the slam program in localization-only mode using a saved map. Use the ground-truth maps provided with the sensor logs. You can run slam using: 
 ```
-$ ./slam --localization-only <filename>  
+$ ./mbot_slam --localization-only <filename>  
 ```
 
-To test the action model only, you can run in action-only mode with localization-only turned on:
+To test the action model only, you can run in action-only mode:
 ```
-$ ./slam --localization-only <filename> --action-only
+$ ./mbot_slam --action-only
 ```
 
 ### Task 2.2.1 Action Model

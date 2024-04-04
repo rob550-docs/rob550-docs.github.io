@@ -9,6 +9,8 @@ last_modified_at: 2024-04-02 12:16:00 -0500
 
 UPDATE 4/2/24: Fix mbot_slam commands
 
+UPDATE 4/4/24: Add reminder here to unplug your lidar and Pico
+
 During the SLAM part of the lab, you will build an increasingly sophisticated algorithm for mapping and localizing in the environment. You will begin by constructing an occupancy grid using known poses. Following that, you’ll implement Monte Carlo Localization in a known map. Finally, you will put each of these pieces together to create a full SLAM system.  Much of this can be initiated using only logs and when you are ready to use the actual robot.
 
 
@@ -67,6 +69,8 @@ To test the action model only, you can run in action-only mode:
 ```
 $ ./mbot_slam --action-only
 ```
+
+Whenever you test your slam using log files, make sure to unplug your lidar and Pico.
 
 ### Task 2.2.1 Action Model
 Implement an action (or motion) model using some combination of sensors. This could be odometry with wheel encoders alone, or it could be some other estimate of action incorporating the IMU or using computer vision. The skeleton of the action model can be found in `mbot/mbot_autonomy/slam/action_model.cpp|hpp`.

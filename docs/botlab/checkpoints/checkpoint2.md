@@ -43,7 +43,7 @@ To do so, you must interpolate between the robot pose estimate of the current sc
 
 ## Mapping - Occupancy Grid
 ### Task 2.1
-Implement the occupancy grid mapping algorithm in the Mapping class in `mbot/mbot_autonomy/src/slam/mapping.cpp/.hpp`.
+Implement the occupancy grid mapping algorithm in the Mapping class in `mbot/mbot_autonomy/src/slam/mapping.cpp|hpp`.
 
 An occupancy grid maps the space surrounding the robot by assigning probabilities to each cell, indicating whether they are occupied or free. In our case, we'll use a grid where cells are at most 10 cm in size, and their log-odds values range from -127 to 127, represented as integers. To accurately trace the rays across your occupancy grid, consider implementing Bresenham’s line algorithm, as discussed in our class lecture.
 
@@ -69,7 +69,7 @@ $ ./mbot_slam --action-only
 ```
 
 ### Task 2.2.1 Action Model
-Implement an action (or motion) model using some combination of sensors. This could be odometry with wheel encoders alone, or it could be some other estimate of action incorporating the IMU or using computer vision. The skeleton of the action model can be found in `mbot/mbot_autonomy/slam/action_model.h/.cpp`.
+Implement an action (or motion) model using some combination of sensors. This could be odometry with wheel encoders alone, or it could be some other estimate of action incorporating the IMU or using computer vision. The skeleton of the action model can be found in `mbot/mbot_autonomy/slam/action_model.cpp|hpp`.
 
 Refer to Chapter 5 of Probabilistic Robotics for a discussion of common action models. You can base your implementation on the pseudo-code in this chapter. There are two action models that are discussed in detail, the Velocity Model (Sec. 5.3) and the Odometry Model (Sec. 5.4).
 
@@ -77,11 +77,11 @@ Refer to Chapter 5 of Probabilistic Robotics for a discussion of common action m
 Describe the action model you utilized, including the equations employed. Additionally, provide a table listing the values of any uncertainty parameters, and explain how you chose these values.
 
 ### Task 2.2.2 Sensor Model & Particle Filter
-Implement a sensor model that calculates the likelihood of a pose given a laser scan and an occupancy grid map. The skeleton of the sensor model can be found in `mbot/mbot_autonomy/slam/sensor_model.h/.cpp`.  
+Implement a sensor model that calculates the likelihood of a pose given a laser scan and an occupancy grid map. The skeleton of the sensor model can be found in `mbot/mbot_autonomy/slam/sensor_model.cpp|hpp`.  
 
 Refer to Chapter 6 of Probabilistic Robotics for a discussion of common sensor models. You can base your implementation on the pseudo-code in this chapter.  
 
-Implement the particle filter functions in `mbot/mbot_autonomy/slam/particle_filter.h/.cpp`.
+Implement the particle filter functions in `mbot/mbot_autonomy/slam/particle_filter.cpp|hpp`.
 
 Refer to Chapter 4 of Probabilistic Robotics for information implementing the particle filter.
 

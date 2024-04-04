@@ -17,7 +17,7 @@ Using the SLAM algorithm implemented previously, you can now construct a map of 
 
 ## Task 3.1 Obstacle Distance
 
-The robot configuration space is implemented in `mbot/mbot_autonomy/src/planning/obstacle_distance_grid.cpp|hpp`. An 8-connected Brushfire algorithm implementation is already written for you. If you make any changes, you can use obstacle_distance_grid_test.cpp to check if your code passes the three tests. Depending on your implementation and data representation, you may want to modify the tests as well. The botgui already has a call for a mapper object from which it can obtain and draw an obstacle distance grid. You can view the generated obstacle distance grid by ticking “Show Obstacle Distances” in botgui.
+The robot configuration space is implemented in `mbot/mbot_autonomy/src/planning/obstacle_distance_grid.cpp|hpp`. An 8-connected Brushfire algorithm implementation is already written for you. If you make any changes, you can use obstacle_distance_grid_test.cpp to check if your code passes the three tests. Depending on your implementation and data representation, you may want to modify the tests as well. The botgui already has a call for a mapper object from which it can obtain and draw an obstacle distance grid. ~~You can view the generated obstacle distance grid by ticking “Show Obstacle Distances” in botgui.~~ This doesn't seem to work now :(
 
 ## Task 3.2 A* Path Planning
  

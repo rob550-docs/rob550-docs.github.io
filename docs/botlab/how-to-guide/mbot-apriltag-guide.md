@@ -155,7 +155,7 @@ Side Note #2: To learn more about LCM, we have 2 posts might be helpful: [LCM fo
 ---
 
 ## Camera Troubleshooting
-> This section is to troubleshoot when the video_streamer.py doesn't work.
+> This section is to troubleshoot when the video_streamer.py doesn't work. Please follow the steps in order to diagnose the cause.
 
 1. Verify the camera is connected properly and is recognized by your system. Run the following commands in your vscode terminal:
     ```bash
@@ -186,3 +186,27 @@ Side Note #2: To learn more about LCM, we have 2 posts might be helpful: [LCM fo
    ```
    - It tells GStreamer to capture 200 frames and then stop, and save the video `test.mp4` to the current directory.
    - To watch the video, you can directly open the `test.mp4` on vscode.
+   - Up to this step, you have confirmed that both your hardware and GStreamer-related components are functioning correctly and are not the source of the issue.
+
+4. Verify if your OpenCV installation was compiled with GStreamer support by run the following code in your vscode terminal:
+```bash
+# Launch Python:
+$ python3
+---
+>>> import cv2
+>>> print(cv2.getBuildInformation())
+```
+This command displays OpenCV's build details. In the output, locate the "Video I/O" section to confirm GStreamer support:
+```bash
+  Video I/O:
+    DC1394:                      YES (2.2.6)
+    FFMPEG:                      YES
+      avcodec:                   YES (58.54.100)
+      avformat:                  YES (58.29.100)
+      avutil:                    YES (56.31.100)
+      swscale:                   YES (5.5.100)
+      avresample:                YES (4.0.0)
+    GStreamer:                   YES (1.16.3)
+    v4l/v4l2:                    YES (linux/videodev2.h)
+```
+If "GStreamer" is marked as "NO," it means GStreamer isn't enabled in your OpenCV installation. This indicates that the issue is from OpenCV.

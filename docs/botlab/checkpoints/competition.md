@@ -7,7 +7,7 @@ grand_parent: Botlab
 last_modified_at: 2024-04-23 16:37:48 -0500
 ---
 
-UPDATE 4/23/24: Clarify exactly what is needed for Tasks 1 and 4.
+UPDATE 4/23/24: Clarify exactly what is needed for tasks.
 
 <a class="image-link" href="/assets/images/botlab/checkpoints/doge-meme.png">
 <img src="/assets/images/botlab/checkpoints/doge-meme.png" alt=" " style="max-width:250px;"/>
@@ -46,10 +46,10 @@ Begin from your initial position and use the camera along with AprilTags to iden
 
 Continue this process for any additional blocks, and after completing the task with all targets, return to your starting position. This entire activity can be efficiently executed using only the camera and visual-servoing techniques. We will position 1 to 3 targets within a defined area of 1 meter.
 
-
 Points:
 - +50 points - each per target lifted
 - +50 points - each per target successfully stacked
+- 50% deduction if the task is done manually
 
 ### Event 3: Maze Explorer [300 points max]
 
@@ -82,3 +82,4 @@ Points:
 - [+100 points] Level 1: from the starting location, retrieve a single green target and stack it on a red drop-off target within 3 minutes.
 - [+150 points] Level 2: retrieve 2 green targets and stack each on a drop-off location within an additional 3 minutes (6 minutes total).
 - [+250 points]  Level 3: retrieve 4 green targets and stack each on a drop-off location within an additional 6 minutes (12 minutes total).
+- 50% deduction if the task is done manually

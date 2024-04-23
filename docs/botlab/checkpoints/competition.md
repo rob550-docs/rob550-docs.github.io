@@ -4,8 +4,10 @@ title: Competition
 nav_order: 7
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-03-13 16:37:48 -0500
+last_modified_at: 2024-04-23 16:37:48 -0500
 ---
+
+UPDATE 4/23/24: Clarify exactly what is needed for Tasks 1 and 4.
 
 <a class="image-link" href="/assets/images/botlab/checkpoints/doge-meme.png">
 <img src="/assets/images/botlab/checkpoints/doge-meme.png" alt=" " style="max-width:250px;"/>
@@ -17,7 +19,11 @@ last_modified_at: 2024-03-13 16:37:48 -0500
 
 ### Event 1: Speed Run [200 points max]
 
-From the starting pose, make a circuit around a convex arena by driving the path given to you. Return to the starting pose. Then, using the map, drive quickly around the path. Save an image of your map and upload the image to Google Drive.
+You will complete two runs in total, one of which is judged for accuracy and the second which is judged for speed.
+
+For the first run, make a circuit around a convex arena by driving the path given to you. Do this while running SLAM to make a map of the arena. Return to the starting pose. You are judged based on the final error in pose. Save an image of your map and upload the image to Google Drive.
+
+For the second run, drive quickly around the path. You are judged on the speed to complete the run. For this run, you will not be judged based on your final error, but your ending pose must be close enough to the start that you are still partially on the starting piece of paper.
 
 Error in pose after mapping:
 - 100 points: < (3 cm, 3 cm, 15°)
@@ -63,7 +69,7 @@ Points:
 
 ### Event 4: Warehouse [500 points max]
 
-Below is an example of what the warehouse arena will look like. Your MBot will move the pick-up targets (green boxes, arrow indicating pick up direction) to the drop-off targets (red boxes, to be stacked on top of).
+Below is an example of what the warehouse arena will look like. Your MBot will move the pick-up targets (green boxes, arrow indicating pick up direction) to the drop-off targets (red boxes, to be stacked on top of). Your bot will start at a random initial location and must localize itself within the map at the start.
 
 <a class="image-link" href="/assets/images/botlab/checkpoints/competition.png">
 <img src="/assets/images/botlab/checkpoints/competition.png" alt=" " style="max-width:400px;"/>

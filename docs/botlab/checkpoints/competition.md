@@ -31,6 +31,8 @@ Error in pose after mapping:
 - 50 points: < (10 cm, 10 cm, 30°)
 - 25 points: < (20 cm, 20 cm, 45°)
 
+Map quality: [+100, +50, +25] for [Excellent, Good, OK] quality
+
 Timed run:
 - 100 points: < time TBD
 - 75 points: < time TBD

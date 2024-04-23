@@ -51,7 +51,7 @@ Points:
 - +50 points - each per target lifted
 - +50 points - each per target successfully stacked
 
-### Event 3: Maze Explorer [400 points max]
+### Event 3: Maze Explorer [300 points max]
 
 From the starting position, explore the maze and make a map of the environment. Then return to the start location/pose. Save the map to an image file and upload your map to Google Drive. Once all groups finish the task, the maps will be ranked according to accuracy. 
 
@@ -66,7 +66,8 @@ Points:
     - 50 points: < (10 cm, 10 cm, 30°)
     - 25 points: < (20 cm, 20 cm, 45°)
 - [+100, +50, +25] for map quality [Excellent, Good, OK] regardless of finishing
-- +100 points for using your path planner (click to drive)
+- +50 points for navigating with teleop
+- +75 points for using your path planner (click to drive)
 - +100 points for completing a full map fully autonomously
 
 ### Event 4: Warehouse [500 points max]

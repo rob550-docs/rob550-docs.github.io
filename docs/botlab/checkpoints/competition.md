@@ -17,7 +17,7 @@ UPDATE 4/23/24: Clarify exactly what is needed for tasks.
 * TOC
 {:toc}
 
-### Event 1: Speed Run [200 points max]
+### Event 1: Speed Run [300 points max]
 
 You will complete two runs in total, one of which is judged for accuracy and the second which is judged for speed.
 

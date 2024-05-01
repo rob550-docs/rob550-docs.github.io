@@ -34,9 +34,9 @@ Error in pose after mapping:
 Map quality: [+100, +50, +25] for [Excellent, Good, OK] quality
 
 Timed run:
-- 100 points: < time TBD
-- 75 points: < time TBD
-- 50 points: < time TBD
+- 100 points: < 15 s
+- 75 points: < 20 s
+- 50 points: < 30 s
 - 25 points: Finish
 
 

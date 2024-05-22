@@ -4,7 +4,7 @@ title: MBot System Setup
 parent: Setup Guide
 grand_parent: Botlab
 nav_order: 2
-last_modified_at: 2024-03-15 14:42:48 -0500
+last_modified_at: 2024-05-22 14:42:48 -0500
 ---
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
@@ -57,42 +57,45 @@ Every time the robot starts, an update to the IP JSON file is pushed to the regi
 ### 4. VSCode Remote - SSH extension
 > In this step, we are going to establish remote access using the VSCode extension. After this setup, you will be able to access the Jetson remotely using your laptop.
 
-1. On your laptop, install VSCode `Remote Development` extension pack
+1. Open VSCode on your laptop, and install the `Remote - SSH` extension
 
     <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh1.png">
-    <img src="/assets/images/botlab/system-setup/vscode_ssh1.png" alt=" " style="max-width:400px;"/>
+    <img src="/assets/images/botlab/system-setup/vscode_ssh1.png" alt=" " style="max-width:600px;"/>
     </a>
 
-2. Add the SSH connection
-    >Note that your laptop needs to connect to MWireless as well.
+2. After installing the `Remote - SSH` extension, a new "Remote Explorer" icon will appear on the side panel. This is where you can add the SSH connection to your mbot. Click the New Remote `+` icon as shown below:
+    >Note that your laptop needs to connect to MWireless as well if you are on campus.
     
     <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh2.png">
-    <img src="/assets/images/botlab/system-setup/vscode_ssh2.png" alt=" " style="max-width:400px;"/>
+    <img src="/assets/images/botlab/system-setup/vscode_ssh2.png" alt=" " style="max-width:600px;"/>
     </a>
 
-3. Input connection: `ssh mbot@your_mbot_ip_address`
+3. When the prompt window pops up, enter the connection command: `ssh mbot@your_mbot_ip_address` as shown below. Your IP address can be found in the IP registry and on the OLED screen.
 
     <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh3.png">
-    <img src="/assets/images/botlab/system-setup/vscode_ssh3.png" alt=" " style="max-width:400px;"/>
+    <img src="/assets/images/botlab/system-setup/vscode_ssh3.png" alt=" " style="max-width:500px;"/>
     </a>
 
 4. Select the default config file. Note that different operating systems may have different paths, but this isn't necessarily a problem. Here in the image, we select the one contains user name.
 
     <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh4.png">
-    <img src="/assets/images/botlab/system-setup/vscode_ssh4.png" alt=" " style="max-width:400px;"/>
+    <img src="/assets/images/botlab/system-setup/vscode_ssh4.png" alt=" " style="max-width:500px;"/>
     </a>
 
 5. Navigate to the "Remote Explorer" tab and click the refresh button. You should see your Jetson's IP address listed under the SSH section, indicating that your connection has been saved. 
     - **To start a remote connection:** Click on "Connect in New Window" and enter the password `i<3robots!`. After this, your SSH session should be up and running.
     - **To end a remote connection:** Click on the tab at the bottom left corner of the VS Code window labeled SSH: xx.x.xxx.xx. A pop-up menu will appear with the option to "close remote connection".
 
+{: .note }
+Username: mbot <br>
+Password: i<3robots!
 
 {: .highlight }
 At this point, you should be able to connect to your MBot using VSCode extension. 
 
-{: .note }
-Username: mbot <br>
-Password: i<3robots!
+- To use the mbot at home
+    - Firstly turn on the mbot at home. It will automatically connect to your Wi-Fi if you entered your home Wi-Fi details in the mbot_config.txt file. Replicate the 5 steps above to add your mbot's IP address at home to your VSCode remote connections. Once done, you will be able to remotely access your mbot at home.
+
 
 ### 5. Remote Desktop access - NoMachine
 > In this step, we are going to set up NoMachine access. Upon completion, you will be able to access the Jetson with a Desktop UI. 
@@ -108,6 +111,24 @@ Password: i<3robots!
         </a>
     - Finally, enter the username: `mbot`, password: `i<3robots!` to log in.
     - Note: if the NoMachine desktop freezes, you can always restart the robot by turning the power off and then back on.
+
+### 6. Change your mbot's password
+
+For mbot network security, we encourage you to change your password once you have set up your mbot. The default password is `i<3robots!`, which everyone uses. You can reset your password to anything you prefer. Here's how to change your mbot's password:
+1. Open a VSCode terminal on your laptop.
+2. Enter this command: `passwd`. You will be prompted to enter your current password.
+3. Next, you will be asked to enter your new password and retype it to confirm.
+4. If the passwords match, you will see a message indicating that your password has been updated successfully.
+
+The output will look like this:
+```bash
+$  passwd
+Changing password for mbot.
+Current password: 
+New password: 
+Retype new password: 
+passwd: password updated successfully
+```
 
 {: .highlight }
 Now you have completed all the setup for Jetson!

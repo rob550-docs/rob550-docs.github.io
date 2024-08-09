@@ -155,23 +155,23 @@ $ ./install_mbot_services.sh
 
 ### 1. Compile the firmware files
 1. It is always a good practice to create a dedicated workspace when working on large-scale projects. Open a new Terminal in the VSCode remote session, then create a new folder called `mbot_ws`:
-```bash
-$ mkdir mbot_ws 
-```
+    ```bash
+    $ mkdir mbot_ws 
+    ```
 
 1.    Clone [mbot_lcm_base](https://github.com/mbot-project/mbot_lcm_base.git) to `~/mbot_ws` and install.
     
     1. Clone from Github
-    ```bash
-    $ cd ~/mbot_ws/
-    $ git clone https://github.com/mbot-project/mbot_lcm_base.git
-    ```
+        ```bash
+        $ cd ~/mbot_ws/
+        $ git clone https://github.com/mbot-project/mbot_lcm_base.git
+        ```
 
     2. Install lcm related stuff
-    ```bash
-    $ cd ~/mbot_ws/mbot_lcm_base
-    $ ./scripts/install.sh
-    ```
+        ```bash
+        $ cd ~/mbot_ws/mbot_lcm_base
+        $ ./scripts/install.sh
+        ```
 
 2. Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f24/mbot_firmware) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to the Pi5 in `~/mbot_ws`.
         
@@ -221,10 +221,10 @@ Note that during the calibration routine, robot should turning in **counter cloc
 
 The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation.
 
-```bash
-$ cd ~/mbot_ws/mbot_firmware
-$ sudo ./upload.sh flash build/src/mbot.uf2
-```
+    ```bash
+    $ cd ~/mbot_ws/mbot_firmware
+    $ sudo ./upload.sh flash build/src/mbot.uf2
+    ```
 
 ### 3. Using Minicom to verify
 Here we introduce you the tool Minicom. It is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts from the Pi5.

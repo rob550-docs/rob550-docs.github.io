@@ -159,7 +159,7 @@ $ ./install_mbot_services.sh
     $ mkdir mbot_ws 
     ```
 
-1.    Clone [mbot_lcm_base](https://github.com/mbot-project/mbot_lcm_base.git) to `~/mbot_ws` and install.
+2.    Clone [mbot_lcm_base](https://github.com/mbot-project/mbot_lcm_base.git) to `~/mbot_ws` and install.
     
     1. Clone from Github
         ```bash
@@ -173,9 +173,9 @@ $ ./install_mbot_services.sh
         $ ./scripts/install.sh
         ```
 
-2. Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f24/mbot_firmware) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to the Pi5 in `~/mbot_ws`.
+3. Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f24/mbot_firmware) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to the Pi5 in `~/mbot_ws`.
         
-3. Compile the firmware code to get .uf2 binary files
+4. Compile the firmware code to get .uf2 binary files
 
     1. Run the firmware setup script
         ```bash

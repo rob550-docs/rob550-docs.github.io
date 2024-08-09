@@ -159,7 +159,8 @@ $ ./install_mbot_services.sh
 $ mkdir mbot_ws 
 ```
 
-1.    Clone [mbot_lcm_base](https://github.com/mbot-project/mbot_lcm_base.git) to `~/mbot_ws` and install
+1.    Clone [mbot_lcm_base](https://github.com/mbot-project/mbot_lcm_base.git) to `~/mbot_ws` and install.
+    
     1. Clone from Github
     ```bash
     $ cd ~/mbot_ws/

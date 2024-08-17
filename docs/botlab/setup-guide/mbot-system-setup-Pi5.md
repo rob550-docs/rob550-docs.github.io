@@ -4,7 +4,7 @@ title: MBot System Setup with RPi5
 parent: Setup Guide
 grand_parent: Botlab
 nav_order: 2
-last_modified_at: 2024-08-9 11:59:00 -0500
+last_modified_at: 2024-08-15 11:59:00 -0500
 ---
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
@@ -12,8 +12,7 @@ last_modified_at: 2024-08-9 11:59:00 -0500
 The following items are needed:
 1. microSD card for main storage
 2. SD adapter
-Optional:
-3. USB keyboard and mouse
+3. USB keyboard and mouse (Optional)
 
 
 ### Contents
@@ -131,21 +130,21 @@ Now you have completed all the setup for Pi5!
 ## Update system utilities
 With the setup now complete, you have the capability to connect to your MBot remotely through **the VSCode terminal**.
 
-Firstly establish a remote connection to your MBot. Once the remote connection is set, open a terminal within VSCode. In the VSCode terminal, navigate to the home directory by entering the command `cd ~`. 
+Firstly establish a remote connection to your MBot. Once the remote connection is set, open a terminal within VSCode. In the VSCode terminal, navigate to the mbot workspace directory by entering the command `cd ~/mbot_ws`. 
 
-In the home directory, you will find a folder named `mbot_sys_utils`. The `mbot_sys_utils` has been updated after the OS image was generated, and we need to update the settings accordingly. This step is essential for the firmware set up later.
+In the workspace directory, you will find a folder named `mbot_sys_utils`. The `mbot_sys_utils` has been updated after the OS image was generated, and we need to update the settings accordingly. This step is essential for the firmware set up later.
 
 **Note: Your laptop is now just a gateway for the SSH connection to your MBot. All programming is executed on the MBot, not on your laptop. When we mention opening a terminal in this guide later, we're referring to using a VSCode terminal to access your MBot.**
 
 
 1. Pull the latest changes from the `mbot_sys_utils` repository using the following commands: <br>
 ```bash
-$ cd ~/mbot_sys_utils
+$ cd mbot_sys_utils
 $ git pull
 ```
 2. Install the services manually:
 ```bash
-$ cd ~/mbot_sys_utils/services
+$ cd services
 $ ./install_mbot_services.sh
 ```
 3. After installation, power off the device, your VS Code connection will drop at this point, then turn the power back on and reconnect to the MBot using VS Code.
@@ -154,20 +153,19 @@ $ ./install_mbot_services.sh
 > In this session, we are going to work on setup of the Control Board.
 
 ### 1. Compile the firmware files
-1. It is always a good practice to create a dedicated workspace when working on large-scale projects. Open a new Terminal in the VSCode remote session, then create a new folder called `mbot_ws`:
+1. Firstly navigate back to `mbot_ws`:
     ```bash
-    $ mkdir mbot_ws 
+    $ cd ~/mbot_ws 
     ```
 
-2.    Clone [mbot_lcm_base](https://github.com/mbot-project/mbot_lcm_base.git) to `~/mbot_ws` and install.
-    
+2. Clone [mbot_lcm_base](https://github.com/mbot-project/mbot_lcm_base.git) to `~/mbot_ws` and install.
     1. Clone from Github
         ```bash
         $ cd ~/mbot_ws/
         $ git clone https://github.com/mbot-project/mbot_lcm_base.git
         ```
-
     2. Install lcm related stuff
+
         ```bash
         $ cd ~/mbot_ws/mbot_lcm_base
         $ ./scripts/install.sh

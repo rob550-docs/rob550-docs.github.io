@@ -4,7 +4,7 @@ title: Competition
 nav_order: 5
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-03-05 12:00:00 -0500
+last_modified_at: 2024-08-26 12:00:00 -0500
 ---
 
 It's time to showcase your hard work and effort!
@@ -110,7 +110,13 @@ For this task, use only large blocks and stack them in any color order you choos
 **You cannot use “click” to pick and place.**
 
 ### Points
-- The first block is worth 10 points, and each additional block is worth (n*10) points
+- Given N blocks stacked, the score for a stack is computed according to the following formula, then rounded to the nearest whole multiple of 10:
+- SCORE = 50 * EXP(0.15*N)
+- The following lookup table gives scores for N=1 to N=19 (tying the class record)
+
+| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 |
+|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|
+| 60 | 70 | 80 | 90 | 110 | 120 | 140 | 170 | 190 | 220 | 260 | 300 | 350 | 410 | 470 | 550 | 640 | 740 | 860 |
 
 ## Score Calculation
 Your overall score will be the sum of your best run on each event. Each event can be completed multiple times at different levels.

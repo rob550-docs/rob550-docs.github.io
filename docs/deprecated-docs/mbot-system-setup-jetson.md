@@ -1,9 +1,8 @@
 ---
 layout: default
 title: MBot System Setup with Jetson
-parent: Setup Guide
-grand_parent: Botlab
-nav_order: 3
+parent: Deprecated Docs
+nav_order: 2
 last_modified_at: 2024-05-22 14:42:48 -0500
 ---
 

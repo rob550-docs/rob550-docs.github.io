@@ -190,7 +190,7 @@ $ ./install_mbot_services.sh
         ```
     3. Now you will have 2 relevant `.uf2` files under `/build`
         - The calibration script, `mbot_firmware/build/tests/mbot_calibrate_classic.uf2`
-        - The MBot firmware, `mbot_firmware/build/src/mbot.uf2`
+        - The MBot firmware, `mbot_firmware/build/src/mbot_classic.uf2`
 
 
 ### 2. Calibrate the MBot and flash the firmware
@@ -219,10 +219,10 @@ Note that during the calibration routine, robot should turning in **counter cloc
 
 The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation.
 
-    ```bash
-    $ cd ~/mbot_ws/mbot_firmware
-    $ sudo ./upload.sh flash build/src/mbot.uf2
-    ```
+```bash
+$ cd ~/mbot_ws/mbot_firmware
+$ sudo ./upload.sh flash build/src/mbot_classic.uf2
+```
 
 ### 3. Using Minicom to verify
 Here we introduce you the tool Minicom. It is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts from the Pi5.

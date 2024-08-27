@@ -1,8 +1,7 @@
 ---
 layout: default
-title: Mbot Classic Assembly
-parent: Setup Guide
-grand_parent: Botlab
+title: Mbot Classic Assembly with Jetson
+parent: Deprecated Docs
 nav_order: 1
 last_modified_at: 2023-10-20 16:37:48 -0500
 ---
@@ -317,8 +316,8 @@ Now let's move to the middle part.
     Gather the components listed in the table and ensure you have all the items shown in the image below. Assemble a 3-heads wire as depicted in the second image. **Color and order matters!** Your assembled wire should look exactly like the image indicated.
 
     <div class="popup-gallery">
-    <a href="/assets/images/botlab/assembly/middlePlate/mbot_jumper_wires_assemble1.jpg" title="Assemble the jumper wires 1"><img src="/assets/images/botlab/assembly/middlePlate/mbot_jumper_wires_assemble1.jpg" width="200" height="200"></a>
-    <a href="/assets/images/botlab/assembly/middlePlate/mbot_jumper_wires_assemble2.jpg" title="Assemble the jumper wires 2"><img src="/assets/images/botlab/assembly/middlePlate/mbot_jumper_wires_assemble2.jpg" width="400" height="200"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/mbot_jumper_wires.jpg" title="Assemble the jumper wires 1"><img src="/assets/images/botlab/assembly/middlePlate/mbot_jumper_wires.jpg" width="200" height="200"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/jetson_jumper_wires_assemble.jpg" title="Assemble the jumper wires 2"><img src="/assets/images/botlab/assembly/middlePlate/jetson_jumper_wires_assemble.jpg" width="400" height="200"></a>
     </div>
 
 8. Connect the assembled jumper wire to the control board and Jetson
@@ -328,9 +327,9 @@ Now let's move to the middle part.
     3. Insert the 3PIN connector into the control board's RUN/BTLD pins, as shown in the image below.
     <br><br>
     <div class="popup-gallery">
-    <a href="/assets/images/botlab/assembly/middlePlate/connect_jumpwires1.jpg" title="Connect the jumper wires 1"><img src="/assets/images/botlab/assembly/middlePlate/connect_jumpwires1.jpg" width="200" height="200"></a>
-    <a href="/assets/images/botlab/assembly/middlePlate/connect_jumpwires2.jpg" title="Connect the jumper wires 2"><img src="/assets/images/botlab/assembly/middlePlate/connect_jumpwires2.jpg" width="200" height="200"></a>
-    <a href="/assets/images/botlab/assembly/middlePlate/connect_jumpwires3.jpg" title="Connect the jumper wires 3"><img src="/assets/images/botlab/assembly/middlePlate/connect_jumpwires3.jpg" width="200" height="200"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/jetson_connect_jumpwires1.jpg" title="Connect the jumper wires 1"><img src="/assets/images/botlab/assembly/middlePlate/jetson_connect_jumpwires1.jpg" width="200" height="200"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/jetson_connect_jumpwires2.jpg" title="Connect the jumper wires 2"><img src="/assets/images/botlab/assembly/middlePlate/jetson_connect_jumpwires2.jpg" width="200" height="200"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/jetson_connect_jumpwires3.jpg" title="Connect the jumper wires 3"><img src="/assets/images/botlab/assembly/middlePlate/jetson_connect_jumpwires3.jpg" width="200" height="200"></a>
     </div>
 
 9. Attach middle part to bottom part

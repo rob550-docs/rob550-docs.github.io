@@ -44,7 +44,7 @@ One group member needs to create a GitLab Group and add all members. Follow thes
 ### 3. Fork Repositories
 "Forking a repository" refers to the process of creating a personal copy of a repository (a collection of files and code) hosted on a platform like GitHub or GitLab, in our case is GitLab. This copy is entirely separate from the original repository, allowing you to make changes and updates without affecting the original project. In order to create a fork, complete the following steps:
 
-1. Navigate to the repository you’d like to fork, in this case, you should fork the [armlab’s repository](https://gitlab.eecs.umich.edu/rob550-f23/armlab-f23)
+1. Navigate to the repository you’d like to fork, in this case, you should fork the [armlab’s repository](https://gitlab.eecs.umich.edu/ROB550-F24/armlab-f24)
 2. On the top right, select "Fork"
 3. You can change the name of the repository if you would like, but the key thing is to change the "Project URL" field so that it is forked into the group you just created.
 4. Change the visibility level to "Private".

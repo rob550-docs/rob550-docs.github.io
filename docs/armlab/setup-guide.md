@@ -60,6 +60,9 @@ One group member needs to create a GitLab Group and add all members. Follow thes
     <img src="/assets/images/armlab/setup-guide/clone.png" alt="" style="max-width:400px;"/>
     </a>
 
+{: .warning}
+The repo must be cloned to the home directory `~`. If you clone your armlab repo into a subfolder you will not be able to run the control station!
+
 2. Then open a Terminal (shortcut: ctrl+alt+t), run the following commands: 
 ```bash
 # move to home directory

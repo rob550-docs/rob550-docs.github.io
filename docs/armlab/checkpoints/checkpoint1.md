@@ -4,8 +4,10 @@ title: Checkpoint 1
 nav_order: 1
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-02-26 15:00:00 -0500
+last_modified_at: 2024-08-29 15:00:00 -0500
 ---
+
+**Update 8/29/24:** Update calibration link and add warning to clone repo.
 
 The first checkpoint is meant to be an introduction to using the GUI of the lab and to start working with the RGB-D camera. The interaction with the GUI will be under the Basic Motion section of the checkpoint, and the interaction with the RGB-D camera will be through the Camera Calibration portion of the checkpoint.
 
@@ -117,7 +119,7 @@ $ ros2 topic echo /the_topic_you_want_to_check
 To perform the intrinsic calibration, use the ROS camera calibration package, which should already be installed from the setup guide.
 
 - You need to firstly start the Realsense2 node, then start the camera calibration node. Details on starting the relevant nodes are in the [How to start ROS nodes guide](/docs/armlab/how-to-guide/how-to-start-nodes).
-- You can find official documentation on using the camera_calibration package with a checkerboard [here](https://navigation.ros.org/tutorials/docs/camera_calibration.html#tutorial-steps). You don't need to run any of the terminal commands on this page.
+- You can find official documentation on using the camera_calibration package with a checkerboard [here](https://web.archive.org/web/20230322162201id_/https://navigation.ros.org/tutorials/docs/camera_calibration.html#tutorial-steps). You don't need to run any of the terminal commands on this page.
 - The ROS camera calibration package will also identify lens distortion parameters, which can be used to reduce video distortion. However, this might not be essential since the Realsense camera usually has low distortion in the imaging area of interest. The distortion for the depth camera is unknown. 
 - Make sure that you save the calibration values obtained from this process. A pixel in the depth image from the ROS driver is a 16-bit integer representing a distance from the camera frame in millimeters.  
 

@@ -1,11 +1,11 @@
----
+<!-- ---
 layout: default
-title: Mbot Classic Assembly with Pi5
-parent: Setup Guide
+title: Old Assembly Guide
+parent: Assembly Guide
 grand_parent: Botlab
-nav_order: 1
+nav_order: 5
 last_modified_at: 2024-08-27 14:37:48 -0500
----
+--- -->
 
 {: .warning}
 This doc needs to be updated, this is for Jetson not pi5

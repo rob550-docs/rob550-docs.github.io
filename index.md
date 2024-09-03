@@ -17,7 +17,7 @@ last_modified_at: 2023-11-30 15:37:48 -0500
     <br> 
     Designed for educational use, here we offer insights into the hardware and software of the ROB 550 Robotic Systems Laboratory at the University of Michigan.
     <br><br>
-    Our course comprises two main segments: Armlab and Botlab. In Armlab, we focus on a 5 DOF manipulator with 7 Dynamixel servo motors. Botlab introduces the Mbot Classic, a differential-drive robot equipped with a robotics control board and NVIDIA Jetson Nano.
+    Our course comprises two main segments: Armlab and Botlab. In Armlab, we focus on a 5 DOF manipulator with 7 Dynamixel servo motors. Botlab introduces the Mbot Classic, a differential-drive robot.
 </p>
 
   </div>

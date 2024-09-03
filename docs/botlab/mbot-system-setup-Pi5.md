@@ -1,11 +1,13 @@
 ---
 layout: default
-title: MBot System Setup with RPi5
-parent: Setup Guide
-grand_parent: Botlab
+title: MBot System Setup 
+parent: Botlab
 nav_order: 2
 last_modified_at: 2024-08-15 11:59:00 -0500
 ---
+
+{: .important}
+This guide is for MBot Classic using **Raspberry Pi 5**!
 
 > This guide will walk you through the steps needed to setup the MBot Classic system. The guide is intended to be followed in order, do not jump back and forth.
 

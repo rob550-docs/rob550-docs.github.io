@@ -4,10 +4,12 @@ title: Checkpoint 1
 nav_order: 1
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-08-29 15:00:00 -0500
+last_modified_at: 2024-09-05 15:00:00 -0500
 ---
 
 **Update 8/29/24:** Update calibration link and add warning to clone repo.
+
+**Update 9/5/24:** Add ros bag reading help and due date.
 
 The first checkpoint is meant to be an introduction to using the GUI of the lab and to start working with the RGB-D camera. The interaction with the GUI will be under the Basic Motion section of the checkpoint, and the interaction with the RGB-D camera will be through the Camera Calibration portion of the checkpoint.
 
@@ -94,7 +96,7 @@ Hints:
 
 {: .required_for_report }
 1) Teach your robot to cycle swapping blocks at locations (-100, 225) and (100, 225) through an intermediate location at (250,75). Coordinates are in mm, relative to the world frame. See [the board diagram](/docs/armlab/checkpoints#board). <br>
-2) Report how many times you can cycle (if you can do 10, feel free to stop) and include a plot of joint angles over time for 1 cycle. Hint: Use [`ros2 bag`](https://github.com/ros2/rosbag2) to record the `/rx200/joint_states` topic. <br><br>
+2) Report how many times you can cycle (if you can do 10, feel free to stop) and include a plot of joint angles over time for 1 cycle. Hint: Use [`ros2 bag`](https://github.com/ros2/rosbag2) to record the `/rx200/joint_states` topic and the [`rosbags`](https://ternaris.gitlab.io/rosbags/) python module to parse the recorded bag. <br><br>
 **Optional:** include a 3D plot of the end effector position by sending recorded joint angles through your FK equations.
 
 {: .sanity_check}
@@ -144,7 +146,7 @@ Assumptions:
 {: .required_for_report }
 Record your extrinsic matrix
 
-## Checkpoint Submission
+## Checkpoint Submission (Due 9/10/24)
 
 - Task 1.2
     - Record a video of your robot playing back the waypoints 

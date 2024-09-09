@@ -7,6 +7,8 @@ grand_parent: Armlab
 last_modified_at: 2024-02-26 15:00:00 -0500
 ---
 
+**Update 9/9/24: Added mechanical design component**
+
 ### Contents
 * TOC
 {:toc}
@@ -169,3 +171,6 @@ Record a video showing your Forward Kinematics results and arm positions while m
 - (-300, -75, 25)
 - (300, -75, 50)
 - (300, 325, 10)
+
+### Part 3
+Submit your sketches for your basketball launcher. They don't have to be super detailed; we just want you to think about how you will approach the design problem. You are also not bound by these sketches and are free to change your mechanism later based on how it performs.

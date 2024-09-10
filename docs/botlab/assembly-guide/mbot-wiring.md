@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Mbot Wiring & Final Step
+title: Mbot Wiring
 parent: Assembly Guide
 grand_parent: Botlab
 nav_order: 4
-last_modified_at: 2024-09-03 14:37:48 -0500
+last_modified_at: 2024-09-09 14:37:48 -0500
 ---
 
 {: .important}
@@ -31,6 +31,23 @@ Gather the components listed in the table and ensure you have all the items show
 <a href="/assets/images/botlab/assembly/middlePlate/pi5_jumper_wires_assemble.jpg" title="Assemble the jumper wires 2"><img src="/assets/images/botlab/assembly/middlePlate/pi5_jumper_wires_assemble.jpg" width="400" height="200"></a>
 </div>
 
-## Plug in all the jumper wires and cables
+## Final Wiring
+1. Connect all the cables and power
 
-show how to connect everything together here.
+    | Components     | #         | 
+    |:-------------|:---- -------|
+    |  12V Power Bank |1| 
+    |  DC power “Y” cable |1| 
+    | USB-C Cable |2| 
+
+    1. Plug in WiFi dongle to Jetson
+    2. Use the "Y" Cable to connect the power bank and the Robotics Control Board
+    3. Use the USB Micro Cable to connect the power bank and the Jetson
+    4. Use the USB-C Cable to connect the Robotics Control Board and Jetson
+    5. Plug in the Lidar's USB to the Jetson
+
+    <a class="image-link" href="/assets/images/botlab/assembly/final/wiring.png">
+        <img src="/assets/images/botlab/assembly/final/wiring.png" alt="" style="max-width:600px;"/>
+    </a> 
+
+Yay! Now you have a complete version of MBot!

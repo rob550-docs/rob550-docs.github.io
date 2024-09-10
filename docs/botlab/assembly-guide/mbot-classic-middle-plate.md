@@ -9,145 +9,89 @@ last_modified_at: 2024-09-09 14:37:48 -0500
 {: .important}
 This guide is for Differential Drive MBot Classic.
 
-## Middle Assembly
 
-1. Mount standoffs on Jetson Nano
+### Contents
+* TOC
+{:toc}
 
-    | Components     | #         | 
-    |:-------------|:---- -------|
-    |Middle Acrylic Sheet     |1|
-    | Nvidia Jetson Nano       |1|
-    | M2.5 X 30mm Standoffs |4| 
-    | M2.5 x 6mm Screws        |4| 
+## 1. Assemble the main plate
 
-    <a class="image-link" href="/assets/images/botlab/assembly/middlePlate/jetsonstandoff.jpg">
-        <img src="/assets/images/botlab/assembly/middlePlate/jetsonstandoff.jpg" alt="" style="max-width:400px;"/>
+| Components     | #         | Details|
+|:-------------|:---- -------|    |
+| Middle Acrylic Sheet     |1|    |
+| Raspberry PI 5           |1|    |
+| M2.5 8mm Nylon Standoffs |4| The grey ones (shortest)|
+| M2.5 x 6mm Screws        |8| Use with Nylon standsoffs |
+| 2.5” Aluminum standoffs  |4| Longest standoffs |
+| M2.5 x 8mm Screws        |4| Use the the 2.5” standoffs|
+| M2.5 X 30mm Standoffs    |4| Second shortest standoffs | 
+| M2.5 x 6mm Screws        |8| Use with the 30mm standoffs|
+| Zip tie                  |4|
+| battery slot pieces       |4| U shaped pieces |
+
+1. Assemble the battery slot
+
+    Using zip ties and the battery slot pieces, assemble as shown in the images below.
+    <div class="popup-gallery">
+    <a href="/assets/images/botlab/assembly/middlePlate/1-battery-slot1.jpg" title="Zip tie the battery slot pieces"><img src="/assets/images/botlab/assembly/middlePlate/1-battery-slot1.jpg" width="300" height="300"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/1-battery-slot2.jpg" title="battery slot result"><img src="/assets/images/botlab/assembly/middlePlate/1-battery-slot2.jpg" width="300" height="300"></a>
+    </div>
+
+2. Mount the standoffs and Pi 5
+
+    <a class="image-link" href="/assets/images/botlab/assembly/middlePlate/1-middle-detail.png">
+        <img src="/assets/images/botlab/assembly/middlePlate/1-middle-detail.png" alt="" style="max-width:600px;"/>
     </a>
+    - The Green Box: Where you use the nylon standoffs to attach the Pi 5 to the platform.
+    - The Blue Box: Where you attach the Pi 5 platform to the bottom.
+    - The Red Box: Where you mount the 2.5" aluminum standoffs, the longest ones.
 
-2. Assemble the battery slot
-
-    | Components     | #         | 
-    |:-------------|:---- -------|
-    | Zip tie                  |4|
-    | batter slot pieces |4|
-
+    Once you finish all three levels, the result should look like this (**without the camera part attached; we will do that in the next step**):
     <div class="popup-gallery">
-    <a href="/assets/images/botlab/assembly/middlePlate/battery_slot1.jpg" title="Zip tie the battery slot pieces"><img src="/assets/images/botlab/assembly/middlePlate/battery_slot1.jpg" width="200" height="300"></a>
-    <a href="/assets/images/botlab/assembly/middlePlate/battery_slot2.jpg" title="battery slot result"><img src="/assets/images/botlab/assembly/middlePlate/battery_slot2.jpg" width="200" height="300"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/1-middle-back.png" title=""><img src="/assets/images/botlab/assembly/middlePlate/1-middle-back.png" width="300" height="300"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/1-middle-front.png" title=""><img src="/assets/images/botlab/assembly/middlePlate/1-middle-front.png" width="300" height="300"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/1-middle-left.png" title=""><img src="/assets/images/botlab/assembly/middlePlate/1-middle-left.png" width="300" height="300"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/1-middle-right.png" title=""><img src="/assets/images/botlab/assembly/middlePlate/1-middle-right.png" width="300" height="300"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/1-middle-top.png" title=""><img src="/assets/images/botlab/assembly/middlePlate/1-middle-top.png" width="300" height="300"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/1-middle-bottom.png" title=""><img src="/assets/images/botlab/assembly/middlePlate/1-middle-bottom.png" width="300" height="300"></a>
     </div>
 
+## 2. Attach the camera
 
-3. Mount Jetson Nano to the middle plate
+| Components     | #         | 
+|:-------------|:---- -------|
+| Camera mount |1| 
+| Camera       |1 |
+| 15-to-22 pin camera cable (one end is narrower, and the other is wider)|  1 |
+| Transparent spacer for camera|1|
+| M2 x 6mm Screws        |4| 
+| M2.5 x 8mm Screws     |2| 
+| M2.5 threaded inserts |2|
 
-    | Components     | #         | 
-    |:-------------|:---- -------|
-    | M2.5 x 8mm Screws        |4| 
+Note that the OLED mount and the camera mount are both white and look similar, but they are different!  
 
-    <a class="image-link" href="/assets/images/botlab/assembly/middlePlate/jeston2plate.jpg">
-        <img src="/assets/images/botlab/assembly/middlePlate/jeston2plate.jpg" alt="" style="max-width:400px;"/>
-    </a>
+1. Insert the threaded inserts into the camera mount, you need soldering iron for this to heat up the inserts.
+2. Attach the camera mount below the middle plate with the screw slot facing upwards, as shown in the image.
+3. Next, attach the camera to the mount and put the transparent spacer between camera and the mount to protect the components on the camera's electronics.
 
-4. Put middle plate standoff on
-
-    | Components     | #         | 
-    |:-------------|:---- -------|
-    |    2.5" Aluminum standoffs|4| 
-    |    M2.5 x 8mm Screws  |4| 
-
-    <a class="image-link" href="/assets/images/botlab/assembly/middlePlate/middleplatestandoff.jpg">
-        <img src="/assets/images/botlab/assembly/middlePlate/middleplatestandoff.jpg" alt="" style="max-width:400px;"/>
-    </a>
-
-5. Attach camera to the Jetson Nano
-
-    | Components     | #         | 
-    |:-------------|:---- -------|
-    | Arducam V2 |1| 
-
-    > There is a guide from the arducam official website, check it out [here](https://docs.arducam.com/Nvidia-Jetson-Camera/Jetvariety-Camera/Quick-Start-Guide/).
-
-    We also have a guide below illustrating the steps with the MBot itself. Make sure when you insert the cable, it is fully inserted.
+    Note: If you can't find M2 x 6mm screws, M2 x 8mm will also work. However, please be cautious when using the longer screws for the top two holes, as they will stick out and against the middle plate. Avoid overtightening those top two screws.
 
     <div class="popup-gallery">
-        <a href="/assets/images/botlab/assembly/middlePlate/connectcam1.jpg" title="Connect the camera to jetson 1"><img src="/assets/images/botlab/assembly/middlePlate/connectcam1.jpg" width="200" height="200"></a>
-        <a href="/assets/images/botlab/assembly/middlePlate/connectcam2.jpg" title="Connect the camera to jetson 2"><img src="/assets/images/botlab/assembly/middlePlate/connectcam2.jpg" width="200" height="200"></a>
-        <a href="/assets/images/botlab/assembly/middlePlate/connectcam3.jpg" title="Connect the camera to jetson 3"><img src="/assets/images/botlab/assembly/middlePlate/connectcam3.jpg" width="200" height="200"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/2-camera-mount1.png" title=""><img src="/assets/images/botlab/assembly/middlePlate/2-camera-mount1.png" width="300"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/2-camera-mount2.png" title=""><img src="/assets/images/botlab/assembly/middlePlate/2-camera-mount2.png" width="300"></a>
     </div>
-
-
-6. Attach the camera and camera mount to middle plate
-
-    | Components     | #         | 
-    |:-------------|:---- -------|
-    | camera mount |1| 
-    | transparent spacer for camera|1|
-    | M2 x 6mm Screws        |4| 
-    | M2.5 x 8mm Screws     |2| 
-    | M2.5 threaded inserts |2|
-
-    Note that the OLED mount and the camera mount are both white and look similar, but they are different!  
-
-    1. Insert the threaded inserts into the camera mount, you need soldering iron for this to heat up the inserts.
-    2. Attach the camera mount below the middle plate with the screw slot facing upwards, as shown in the image.
-    2. Next, attach the camera to the mount and put the transparent spacer between camera and the mount to protect the components on the camera's electronics.
-
-        Note: If you can't find M2 x 6mm screws, M2 x 8mm will also work. However, please be cautious when using the longer screws for the top two holes, as they will stick out and against the middle plate. Avoid overtightening those top two screws.
+4. Insert the camera cable. The wider end goes into the camera, and the narrower end goes into the Pi. You can use any of the Pi's camera slots.
+    > Credit to Arducam [official guide](https://docs.arducam.com/Nvidia-Jetson-Camera/Jetvariety-Camera/Quick-Start-Guide/)
+    1. Gently pull up the plastic edges of the camera port.
+    2. Insert the camera ribbon, ensuring the contacts are facing the correct side as shown in the image.
+    3. Push the plastic connector back down to secure the cable.
 
     <div class="popup-gallery">
-        <a href="/assets/images/botlab/assembly/middlePlate/cameramount1.jpg" title="Attach camera mount to plate 1"><img src="/assets/images/botlab/assembly/middlePlate/cameramount1.jpg" width="200" height="200"></a>
-        <a href="/assets/images/botlab/assembly/middlePlate/cameramount2.jpg" title="Attach camera mount to plate 2"><img src="/assets/images/botlab/assembly/middlePlate/cameramount2.jpg" width="200" height="200"></a>
-   </div>
-    <div class="popup-gallery">
-        <a href="/assets/images/botlab/assembly/middlePlate/cameramount3.jpg" title="Attach camera to camera mount"><img src="/assets/images/botlab/assembly/middlePlate/cameramount3.jpg" width="200" height="200"></a>
-        <a href="/assets/images/botlab/assembly/middlePlate/cameramount4.jpg" title="Attach camera to camera mount"><img src="/assets/images/botlab/assembly/middlePlate/cameramount4.jpg" width="200" height="200"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/2-camera-cable1.png" title=""><img src="/assets/images/botlab/assembly/middlePlate/2-camera-cable1.png" width="300"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/2-camera-cable2.png" title=""><img src="/assets/images/botlab/assembly/middlePlate/2-camera-cable2.png" width="300"></a>
+    <a href="/assets/images/botlab/assembly/middlePlate/2-camera-cable3.png" title=""><img src="/assets/images/botlab/assembly/middlePlate/2-camera-cable3.png" width="300"></a>
     </div>
-
-7. Assemble the jumper wires
-
-    | Components     | #         | 
-    |:-------------|:-----------|
-    | jumper wires (Black/Red/Yellow/Blue/Green/White)   |6| 
-    | Crimp connector housings (3/4/6 pins)   |3| 
-
-    You need to build the OLED/Bootload cable assembly which is shown. This cable plugs into the Jetson or RasPi 40pin header, the OLED module, and the Control board and allows both communicating with the OLED and controlling the run and bootload modes on the control board.
-
-    Gather the components listed in the table and ensure you have all the items shown in the image below. Assemble a 3-heads wire as depicted in the second image. **Color and order matters!** Your assembled wire should look exactly like the image indicated.
-
-    <div class="popup-gallery">
-    <a href="/assets/images/botlab/assembly/middlePlate/mbot_jumper_wires.jpg" title="Assemble the jumper wires 1"><img src="/assets/images/botlab/assembly/middlePlate/mbot_jumper_wires.jpg" width="200" height="200"></a>
-    <a href="/assets/images/botlab/assembly/middlePlate/pi5_jumper_wires_assemble.jpg" title="Assemble the jumper wires 2"><img src="/assets/images/botlab/assembly/middlePlate/pi5_jumper_wires_assemble.jpg" width="400" height="200"></a>
-    </div>
-
-8. Connect the assembled jumper wire to the control board and Jetson
-
-    1. Plug the 6PIN connector into the Jetson pins, connecting the cables according to the marks on the board. Here, you should have white cable to pin 11 and the black cable to GND, as illustrated in the image above.
-    2. Thread the 3PIN connector through the middle plate like the 2nd image shown.
-    3. Insert the 3PIN connector into the control board's RUN/BTLD pins, as shown in the image below.
-    <br><br>
-    <div class="popup-gallery">
-    <a href="/assets/images/botlab/assembly/middlePlate/jetson_connect_jumpwires1.jpg" title="Connect the jumper wires 1"><img src="/assets/images/botlab/assembly/middlePlate/jetson_connect_jumpwires1.jpg" width="200" height="200"></a>
-    <a href="/assets/images/botlab/assembly/middlePlate/jetson_connect_jumpwires2.jpg" title="Connect the jumper wires 2"><img src="/assets/images/botlab/assembly/middlePlate/jetson_connect_jumpwires2.jpg" width="200" height="200"></a>
-    <a href="/assets/images/botlab/assembly/middlePlate/pi5_connect_jumpwires3.jpg" title="Connect the jumper wires 3"><img src="/assets/images/botlab/assembly/middlePlate/pi5_connect_jumpwires3.jpg" width="200" height="200"></a>
-    </div>
-
-9. Attach middle part to bottom part
-
-    | Components     | #         | 
-    |:-------------|:---- -------|
-    |     4-40 thumb screw 3/8"|4| 
-
-    Use 4 thumb screws to put the middle and bottom parts together.
-
-    <a class="image-link" href="/assets/images/botlab/assembly/middlePlate/middle_bottom.jpg">
-    <img src="/assets/images/botlab/assembly/middlePlate/middle_bottom.jpg" alt="" style="max-width:300px;"/>
-    </a>    
-
-If you have successfully assembled the middle plate, the result should look like this:
-
-<a class="image-link" href="/assets/images/botlab/assembly/middlePlate/middlefinish.jpg">
-    <img src="/assets/images/botlab/assembly/middlePlate/middlefinish.jpg" alt="" style="max-width:300px;"/>
-</a>
-
-Now let's move to the top part.
+5. Then use 4 screws attach the camera to the camera mount.
 
 
+Now, let's move on to the top section.

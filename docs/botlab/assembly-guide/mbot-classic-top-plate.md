@@ -64,7 +64,6 @@ This guide is for Differential Drive MBot Classic.
 | M2 x 8mm screws  |4|
 | M2.5 x 8mm screws |2|
 | M2.5 threaded inserts |2|
-| OLED cable assembly | 1 |
 
 Note that the OLED mount and the camera mount are both white and look similar, but they are different!
 
@@ -75,28 +74,33 @@ Note that the OLED mount and the camera mount are both white and look similar, b
     </div>
 2. Secure the OLED screen to the mount using four M2 x 8mm screws.
 3. Attach the mount to the right side of the robot using M2.5 x 8mm screws.
-4. Connect the 4PIN connector (the jumper wire we assembled at the middle plate section) to the OLED, ensuring that the pins align with the marked positions.
     <div class="popup-gallery">
     <a href="/assets/images/botlab/assembly/topPlate/2-oled1.jpg" title="Attach OLED 1"><img src="/assets/images/botlab/assembly/topPlate/2-oled1.jpg" width="200" height="225"></a>
     <a href="/assets/images/botlab/assembly/topPlate/2-oled2.jpg" title="Attach OLED 2"><img src="/assets/images/botlab/assembly/topPlate/2-oled2.jpg" width="190" height="200"></a>
-    <a href="/assets/images/botlab/assembly/topPlate/2-oled3.jpg" title="Attach OLED 2"><img src="/assets/images/botlab/assembly/topPlate/2-oled3.jpg" width="200" height="200"></a>
     </div>
 
-5. Put the top plate on the rest of the robot body
 
-    | Components     | #         | 
-    |:-------------|:---- -------|
-    |     4-40 thumb screw 3/8"|4| 
+## 3. Assemble 3-heads jumper wire cable
 
-    <a class="image-link" href="/assets/images/botlab/assembly/topPlate/2-top2rest.jpg">
-        <img src="/assets/images/botlab/assembly/topPlate/2-top2rest.jpg" alt="" style="max-width:300px;"/>
-    </a>
+| Components     | #         | 
+|:-------------|:-----------|
+| jumper wires (Black/Red/Yellow/Blue/Green/White)   |6| 
+| Crimp connector housings (3/4/6 pins)   |3| 
 
-If you have successfully assembled the top plate, the result should look like this:
+You will need to build the OLED/Bootloader cable assembly as shown. This cable has three heads, which plug into the following:
+- Raspberry Pi header (6-pin header)
+- OLED module (4-pin header)
+- Control board (3-pin header)
 
-<a class="image-link" href="/assets/images/botlab/assembly/topPlate/2-topfinish.jpg">
-<img src="/assets/images/botlab/assembly/topPlate/2-topfinish.jpg" alt="" style="max-width:400px;"/>
-</a> 
+This cable allows communication with the OLED and controls the run and bootload modes on the control board.
 
+Assemble the 3-heads wire as depicted in the image. **Color and order matters!** Your assembled wire should look exactly like the image indicated.
 
+<div class="popup-gallery">
+<a href="/assets/images/botlab/assembly/middlePlate/3-jumper-wires1.jpg" title="Assemble the jumper wires 1"><img src="/assets/images/botlab/assembly/middlePlate/3-jumper-wires1.jpg" width="200" height="200"></a>
+<a href="/assets/images/botlab/assembly/middlePlate/3-jumper-wires2.jpg" title="Assemble the jumper wires 2"><img src="/assets/images/botlab/assembly/middlePlate/3-jumper-wires2.jpg" width="400" height="200"></a>
+</div>
 
+After assembling the wires, do not plug them in yet.
+
+Now, let's move on to the wiring section.

@@ -9,6 +9,8 @@ last_modified_at: 2024-02-26 15:00:00 -0500
 
 **Update 9/9/24: Added mechanical design component**
 
+**Update 9/10/24: Added rigid transformation calibration option alongside PnP**
+
 ### Contents
 * TOC
 {:toc}
@@ -87,7 +89,12 @@ The procedure will display status messages at the bottom of the GUI window, whic
 
 **Extrinsic Matrix**
 
-Similar to the extrinsic matrix you calculated before using measurements of the board, the Apriltags can be used to calculate an extrinsic matrix automatically. This is done with [perspective n-point](https://docs.opencv.org/4.x/d5/d1f/calib3d_solvePnP.html) pose computation, which takes in known image coordinates (from the detector) and known world coordinates (from measuring the board). An example of how to do this is found in the `solve_extrinsics.py` script in the `armlab_opencv_examples` repo.
+Similar to the extrinsic matrix you calculated before using measurements of the board, the Apriltags can be used to calculate an extrinsic matrix automatically. There are two main options to do this: Perspective N-Point (PnP) solving and Rigid Transformation Solving. Examples of how to both of these are found in the `solve_extrinsics.py` script in the [`armlab_opencv_examples`](https://gitlab.eecs.umich.edu/ROB550-F24/armlab_opencv_examples) repo.
+
+1. [Perspective N-Point](https://docs.opencv.org/4.x/d5/d1f/calib3d_solvePnP.html) pose computation takes in known image coordinates (from the detector) and known world coordinates (from measuring the board). An example of how to do this is found in the `recover_homogenous_transform_pnp` function in `solve_extrinsics.py`.
+2. Rigid Transformation Solving pose computation takes in known camera frame coordinates (using your image coordinates and intrinsic matrix) and known world coordinates (from measuring the board). An example of how to do this is found in the `recover_homogenous_affine_transformation` function in `solve_extrinsics.py`. Note: This method takes in a maximum of three world/camera points, so if you have 4 Apriltags you'll only end up using 3.
+
+It is worth trying both of the methods out to see which produces a more accurate calibration.
 
 **Homography**
 

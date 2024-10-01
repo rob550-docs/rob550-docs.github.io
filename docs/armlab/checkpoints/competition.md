@@ -114,7 +114,7 @@ Red circle below shows the aluminum extrusions that can be used for anchoring. S
 
 **Objective**
 
-Within a limited time, your RX200 robotic arm must retrieve a basketball from storage, load it into your custom-designed shooting mechanism, aim at the hoop, and then launch the basketball. The mechanism can either aim first and then the arm places the ball, or the arm can load the ball before aiming.
+Within a limited time, your RX200 robotic arm must retrieve a basketball from storage, load it into your custom-designed shooting mechanism, aim at the hoop, and then launch the basketball.  When the basketball leaves the mechanism, the point of departure should be on the opposite half plane of the hoops. The mechanism can either aim first and then the arm places the ball, or the arm can load the ball before aiming.
 
 ### Level Setup
 <a class="image-link" href="/assets/images/armlab/checkpoints/competition4.png">
@@ -133,7 +133,8 @@ The hoop comes in 3 sizes: small, medium, and large.
 **Requirements**
 1. Choose a level for the task
 2. Choose combination of the hoops (if level 2 or 3 selected)
-3. Complete the task within **180 seconds**
+3. The instructor or GSI will set up the hoop location
+4. Complete the task within **180 seconds**
 
 ### Points
 - +20 points for large hoop
@@ -151,7 +152,7 @@ The hoop comes in 3 sizes: small, medium, and large.
 </a>
 
 For this event, the basketball hoops are setup as shown in the figure
-- Complete the task in 120 seconds
+- Complete the task in **120 seconds**
 - You need to aim and shoot cycle through all hoops
 
 ### Points

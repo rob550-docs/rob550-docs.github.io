@@ -87,6 +87,79 @@ Requirements:
 | 60 | 70 | 80 | 90 | 110 | 120 | 140 | 170 | 190 | 220 | 260 | 300 | 350 | 410 | 470 | 550 | 640 | 740 | 860 |
 
 
+## Event 4: Free throw (400 points)
+<a class="image-link" href="/assets/images/armlab/checkpoints/competition1.png">
+<img src="/assets/images/armlab/checkpoints/competition1.png" alt="" style="max-width:500px;"/>
+</a>
+
+### Task Setup
+Design a mechanism that can aim and launch a mini-basketball using the RX200, then score as many points as possible, with a maximum 400 points. 
+
+**Arena**
+
+Multiple basketballs will be in the storage area, RX200 should pick it up autonomously using the camera.
+
+<a class="image-link" href="/assets/images/armlab/checkpoints/competition2.png">
+<img src="/assets/images/armlab/checkpoints/competition2.png" alt="" style="max-width:600px;"/>
+</a>
+
+
+**Anchoring**
+
+Red circle below shows the aluminum extrusions that can be used for anchoring. Securely fix your mechanism to the table ensures repeatability. The mechanism should be easily removeable from the arena.
+
+<a class="image-link" href="/assets/images/armlab/checkpoints/competition3.png">
+<img src="/assets/images/armlab/checkpoints/competition3.png" alt="" style="max-width:600px;"/>
+</a>
+
+**Objective**
+
+Within a limited time, your RX200 robotic arm must retrieve a basketball from storage, load it into your custom-designed shooting mechanism, aim at the hoop, and then launch the basketball. The mechanism can either aim first and then the arm places the ball, or the arm can load the ball before aiming.
+
+### Level Setup
+<a class="image-link" href="/assets/images/armlab/checkpoints/competition4.png">
+<img src="/assets/images/armlab/checkpoints/competition4.png" alt="" style="max-width:600px;"/>
+</a>
+
+The hoop comes in 3 sizes: small, medium, and large.
+- Level 1: One basket (any size)
+- Level 2: Two baskets (pick 2 from the 3 sizes)
+    - [streak rule] you can score in a hoop up to 2 time in a row before switching to a different hoop. For examples:
+        - Up-down-up-down is valid: You are alternating between the two hoops with every shot.
+        - UU-DD-UU-DD is valid: You score twice in a row in one hoop, then switch and repeat this pattern.
+        - UUU-DD is NOT valid: This breaks the rule because you shot three times in a row in one hoop. You’re only allowed two consecutive scored shots before switching hoops.
+- Level 3: Three baskets. The streak rule holds.
+
+**Requirements**
+1. Choose a level for the task
+2. Choose combination of the hoops (if level 2 or 3 selected)
+3. Complete the task within **180 seconds**
+
+### Points
+- +20 points for large hoop
+- +30 points for medium hoop
+- +50 points for small hoop
+- +20 bonus points for each two-basket streak
+- +40 bonus points for each three-basket streak
+- 30% deduction for manual orientation control
+- 30% bonus boost for orientation control using RX200
+
+## Event 5: Bonus Event (200 points)
+### Task Setup
+<a class="image-link" href="/assets/images/armlab/checkpoints/competition5.png">
+<img src="/assets/images/armlab/checkpoints/competition5.png" alt="" style="max-width:300px;"/>
+</a>
+
+For this event, the basketball hoops are setup as shown in the figure
+- Complete the task in 120 seconds
+- You need to aim and shoot cycle through all hoops
+
+### Points
+- Each cycle through all hoops (L-M-S) is worth 100 points. A cycle means you successfully score in the Large, Medium, and Small hoops in sequence.
+        - (L-M-S)-(L-M-S) is 100 + 100 = 200 pts
+- Incomplete cycle point is calculated based on the points for individual hoops
+
+
 ## Score Calculation
 Your overall score will be the sum of your best run on each event. Each event can be completed multiple times at different levels.
 - The 3 top scoring teams **in each section** will receive bonus points on the report: [+3, +2, +1] points. 

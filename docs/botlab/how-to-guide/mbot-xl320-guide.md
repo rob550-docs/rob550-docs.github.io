@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Servo XL320 Guide
+title: mbot_xl320_lib Guide
 parent: How-to Guide
 grand_parent: Botlab
 nav_order: 2

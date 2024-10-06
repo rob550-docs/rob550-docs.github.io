@@ -78,14 +78,13 @@ Requirements:
 - Blocks can be placed while the arm is moving.
 
 ### Points
-- Given N blocks stacked, the score for a stack is computed according to the following formula, then rounded to the nearest whole multiple of 10:
-- SCORE = 50 * EXP(0.15*N)
+- The first 8 blocks are worth 30 points
+- Any blocks after that are worth 50 points
 - The following lookup table gives scores for N=1 to N=19 (tying the class record)
 
 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 |
 |:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|
-| 60 | 70 | 80 | 90 | 110 | 120 | 140 | 170 | 190 | 220 | 260 | 300 | 350 | 410 | 470 | 550 | 640 | 740 | 860 |
-
+| 30 | 60 | 90 | 120 | 150 | 180 | 210 | 240 | 290 | 340 | 390 | 440 | 490 | 540 | 590 | 640 | 690 | 740 | 790 |
 
 ## Event 4: Free throw (400 points)
 <a class="image-link" href="/assets/images/armlab/checkpoints/competition1.png">

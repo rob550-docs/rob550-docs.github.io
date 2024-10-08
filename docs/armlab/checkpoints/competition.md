@@ -9,9 +9,9 @@ last_modified_at: 2024-10-07 12:00:00 -0500
 
 **Update 10/5/24:** Modify to the sky scoring
 
-**Update 10/7/24:** Modify basketball manual deductions to be more forgiving.
+**Update 10/7/24:** Modify basketball manual deductions.
 
-**Update 10/8/24:** Add disclaimer about basketball deductions.
+**Update 10/8/24:** Add disclaimer about basketball deductions and modify them again.
 
 It's time to showcase your hard work and effort!
 
@@ -149,12 +149,12 @@ The hoop comes in 3 sizes: small, medium, and large.
 - +40 bonus points for each three-basket streak
 
 Deductions for manual control: Base score is 100%
-* +10% for RX200 pitch/yaw control
+* +30% for RX200 pitch/yaw control
 * +0% for servo pitch/yaw control
 * -10% for manual pitch/yaw control
-* -10% for manual loading (moving the ball from the holding area to the receptacle)
-* -10% for manual arming (storing the potential energy used to fire the ball)
-* -10% for manual firing (making the ball shoot)
+* -20% for manual loading (moving the ball from the holding area to the receptacle)
+* -30% for manual arming (storing the potential energy used to fire the ball)
+* -20% for manual firing (making the ball shoot)
 
 **Deductions may change values between today and Thursday depending on how everybody does**
 
@@ -174,12 +174,12 @@ For this event, the basketball hoops are setup as shown in the figure
 - Incomplete cycle point is calculated based on the points for individual hoops, halved
 
 Deductions for manual control: Base score is 100%
-* +10% for RX200 pitch/yaw control
+* +30% for RX200 pitch/yaw control
 * +0% for servo pitch/yaw control
 * -10% for manual pitch/yaw control
-* -10% for manual loading (moving the ball from the holding area to the receptacle)
-* -10% for manual arming (storing the potential energy used to fire the ball)
-* -10% for manual firing (making the ball shoot)
+* -20% for manual loading (moving the ball from the holding area to the receptacle)
+* -30% for manual arming (storing the potential energy used to fire the ball)
+* -20% for manual firing (making the ball shoot)
 
 **Deductions may change values between today and Thursday depending on how everybody does**
 

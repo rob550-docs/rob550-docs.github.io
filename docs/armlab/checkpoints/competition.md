@@ -148,8 +148,8 @@ The hoop comes in 3 sizes: small, medium, and large.
 - +20 bonus points for each two-basket streak
 - +40 bonus points for each three-basket streak
 
-Deductions for manual control: Base score is 100%
-* +30% for RX200 pitch/yaw control
+Deductions for manual control: Your maximum score, pre-deduction, is 400. The deduction is then applied to your capped score.
+* +30% for RX200 pitch/yaw control (max score is still 400)
 * +0% for servo pitch/yaw control
 * -10% for manual pitch/yaw control
 * -20% for manual loading (moving the ball from the holding area to the receptacle)
@@ -173,8 +173,8 @@ For this event, the basketball hoops are setup as shown in the figure
         - (L-M-S)-(L-M-S) is 100 + 100 = 200 pts
 - Incomplete cycle point is calculated based on the points for individual hoops, halved
 
-Deductions for manual control: Base score is 100%
-* +30% for RX200 pitch/yaw control
+Deductions for manual control: Your maximum score, pre-deduction, is 400. The deduction is then applied to your capped score.
+* +30% for RX200 pitch/yaw control (max score is still 400)
 * +0% for servo pitch/yaw control
 * -10% for manual pitch/yaw control
 * -20% for manual loading (moving the ball from the holding area to the receptacle)

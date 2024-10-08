@@ -11,6 +11,8 @@ last_modified_at: 2024-10-07 12:00:00 -0500
 
 **Update 10/7/24:** Modify basketball manual deductions to be more forgiving.
 
+**Update 10/8/24:** Add disclaimer about basketball deductions.
+
 It's time to showcase your hard work and effort!
 
 <a class="image-link" href="https://i.imgflip.com/3t9jkg.jpg"><img src="https://i.imgflip.com/3t9jkg.jpg" alt="" style="max-width:400px;"/>
@@ -154,6 +156,8 @@ Deductions for manual control: Base score is 100%
 * -10% for manual arming (storing the potential energy used to fire the ball)
 * -10% for manual firing (making the ball shoot)
 
+**Deductions may change values between today and Thursday depending on how everybody does**
+
 ## Event 5: Bonus Event (200 points)
 ### Task Setup
 <a class="image-link" href="/assets/images/armlab/checkpoints/competition5.png">
@@ -176,6 +180,8 @@ Deductions for manual control: Base score is 100%
 * -10% for manual loading (moving the ball from the holding area to the receptacle)
 * -10% for manual arming (storing the potential energy used to fire the ball)
 * -10% for manual firing (making the ball shoot)
+
+**Deductions may change values between today and Thursday depending on how everybody does**
 
 ## Score Calculation
 Your overall score will be the sum of your best run on each event. Each event can be completed multiple times at different levels.

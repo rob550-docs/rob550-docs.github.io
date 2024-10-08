@@ -4,7 +4,7 @@ title: Competition
 nav_order: 5
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-08-26 12:00:00 -0500
+last_modified_at: 2024-10-07 12:00:00 -0500
 ---
 
 **Update 10/5/24:** Modify to the sky scoring
@@ -147,13 +147,12 @@ The hoop comes in 3 sizes: small, medium, and large.
 - +40 bonus points for each three-basket streak
 
 Deductions for manual control: Base score is 100%
-- +10% for RX200 pitch/yaw control
-- +0% for servo pitch/yaw control
-- -10% for manual pitch/yaw control
-
-- -10% for manual loading (moving the ball from the holding area to the receptacle)
-- -10% for manual arming (storing the potential energy used to fire the ball)
-- -10% for manual firing (making the ball shoot)
+* +10% for RX200 pitch/yaw control
+* +0% for servo pitch/yaw control
+* -10% for manual pitch/yaw control
+* -10% for manual loading (moving the ball from the holding area to the receptacle)
+* -10% for manual arming (storing the potential energy used to fire the ball)
+* -10% for manual firing (making the ball shoot)
 
 ## Event 5: Bonus Event (200 points)
 ### Task Setup
@@ -171,13 +170,12 @@ For this event, the basketball hoops are setup as shown in the figure
 - Incomplete cycle point is calculated based on the points for individual hoops
 
 Deductions for manual control: Base score is 100%
-- +10% for RX200 pitch/yaw control
-- +0% for servo pitch/yaw control
-- -10% for manual pitch/yaw control
-
-- -10% for manual loading (moving the ball from the holding area to the receptacle)
-- -10% for manual arming (storing the potential energy used to fire the ball)
-- -10% for manual firing (shooting the ball towards the hoop)
+* +10% for RX200 pitch/yaw control
+* +0% for servo pitch/yaw control
+* -10% for manual pitch/yaw control
+* -10% for manual loading (moving the ball from the holding area to the receptacle)
+* -10% for manual arming (storing the potential energy used to fire the ball)
+* -10% for manual firing (making the ball shoot)
 
 ## Score Calculation
 Your overall score will be the sum of your best run on each event. Each event can be completed multiple times at different levels.

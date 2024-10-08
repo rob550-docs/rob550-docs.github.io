@@ -11,6 +11,6 @@ The main development goal of Armlab is to finish the [final competition](/docs/a
 
 {: .required_for_report }
 Within the report: <br>
-1) Briefly describe the mechanism design and function of the launcher, and include a figure to help showcase how it works. Note: this should not be a substantial part of the report, as we are more interested in the other technical topics you are learning. <br>
+1) Briefly describe the mechanism design and function of the launcher, and include a figure to help showcase how it works. Note: this should not be a substantial part of the report, as we are more interested in the other technical topics you are learning.
 <br><br>
 Submitted with the report (submitted files, not an appendix): <br> 1) CAD files <br> 2) Bill of Materials (BOM)

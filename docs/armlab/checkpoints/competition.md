@@ -167,7 +167,7 @@ For this event, the basketball hoops are setup as shown in the figure
 ### Points
 - Each cycle through all hoops (L-M-S) is worth 100 points. A cycle means you successfully score in the Large, Medium, and Small hoops in sequence.
         - (L-M-S)-(L-M-S) is 100 + 100 = 200 pts
-- Incomplete cycle point is calculated based on the points for individual hoops
+- Incomplete cycle point is calculated based on the points for individual hoops, halved
 
 Deductions for manual control: Base score is 100%
 * +10% for RX200 pitch/yaw control

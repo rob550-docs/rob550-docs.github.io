@@ -13,6 +13,8 @@ last_modified_at: 2024-10-07 12:00:00 -0500
 
 **Update 10/8/24:** Add disclaimer about basketball deductions and modify them again.
 
+**Update 10/10/24:** Final deduction modifications.
+
 It's time to showcase your hard work and effort!
 
 <a class="image-link" href="https://i.imgflip.com/3t9jkg.jpg"><img src="https://i.imgflip.com/3t9jkg.jpg" alt="" style="max-width:400px;"/>
@@ -148,15 +150,14 @@ The hoop comes in 3 sizes: small, medium, and large.
 - +20 bonus points for each two-basket streak
 - +40 bonus points for each three-basket streak
 
-Deductions for manual control: Your maximum score, pre-deduction, is 400. The deduction is then applied to your capped score.
-* +30% for RX200 pitch/yaw control (max score is still 400)
+Deductions/bonuses for manual/automatic control: Your maximum score, pre-deduction, is 400. The deduction is then applied to your capped score. For bonuses, your score is still capped at 400.
+* +30% for RX200 pitch/yaw control
 * +0% for servo pitch/yaw control
 * -10% for manual pitch/yaw control
+* +20% for detecting hoop position automatically
 * -20% for manual loading (moving the ball from the holding area to the receptacle)
 * -30% for manual arming (storing the potential energy used to fire the ball)
 * -20% for manual firing (making the ball shoot)
-
-**Deductions may change values between today and Thursday depending on how everybody does**
 
 ## Event 5: Bonus Event (200 points)
 ### Task Setup
@@ -173,15 +174,14 @@ For this event, the basketball hoops are setup as shown in the figure
         - (L-M-S)-(L-M-S) is 100 + 100 = 200 pts
 - Incomplete cycle point is calculated based on the points for individual hoops, halved
 
-Deductions for manual control: Your maximum score, pre-deduction, is 400. The deduction is then applied to your capped score.
+Deductions/bonuses for manual/automatic control: Your maximum score, pre-deduction, is 400. The deduction is then applied to your capped score. For bonuses, your score is still capped at 400.
 * +30% for RX200 pitch/yaw control (max score is still 400)
 * +0% for servo pitch/yaw control
 * -10% for manual pitch/yaw control
+* +20% for detecting hoop position automatically
 * -20% for manual loading (moving the ball from the holding area to the receptacle)
 * -30% for manual arming (storing the potential energy used to fire the ball)
 * -20% for manual firing (making the ball shoot)
-
-**Deductions may change values between today and Thursday depending on how everybody does**
 
 ## Score Calculation
 Your overall score will be the sum of your best run on each event. Each event can be completed multiple times at different levels.

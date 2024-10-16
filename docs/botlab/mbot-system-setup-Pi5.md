@@ -1,6 +1,6 @@
 ---
 layout: default
-title: MBot System Setup 
+title: MBot System Setup
 parent: Botlab
 nav_order: 2
 last_modified_at: 2024-08-15 11:59:00 -0500
@@ -23,8 +23,7 @@ The following items are needed:
 
 ## Set up RPi 5 System
 ### 1. Flash the image
-1. Download the custom Pi5 image `mbot-RPi5-base-Aug24.img.xz` from this [link](https://www.dropbox.com/scl/fi/f9jijqd5jctr3jmo62873/mbot-RPi5-base-Aug24.img.xz?rlkey=eqbjgdkby7md3tfei1vl742ep&st=kqrqg87g&dl=0).
-    - We use a custom image with RPiOS based on Debian 12 Bookworm
+1. Download the custom Pi5 image `2024-10-16-mbot-base-bookworm.img` from this [link](https://www.dropbox.com/scl/fi/tyyslhj3fz7dd2y6267mp/2024-10-16-mbot-base-bookworm.img.gz?rlkey=4k3qe7knhqhabw4g17n9feukj&st=fdf77uva&dl=0). We use a custom image with RPiOS based on Debian 12 Bookworm
 2. Download [Balena Etcher](https://etcher.balena.io/) then flash the OS image to your SD card. Plug in the SD card to your laptop using SD card reader then following the steps in Balena Etcher
 
 You now have an SD card with the OS image flashed on it for the Pi5. Keep the card in your laptop for now and proceed to the next step.
@@ -39,74 +38,41 @@ If the flash succeeded, the SD card will have two partitions: a 134MB Volume for
 - Set `mbot_hostname` following this format: `mbot-<section>-<team#>-<unique_name>`
     - For example: if you are in the AM section team 6, and your unique_name is johndoe, you should name the robot as `mbot-AM-team6-johndoe`
 - Enter your home Wi-Fi details for `new_wifi_ssid` and `new_wifi_password` if you intend to use it at home later.
+- Leave all other variables unchanged.
 
 ### 3. Boot the Pi5
-1. Insert the SD card into your Pi5. The SD card slot is located on the bottom on the side opposite the USB ports. 
+1. Insert the SD card into your Pi5. The SD card slot is located on the bottom on the side opposite the USB ports.
 
     <a class="image-link" href="https://projects-static.raspberrypi.org/projects/raspberry-pi-setting-up/94c43714c0e0536158409093ba28931e0fa5c9bc/en/images/pi-sd.png">
     <img src="https://projects-static.raspberrypi.org/projects/raspberry-pi-setting-up/94c43714c0e0536158409093ba28931e0fa5c9bc/en/images/pi-sd.png" alt="Image from RPi Foundation" style="max-width:300px;"/>
     </a>
 
 2. Turn on the power bank and ensure that the power cables are connected as per the assembly guide.
-3. Please allow a minute or so for it to initialize. Once the initialization is complete, the OLED screen on the side of the mbot will display the MBot's IP address. This information is crucial for connecting to your MBot remotely.
 
-### 4. VSCode Remote - SSH extension
-> In this step, we are going to establish remote access using the VSCode extension. After this setup, you will be able to access the Pi5 remotely using your laptop.
+### 4. Connect to the Internet
+If you are on campus using MWireless:
+1. Connect in NoMachine to the local accesspoint.
+2. Open a terminal and run:
+    ```bash
+    $ cd ~
+    $ SecureJoinNow.run
+    ```
+3. Connect with the credentials for the course given by Instructor.
+4. NoMachine will disconnect in the process. Wait 1 minute then reboot the robot.
 
-1. Open VSCode on your laptop, and install the `Remote - SSH` extension
+If you are at home:
 
-    <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh1.png">
-    <img src="/assets/images/botlab/system-setup/vscode_ssh1.png" alt=" " style="max-width:600px;"/>
-    </a>
 
-2. After installing the `Remote - SSH` extension, a new "Remote Explorer" icon will appear on the side panel. This is where you can add the SSH connection to your mbot. Click the New Remote `+` icon as shown below:
-    >Note that your laptop needs to connect to MWireless as well if you are on campus.
-    
-    <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh2.png">
-    <img src="/assets/images/botlab/system-setup/vscode_ssh2.png" alt=" " style="max-width:600px;"/>
-    </a>
+### 5. Remote Access
+Now the mbot is online, you can remote access to it.
 
-3. When the prompt window pops up, enter the connection command: `ssh mbot@your_mbot_ip_address` as shown below. Your IP address can be found in the IP registry and on the OLED screen.
+You have 2 options:
+1. Using VSCode (Recommended), here is the tutorail: [link](https://mbot.robotics.umich.edu/docs/tutorials/vscode/#connecting-to-the-robot)
+2. Using NoMachine, here is the tutorail: [link](https://mbot.robotics.umich.edu/docs/tutorials/no-machine/)
 
-    <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh3.png">
-    <img src="/assets/images/botlab/system-setup/vscode_ssh3.png" alt=" " style="max-width:500px;"/>
-    </a>
-
-4. Select the default config file. Note that different operating systems may have different paths, but this isn't necessarily a problem. Here in the image, we select the one contains user name.
-
-    <a class="image-link" href="/assets/images/botlab/system-setup/vscode_ssh4.png">
-    <img src="/assets/images/botlab/system-setup/vscode_ssh4.png" alt=" " style="max-width:500px;"/>
-    </a>
-
-5. Navigate to the "Remote Explorer" tab and click the refresh button. You should see your Pi5's IP address listed under the SSH section, indicating that your connection has been saved. 
-    - **To start a remote connection:** Click on "Connect in New Window" and enter the password `i<3robots!`. After this, your SSH session should be up and running.
-    - **To end a remote connection:** Click on the tab at the bottom left corner of the VS Code window labeled SSH: xx.x.xxx.xx. A pop-up menu will appear with the option to "close remote connection".
-
-{: .note }
 Username: mbot <br>
 Password: i<3robots!
-
-{: .highlight }
-At this point, you should be able to connect to your MBot using VSCode extension. 
-
-- To use the mbot at home
-    - Firstly turn on the mbot at home. It will automatically connect to your Wi-Fi if you entered your home Wi-Fi details in the mbot_config.txt file. Replicate the 5 steps above to add your mbot's IP address at home to your VSCode remote connections. Once done, you will be able to remotely access your mbot at home.
-
-
-### 5. Remote Desktop access - NoMachine
-> In this step, we are going to set up NoMachine access. Upon completion, you will be able to access the Pi5 with a Desktop UI. 
-
-1. Download NoMachine to your laptop from the [official site](https://www.nomachine.com/).
-    - NoMachine is a remote access software and it is pre-installed on our customized Pi5 image. 
- 
-2. Connect to Pi5 using NoMachine
-    - Open NoMachine on your laptop, connect to Pi5 as shown in the image below. You will need your IP address for this step.
-
-        <a class="image-link" href="/assets/images/botlab/system-setup/nomachine1.png">
-        <img src="/assets/images/botlab/system-setup/nomachine1.png" alt=" " style="max-width:400px;"/>
-        </a>
-    - Finally, enter the username: `mbot`, password: `i<3robots!` to log in.
-    - Note: if the NoMachine desktop freezes, you can always restart the robot by turning the power off and then back on.
+{: .note }
 
 ### 6. Change your mbot's password
 
@@ -120,44 +86,27 @@ The output will look like this:
 ```bash
 $  passwd
 Changing password for mbot.
-Current password: 
-New password: 
-Retype new password: 
+Current password:
+New password:
+Retype new password:
 passwd: password updated successfully
 ```
 
 {: .highlight }
 Now you have completed all the setup for Pi5!
 
-## Update system utilities
-With the setup now complete, you have the capability to connect to your MBot remotely through **the VSCode terminal**.
-
-Firstly establish a remote connection to your MBot. Once the remote connection is set, open a terminal within VSCode. In the VSCode terminal, navigate to the mbot workspace directory by entering the command `cd ~/mbot_ws`. 
-
-In the workspace directory, you will find a folder named `mbot_sys_utils`. The `mbot_sys_utils` has been updated after the OS image was generated, and we need to update the settings accordingly. This step is essential for the firmware set up later.
-
-**Note: Your laptop is now just a gateway for the SSH connection to your MBot. All programming is executed on the MBot, not on your laptop. When we mention opening a terminal in this guide later, we're referring to using a VSCode terminal to access your MBot.**
-
-
-1. Pull the latest changes from the `mbot_sys_utils` repository using the following commands: <br>
-```bash
-$ cd mbot_sys_utils
-$ git pull
-```
-2. Install the services manually:
-```bash
-$ cd services
-$ ./install_mbot_services.sh
-```
-3. After installation, power off the device, your VS Code connection will drop at this point, then turn the power back on and reconnect to the MBot using VS Code.
+**Note: <br> With the setup now complete, your laptop is now just a gateway for the SSH connection to your MBot. All programming is executed on the MBot, not on your laptop. When we mention opening a terminal in this guide later, we're referring to using a VSCode terminal to access your MBot.**
+{: .text-red-200}
 
 ## Set up MBot firmware
 > In this session, we are going to work on setup of the Control Board.
 
 ### 1. Compile the firmware files
-1. Firstly navigate back to `mbot_ws`:
+1. Firstly navigate to `mbot_ws`:
     ```bash
-    $ cd ~/mbot_ws 
+    $ cd ~
+    $ mkdir mbot_ws
+    $ cd ~/mbot_ws
     ```
 
 2. Clone [mbot_lcm_base](https://github.com/mbot-project/mbot_lcm_base.git) to `~/mbot_ws` and install.
@@ -173,8 +122,8 @@ $ ./install_mbot_services.sh
         $ ./scripts/install.sh
         ```
 
-3. Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/rob550-f24/mbot_firmware) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to the Pi5 in `~/mbot_ws`.
-        
+3. Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/ROB550-F24/mbot_firmware) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to the Pi5 in `~/mbot_ws`.
+
 4. Compile the firmware code to get .uf2 binary files
 
     1. Run the firmware setup script
@@ -191,8 +140,10 @@ $ ./install_mbot_services.sh
         $ make
         ```
     3. Now you will have 2 relevant `.uf2` files under `/build`
-        - The calibration script, `mbot_firmware/build/tests/mbot_calibrate_classic.uf2`
-        - The MBot firmware, `mbot_firmware/build/src/mbot_classic.uf2`
+        - The calibration script, `mbot_firmware/build/mbot_calibrate_classic_v1.0.0_enc48.uf2`
+        - The MBot firmware, `mbot_firmware/build/mbot_classic_v1.0.0_enc48.uf2`
+
+        The name is long, you can hit `Tab` key on the keyboard to auto complete.
 
 
 ### 2. Calibrate the MBot and flash the firmware
@@ -207,12 +158,7 @@ In this step, we are going to flash the calibration script onto the Pico to cali
     ```bash
     $ cd ~/mbot_ws/mbot_firmware
     # upload the calibration scripts
-    $ sudo ./upload.sh flash build/tests/mbot_calibrate_classic.uf2
-    ```
-Note that during the calibration routine, robot should turning in **counter clockwise** circle first then turning **clockwise**. If it is not executing in this order, you might have wrong motor polarity. Modify it in the `mbot_firmware/tests/mbot_calibrate_classic.c` to be either 1 or -1.
-    ```
-    #define MOT_LEFT_POL 1    
-    #define MOT_RIGHT_POL 1
+    $ sudo ./upload.sh flash build/build/mbot_calibrate_classic_v1.0.0_enc48.uf2
     ```
 
     Here is a video of expected routine:
@@ -223,7 +169,7 @@ The calibration script will have saved parameters onto the Pico’s memory. We c
 
 ```bash
 $ cd ~/mbot_ws/mbot_firmware
-$ sudo ./upload.sh flash build/src/mbot_classic.uf2
+$ sudo ./upload.sh flash build/mbot_classic_v1.0.0_enc48.uf2
 ```
 
 ### 3. Using Minicom to verify
@@ -257,7 +203,7 @@ Add the line `alias start-minicom='minicom -D /dev/mbot_tty -b 115200'` to the e
 
 If the firmware was successfully flashed, skip this step and proceed to the next.
 
-If your firmware flashing was not successful because the `./upload.sh` script from step two doesn't work for your mbot, you can manually enter the bootloader mode (namely let pico ready to get the firmware) by following instructions [here](/docs/botlab/how-to-guide/manually-enter-bootloader). 
+If your firmware flashing was not successful because the `./upload.sh` script from step two doesn't work for your mbot, you can manually enter the bootloader mode (namely let pico ready to get the firmware) by following instructions [here](/docs/botlab/how-to-guide/manually-enter-bootloader).
 
 
 ## Install the rest of the MBot Code
@@ -266,16 +212,21 @@ If your firmware flashing was not successful because the `./upload.sh` script fr
     - **Clone** [RP Lidar Driver](https://github.com/mbot-project/rplidar_lcm_driver) and [MBot Bridge](https://github.com/mbot-project/mbot_bridge.git)
     - **Fork** [MBot Autonomy](https://gitlab.eecs.umich.edu/rob550-f24/mbot_autonomy) to your group and **then clone** the forked code to Pi5
 
-2. Install the MBot Web App
+2. Install the MBot Bridge
+    ```bash
+    $ cd ~/mbot_ws/mbot_bridge/
+    $ ./scripts/install.sh
+    ```
+3. Install the MBot Web App
     1. Download the latest web app release and unpack it
     ```bash
     $ cd ~/mbot_ws
-    $ wget https://github.com/MBot-Project-Development/mbot_web_app/releases/download/v1.1.0/mbot_web_app-v1.1.0.tar.gz
-    $ tar -xvzf mbot_web_app-v1.1.0.tar.gz
+    $ wget https://github.com/mbot-project/mbot_web_app/releases/download/v1.3.0/mbot_web_app-v1.3.0.tar.gz
+    $ tar -xvzf mbot_web_app-v1.3.0.tar.gz
     ```
     2. Install the web app dependencies
     ```bash
-    $ cd mbot_web_app-v1.1.0/
+    $ cd mbot_web_app-v1.3.0/
     $ ./install_nginx.sh
     $ ./install_python_deps.sh
     ```
@@ -292,22 +243,13 @@ If your firmware flashing was not successful because the `./upload.sh` script fr
     You can use the web app by going to your browser and typing in the robot’s IP address. <br>
     If the firmware is flashed and the serial server is running, you should be able to drive the robot through the webapp. Toggle drive mode on then use the keys WSQE to drive the robot.
 
-
-3. Install the RPLidar driver
+4. Install the RPLidar driver
 ```bash
 $ cd ~/mbot_ws/rplidar_lcm_driver/
 $ ./scripts/install.sh
 ```
-4. Install the MBot Autonomy code
+5. Install the MBot Autonomy code
 ```bash
 $ cd ~/mbot_ws/mbot_autonomy/
 $ ./scripts/install.sh
 ```
-- The autonomy code includes SLAM and a motion controller program.
-
-5. Install the MBot Bridge and API 
-    ```bash
-    $ cd ~/mbot_ws/mbot_bridge/
-    $ ./scripts/install.sh
-    ```
-    - The MBot Bridge includes a server that bridges student code with the MBot software, as well as APIs in C++ and Python.

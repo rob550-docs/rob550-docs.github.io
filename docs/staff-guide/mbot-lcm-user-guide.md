@@ -1,29 +1,29 @@
 ---
 layout: default
-title: MBot LCM Guide
+title: MBot LCM User Guide
 parent: Staff Guide
 nav_order: 4
-last_modified_at: 2024-10-9 14:20:48 -0500
+last_modified_at: 2024-10-09 14:20:48 -0500
 ---
 
-> This guide is about LCM in MBot ecosystem.
+> This guide is about how to use LCM in MBot ecosystem.
 
 ### Contents
 * TOC
 {:toc}
 
 ## What is LCM?
-[LCM](https://lcm-proj.github.io/lcm/) stands for Lightweight Communications and Marshalling. It's about sending data between programs or computers (Communications) and getting data ready for sending or storing (Marshalling). 
+[LCM](https://lcm-proj.github.io/lcm/) stands for Lightweight Communications and Marshalling. It's about sending data between programs or computers (Communications) and getting data ready for sending or storing (Marshalling).
 - If you know ROS, LCM works similarly with the same publish-subscribe model. LCM types are like ROS messages, and LCM channels are like ROS topics.
 - If ROS is new to you, think of LCM as a way to send and receive messages over channels.
     - For example, to enable communication between your Raspberry Pi and the Pico board, first create a communication channel, for instance, named “talking_channel”. Create a publisher on the RPi to publish messages on this channel, and establish a listener on the Pico board to listen messages from it. That's LCM in a nutshell.
 
 The messages that are passed are created based on the [LCM message type](https://lcm-proj.github.io/lcm/content/tutorial-lcmgen.html), which is a data structure that can include primitive data types. Here’s an example of an LCM type, `mbot_message_received_t`, which consists of two integers and a string:
-```
+```c
 struct mbot_message_received_t{
     int64_t utime;            // Time of confirmation message creation
-    int64_t creation_time;    // time of message creation  
-    string channel;           // name of channel 
+    int64_t creation_time;    // time of message creation
+    string channel;           // name of channel
 }
 ```
 
@@ -33,8 +33,8 @@ In `mbot_firmware/src/mbot_channels.h`, we define **serial channels**:
 ```c
 // These must match the channels also defined for mbot_lcm_serial in mbot_lcm_base
 enum message_topics{
-    MBOT_TIMESYNC = 201, 
-    MBOT_ODOMETRY = 210, 
+    MBOT_TIMESYNC = 201,
+    MBOT_ODOMETRY = 210,
     MBOT_ODOMETRY_RESET = 211,
     MBOT_VEL_CMD = 214,
     MBOT_IMU = 220,
@@ -68,8 +68,8 @@ In `mbot_lcm_base/mbot_lcm_serial/include/mbot_lcm_serial/lcm_config.h`, we defi
 
 /////// serial channels //////
 enum message_topics{
-    MBOT_TIMESYNC = 201, 
-    MBOT_ODOMETRY = 210, 
+    MBOT_TIMESYNC = 201,
+    MBOT_ODOMETRY = 210,
     MBOT_ODOMETRY_RESET = 211,
     MBOT_VEL_CMD = 214,
     MBOT_IMU = 220,
@@ -164,7 +164,7 @@ else if(MBOT_DRIVE_TYPE == DIFFERENTIAL_DRIVE){
 
 In this code snippet, the `mbot_vel_cmd` variable's linear velocity (`vx`) and angular velocity (`wz`) components are being used to calculate the target velocities for the left and right motors of a differential drive robot, so it translates a desired linear and angular velocity into specific motor speeds.
 
-Now we know that the control board already has a subscriber listening to `MBOT_VEL_CMD` channel, ready to process the incoming message. To make the robot move, we need to publish the desired velocities to the `MBOT_VEL_CMD` channel. 
+Now we know that the control board already has a subscriber listening to `MBOT_VEL_CMD` channel, ready to process the incoming message. To make the robot move, we need to publish the desired velocities to the `MBOT_VEL_CMD` channel.
 
 Next, let's discuss the structure of the message.
 
@@ -176,7 +176,7 @@ Inside that directory, you'll find `twist2D_t.lcm`:
 struct twist2D_t{
     int64_t utime;
     float vx;
-    float vy; // this should be 0 when use differential drive 
+    float vy; // this should be 0 when use differential drive
     float wz;
 }
 ```
@@ -212,7 +212,7 @@ At this point, your communication setup is complete. Once you run the Python fil
     - All LCM message types are stored in the `mbot_lcm_base/mbot_msgs/lcmtypes` directory. To add a new LCM type, create your custom LCM message in this location.
 2. Define the channel
     - Messages are sent over channels. You need to decide whether the Pico board needs to receive or send the message. If the message is only relevant to programs on the RPi, you only need to define the LCM channel in `mbot_lcm_base/mbot_lcm_serial/include/mbot_lcm_serial/lcm_config.h`.
-    
+
       ```c
       #define MBOT_EXAMPLE_CHANNEL "MBOT_EXAMPLE"
       ```
@@ -227,13 +227,13 @@ At this point, your communication setup is complete. Once you run the Python fil
           MBOT_EXAMPLE = 200
         };
         ```
-      
+
     Notice: The channel number is limited to a maximum of 255 due to the 8-bit limit. The numbers 0 and 255 might reserved for special purposes. Therefore, 254 is your highest usable value for channel identifiers.
 3. Make and install in `mbot_lcm_base` to apply new changes
     - Add the new defined type to `mbot_lcm_base/mbot_msgs/CMakeLists.txt`:
       ```cmake
       set(LCM_FILES
-        ...  
+        ...
         lcmtypes/slam_status_t.lcm
         lcmtypes/exploration_status_t.lcm
         ...
@@ -251,13 +251,13 @@ At this point, your communication setup is complete. Once you run the Python fil
       # Compile the firmware
       $ cd ~/mbot_ws/mbot_firmware/build
       $ cmake ..
-      $ make  
+      $ make
       # Upload to the pico
       $ cd ~/mbot_ws/mbot_firmware
       $ sudo mbot-upload-firmware flash build/mbot_calibrate_classic.uf2
       ```
 5. Now your newly defined lcm message is ready to use. To publish your newly defined message from mbot_autonomy, you need to use an LCM instance to either publish to or subscribe from channels with the messages or callback functions.
-    
+
     The following code from `mbot_autonomy` demonstrates how to subscribe to and publish messages:
     ```cpp
      lcm_.subscribe(PATH_REQUEST_CHANNEL, &MotionPlannerServer::handleRequest, this);

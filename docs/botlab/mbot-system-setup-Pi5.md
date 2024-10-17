@@ -72,6 +72,7 @@ Then save the file. Now you can eject the SD card.
     ```
 
 4. When prompted for your unique name and password, use the course credentials provided by your instructor (for Fall 2024, these will be sent via Discord).
+
 5. After entering your credentials, NoMachine will disconnect during the process. Close the NoMachine window and wait for about 1 minute. Check the OLED screen to see if the IP address has changed from `192.168.X.X` to a different one. This indicates that the MBot has successfully connected to the Internet.
 
 **Video Demo:**
@@ -81,7 +82,8 @@ Then save the file. Now you can eject the SD card.
 
 ### 4.2 Connect to the Internet at Home
 1. Ensure the `new_wifi_ssid` and `new_wifi_password` are correctly set in the `mbot_config.txt` file (check for any typos). They should be your home wifi name, and home wifi password.
-2. Start the MBot, wait for about 1 minute. You may hear the fan start a couple of times, and eventually, the OLED screen will display the MBot's IP address, meaning the mbot is connected to your home Wi-Fi.
+
+2. Start the MBot, wait for about 1 minute. You may hear the fan start a couple of times, and eventually, the OLED screen will display the MBot's IP address (since you are at home, the IP be `192.168.x.x` is normal unlike on campus), meaning the mbot is connected to your home Wi-Fi.
 
 
 If you have successfully connected your MBot to MWireless or your home Wi-Fi, you can use its IP address to remotely access the MBot. From now on, you can always find the IP address on the OLED screen. Proceed to the next step for more details.

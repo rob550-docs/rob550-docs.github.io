@@ -62,7 +62,10 @@ Then save the file. Now you can eject the SD card.
 ### 4.1 Connect to the Internet on Campus
 1. Connect to the MBot's local access point. See the instructions on the official MBot website [here](https://mbot.robotics.umich.edu/docs/setup/networking/#connecting-to-the-mbots-access-point) under the "Connecting to the MBot’s Access Point" section.
 
-2. Use NoMachine to connect to MBot. Follow the instructions on the official MBot website [here](https://mbot.robotics.umich.edu/docs/tutorials/no-machine/). However, **at the second step, instead of using the numeric IP address, enter** `<MBOT-HOSTNAME>.local`.
+2. Use NoMachine to connect to MBot. Follow the instructions on the official MBot website [here](https://mbot.robotics.umich.edu/docs/tutorials/no-machine/).
+    - **At the second step**, you can:
+        1. Either eneter the numeric IP address on the OLED screen.
+        2. Or enter `<MBOT-HOSTNAME>.local` like in the video demo.
     - Note: NoMachine can be SLOW so please be EXTRA PATIENT. In the video demo below, we reopen NoMachine a few times due to delays. If you feel it's taking too long, you can try reopening the connection as well. you will eventually get through.
 
 3. Connect the MBot to the Internet. Open a terminal in the NoMachine desktop and run the following commands to connect the MBot to the Internet:

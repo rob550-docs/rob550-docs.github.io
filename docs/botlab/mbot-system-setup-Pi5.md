@@ -52,32 +52,50 @@ Then save the file. Now you can eject the SD card.
     </a>
 
 2. Turn on the power bank and ensure that the power cables are connected as per the [assembly guide](https://mbot.robotics.umich.edu/docs/hardware/classic/assembly/mbot-wiring/).
+3. **Wait for about 1 minute until the OLED screen lights up, then proceed to the next step.**
 
 ### 4. Connect to the Internet
-Your laptop and the mbot should always be in the same network.
+Your laptop and the MBot must always be on the same network.
 {: .note}
 
 **If you are on campus using MWireless:**
-1. Connect in NoMachine to the local accesspoint.
-2. Open a terminal and run:
+1. Connect to the MBot's local access point.
+    1. Open your WiFi settings and look for all available networks (e.g., MWireless, MSetup, etc.).
+    2. You should see a network called [MBOT-HOSTNAME]-AP, where [MBOT-HOSTNAME] is replaced with the hostname of your robot.
+    3. Connect to [MBOT-HOSTNAME]-AP using the password **`iloverobots`**. Note that you will lose your Internet connection since you are now connected to the MBot.
+2. Open a terminal on your laptop or in VSCode, and run:
+    ```bash
+    # Replace [MBOT-HOSTNAME] with your MBot's hostname
+    ssh mbot@[MBOT-HOSTNAME].local
+    ```
+    You will be prompted:
+    ```bash
+    Are you sure you want to continue connecting (yes/no/[fingerprint])?
+    ```
+    Type "yes" and press Enter. You will then be asked for a password. This time, enter **`i<3robots!`**.
+
+    **You are now connected to the MBot's terminal.**
+3. Run the following commands to connect the MBot to the Internet:
     ```bash
     $ cd ~
-    $ sh SecureW2_JoinNow.run
+    $ ./SecureW2_JoinNow.run
     ```
-3. When it ask for your unique name and password, use the course credentials provided by your instructor to connect.
-4. Once you entered the redentials, NoMachine will disconnect in the process. Wait 1 minute then reboot the robot.
+4. When prompted for your unique name and password, use the course credentials provided by your instructor.
+5. Once you have entered the credentials, NoMachine will disconnect during the process. Wait for 1 minute, then reboot the robot.
+
+**If the above steps do not work for you, you will need to find an external monitor, keyboard, and mouse, and then start from step 3.**
 
 **If you are at home:**
 1. Ensure the `new_wifi_ssid` and `new_wifi_password` are correctly set in the `mbot_config.txt` file (check for any typos).
 2. Wait for about 1 minute. You may hear the fan start a couple of times, and eventually, the OLED screen will display the MBot's IP address, meaning the mbot is connected to your home Wi-Fi.
 
-IP address on OLED:
+    IP address on OLED:
 
-<a class="image-link" href="https://mbot.robotics.umich.edu/assets/images/tutorials/mbot-oled-ip.jpg">
-<img src="https://mbot.robotics.umich.edu/assets/images/tutorials/mbot-oled-ip.jpg" alt="Image from RPi Foundation" style="max-width:300px;"/>
-</a>
+    <a class="image-link" href="https://mbot.robotics.umich.edu/assets/images/tutorials/mbot-oled-ip.jpg">
+    <img src="https://mbot.robotics.umich.edu/assets/images/tutorials/mbot-oled-ip.jpg" alt="Image from RPi Foundation" style="max-width:300px;"/>
+    </a>
 
-Now you can use the IP address to remotely access your MBot. Proceed to the next step for more details.
+If you have successfully connected your MBot to MWireless, you can use its IP address to remotely access the MBot. From now on, you can always find the IP address on the OLED screen. Proceed to the next step for more details.
 
 ### 5. Remote Access
 You have 2 options:

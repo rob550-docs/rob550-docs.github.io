@@ -4,7 +4,7 @@ title: Checkpoint 1.5
 nav_order: 3
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-03-04 16:37:48 -0500
+last_modified_at: 2024-10-16 16:37:48 -0500
 ---
 
 The MBot has a camera that can be used to perform vision tasks like identifying Apriltags and other obstacles in the environment.
@@ -16,7 +16,7 @@ The MBot has a camera that can be used to perform vision tasks like identifying 
 ## Computer Vision
 ### Task 1.5 Camera Calibration
 
-Find the intrinsic and extrinsic matrix (robot frame to camera frame) for your MBot. 
+Find the intrinsic and extrinsic matrix (robot frame to camera frame) for your MBot.
 
 Hints:
 - For the intrinsic matrix, use the camera calibration tools available in the [mbot_apriltag](https://gitlab.eecs.umich.edu/rob550-f23/mbot_apriltag) repository. For detailed instructions on using `mbot_apriltag`, please refer to [mbot_apriltag guide](/docs/botlab/how-to-guide/mbot-apriltag-guide).
@@ -33,4 +33,4 @@ Compare the camera detection of the apriltag with your odometry by driving backw
 
 
 ## Checkpoint Submission
-No submission is required for this checkpoint. 
+No submission is required for this checkpoint.

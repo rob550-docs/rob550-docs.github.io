@@ -23,7 +23,7 @@ The following items are needed:
 
 ## Set up RPi 5 System
 ### 1. Flash the image
-1. Download the custom Pi5 image `2024-10-16-mbot-base-bookworm.img` from this [link](https://www.dropbox.com/scl/fi/tyyslhj3fz7dd2y6267mp/2024-10-16-mbot-base-bookworm.img.gz?rlkey=4k3qe7knhqhabw4g17n9feukj&st=fdf77uva&dl=0) to your laptop. We use a custom image with RPiOS based on Debian 12 Bookworm
+1. Download the custom Pi5 image `2024-10-16-mbot-base-bookworm.img` from this [link](https://www.dropbox.com/scl/fi/tyyslhj3fz7dd2y6267mp/2024-10-16-mbot-base-bookworm.img.gz?rlkey=4k3qe7knhqhabw4g17n9feukj&st=1knc90ky&dl=0) to your laptop. We use a custom image with RPiOS based on Debian 12 Bookworm
 2. Download [Balena Etcher](https://etcher.balena.io/) to your laptop, it is a tool to flash the OS image to the SD card. Plug in the SD card to your laptop using SD card reader then following the steps in Balena Etcher.
 
 You now have an SD card with the OS image flashed on it for the Pi5. Keep the card in your laptop for now and proceed to the next step.
@@ -55,49 +55,36 @@ Then save the file. Now you can eject the SD card.
 3. **Wait for about 1 minute until the OLED screen lights up, then proceed to the next step.**
 
 ### 4. Connect to the Internet
+- **If you are on campus:**
+    1. Connect to the MBot's local access point. See the instructions on the official MBot website [here](https://mbot.robotics.umich.edu/docs/setup/networking/#connecting-to-the-mbots-access-point) under the "Connecting to the MBot’s Access Point" section.
+    2. Use NoMachine to connect. Follow the instructions on the official MBot website [here](https://mbot.robotics.umich.edu/docs/tutorials/no-machine/). However, **at the second step, instead of using the numeric IP address, enter** `<MBOT-HOSTNAME>.local`.
+    3. Open a terminal in the NoMachine desktop and run the following commands to connect the MBot to the Internet:
+        ```bash
+        $ cd ~
+        $ ./SecureW2_JoinNow.run
+        ```
+    4. When prompted for your unique name and password, use the course credentials provided by your instructor.
+    5. Once you have entered the credentials, NoMachine will disconnect during the process. Wait for 1 minute, then reboot the robot.
+
+    **If the above steps do not work for you, you will need to find an external monitor, keyboard, and mouse, and then start from step 3.**
+
+- **If you are at home:**
+    1. Ensure the `new_wifi_ssid` and `new_wifi_password` are correctly set in the `mbot_config.txt` file (check for any typos).
+    2. Wait for about 1 minute. You may hear the fan start a couple of times, and eventually, the OLED screen will display the MBot's IP address, meaning the mbot is connected to your home Wi-Fi.
+
+        IP address on OLED:
+
+        <a class="image-link" href="https://mbot.robotics.umich.edu/assets/images/tutorials/mbot-oled-ip.jpg">
+        <img src="https://mbot.robotics.umich.edu/assets/images/tutorials/mbot-oled-ip.jpg" alt="Image from RPi Foundation" style="max-width:300px;"/>
+        </a>
+
+If you have successfully connected your MBot to MWireless or your home Wi-Fi, you can use its IP address to remotely access the MBot. From now on, you can always find the IP address on the OLED screen. Proceed to the next step for more details.
+
+### 5. Remote Access
+
 Your laptop and the MBot must always be on the same network.
 {: .note}
 
-**If you are on campus using MWireless:**
-1. Connect to the MBot's local access point.
-    1. Open your WiFi settings and look for all available networks (e.g., MWireless, MSetup, etc.).
-    2. You should see a network called [MBOT-HOSTNAME]-AP, where [MBOT-HOSTNAME] is replaced with the hostname of your robot.
-    3. Connect to [MBOT-HOSTNAME]-AP using the password **`iloverobots`**. Note that you will lose your Internet connection since you are now connected to the MBot.
-2. Open a terminal on your laptop or in VSCode, and run:
-    ```bash
-    # Replace [MBOT-HOSTNAME] with your MBot's hostname
-    ssh mbot@[MBOT-HOSTNAME].local
-    ```
-    You will be prompted:
-    ```bash
-    Are you sure you want to continue connecting (yes/no/[fingerprint])?
-    ```
-    Type "yes" and press Enter. You will then be asked for a password. This time, enter **`i<3robots!`**.
-
-    **You are now connected to the MBot's terminal.**
-3. Run the following commands to connect the MBot to the Internet:
-    ```bash
-    $ cd ~
-    $ ./SecureW2_JoinNow.run
-    ```
-4. When prompted for your unique name and password, use the course credentials provided by your instructor.
-5. Once you have entered the credentials, NoMachine will disconnect during the process. Wait for 1 minute, then reboot the robot.
-
-**If the above steps do not work for you, you will need to find an external monitor, keyboard, and mouse, and then start from step 3.**
-
-**If you are at home:**
-1. Ensure the `new_wifi_ssid` and `new_wifi_password` are correctly set in the `mbot_config.txt` file (check for any typos).
-2. Wait for about 1 minute. You may hear the fan start a couple of times, and eventually, the OLED screen will display the MBot's IP address, meaning the mbot is connected to your home Wi-Fi.
-
-    IP address on OLED:
-
-    <a class="image-link" href="https://mbot.robotics.umich.edu/assets/images/tutorials/mbot-oled-ip.jpg">
-    <img src="https://mbot.robotics.umich.edu/assets/images/tutorials/mbot-oled-ip.jpg" alt="Image from RPi Foundation" style="max-width:300px;"/>
-    </a>
-
-If you have successfully connected your MBot to MWireless, you can use its IP address to remotely access the MBot. From now on, you can always find the IP address on the OLED screen. Proceed to the next step for more details.
-
-### 5. Remote Access
 You have 2 options:
 1. Using VSCode (Recommended), here is the tutorail: [link](https://mbot.robotics.umich.edu/docs/tutorials/vscode/#connecting-to-the-robot)
 2. Using NoMachine, here is the tutorail: [link](https://mbot.robotics.umich.edu/docs/tutorials/no-machine/)

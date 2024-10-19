@@ -198,31 +198,31 @@ $ sudo mbot-upload-firmware flash build/mbot_classic_v1.1.0_enc48.uf2
 ```
 
 ### 3. Using Minicom to verify
-Here we introduce you the tool Minicom. It is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts from the Pi5.
-
+Minicom is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts from the Pi5.
 - After flashing the firmware to the Pico, run the following command to start minicom
     ```bash
     $ minicom -D /dev/mbot_tty -b 115200
     ```
-    - `-D` indicates the serial port device, and `-b` sets the communication speed or baud rate.
-    - If the minicom command doesn't work, run this: `ls /dev | grep mbot`
+    - If the minicom command doesn't work, run this command in the Terminal: `ls /dev | grep mbot`
     ```bash
     $ mbot@mbot-0018-shaw:/dev$ ls /dev | grep mbot
     mbot_lcm
     mbot_tty
     ```
     If you do not see the 2 outputs above, unplug the USB which connect Pi5 and Pico, then plug back in.
-- To exit Minicom, press `CTRL-A` to get to command mode, then press `X` to quit.
+    - **Successful Firmware Flashing:** After flashing the firmware successfully, Minicom will display a table, showing the encoder counts, IMU values, and more. Manually turning the wheel will update the encoder counts in the Minicom terminal.
+    - **Unsuccessful Firmware Flashing:** If the firmware doesn't flash correctly, repeat the calibration and firmware flashing steps. This time, open a second terminal window with Minicom running to monitor its outputs for troubleshooting.
 
-**Successful Firmware Flashing:** After flashing the firmware successfully, Minicom will display your encoder counts, IMU values, and more.
-Manually turning the wheel will update the encoder counts in the Minicom terminal.
+- **To exit Minicom**, press `CTRL-A`, then press `X` to quit.
 
-**Unsuccessful Firmware Flashing:** If the firmware doesn't flash correctly, repeat the calibration and firmware flashing steps.
-Open a second terminal window with Minicom to monitor its outputs for troubleshooting.
 
-{: .note }
-To make running minicom easier, consider creating a [permanent alias](https://askubuntu.com/questions/154640/how-to-add-an-alias-to-a-command-in-terminal) by editing your .bashrc file.
-Add the line `alias start-minicom='minicom -D /dev/mbot_tty -b 115200'` to the end of your .bashrc file, then run the command `source ~/.bashrc` in a terminal. This will let you run minicom using the command `start-minicom`.
+**Note:**<br>
+To make running minicom easier, consider creating a [permanent alias](https://askubuntu.com/questions/154640/how-to-add-an-alias-to-a-command-in-terminal) by editing your .bashrc file. Run the following commands in your terminal:
+```bash
+$ echo "alias start-minicom='minicom -D /dev/mbot_tty -b 115200'" >> ~/.bashrc
+$ source ~/.bashrc
+```
+This will let you run minicom using the command `start-minicom`.
 
 ### 4. Manually enter bootloader mode
 
@@ -267,11 +267,14 @@ If your firmware flashing was not successful because using `mbot-uplaod-firmware
     ```
 
     {: .highlight }
-    The web app should now be available! You don't have to re-run any of these steps; the web app will automatically start when you start the robot.
-
-    {: .note }
-    You can use the web app by going to your browser and typing in the robot’s IP address. <br>
-    If the firmware is flashed and the serial server is running, you should be able to drive the robot through the webapp. Toggle drive mode on then use the keys WSQE to drive the robot.
+    You can use the web app by going to your browser and typing in the robot’s IP address.
+    - If the firmware is flashed and the serial server is running, you should be able to drive the robot through the webapp. Toggle "Drive Mode" on then use the keyboard `W-S-Q-E` to drive the robot.
+    - You don't have to re-run any of these steps, the web app will automatically start when you start the robot. And to save space, you can now safely delete all the web app related code by running:
+    ```bash
+    $ cd ~/mbot_ws
+    $ rm mbot_web_app-v1.3.0.tar.gz
+    $ rm -r mbot_web_app-v1.3.0/
+    ```
 
 5. **Fork** [MBot Autonomy](https://gitlab.eecs.umich.edu/rob550-f24/mbot_autonomy) to your group and **then clone** the forked code to Pi5, then install the MBot Autonomy code
 ```bash

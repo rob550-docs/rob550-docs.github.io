@@ -171,32 +171,16 @@ Now you have completed all the basic setup for MBot! Next, we are going to insta
         ```
 
 ### 2. Calibrate the MBot and flash the firmware
-In this step, we are going to flash the calibration script onto the Pico to calibrate it before we flash the firmware.
+In this step, we are going to flash the calibration script onto the Pico to calibrate it and then flash the firmware.
 
-1. **Place the MBot on the floor** in a spot with at least 2 feet of clear space all around the robot, preferably on the same type of surface that you plan to use the robots on.
-2. Run the following command, the Pico will reboot automatically, and will then run its calibration routine right away. **Allow the Pico to finish its calibration routine without interference.**
-
-    {: .warning}
-    Hold off on running this command until the robot is placed on the floor.
-
-    ```bash
-    $ cd ~/mbot_ws/mbot_firmware
-    # upload the calibration scripts
-    $ sudo mbot-upload-firmware flash build/mbot_calibrate_classic_v1.1.0_enc48.uf2
-    ```
-    - The name is long, you can hit `Tab` key on the keyboard to auto complete.
-    - **If the MBot does not move after running the command above**, wait a few seconds. If it still does not move, you can **manually enter the bootloader mode** (namely let pico ready to get the firmware) by following instructions [here](/docs/botlab/how-to-guide/manually-enter-bootloader).
-
-    Here is a video of expected routine:
+1. **Place the MBot on the floor** in a spot with at least 2 feet of clear space around the robot, preferably on the same type of surface you plan to use it on.
+2. Follow the [firmware flashing guide](https://mbot.robotics.umich.edu/docs/setup/firmware/). There are multiple ways to flash the firmwar, "Manual Boot Mode" is recommended.
+3. First, flash the calibration file we compiled from step 1, to calibrate your MBot. The calibration file is named something like `mbot_calibrate_classic_<vX.X.X>_enc48.uf2` under the `build` folder. Here is a video showing the expected calibration routine:
 
     <iframe width="400" height="227" src="https://www.youtube.com/embed/iIghZzf8ZQY?si=w_ultg6PtCwJVr2_" title="YouTube video player" frameborder="2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    - **Allow the Pico to finish its calibration routine without interference.** The calibration script will save the parameters onto the Pico’s memory.
+4. Then, you can flash the firmware that will run on the Pico during operation. The firmware file name should be `mbot_classic_<vX.X.X>_enc48.uf2`.
 
-The calibration script will have saved parameters onto the Pico’s memory. We can now flash the firmware that will run on the Pico during operation.
-
-```bash
-$ cd ~/mbot_ws/mbot_firmware
-$ sudo mbot-upload-firmware flash build/mbot_classic_v1.1.0_enc48.uf2
-```
 
 ### 3. Using Minicom to verify
 Minicom is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts during the flash process.
@@ -283,6 +267,9 @@ This will let you run minicom using the command `start-minicom`.
 
 5. **Fork** [MBot Autonomy](https://gitlab.eecs.umich.edu/ROB550-F24/mbot_autonomy) to your group and **then clone** the forked code to Pi5, then install the MBot Autonomy code
 ```bash
-$ cd ~/mbot_ws/mbot_autonomy/
-$ ./scripts/install.sh -t DIFF --no-enable
+$ cd ~/mbot_ws/mbot_autonomy
+$ mkdir build
+$ cd build
+$ cmake -DMBOT_TYPE=DIFF ..
+$ make
 ```

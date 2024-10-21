@@ -3,7 +3,7 @@ layout: default
 title: Misc
 parent: How-to Guide
 grand_parent: Botlab
-nav_order: 6
+nav_order: 4
 last_modified_at: 2023-10-19 13:37:48 -0500
 ---
 
@@ -21,12 +21,12 @@ Assuming you have finished the headless setup
     - NoMachine GUI: use the Ubuntu system poweroff
     - Command line tool over SSH connection: `sudo shutdown -h now`
 
- 
+
 ## How to charge the power bank
-1. Push the switch of the power bank to position "I" to make the charging circuit breakout. 
+1. Push the switch of the power bank to position "I" to make the charging circuit breakout.
 2. Connect the charger to the power bank
-3. The LED indicator on the AC-DC charger head showing RED means the charging process is working. 
-4. The LED indicator on the AC-DC charger head showing GREEN means the charging process has completed. 
+3. The LED indicator on the AC-DC charger head showing RED means the charging process is working.
+4. The LED indicator on the AC-DC charger head showing GREEN means the charging process has completed.
 
 ## How to transfer file from MBot to your laptop - wormhole
 

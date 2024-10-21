@@ -7,15 +7,16 @@ plugins:
   - jekyll-last-modified-at
 
 remote_theme: pmarsceill/just-the-docs
- 
+
 last_modified_at: true
 
 logo: "/assets/images/robotics-logo.svg"
 favicon_ico: "/assets/images/mbot-logo.png"
 math: katex
 url: "https://rob550-docs.github.io"
+enable_copy_code_button: false
 
-callouts_level: quiet # or loud 
+callouts_level: quiet # or loud
 callouts:
   highlight:
     title: Highlight

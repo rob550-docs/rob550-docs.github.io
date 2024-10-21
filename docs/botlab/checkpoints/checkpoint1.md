@@ -47,7 +47,16 @@ The odometry functions are implemented in `odometry.c` and the estimated positio
 ### Task 1.2
 You need to test the provided odometry implementation by moving the robot known distances and turning by known angles. Verify if the odometry calculations match these values.
 
+You can use `mbot_firmware/python/mbot_move_simple.py` to drive the MBot: drive 1m straight see if x = 1, or turn half a cycle to check if odometry theta is pi. To verify odometry, run: `mbot lcm-spy --channels MBOT_ODOMETRY`, refer to the [MBot CLI Tools](/docs/botlab/how-to-guide/mbot-cli-tools) guide for more details.
+
 If you are unsatisfied with the accuracy of the provided odometry, you can include some of the features discussed in lecture, for example, gyrodometry, to improve the accuracy.
+
+To apply the changes, you need to compile the mbot_firmware, and flash the .uf2 files to the control board same as we did in the system setup guide.
+```bash
+$ cd build
+$ make
+$ sudo mbot-upload-firmware flash mbot_classic_v1.1.0_enc48.uf2
+```
 
 {: .required_for_report }
 Evaluate the performance of your odometry system with, and/or without, the improvements you made.
@@ -64,13 +73,6 @@ Features you should consider adding/changing for your controller:
 - Integrate Feed-Forward (FF) and Feedback (FB) controllers by summing their outputs. This approach allows the PID to focus solely on correcting the error between measured speed and the calibration function, potentially reducing or even eliminating the need for an integral term.
 - Implement a low-pass filter on the wheel velocity estimates to minimize discretization noise, particularly at low speeds.
 - Introduce acceleration and deceleration limits for the robot to prevent abrupt movements by filtering the command setpoints.
-
-To apply the changes, you need to compile the mbot_firmware, and flash the .uf2 files to the control board same as we did in the system setup guide.
-```bash
-$ cd build
-$ make
-$ sudo mbot-upload-firmware flash build/mbot_calibrate_classic_v1.1.0_enc48.uf2
-```
 
 To test your updated controller, you can modify the Python script `mbot_firmware/python/mbot_move_simple.py`, using them to create commands that challenge and evaluate your controller's performance.
 

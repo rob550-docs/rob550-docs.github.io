@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Competition
-nav_order: 7
+nav_order: 6
 parent: Checkpoints
 grand_parent: Botlab
 last_modified_at: 2024-04-23 16:37:48 -0500
@@ -53,11 +53,11 @@ Points:
 
 ### Event 3: Maze Explorer [300 points max]
 
-From the starting position, explore the maze and make a map of the environment. Then return to the start location/pose. Save the map to an image file and upload your map to Google Drive. Once all groups finish the task, the maps will be ranked according to accuracy. 
+From the starting position, explore the maze and make a map of the environment. Then return to the start location/pose. Save the map to an image file and upload your map to Google Drive. Once all groups finish the task, the maps will be ranked according to accuracy.
 
 For partial credit:
 - You may choose to use botgui for manual exploration of the map via right-clicking (using A* algorithm), but note that this will not earn you points for autonomous navigation.
-- Alternatively, you can operate the bot manually (tele-op) to construct the map. In this case, points will be awarded based on the map's quality. 
+- Alternatively, you can operate the bot manually (tele-op) to construct the map. In this case, points will be awarded based on the map's quality.
 
 Points:
 - [+100, +75, +50, +25] points for returning to start pose with error limit:

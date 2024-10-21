@@ -281,7 +281,7 @@ This will let you run minicom using the command `start-minicom`.
 
 
 
-5. **Fork** [MBot Autonomy](https://gitlab.eecs.umich.edu/rob550-f24/mbot_autonomy) to your group and **then clone** the forked code to Pi5, then install the MBot Autonomy code
+5. **Fork** [MBot Autonomy](https://gitlab.eecs.umich.edu/ROB550-F24/mbot_autonomy) to your group and **then clone** the forked code to Pi5, then install the MBot Autonomy code
 ```bash
 $ cd ~/mbot_ws/mbot_autonomy/
 $ ./scripts/install.sh -t DIFF --no-enable

@@ -21,6 +21,12 @@ The following items are needed:
 - TOC
 {:toc}
 
+**Important:** Do not power on the MBot before following the system setup guide. The SD card you receive might not be empty or could have the wrong operating system installed. Powering on the device before checking could damage the Raspberry Pi.
+{: .text-red-200}
+
+If you've already powered on the Raspberry Pi and notice the LED light has "4 long flashes followed by 5 short flashes", it indicates a [Fatal Firmware Error](https://www.raspberrypi.com/documentation/computers/configuration.html#led-warning-flash-codes). You can find the solution in the troubleshooting guide [here](/docs/botlab/how-to-guide/pi-troubleshooting).
+- The LED light, labeled "STAT," is located next to the SD slot.
+
 ## Set up RPi 5 System
 ### 1. Flash the image
 1. Download the custom Pi5 image `2024-10-16-mbot-base-bookworm.img` from this [link](https://www.dropbox.com/scl/fi/tyyslhj3fz7dd2y6267mp/2024-10-16-mbot-base-bookworm.img.gz?rlkey=4k3qe7knhqhabw4g17n9feukj&st=1knc90ky&dl=0) to your laptop. We use a custom image with RPiOS based on Debian 12 Bookworm

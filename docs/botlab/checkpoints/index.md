@@ -36,7 +36,6 @@ The robot also has a scanning 2D Lidar, and a MEMS 3-axis IMU. The MBot has a Wi
 
 Part 1: 
 - Assemble the MBot
-- Design a gripping mechanism for your MBot
 
 Part 2:
 - Design a feedback controller to control the motor speed

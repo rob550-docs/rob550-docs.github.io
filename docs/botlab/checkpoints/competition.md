@@ -7,8 +7,6 @@ grand_parent: Botlab
 last_modified_at: 2024-04-23 16:37:48 -0500
 ---
 
-UPDATE 4/23/24: Clarify exactly what is needed for tasks.
-
 <a class="image-link" href="/assets/images/botlab/checkpoints/doge-meme.png">
 <img src="/assets/images/botlab/checkpoints/doge-meme.png" alt=" " style="max-width:250px;"/>
 </a>

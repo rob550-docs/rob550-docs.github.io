@@ -50,4 +50,12 @@ For the advanced competition tasks, you will be asked to localize on a map where
 Explain the methods used for initial localization.
 
 ## Checkpoint Submission
-No submission is required for this checkpoint. 
+
+Demonstrate your path planner and show your bot moving in a maze while avoiding obstacles.
+
+- Submit a video of your bot navigating autonomously in a maze environment.
+- Your video should include the following elements:
+  - Show your bot in a maze
+  - Show your map on botgui
+  - Right click on botgui so a green path shows up from your bot’s current location to the clicked location
+  - Show your bot moving in the maze to the point you clicked

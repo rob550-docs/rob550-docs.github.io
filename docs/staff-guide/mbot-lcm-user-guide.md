@@ -86,7 +86,7 @@ enum message_topics{
 
 ### Explanation
 - `mbot_firmware` will be flashed onto the Pico board. The Pico communicates with the RPi over the USB cable using **serial channels**.
-- `mbot_lcm_base` is installed on the RPi. On the RPi, a serial server decodes the messages received from the Pico and publishes them as LCM messages over **LCM channels**.
+- `mbot_lcm_base` is installed on the RPi. On the RPi, a serial server decodes the messages received from the Pico and publishes them as LCM messages over **LCM channels**, also serializes the messages send to Pico.
 - **Serial channels** are used for communication between the Pico and the RPi, while **LCM channels** handle communication between different programs on the RPi.
 
 For example:
@@ -123,20 +123,9 @@ Thus, it’s best practice to use `MBOT_VEL_CHANNEL` throughout the code rather 
 > In this section, we use sending message from RPi to Pico as an example.
 
 ### Subscriber
-Under the `mbot_firmware/src` directory, the `mbot.c` file contains the firmware C code. The `register_topics()` function is where all LCM subscribers and publishers are registered.
+Under the `mbot_firmware/src` directory, the `mbot_comms.c` file contains the firmware communication code. The `register_topics()` function is where all LCM subscribers and publishers are registered.
 
-Remember, a subscriber listens, and a publisher publishes. We talk to Pico board by creating a publisher on the RPi, and publishing data to a channel that a subscriber on the Pico board listens to.
-
-To set up a subscriber, you can utilize the existing setup in `register_topics()`. You can also create your customized message and new channel, but that's for the next section, let's just use what is already existed as an example here:
-
-```c
-void register_topics(){
-    ...
-    comms_register_topic(MBOT_MOTOR_PWM_CMD, sizeof(serial_mbot_motor_pwm_t), (Deserialize)&mbot_motor_pwm_t_deserialize, (Serialize)&mbot_motor_pwm_t_serialize, (MsgCb)mbot_motor_vel_cmd_cb);
-    comms_register_topic(MBOT_MOTOR_VEL_CMD, sizeof(serial_mbot_motor_vel_t), (Deserialize)&mbot_motor_vel_t_deserialize, (Serialize)&mbot_motor_vel_t_serialize, (MsgCb)mbot_motor_pwm_cmd_cb);
-    comms_register_topic(MBOT_VEL_CMD, sizeof(serial_twist2D_t), (Deserialize)&twist2D_t_deserialize, (Serialize)&twist2D_t_serialize, (MsgCb)mbot_vel_cmd_cb);
-}
-```
+To set up a subscriber, you can utilize `register_topics()` to add new callback functions, but that's for the next section, let's just use what is already existed as an example here:
 
 When you look at `register_topics()` in the codebase, there is a lot going on, but we only care about this one line:
 
@@ -153,34 +142,29 @@ void mbot_vel_cmd_cb(serial_twist2D_t *msg){
     drive_mode = MODE_MBOT_VEL;
 }
 ```
-It copies the received `serial_twist2D_t` message to the global `mbot_vel_cmd` variable. The `mbot_loop()` function then utilizes this variable:
+It copies the received `serial_twist2D_t` message to the global `mbot_vel_cmd` variable. The `mbot_loop()` function under `mbot_classic.c` then utilizes this variable:
 ```c
 else if(MBOT_DRIVE_TYPE == DIFFERENTIAL_DRIVE){
-    mbot_motor_vel_cmd.velocity[params.mot_left] = (mbot_vel_cmd.vx - DIFF_BASE_RADIUS * mbot_vel_cmd.wz) / DIFF_WHEEL_RADIUS;
-    mbot_motor_vel_cmd.velocity[params.mot_right] = (-mbot_vel_cmd.vx - DIFF_BASE_RADIUS * mbot_vel_cmd.wz) / DIFF_WHEEL_RADIUS;
-    ...
+  mbot_motor_vel_cmd.velocity[MOT_L] = (mbot_vel_cmd.vx - DIFF_BASE_RADIUS * mbot_vel_cmd.wz) / DIFF_WHEEL_RADIUS;
+  mbot_motor_vel_cmd.velocity[MOT_R] = (-mbot_vel_cmd.vx - DIFF_BASE_RADIUS * mbot_vel_cmd.wz) / DIFF_WHEEL_RADIUS;
 }
 ```
-
-In this code snippet, the `mbot_vel_cmd` variable's linear velocity (`vx`) and angular velocity (`wz`) components are being used to calculate the target velocities for the left and right motors of a differential drive robot, so it translates a desired linear and angular velocity into specific motor speeds.
-
-Now we know that the control board already has a subscriber listening to `MBOT_VEL_CMD` channel, ready to process the incoming message. To make the robot move, we need to publish the desired velocities to the `MBOT_VEL_CMD` channel.
+In this code snippet, the `mbot_vel_cmd` variable's linear velocity (`vx`) and angular velocity (`wz`) components are being used to calculate the target velocities for the left and right motors of a differential drive robot,  the firmware is ready to process the incoming message. To make the robot move, we need to publish the desired velocities to the `MBOT_VEL_CMD` channel.
 
 Next, let's discuss the structure of the message.
 
 ### LCM message
-From the code snippet discussed earlier, we know the subscriber takes in data type `serial_twist2D_t`. This is the serialized form of `twist2D_t`, automatically generated for use with `mbot_firmware`. So the actual LCM type that we defined is `twist2D_t`. It is defined in the `mbot_lcm_base/mbot_msgs/lcmtypes` directory, where all LCM message definitions are stored.
+From the code snippet discussed earlier, we know the subscriber takes in data type `serial_twist2D_t`. This is the serialized form of `twist2D_t`, automatically generated for use with `mbot_firmware`. So the actual LCM type that we defined is `twist2D_t`. To check the structure of it, you can run `mbot lcm-msg show twist2D_t` in the terminal, details [here](/docs/botlab/how-to-guide/mbot-cli-tools).
 
-Inside that directory, you'll find `twist2D_t.lcm`:
+The message structure looks like this:
 ```
 struct twist2D_t{
     int64_t utime;
     float vx;
-    float vy; // this should be 0 when use differential drive
+    float vy;
     float wz;
 }
 ```
-For our purposes, `vx` and `wz` are the relevant parameters.
 
 ### Publisher
 Now that we understand the message we wish to publish, let's create the publisher.
@@ -200,7 +184,7 @@ lc = lcm.LCM("udpm://239.255.76.67:7667?ttl=0")
 lc.publish("MBOT_VEL_CMD", msg.encode())
 ```
 
-When developing, ensure your code resets the velocities to 0 after completion of the logic. Failing to do so may result in the wheels continuing to run, even after the program has been terminated.
+When developing, ensure your code resets the velocities to 0 after completion of the logic.
 
 The line `lc = lcm.LCM("udpm://239.255.76.67:7667?ttl=0")` configures UDP multicast communication, specifying the multicast address, port, and TTL for the packets. This URL is the default setting. For more on UDP Multicast Setup, see [LCM's multicast setup documentation](https://lcm-proj.github.io/lcm/content/multicast-setup.html).
 
@@ -208,17 +192,20 @@ At this point, your communication setup is complete. Once you run the Python fil
 
 
 ## Add new LCM message types
-1. Define the data structure.
-    - All LCM message types are stored in the `mbot_lcm_base/mbot_msgs/lcmtypes` directory. To add a new LCM type, create your custom LCM message in this location.
-2. Define the channel
-    - Messages are sent over channels. You need to decide whether the Pico board needs to receive or send the message. If the message is only relevant to programs on the RPi, you only need to define the LCM channel in `mbot_lcm_base/mbot_lcm_serial/include/mbot_lcm_serial/lcm_config.h`.
+### Communication on Pi only
+> When you want to send data from one program to another when both of them running on the Pi.
 
-      ```c
-      #define MBOT_EXAMPLE_CHANNEL "MBOT_EXAMPLE"
-      ```
-    - If the message also needs to be sent between the RPi and Pico, you must define both LCM channels and serial channels:
-      - In `mbot_lcm_serial/lcm_config.h` for LCM channels.
-      - In `mbot_firmware/src/mbot_channels.h` for Serial channels.
+Under editting...
+
+### Communication between Pi and Pico
+> When you want to grab data from the Pico to the Pi, or you want to send data to the Pico.
+
+1. Define the data structure.
+    - All LCM message types are stored in the `mbot_lcm_base/mbot_msgs/lcmtypes` directory. To add a new LCM type, create your custom LCM message `mbot_example_t.h` in this location.
+2. Define the channel
+    - Messages are sent over channels. Since the message needs to be sent between the RPi and Pico, you must define both LCM channels and serial channels, and the definition should be all the same cross files:
+      - In `mbot_lcm_base/mbot_lcm_serial/include/mbot_lcm_serial/lcm_config.h`, define serial channels and LCM channels.
+      - In `mbot_firmware/src/mbot_channels.h` define serial channels.
         ```c
         #define MBOT_EXAMPLE_CHANNEL "MBOT_EXAMPLE"
 
@@ -229,7 +216,21 @@ At this point, your communication setup is complete. Once you run the Python fil
         ```
 
     Notice: The channel number is limited to a maximum of 255 due to the 8-bit limit. The numbers 0 and 255 might reserved for special purposes. Therefore, 254 is your highest usable value for channel identifiers.
-3. Make and install in `mbot_lcm_base` to apply new changes
+3. Register the channel in `mbot_lcm_base/mbot_lcm_serial/src/lcm_serial_server_main.c`
+  - Include the new message by add `#include <mbot_lcm_msgs_mbot_example_t.h>`
+  - register the topic (say if setting a subscriber):
+    ```c
+    comms_register_topic(MBOT_EXAMPLE, sizeof(serial_mbot_example_t), (Deserialize)&mbot_example_t_deserialize, (Serialize)&mbot_example_t_serialize, (MsgCb)serial_example_msg_t_cb);
+    ```
+  - Add the callback function:
+    ```c
+    void serial_example_msg_t_cb(serial_mbot_example_t* data){
+      mbot_lcm_msgs_mbot_example_t to_send = {0};
+      // populate to_send then publish it to the LCM
+      mbot_lcm_msgs_mbot_example_t_publish(lcmInstance, MBOT_EXAMPLE_CHANNEL, &to_send);
+    }
+    ```
+4. Make and install in `mbot_lcm_base` to apply new changes
     - Add the new defined type to `mbot_lcm_base/mbot_msgs/CMakeLists.txt`:
       ```cmake
       set(LCM_FILES
@@ -245,18 +246,18 @@ At this point, your communication setup is complete. Once you run the Python fil
        $ cd ~/mbot_ws/mbot_lcm_base
        $ ./scripts/install.sh
       ```
-4. Modify the `mbot_firmware` if you have added new channels to the firmware.
-    - If you added new channels to the firmware, you need to modify the firmware to register the new channel and set up publish/subscribe functions in `src/mbot_comms.c`. After making the necessary changes, recompile and flash the updated firmware to the Pico.
-      ```bash
-      # Compile the firmware
-      $ cd ~/mbot_ws/mbot_firmware/build
-      $ cmake ..
-      $ make
-      # Upload to the pico
-      $ cd ~/mbot_ws/mbot_firmware
-      $ sudo mbot-upload-firmware flash build/mbot_calibrate_classic.uf2
-      ```
-5. Now your newly defined lcm message is ready to use. To publish your newly defined message from mbot_autonomy, you need to use an LCM instance to either publish to or subscribe from channels with the messages or callback functions.
+5. Modify the `mbot_firmware` to register the new channel and set up publish/subscribe functions in `src/mbot_comms.c`.
+  - Still under `register_topics()` (say if setting a publisher):
+    ```c
+    comms_register_topic(MBOT_EXAMPLE, sizeof(serial_mbot_example_t), (Deserialize)&mbot_example_t_deserialize, (Serialize)&mbot_example_t_serialize, NULL);
+    ```
+  - After making the necessary changes, recompile and flash the updated firmware to the Pico.
+6. Now your newly defined lcm message is ready to use.
+  - To publish from the firmware side:
+    ```c
+    comms_write_topic(MBOT_EXAMPLE,, &mbot_example);
+    ```
+  - To publish/subscribe from the Pi side:
 
     The following code from `mbot_autonomy` demonstrates how to subscribe to and publish messages:
     ```cpp

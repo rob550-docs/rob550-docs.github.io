@@ -106,4 +106,6 @@ Describe and document your motion control algorithm for getting between waypoint
 - Demonstrate your motion controller by having it drive the illustrated path in one of the mazes set up in the lab. Record a video of the robot attempting the path at a slow speed (~0.2m/s & pi/4 rad/s) and a high speed (~0.8m/s, pi rad/s) and provide a link to it.
     - The robot motion does NOT need to be perfect
 - Produce a plot of the (x,y) odometry position as the robot executes the path at both speeds.
+    - To record a log, use `lcm-logger -c MBOT_ODOMETRY my_lcm_log.log`
+    - To parse a log and make a plot, refer to the first Botlab lecture slides.
 - Write a short description of your controllers (1/2 page) and any features we should be aware of. It is OK to use the stock controllers.

@@ -180,7 +180,7 @@ Now you have completed all the basic setup for MBot! Next, we are going to insta
 In this step, we are going to flash the calibration script onto the Pico to calibrate it and then flash the firmware.
 
 1. **Place the MBot on the floor** in a spot with at least 2 feet of clear space around the robot, preferably on the same type of surface you plan to use it on.
-2. Follow the [firmware flashing guide](https://mbot.robotics.umich.edu/docs/setup/firmware/). There are multiple ways to flash the firmwar, "Manual Boot Mode" is recommended.
+2. Follow the [firmware flashing guide](https://mbot.robotics.umich.edu/docs/setup/firmware/). There are multiple ways to flash the firmware, "Manual Boot Mode" is recommended.
 3. First, flash the calibration file we compiled from step 1, to calibrate your MBot. The calibration file is named something like `mbot_calibrate_classic_<vX.X.X>_enc48.uf2` under the `build` folder. Here is a video showing the expected calibration routine:
 
     <iframe width="400" height="227" src="https://www.youtube.com/embed/iIghZzf8ZQY?si=w_ultg6PtCwJVr2_" title="YouTube video player" frameborder="2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

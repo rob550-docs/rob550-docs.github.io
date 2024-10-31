@@ -86,7 +86,7 @@ Provide a detailed description of your final controller, including a table of pa
 ## Motion Controller
 The motion controller on the MBot is the interface between the planner and the low level controller. It reads in a planned path (`robot_path_t`) on the `CONTROLLER_PATH` channel and executes the planned motion of the robot.
 
-{ .important }
+{: .important }
 The motion controller isn't running by default. If you ever want to send waypoints to the bot, such as in `drive_square.cpp`, you need to first run the program with `mbot_autonomy/build/mbot_motion_controller`. The program must be running in an active terminal window every time you send a path.
 
 ### Task 1.4

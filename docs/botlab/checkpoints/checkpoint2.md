@@ -28,9 +28,9 @@ $ git clone https://gitlab.eecs.umich.edu/ROB550-F24/mbot_example_logs.git
 
 Here are a few logs that will be helpful to tune your SLAM:
 
-- `mbot_example_logs/center_maze.log`: convex environment, where all walls are always visible and the robot remains stationary (use for initial testing of algorithms).
-- `mbot_example_logs/drive_square.log` : a convex environment while driving a square
-- `mbot_example_logs/drive_maze.log`: driving a circuit in an environment with several obstacles
+- `mbot_example_logs/botlab/center_maze.log`: convex environment, where all walls are always visible and the robot remains stationary (use for initial testing of algorithms).
+- `mbot_example_logs/botlab/drive_square.log` : a convex environment while driving a square
+- `mbot_example_logs/botlab/drive_maze.log`: driving a circuit in an environment with several obstacles
 
 To play back these recorded LCM sessions on a laptop (with Java), you can use the lcm-logplayer-gui
 ```
@@ -49,11 +49,11 @@ This example would store data from the SLAM_POSE channel in the file `my_lcm_log
 ### Accounting for Scan Speed
 The laser rangefinder beam rotates 360 degrees at a sufficiently slow rate such that the robot may move a non-negligible distance in that time. Therefore, you will need to estimate the actual pose of the robot when each beam was sent to determine the cell in which the beam terminated. 
 
-To do so, you must interpolate between the robot pose estimate of the current scan and the scan immediately before. Remember that the pose estimate of the previous SLAM update occurred immediately before the current scan started. Likewise, the pose estimate of the current SLAM update will occur when the final beam of the current scan is measured. We have provided code to handle this interpolation for you, located in `src/slam/moving_laser_scan.hpp`. You only need to implement the poses to use for the interpolation. 
+To do so, you must interpolate between the robot pose estimate of the current scan and the scan immediately before. Remember that the pose estimate of the previous SLAM update occurred immediately before the current scan started. Likewise, the pose estimate of the current SLAM update will occur when the final beam of the current scan is measured. We have provided code to handle this interpolation for you, located in `mbot_autonomy/src/slam/moving_laser_scan.hpp`. You only need to implement the poses to use for the interpolation. 
 
 ## Mapping - Occupancy Grid
 ### Task 2.1
-Implement the occupancy grid mapping algorithm in the Mapping class in `mbot/mbot_autonomy/src/slam/mapping.cpp|hpp`.
+Implement the occupancy grid mapping algorithm in the Mapping class in `mbot_autonomy/src/slam/mapping.cpp|hpp`.
 
 An occupancy grid maps the space surrounding the robot by assigning probabilities to each cell, indicating whether they are occupied or free. In our case, we'll use a grid where cells are at most 10 cm in size, and their log-odds values range from -127 to 127, represented as integers. To accurately trace the rays across your occupancy grid, consider implementing Bresenham’s line algorithm, as discussed in our class lecture.
 
@@ -102,7 +102,7 @@ Hint: In case of slow performance of your sensor model, consider increasing the 
 
 {: .required_for_report } 
 1) Report in a table the time it takes to update the particle filter for 100, 500 and 1000 particles. Estimate the maximum number of particles your filter can support running at 10Hz.
-<br> 2) Using your particle filter on `mbot_example_logs/drive_square.log`, plot 300 particles at regular intervals along the path taken.     
+<br> 2) Using your particle filter on `mbot_example_logs/botlab/drive_square.log`, plot 300 particles at regular intervals along the path taken.     
 
 ## Simultaneous Localization and Mapping (SLAM)
 ### Task 2.3

@@ -7,6 +7,8 @@ grand_parent: Botlab
 last_modified_at: 2024-04-02 12:16:00 -0500
 ---
 
+**Update 10/31/24:** Add command to clone mbot_example_logs
+
 During the SLAM part of the lab, you will build an increasingly sophisticated algorithm for mapping and localizing in the environment. You will begin by constructing an occupancy grid using known poses. Following that, you’ll implement Monte Carlo Localization in a known map. Finally, you will put each of these pieces together to create a full SLAM system.  Much of this can be initiated using only logs and when you are ready to use the actual robot.
 
 
@@ -16,6 +18,16 @@ During the SLAM part of the lab, you will build an increasingly sophisticated al
 
 ### LCM Logs
 For this phase, we have provided some LCM logs containing sensor data from the MBot along with ground-truth poses as estimated by the staff’s SLAM implementation.
+
+The logs are in the [`mbot_example_logs`](https://gitlab.eecs.umich.edu/ROB550-F24/mbot_example_logs) repo, which you can clone to your bot with the following commands:
+
+```
+$ cd ~/mbot_ws
+$ git clone https://gitlab.eecs.umich.edu/ROB550-F24/mbot_example_logs.git
+```
+
+Here are a few logs that will be helpful to tune your SLAM:
+
 - `mbot_example_logs/center_maze.log`: convex environment, where all walls are always visible and the robot remains stationary (use for initial testing of algorithms).
 - `mbot_example_logs/drive_square.log` : a convex environment while driving a square
 - `mbot_example_logs/drive_maze.log`: driving a circuit in an environment with several obstacles
@@ -78,11 +90,11 @@ Refer to Chapter 5 of Probabilistic Robotics for a discussion of common action m
 Describe the action model you utilized, including the equations employed. Additionally, provide a table listing the values of any uncertainty parameters, and explain how you chose these values.
 
 ### Task 2.2.2 Sensor Model & Particle Filter
-Implement a sensor model that calculates the likelihood of a pose given a laser scan and an occupancy grid map. The skeleton of the sensor model can be found in `mbot/mbot_autonomy/slam/sensor_model.cpp|hpp`.  
+Implement a sensor model that calculates the likelihood of a pose given a laser scan and an occupancy grid map. The skeleton of the sensor model can be found in `mbot_autonomy/slam/sensor_model.cpp|hpp`.  
 
 Refer to Chapter 6 of Probabilistic Robotics for a discussion of common sensor models. You can base your implementation on the pseudo-code in this chapter.  
 
-Implement the particle filter functions in `mbot/mbot_autonomy/slam/particle_filter.cpp|hpp`.
+Implement the particle filter functions in `mbot_autonomy/slam/particle_filter.cpp|hpp`.
 
 Refer to Chapter 4 of Probabilistic Robotics for information implementing the particle filter.
 

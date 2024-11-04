@@ -4,8 +4,11 @@ title: Checkpoint 1.5
 nav_order: 3
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-10-25 16:37:48 -0500
+last_modified_at: 2024-11-04 16:37:48 -0500
 ---
+
+{: .warning}
+Please note that mbot_apriltag will be deprecated, and an update to this CP is coming soon. Sorry for any inconvenience this may cause."
 
 The MBot has a camera that can be used to perform vision tasks like identifying Apriltags and other obstacles in the environment.
 

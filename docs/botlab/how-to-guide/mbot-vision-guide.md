@@ -4,7 +4,7 @@ title: mbot_vision Guide
 parent: How-to Guide
 grand_parent: Botlab
 nav_order: 1
-last_modified_at: 2024-10-24 10:37:48 -0500
+last_modified_at: 2024-11-05 16:37:48 -0500
 ---
 
 > This guide explains how to use the `mbot_vision` example code.

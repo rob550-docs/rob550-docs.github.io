@@ -7,10 +7,6 @@ grand_parent: Armlab
 last_modified_at: 2024-02-26 15:00:00 -0500
 ---
 
-**Update 9/9/24: Added mechanical design component**
-
-**Update 9/10/24: Added rigid transformation calibration option alongside PnP**
-
 ### Contents
 * TOC
 {:toc}

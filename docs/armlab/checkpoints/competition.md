@@ -7,14 +7,6 @@ grand_parent: Armlab
 last_modified_at: 2024-10-07 12:00:00 -0500
 ---
 
-**Update 10/5/24:** Modify to the sky scoring
-
-**Update 10/7/24:** Modify basketball manual deductions.
-
-**Update 10/8/24:** Add disclaimer about basketball deductions and modify them again.
-
-**Update 10/10/24:** Final deduction modifications.
-
 It's time to showcase your hard work and effort!
 
 <a class="image-link" href="https://i.imgflip.com/3t9jkg.jpg"><img src="https://i.imgflip.com/3t9jkg.jpg" alt="" style="max-width:400px;"/>

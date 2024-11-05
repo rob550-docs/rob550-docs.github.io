@@ -7,10 +7,6 @@ grand_parent: Armlab
 last_modified_at: 2024-09-05 15:00:00 -0500
 ---
 
-**Update 8/29/24:** Update calibration link and add warning to clone repo.
-
-**Update 9/5/24:** Add ros bag reading help and due date.
-
 The first checkpoint is meant to be an introduction to using the GUI of the lab and to start working with the RGB-D camera. The interaction with the GUI will be under the Basic Motion section of the checkpoint, and the interaction with the RGB-D camera will be through the Camera Calibration portion of the checkpoint.
 
 

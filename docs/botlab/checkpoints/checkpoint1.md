@@ -7,6 +7,8 @@ grand_parent: Botlab
 last_modified_at: 2024-10-17 17:37:48 -0500
 ---
 
+**Update 11/5/24:** Remove google form requirement
+
 To control the robot’s position, we need to tell it how to move. The basic command for moving the robot is the motor PWM, which determines how much effort the motors use.
 
 However, it’s more practical to control the robot by setting its velocity directly. PWM values like give the motor "50% duty cycle" are less intuitive than setting mbot moving by "1 m/s" directly.  To do this, we control the speed of each wheel. There are two main ways:
@@ -103,9 +105,9 @@ Describe and document your motion control algorithm for getting between waypoint
 <img src="/assets/images/botlab/checkpoints/checkpoint1-maze.png" alt=" " style="max-width:600px;"/>
 </a>
 
-- On the Google Form:
-    - Report the status of your teams robots
-    - Submit your motor calibrations and statistics for any robots built
+- ~~On the Google Form:~~ The google form will not be due for this checkpoint
+    - ~~Report the status of your teams robots~~
+    - ~~Submit your motor calibrations and statistics for any robots built~~
 - Demonstrate your motion controller by having it drive the illustrated path in one of the mazes set up in the lab. Record a video of the robot attempting the path at a slow speed (~0.2m/s & pi/4 rad/s) and a high speed (~0.8m/s, pi rad/s) and provide a link to it.
     - The robot motion does NOT need to be perfect
 - Produce a plot of the (x,y) odometry position as the robot executes the path at both speeds.

@@ -42,7 +42,7 @@ Timed run:
 The thresholds will be determined by the actual times on the first day of competition.
 
 
-### Event 2: Maze Explorer [400 points max]
+## Event 2: Maze Explorer [400 points max]
 
 From the starting position, explore the maze and make a map of the environment. Then return to the start location/pose.
 

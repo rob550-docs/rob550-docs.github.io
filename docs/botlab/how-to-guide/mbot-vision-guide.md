@@ -1,20 +1,34 @@
 ---
 layout: default
-title: mbot_apriltag Guide
+title: mbot_vision Guide
 parent: How-to Guide
 grand_parent: Botlab
 nav_order: 1
 last_modified_at: 2024-10-24 10:37:48 -0500
 ---
 
-> This guide explains how to use the `mbot_apriltag` example code.
+> This guide explains how to use the `mbot_vision` example code.
 
 ### Contents
 * TOC
 {:toc}
 
+## Prerequisite
+Run the following commands to pull the latest `mbot_lcm_base` updates:
+```
+$ cd ~/mbot_ws/mbot_lcm_base
+$ git pull
+$ ./scripts/install.sh
+```
+
+If you have pushed the GitHub mbot_lcm_base repository to your group’s GitLab repository, you can still pull from the GitHub upstream:
+1. Run `git remote -v` to check the old GitHub remote’s name, for example, "old-origin".
+2. Run `git fetch old-origin` to get the latest updates from GitHub.
+3. Run `git merge old-origin/main` to merge the updates from the main branch of "old-origin" to your current branch. For instance, if you are on a branch named "test", the updates will merge into your "test" branch.
+4. Run `git push` to push the changes to your GitLab repository.
+
 ## Video Demo
-<iframe width="560" height="315" src="https://www.youtube.com/embed/u3b7nYwmB_Q?si=pPn8bifVoLXkZp3U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cVtnwtbuxPw?si=6Wio0GMkb4QAe3Ma" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Installation
 ### Installing the Apriltag Library
@@ -31,16 +45,16 @@ $ sudo cmake --build build --target install
 $ echo 'export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.11/site-packages' >> ~/.bashrc
 ```
 
-### Cloning `mbot_apriltag` repository
+### Cloning `mbot_vision` repository
 ```bash
 $ cd ~/mbot_ws
-$ git clone https://gitlab.eecs.umich.edu/ROB550-F24/mbot_apriltag
+$ git clone https://gitlab.eecs.umich.edu/ROB550-F24/mbot_vision
 ```
 
 ## Testing the Setup
 To test your camera, **open a vscode new terminal**, then execute the command below and then visit `http://your_mbot_ip:5001` in your web browser:
 ```bash
-$ cd ~/mbot_ws/mbot_apriltag/scripts
+$ cd ~/mbot_ws/mbot_vision
 $ python3 video_streamer.py
 ```
 - This script is for testing the video stream to ensure your camera is operational.
@@ -81,13 +95,16 @@ To find the intrinsic matrix of the mbot camera, we need to perform the camera c
     - A "Mean reprojection error" below 0.5 indicates successful calibration, and the camera matrix is reliable.
     - If the "Mean reprojection error" is significantly above 0.5, verify the accuracy of your CHECKERBOARD dimensions and square_size settings.
 
-## AprilTag Detection Demo
+## Object Detection Demo
 Run the following command and visit `http://your_mbot_ip:5001`
 ```bash
-$ python3 apriltag_demo.py
+$ python3 tag_cone_detection.py
 ```
-- It runs apriltag detection. When a tag is detected, the pose estimation results will be displayed on the screen.
-- You can change the fps and image resolution in `pi5/scripts/utils/config.py` to save computational resources.
+- It runs apriltag and cone detection. When a tag or a cone is detected, the pose estimation results will be displayed on the screen.
+- You can change the fps and image resolution in `utils/config.py` to save computational resources.
+
+{: .important}
+However, once you change the camera_config's `image_width` and `image_height`, you have to re-calibrate the camera by saving new set of images with the new resolution, because the camera’s intrinsic parameters are resolution-dependent.
 
 ### Troubleshooting
 If you encounter the following runtime error: "ImportError: libapriltag.so.3: cannot open shared object file: No such file or directory," follow these steps:
@@ -118,22 +135,19 @@ If you encounter the following runtime error: "ImportError: libapriltag.so.3: ca
     ```bash
     $ sudo ldconfig
     ```
-    - After updating, try running `apriltag_demo.py` again to check if the issue is resolved.
+    - After updating, try running `python3 tag_cone_detection.py` again to check if the issue is resolved.
 
 The values displayed on the screen are in **millimeters**. You can use a physical tape measure to verify the accuracy of the detection.
 
-## AprilTag LCM Message
+## Detection LCM Message
 
-By running the following commands, you can publish and subsequently listen to AprilTag messages using the LCM framework:
+By running the following commands, you can publish and subsequently listen to the detection messages:
 ```bash
-# Publish apriltag lcm message over MBOT_APRILTAG_ARRAY
-$ python3 apriltag_lcm_publisher.py
-# Listen to MBOT_APRILTAG_ARRAY for apriltag lcm message
-$ python3 apriltag_lcm_subscriber.py
+# Publish detection messages
+$ python3 tag_cone_lcm_publisher.py
+# Listen to detection messages
+$ python3 tag_cone_lcm_subscriber.py
 ```
-
-The lcm message structure can be found under `mbot_lcm_base/mbot_msgs/lcmtypes`. To learn more about LCM: [MBot LCM User Guide](/docs/staff-guide/mbot-lcm-user-guide).
-
 ## Code Explanation
 ### Coordinate frame
 - World Frame: the center of the AprilTag is used as the origin of the world frame. The x, y, and z axes are aligned with the tag's edges (horizontal, vertical, and outward, respectively).

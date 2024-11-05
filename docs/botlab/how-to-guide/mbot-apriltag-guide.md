@@ -103,6 +103,14 @@ If you encounter the following runtime error: "ImportError: libapriltag.so.3: ca
     ```
     - If you see "libapriltag.so.3" in the output, proceed to the next step.
 
+    If the above steps don't work, try adding the "libapriltag.so.3" to PATH like this:
+    ```bash
+    $ sudo find /usr -name libapriltag.so*
+    ```
+    ```bash
+    $ export LD_LIBRARY_PATH=/usr/local/lib:libapriltag.so.3
+    ```
+
 2. Update the Library Cache
 
     If the library is in a standard location but still not found, you may need to update your system's library cache. Run the following command to refresh it:

@@ -116,7 +116,8 @@ Points:
   * -10 points per false positive detection, capped at -30 points
 * [+100, +50] points for the final distance to Apriltag
   * 100 points: < 5 cm away from the Apriltag
-  * 50 points: > 5 cm away
+  * 50 points: < 20 cm away
+  * No points for > 20 cm away
 * 50% deduction for using teleop or click to drive
 * Your Apriltag/cone detection and localizing must be fully autonomous. You may choose when to print out the detections for grading.
 

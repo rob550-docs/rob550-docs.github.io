@@ -45,6 +45,14 @@ $ sudo cmake --build build --target install
 $ echo 'export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.11/site-packages' >> ~/.bashrc
 ```
 
+### Installing YOLO
+```bash
+pip install ultralytics --break-system-packages
+pip install --no-cache-dir "ncnn" --break-system-packages
+echo 'export PYTHONPATH=$PYTHONPATH:/home/mbot/.local/bin' >> ~/.bashrc
+source ~/.bashrc
+```
+
 ### Cloning `mbot_vision` repository
 ```bash
 $ cd ~/mbot_ws
@@ -101,6 +109,7 @@ Run the following command and visit `http://your_mbot_ip:5001`
 $ python3 tag_cone_detection.py
 ```
 - It runs apriltag and cone detection. When a tag or a cone is detected, the pose estimation results will be displayed on the screen.
+- The weights we provide is under `utils/cone_detection_model.pt`, you can train your own model for better result.
 - You can change the fps and image resolution in `utils/config.py` to save computational resources.
 
 {: .important}

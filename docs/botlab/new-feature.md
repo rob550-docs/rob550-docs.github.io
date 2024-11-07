@@ -89,4 +89,4 @@ If everything went smoothly but the voltage reads as -1, it means the battery vo
     |-----------------------------------|
     ```
 - If no data appears, press the `RST` button on your control board and see if it resumes.
-- If data does appear, your did not flash the latest firmware successfully.
+- If data does appear, but doesn't have the row with "ANALOG" reading, your did not flash the latest firmware successfully.

@@ -67,8 +67,11 @@ $ python3 video_streamer.py
 ```
 - This script is for testing the video stream to ensure your camera is operational.
 
+{: .important }
+Close this script when you're done with it to free up the camera. You can only ever have one camera script running at a time. This applies to the following scripts as well.
+
 ## Camera Calibration
-To find the intrinsic matrix of the mbot camera, we need to perform the camera calibratoin.
+To find the intrinsic matrix of the mbot camera, we need to perform the camera calibration.
 
 1. Find a Checkerboard in the lab
 

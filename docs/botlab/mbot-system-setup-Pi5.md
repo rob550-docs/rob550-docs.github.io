@@ -279,3 +279,20 @@ $ cd build
 $ cmake -DMBOT_TYPE=DIFF ..
 $ make
 ```
+
+6. Clone [mbot_gui](https://github.com/mbot-project/mbot_gui) and install it.
+```bash
+$ cd ~/mbot_ws
+$ git clone https://github.com/mbot-project/mbot_gui.git
+$ sudo apt install libgtk2.0-dev \
+                 mesa-common-dev \
+                 libgl1-mesa-dev \
+                 libglu1-mesa-dev \
+                 libusb-dev libusb-1.0-0-dev \
+                 libdc1394-dev libgsl-dev
+
+$ cd mbot_gui
+$ mkdir build
+$ cd build
+$ cmake .. && make
+```

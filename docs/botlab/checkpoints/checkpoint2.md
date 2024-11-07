@@ -9,6 +9,8 @@ last_modified_at: 2024-04-02 12:16:00 -0500
 
 **Update 10/31/24:** Add command to clone mbot_example_logs
 
+**Update 11/7/24:** Add instructions for Botgui
+
 During the SLAM part of the lab, you will build an increasingly sophisticated algorithm for mapping and localizing in the environment. You will begin by constructing an occupancy grid using known poses. Following that, you’ll implement Monte Carlo Localization in a known map. Finally, you will put each of these pieces together to create a full SLAM system.  Much of this can be initiated using only logs and when you are ready to use the actual robot.
 
 
@@ -16,12 +18,25 @@ During the SLAM part of the lab, you will build an increasingly sophisticated al
 * TOC
 {:toc}
 
+### Botgui
+To do this section, make sure that mbot_gui is installed on your bot. If it isn't, go back to [Mbot System Setup](../mbot-system-setup-Pi5) and follow the instructions at the very end to install it.
+
+Botgui is a legacy GUI and alternative to the webapp. It has more functionality compared to the webap, so it is useful for SLAM and beyond. When coding your SLAM, we highly recommend using botgui to visualize your map and pose.
+
+To run it you can execute the following commands, but they must be executed **on NoMachine**! As botgui opens a new GUI, it will not work on SSH.
+
+```bash
+$ cd ~/mbot_ws/mbot_gui
+$ source setenv.sh
+$ ./build/botgui
+```
+
 ### LCM Logs
 For this phase, we have provided some LCM logs containing sensor data from the MBot along with ground-truth poses as estimated by the staff’s SLAM implementation.
 
 The logs are in the [`mbot_example_logs`](https://gitlab.eecs.umich.edu/ROB550-F24/mbot_example_logs) repo, which you can clone to your bot with the following commands:
 
-```
+```bash
 $ cd ~/mbot_ws
 $ git clone https://gitlab.eecs.umich.edu/ROB550-F24/mbot_example_logs.git
 ```
@@ -32,16 +47,16 @@ Here are a few logs that will be helpful to tune your SLAM:
 - `mbot_example_logs/botlab/drive_square.log` : a convex environment while driving a square
 - `mbot_example_logs/botlab/drive_maze.log`: driving a circuit in an environment with several obstacles
 
-To play back these recorded LCM sessions on a laptop (with Java), you can use the lcm-logplayer-gui
-```
+To play back these recorded LCM sessions, you can use lcm-logplayer-gui. Be careful, because the following command opens a new GUI and will only run **on NoMachine**!
+```bash
 $ lcm-logplayer-gui log_file.log
 ```
-You can also run the command line version, lcm-log-player, if the system does not have Java. In the GUI version you can turn off LCM channels with a checkbox. The same functionality is available in the command line version, check the help with:
-```
+You can also run the command line version, lcm-logplayer, if the system does not have Java. In the GUI version you can turn off LCM channels with a checkbox. The same functionality is available in the command line version, check the help with:
+```bash
 $ lcm-logplayer --help
 ```
 Similarly, to record your own lcm logs, for testing or otherwise, you can use the lcm-logger:
-```
+```bash
 $ lcm-logger -c SLAM_POSE my_lcm_log.log 
 ```
 This example would store data from the SLAM_POSE channel in the file `my_lcm_log.log`. With no channels specified, all channels will be recorded over the interval.  
@@ -69,12 +84,12 @@ As discussed in the lecture, Monte Carlo Localization (MCL) is a particle-filter
 - various functions for particle filtering, including drawing samples, normalizing particle weights, and finding the weighted mean pose of the particles. 
 
 In these tasks, you’ll run the slam program in localization-only mode using a saved map. Use the ground-truth maps provided with the sensor logs. You can run slam using: 
-```
+```bash
 $ ./mbot_slam --localization-only <filename>  
 ```
 
 To test the action model only, you can run in action-only mode:
-```
+```bash
 $ ./mbot_slam --action-only
 ```
 

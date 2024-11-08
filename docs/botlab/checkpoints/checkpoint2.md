@@ -11,6 +11,8 @@ last_modified_at: 2024-04-02 12:16:00 -0500
 
 **Update 11/7/24:** Add instructions for Botgui
 
+**Update 11/8/24:** Add instructions to test your SLAM
+
 During the SLAM part of the lab, you will build an increasingly sophisticated algorithm for mapping and localizing in the environment. You will begin by constructing an occupancy grid using known poses. Following that, you’ll implement Monte Carlo Localization in a known map. Finally, you will put each of these pieces together to create a full SLAM system.  Much of this can be initiated using only logs and when you are ready to use the actual robot.
 
 
@@ -80,6 +82,7 @@ For this task, construct occupancy grid maps using the ground-truth poses provid
 {: .required_for_report } 
 Plot your map from the log file `drive_maze.log`.
 
+
 ## Monte Carlo Localization
 As discussed in the lecture, Monte Carlo Localization (MCL) is a particle-filter-based localization algorithm. Implementation of MCL requires three key components: 
 - an action model to predict the robot’s pose
@@ -88,7 +91,7 @@ As discussed in the lecture, Monte Carlo Localization (MCL) is a particle-filter
 
 In these tasks, you’ll run the slam program in localization-only mode using a saved map. Use the ground-truth maps provided with the sensor logs. You can run slam using: 
 ```bash
-$ ./mbot_slam --localization-only <filename>  
+$ ./mbot_slam --localization-only --map <map_file.map>
 ```
 
 To test the action model only, you can run in action-only mode:
@@ -100,6 +103,8 @@ $ ./mbot_slam --action-only
 Implement an action (or motion) model using some combination of sensors. This could be odometry with wheel encoders alone, or it could be some other estimate of action incorporating the IMU or using computer vision. The skeleton of the action model can be found in `mbot/mbot_autonomy/slam/action_model.cpp|hpp`.
 
 Refer to Chapter 5 of Probabilistic Robotics for a discussion of common action models. You can base your implementation on the pseudo-code in this chapter. There are two action models that are discussed in detail, the Velocity Model (Sec. 5.3) and the Odometry Model (Sec. 5.4).
+
+If you test in action-only mode you will see the particles spread out over time. That is expected. The action model adds randomness to your position, so your estimated position will get worse and worse if you don't use the sensor model to filter your position.
 
 {: .required_for_report } 
 Describe the action model you utilized, including the equations employed. Additionally, provide a table listing the values of any uncertainty parameters, and explain how you chose these values.
@@ -117,7 +122,7 @@ Hint: In case of slow performance of your sensor model, consider increasing the 
 
 {: .required_for_report } 
 1) Report in a table the time it takes to update the particle filter for 100, 500 and 1000 particles. Estimate the maximum number of particles your filter can support running at 10Hz.
-<br> 2) Using your particle filter on `mbot_example_logs/botlab/drive_square.log`, plot 300 particles at regular intervals along the path taken.     
+<br> 2) Using your particle filter on `mbot_example_logs/botlab/drive_square.log`, plot 300 particles at regular intervals along the path taken.
 
 ## Simultaneous Localization and Mapping (SLAM)
 ### Task 2.3
@@ -133,6 +138,54 @@ NOTE: The above logic is already implemented for you. Your goal for this task is
 1) Create a block diagram of how the SLAM system components interact
 <br> 2) Compare the estimated poses from your SLAM system against the ground-truth poses in `drive_maze_full_rays.log`. Use this to estimate the accuracy of your system and include statistics such as RMS error etc.
 
+## Testing Your SLAM
+
+<u>Setup</u>
+Do these at the start of a session.
+
+1. Connect to the bot using **NoMachine**
+2. Unplug your Lidar and Pico.
+3. Prepare a log file for playback using lcm-logplayer-gui.
+    ```bash
+    $ lcm-logplayer-gui log_file.log
+    ```
+    Disable the following channels depending on what you're testing:
+    - Testing mapping: Disable SLAM_MAP
+    - Testing anything else: Disable all SLAM_* channels
+
+    Here is an image of what the GUI would look like if you're testing mapping:
+
+<a class="image-link" href="/assets/images/botlab/checkpoints/logplayer_gui_mapping.png">
+<img src="/assets/images/botlab/checkpoints/logplayer_gui_mapping.png" alt="This image shows the Lcm-Logplayer-GUI application playing the log file 'center_maze_full_rays.log'. The interface includes a play button, a step button, and a slider for navigating the log timeline. The slider is positioned at approximately 1.302 seconds into the log file. Below the timeline, a table lists various log channels and their corresponding playback channels. Each row represents a different data channel, with checkboxes in the 'Enable' column to toggle their playback status. The 'SLAM MAP' channel is highlighted, indicating it is currently selected but not enabled for playback." style="max-width:500px;"/>
+</a>
+
+<u>Running</u>
+Do these every time you run a new test.
+
+1. Close botgui and kill your SLAM program if it's still running
+2. Start botgui
+3. Scrub the log player progress bar (the dark blue one at the top) slightly ahead of the start but not at the very start. See the image above for an example. This may not be necessary for every log file but playing from the very start can sometimes cause your SLAM to fail.
+4. Run mbot_slam with a different command line argument depending on what you are testing:
+    - Testing mapping:
+        ```bash
+        $ ./mbot_slam --mapping-only
+        ```
+    - Testing action model:
+        ```bash
+        $ ./mbot_slam --action-only
+        ```
+    - Testing localization:
+        ```bash
+        $ ./mbot_slam --localization-only --map <map_file.map>
+        ```
+    - Testing full SLAM:
+        ```bash
+        $ ./mbot_slam
+        ```
+5. Press "Play" on lcm-logplayer-gui.
+6. Observe your SLAM results.
+7. To compare your results with the ground truth results, stop your SLAM and play the log with the SLAM_* channels enabled.
+
 
 ## Checkpoint Submission
 <br>
@@ -141,7 +194,7 @@ NOTE: The above logic is already implemented for you. Your goal for this task is
 </a>
 
 Demonstrate your SLAM system by mapping the maze used for Checkpoint 1. You may either manually drive the path with teleop, click to drive in botgui, or try using your python script from checkpoint 1.
-1. Submit a screenshot of the map, showing the SLAM_POSE and MBOT_ODOMETRY pose traces (turn off lasers, & frontiers)
+1. Submit a screenshot of the map on botgui, showing the SLAM_POSE and MBOT_ODOMETRY pose traces (turn off lasers, & frontiers)
 2. Submit a lcm log file of the run and a .map file as well
     - You can uncomment the line map_.saveToFile("current.map"); in slam.cpp to output maps
     - You can also use the Download Map functionality of the webapp

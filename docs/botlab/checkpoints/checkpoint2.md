@@ -60,6 +60,9 @@ Similarly, to record your own lcm logs, for testing or otherwise, you can use th
 $ lcm-logger -c SLAM_POSE my_lcm_log.log 
 ```
 This example would store data from the SLAM_POSE channel in the file `my_lcm_log.log`. With no channels specified, all channels will be recorded over the interval.  
+
+{: .warning }
+Whenever you test your slam using log files, make sure to unplug your lidar and Pico to prevent the realtime data interfering with the logged data.
  
 ### Accounting for Scan Speed
 The laser rangefinder beam rotates 360 degrees at a sufficiently slow rate such that the robot may move a non-negligible distance in that time. Therefore, you will need to estimate the actual pose of the robot when each beam was sent to determine the cell in which the beam terminated. 
@@ -92,9 +95,6 @@ To test the action model only, you can run in action-only mode:
 ```bash
 $ ./mbot_slam --action-only
 ```
-
-{: .important }
-Whenever you test your slam using log files, make sure to unplug your lidar and Pico to prevent the realtime data interfering with the logged data.
 
 ### Task 2.2.1 Action Model
 Implement an action (or motion) model using some combination of sensors. This could be odometry with wheel encoders alone, or it could be some other estimate of action incorporating the IMU or using computer vision. The skeleton of the action model can be found in `mbot/mbot_autonomy/slam/action_model.cpp|hpp`.

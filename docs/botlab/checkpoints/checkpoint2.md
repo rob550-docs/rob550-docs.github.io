@@ -140,7 +140,8 @@ NOTE: The above logic is already implemented for you. Your goal for this task is
 
 ## Testing Your SLAM
 
-<u>Setup</u>
+### Setup
+
 Do these at the start of a session.
 
 1. Connect to the bot using **NoMachine**
@@ -159,7 +160,8 @@ Do these at the start of a session.
 <img src="/assets/images/botlab/checkpoints/logplayer_gui_mapping.png" alt="This image shows the Lcm-Logplayer-GUI application playing the log file 'center_maze_full_rays.log'. The interface includes a play button, a step button, and a slider for navigating the log timeline. The slider is positioned at approximately 1.302 seconds into the log file. Below the timeline, a table lists various log channels and their corresponding playback channels. Each row represents a different data channel, with checkboxes in the 'Enable' column to toggle their playback status. The 'SLAM MAP' channel is highlighted, indicating it is currently selected but not enabled for playback." style="max-width:500px;"/>
 </a>
 
-<u>Running</u>
+### Running
+
 Do these every time you run a new test.
 
 1. Close botgui and kill your SLAM program if it's still running

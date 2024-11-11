@@ -13,7 +13,7 @@ last_modified_at: 2024-04-02 12:16:00 -0500
 
 **Update 11/8/24:** Add instructions to test your SLAM
 
-During the SLAM part of the lab, you will build an increasingly sophisticated algorithm for mapping and localizing in the environment. You will begin by constructing an occupancy grid using known poses. Following that, you’ll implement Monte Carlo Localization in a known map. Finally, you will put each of these pieces together to create a full SLAM system.  Much of this can be initiated using only logs and when you are ready to use the actual robot.
+During the SLAM part of the lab, you will build an increasingly sophisticated algorithm for mapping and localizing in the environment. You will begin by constructing an occupancy grid using known poses. Following that, you’ll implement Monte Carlo Localization in a known map. Finally, you will put each of these pieces together to create a full SLAM system. Much of this can be initiated using only logs and the only parts you should need to change when you are ready to use the actual robot are the constants and parameters.
 
 
 ### Contents

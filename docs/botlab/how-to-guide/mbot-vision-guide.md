@@ -4,7 +4,7 @@ title: mbot_vision Guide
 parent: How-to Guide
 grand_parent: Botlab
 nav_order: 1
-last_modified_at: 2024-11-05 16:37:48 -0500
+last_modified_at: 2024-11-13 16:37:48 -0500
 ---
 
 > This guide explains how to use the `mbot_vision` example code.
@@ -160,6 +160,11 @@ $ python3 tag_cone_lcm_publisher.py
 # Listen to detection messages
 $ python3 tag_cone_lcm_subscriber.py
 ```
+
+## Train Your Own Model
+To train your own model, you can use the provided notebook, `utils/cone_detection_train.ipynb`, along with our dataset. You can fork the dataset from Roboflow, adding more images or adjusting preprocessing steps to build a more robust model. Alternatively, experiment with different object detection models other than the YOLOv11s we use here.
+- The data can be found [here](https://universe.roboflow.com/mbot-p2cui/mbot-cone-detection-o3klb).
+
 ## Code Explanation
 ### Coordinate frame
 - World Frame: the center of the AprilTag is used as the origin of the world frame. The x, y, and z axes are aligned with the tag's edges (horizontal, vertical, and outward, respectively).

@@ -51,7 +51,7 @@ Here are a few logs that will be helpful to tune your SLAM:
 
 To play back these recorded LCM sessions, you can use lcm-logplayer-gui. Be careful, because the following command opens a new GUI and will only run **on NoMachine**!
 ```bash
-$ lcm-logplayer-gui log_file.log
+$ lcm-logplayer-gui <log_file.log>
 ```
 You can also run the command line version, lcm-logplayer, if the system does not have Java. In the GUI version you can turn off LCM channels with a checkbox. The same functionality is available in the command line version, check the help with:
 ```bash
@@ -100,7 +100,7 @@ $ ./mbot_slam --action-only
 ```
 
 ### Task 2.2.1 Action Model
-Implement an action (or motion) model using some combination of sensors. This could be odometry with wheel encoders alone, or it could be some other estimate of action incorporating the IMU or using computer vision. The skeleton of the action model can be found in `mbot/mbot_autonomy/slam/action_model.cpp|hpp`.
+Implement an action (or motion) model using some combination of sensors. This could be odometry with wheel encoders alone, or it could be some other estimate of action incorporating the IMU or using computer vision. The skeleton of the action model can be found in `mbot_autonomy/src/slam/action_model.cpp|hpp`.
 
 Refer to Chapter 5 of Probabilistic Robotics for a discussion of common action models. You can base your implementation on the pseudo-code in this chapter. There are two action models that are discussed in detail, the Velocity Model (Sec. 5.3) and the Odometry Model (Sec. 5.4).
 
@@ -110,11 +110,11 @@ If you test in action-only mode you will see the particles spread out over time.
 Describe the action model you utilized, including the equations employed. Additionally, provide a table listing the values of any uncertainty parameters, and explain how you chose these values.
 
 ### Task 2.2.2 Sensor Model & Particle Filter
-Implement a sensor model that calculates the likelihood of a pose given a laser scan and an occupancy grid map. The skeleton of the sensor model can be found in `mbot_autonomy/slam/sensor_model.cpp|hpp`.  
+Implement a sensor model that calculates the likelihood of a pose given a laser scan and an occupancy grid map. The skeleton of the sensor model can be found in `mbot_autonomy/src/slam/sensor_model.cpp|hpp`.  
 
 Refer to Chapter 6 of Probabilistic Robotics for a discussion of common sensor models. You can base your implementation on the pseudo-code in this chapter.  
 
-Implement the particle filter functions in `mbot_autonomy/slam/particle_filter.cpp|hpp`.
+Implement the particle filter functions in `mbot_autonomy/src/slam/particle_filter.cpp|hpp`.
 
 Refer to Chapter 4 of Probabilistic Robotics for information implementing the particle filter.
 

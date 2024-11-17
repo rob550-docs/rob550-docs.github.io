@@ -4,7 +4,7 @@ title: Competition
 nav_order: 6
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-11-05 16:37:48 -0500
+last_modified_at: 2024-11-17 16:37:48 -0500
 ---
 
 **Update 11/5/24:** Change competition events as forklift is no longer used.
@@ -95,72 +95,64 @@ The purpose of this event is to locate Apriltag crates and cones and move the cr
 
 **All Levels**
 
-* 3 Apriltag crates with cones on top of them will be placed in random places in the warehouse
-  * Crate cone colors: Red or Green, randomly assigned
-  * The Apriltags will have unique IDs
+* Apriltag crates with cones on top of them will be placed in random places in the warehouse
+  * Cone colors: Red or Blue
+  * Red for Apriltag ID 1/2
+  * Blue for Apriltag ID 3/4
+  * The colors and numbers used will depend on the level chosen
   * The crates will be placed with enough space around them to complete the tasks
-* 2 cones will be placed in fixed places in the warehouse, marking dropoff zones
-  * Dropoff cone colors: Blue and Yellow
-
-
-**Level 1 and 2**
-
-* The robot will be placed at a fixed position
-
-**Level 3**
-
-* The robot will be placed at an unknown position
-
-### Tasks
+* 2 pairs of cones will be placed in fixed places in the warehouse, marking dropoff zones
+  * The cones will be placed in pairs denoting "goal lines"
+  * Dropoff cone colors: Green and Yellow
+* We will provide you with the 3D printed forks that you will attach to your bot and use to move the Apriltag crates
 
 **Level 1**
 
-* Locate the Apriltags and cones. After finding all the Apriltags and cones, print out the position of each to the terminal. Your final printout must display the Apriltag ID (if applicable), cone color, and crate position for each detection.
-  * A crate location is defined to be the **center** of the crate, **not the side** where the Apriltag is. The output of the Apriltag detector is the centroid of the Apriltag, which is not what we are after! For maximum accuracy you must find the center of the crate given the Apriltag position and orientation.
-  * The Apriltag crates have 2 IDs. Printing out either one is fine. However, if you print out both on separate lines, they will be treated as two separate detections and count against you.
-  * Example line format: `Pos: (14.4, 10.0), ID: 1 & 2, Color: Red`
-* Then, drive close to an Apriltag with a red cone on top of it. Running into the Apriltag is allowed.
-* The origin is defined to be the piece of paper where you start.
+* 1 red cone and 1 blue cone will be placed on the Apriltag crates
+
+**Level 2**
+
+* 2 red cones will be placed on the Apriltag crates
+
+**Level 3**
+
+* 3 red or blue cones will be placed on the Apriltag crates
+
+### Tasks
+
+You will have to move crates from their initial locations to a point past the goal lines marked by the cones. Below is a diagram of the goal of this event.
+
+<a class="image-link" href="/assets/images/botlab/checkpoints/warehouse_goal.png">
+<img src="/assets/images/botlab/checkpoints/warehouse_goal.png" alt="The image depicts a sequence where robots equipped with forklifts move crates topped with cones. The process involves the transfer of these cone-topped crates from one location to another." style="max-width:500px;"/>
+</a>
+
+**Level 1**
+
+Drive into an Apriltag crate with a red cone on top of it, then drive into an Apriltag crate with a blue cone on top of it. Running into the crate is allowed.
 
 **Time limit:** 2 minutes
 
 Points:
 
-* [+20, +15, +10] points for each Apriltag/cone position printed out with location error:
-  * 20 points: < (2 cm, 2 cm)
-  * 15 points: < (5 cm, 5 cm)
-  * 10 points: < (15 cm, 15 cm)
-  * No points for correct position but wrong ID or color
-  * -10 points per false positive detection, capped at -30 points
-* [+100, +50] points for the final distance to Apriltag
+* [+100, +50] points for the final distance to a crate
   * 100 points: < 5 cm away from the Apriltag
   * 50 points: < 20 cm away
   * No points for > 20 cm away
+  * We will judge you based on the closest point your bot was to a crate during the entire run
 * 50% deduction for using teleop or click to drive
-* Your Apriltag/cone detection and localizing must be fully autonomous. You may choose when to print out the detections for grading.
 
 **Level 2 and 3**
 
-* Explore the area and locate each Apriltag crate and dropoff cone. After you have determined the positions, print out the detections as in Level 1.
-* Then, move each Apriltag crate to a drop-off zone marked by a cone.
-  * Apriltags with **red** cones on top of them go to the **yellow** drop off cone
-  * Apriltags with **green** cones on top of them go to the **blue** drop off cone
-* We will provide you with the 3D printed forks that you will attach to your bot and use to move the Apriltag crates
-* The origin is defined to be the piece of paper where you start in Levels 1 and 2.
+* Move each Apriltag crate to a drop-off zone marked by a pair of cones.
+  * Apriltags with **red** cones on top of them go to the **green** drop off zones
+  * Apriltags with **blue** cones on top of them go to the **yellow** drop off zones
 
 **Time limit:** 10 minutes
 
 Points:
 
-* [+50, +30, +20] points for each Apriltag/cone position printed out with location error:
-  * 50 points: < (2 cm, 2 cm)
-  * 30 points: < (5 cm, 5 cm)
-  * 20 points: < (15 cm, 15 cm)
-  * No points for correct position < (15 cm, 15 cm) but wrong ID or color
-  * -10 points per false positive detection, capped at -30 points
-  * **Level 3:** +150 points for correctly printing out all positions in the global reference frame
-* +100 points for each Apriltag moved to the correct drop-off zone, < (15 cm, 15 cm) away from the cone
+* +100 points for each crate picked successfully
+  * A successful pick is one where the tines of your fork pass through the slots in the bottom of the crate
+* +100 points for each crate moved to the correct drop-off zone
+  * A successful drop-off is one where the center of the crate ends up past the "goal line" marked by the cones
 * 50% deduction for driving around using teleop or click to drive
-* Your Apriltag/cone detection and localizing must be fully autonomous
-
-Hint for Level 3: Make a map of the warehouse yourself, then during the competition pre-load that map and use your SLAM in localization only mode to determine your initial position.

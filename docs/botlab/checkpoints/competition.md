@@ -9,6 +9,8 @@ last_modified_at: 2024-11-05 16:37:48 -0500
 
 **Update 11/5/24:** Change competition events as forklift is no longer used.
 
+**Update 11/17/24:** Refine competition events to more utilize cones.
+
 <a class="image-link" href="/assets/images/botlab/checkpoints/doge-meme.png">
 <img src="/assets/images/botlab/checkpoints/doge-meme.png" alt=" " style="max-width:250px;"/>
 </a>
@@ -24,6 +26,8 @@ You will complete two runs in total, one of which is judged for accuracy and the
 For the first run, make a circuit around a convex arena by driving the path given to you. Do this while running SLAM to make a map of the arena. Return to the starting pose. You are judged based on the final error in pose and your map quality. Save an image of your map and upload the image to Google Drive.
 
 For the second run, drive quickly around the path two times. You are judged on the speed to complete the run. For this run, you will not be judged based on your final error, but your ending pose must be close enough to the start that you are still partially on the starting piece of paper. If your final position is beyond that then you will receive no points for the speed run section.
+
+### Points
 
 Error in pose after mapping:
 - 100 points: < (3 cm, 3 cm, 15°)
@@ -42,26 +46,40 @@ Timed run:
 The thresholds will be determined by the actual times on the first day of competition.
 
 
-## Event 2: Maze Explorer [400 points max]
+## Event 2: Maze Explorer [500 points max]
+
+**Level 1**
 
 From the starting position, explore the maze and make a map of the environment. Then return to the start location/pose.
 
 For partial credit:
-- You may choose to use botgui for manual exploration of the map via right-clicking (using A* algorithm), but note that this will not earn you points for autonomous navigation.
+- You may choose to use botgui for manual exploration of the map via right-clicking (using A* algorithm), but note that this will result in a deduction.
 - Alternatively, you can operate the bot manually (tele-op) to construct the map. In this case, points will be awarded based on the map's quality.
 
-**Cone challenge:** If you choose to, we will place 3 randomly colored cones (no duplicates) in the maze. After mapping the environment, you will navigate to the cones in rainbow order (red first) before returning to the start.
+**Level 2: Cone Challenge**
 
-Points:
+You will map the environment as in Level 1, with the addition that we will place 3 randomly colored cones (no duplicates) in the maze. After mapping the environment, you will navigate to the cones in rainbow order (red first) before returning to the start.
+
+**Level 3: Hey, you. You're finally awake**
+
+You will map the environment as in Level 1. You will tell us when you've mapped the environment. After that, an instructor will take the robot out and put it back in at a random location. Your bot will then "wake up" and complete the Cone Challenge as in Level 2. The stopping and starting of your bot between the initial mapping and the re-localization after moving your bot can be done manually, but the actions of your bot inside the maze must be autonomous. Click-to-drive and teleop are not available for this level.
+
+You are allowed and encouraged to save your map and the cone locations, so you can use a cone to initialize your particles then use the walls to refine your particles in localization-only mode.
+
+**Time Limit:** 10 minutes
+
+### Points
+
 - [+200, +150, +100, +50] points for returning to start pose with error limit:
     - 200 points: < (3 cm, 3 cm, 15°)
     - 150 points: < (5 cm, 5 cm, 15°)
     - 100 points: < (10 cm, 10 cm, 30°)
     - 50 points: < (20 cm, 20 cm, 45°)
 - [+100, +50, +25] for map quality [Excellent, Good, OK] regardless of finishing
-- +100 points for completing the cone challenge
-- 25% deduction for using your A* path planner but using click to drive instead of full autonomy
-- 50% deduction for using teleop
+- +100 points for completing the cone challenge (Levels 2 and 3)
+- +100 points for completing the task from an unknown initial location (Level 3)
+- 25% deduction for using your A* path planner but using click to drive instead of full autonomy (Levels 1 and 2 only)
+- 50% deduction for using teleop (Levels 1 and 2 only)
 
 ## Event 3: Warehouse [600 points max]
 

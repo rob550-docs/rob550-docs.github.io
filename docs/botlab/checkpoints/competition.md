@@ -99,7 +99,7 @@ The purpose of this event is to locate Apriltag crates and cones and move the cr
   * Cone colors: Red or Blue
   * Red for Apriltag ID 1/2
   * Blue for Apriltag ID 3/4
-  * The colors and numbers used will depend on the level chosen
+  * The color and number of crates/cones used will depend on the level chosen
   * The crates will be placed with enough space around them to complete the tasks
 * 2 pairs of cones will be placed in fixed places in the warehouse, marking dropoff zones
   * The cones will be placed in pairs denoting "goal lines"

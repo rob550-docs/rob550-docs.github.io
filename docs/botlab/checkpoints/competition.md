@@ -62,7 +62,7 @@ You will map the environment as in Level 1, with the addition that we will place
 
 **Level 3: Hey, you. You're finally awake**
 
-You will map the environment as in Level 1. You will tell us when you've mapped the environment. After that, an instructor will take the robot out and put it back in at a random location. Your bot will then "wake up" and complete the Cone Challenge as in Level 2. The stopping and starting of your bot between the initial mapping and the re-localization after moving your bot can be done manually, but the actions of your bot inside the maze must be autonomous. Click-to-drive and teleop are not available for this level.
+You will map the environment as in Level 1. **After you have made your map, tell us. You can then stop your code, save your map, recompile, change your configuration, do anything you want in between runs.** After that, an instructor will take the robot out and put it back in at a random location. Your bot will then "wake up" and complete the Cone Challenge as in Level 2. While you can manually start and stop your bot between runs, once your bot is in the maze, everything must be autonomous. Click-to-drive and teleop are not available for this level.
 
 You are allowed and encouraged to save your map and the cone locations, so you can use a cone to initialize your particles then use the walls to refine your particles in localization-only mode.
 

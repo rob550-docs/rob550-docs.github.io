@@ -11,6 +11,8 @@ last_modified_at: 2024-11-17 16:37:48 -0500
 
 **Update 11/17/24:** Refine competition events to more utilize cones.
 
+**Update 12/5/24:** Remove Google Drive upload requirement.
+
 <a class="image-link" href="/assets/images/botlab/checkpoints/doge-meme.png">
 <img src="/assets/images/botlab/checkpoints/doge-meme.png" alt=" " style="max-width:250px;"/>
 </a>
@@ -23,7 +25,7 @@ last_modified_at: 2024-11-17 16:37:48 -0500
 
 You will complete two runs in total, one of which is judged for accuracy and the second which is judged for speed.
 
-For the first run, make a circuit around a convex arena by driving the path given to you. Do this while running SLAM to make a map of the arena. Return to the starting pose. You are judged based on the final error in pose and your map quality. Save an image of your map and upload the image to Google Drive.
+For the first run, make a circuit around a convex arena by driving the path given to you. Do this while running SLAM to make a map of the arena. Return to the starting pose. You are judged based on the final error in pose and your map quality.
 
 For the second run, drive quickly around the path two times. You are judged on the speed to complete the run. For this run, you will not be judged based on your final error, but your ending pose must be close enough to the start that you are still partially on the starting piece of paper. If your final position is beyond that then you will receive no points for the speed run section.
 

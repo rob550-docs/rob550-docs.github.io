@@ -158,3 +158,8 @@ Points:
 * +100 points for each crate moved to the correct drop-off zone
   * A successful drop-off is one where the center of the crate ends up past the "goal line" marked by the cones
 * 50% deduction for driving around using teleop or click to drive
+
+## Score Calculation
+Your overall score will be the sum of your best run on each event. Each event can be completed multiple times at different levels.
+- The 3 top scoring teams **in each section** will receive bonus points on the report: [+3, +2, +1] points. 
+- The top score **in each event** will receive +1 bonus point on the report for the team.

@@ -81,7 +81,7 @@ While your result doesn't have to be identical, the goal is to verify the accura
 ### Task 2.2 Camera Calibration Using GUI
 Add a workspace calibration procedure. This procedure should be initiated by one of the user buttons in the GUI, integrated into the state machine as a `calibration` state. 
 
-The procedure will display status messages at the bottom of the GUI window, which will guide users through the calibration steps if you choose a manual or semi-automatic calibration. This button will not only find the extrinsic matrix, but also apply a projective transform to adjust the camera's perspective.
+The procedure will display status messages at the bottom of the GUI window, which will guide users through the calibration steps if you choose a manual or semi-automatic calibration. This button will not only find the extrinsic matrix, but also apply a projective transform to adjust the camera's perspective. The end result should center the board in the video frmae so it no longer looks tilted.
 
 **Extrinsic Matrix**
 
@@ -161,7 +161,10 @@ The end effector position is defined by $$(x, y, z, \varphi, \theta, \psi)$$ whe
 
 ## Checkpoint Submission
 ### Part 1
-- Rotate the camera, then demonstrate the calibration procedure in a video
+- Demonstrate your calibration procedure in a video
+    1. Show your GUI.
+    2. Rotate your camera.
+    3. Recalibrate and show your GUI again. We should see that the board becomes centered in frame again.
 - With the camera rotated, record the reported position (x,y,z) of the center of the top of a stack of large blocks placed at the following locations for a stack size of [0,1,2,4,6] blocks (total of 4x5=20 measurements):
     - (0,175)
     - (-300, -75)

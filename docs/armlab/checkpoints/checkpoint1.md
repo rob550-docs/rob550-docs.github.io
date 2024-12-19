@@ -91,7 +91,7 @@ Hints:
 - Consider utilizing the status message bar at the bottom of the GUI window to provide instructions or using it for your own debug purpose.
 
 {: .required_for_report }
-1) Teach your robot to cycle swapping blocks at locations (-100, 225) and (100, 225) through an intermediate location at (250,75). Coordinates are in mm, relative to the world frame. See [the board diagram](/docs/armlab/checkpoints#board). <br>
+1) **Cycle Task:** Teach your robot to cycle swapping blocks at locations (-100, 225) and (100, 225) through an intermediate location at (250,75). Coordinates are in mm, relative to the world frame. See [the board diagram](/docs/armlab/checkpoints#board). <br>
 2) Report how many times you can cycle (if you can do 10, feel free to stop) and include a plot of joint angles over time for 1 cycle. Hint: Use [`ros2 bag`](https://github.com/ros2/rosbag2) to record the `/rx200/joint_states` topic and the [`rosbags`](https://ternaris.gitlab.io/rosbags/) python module to parse the recorded bag. <br><br>
 **Optional:** include a 3D plot of the end effector position by sending recorded joint angles through your FK equations.
 
@@ -147,7 +147,7 @@ Record your extrinsic matrix
 - Task 1.2
     - Record a video of your robot playing back the waypoints 
 - Task 1.3
-    - Demonstrate the teach-and-repeat in a video by recording the process of teaching the robot and repeating at least once the cycle task from the "collect for report" subsection
+    - Demonstrate the teach-and-repeat in a video by recording the process of teaching the robot and repeating at least once the cycle task from the "required for the report" subsection
 - Task 1.4/1.5: 
     - Record a screenshot or video of the GUI reporting world coordinates of the mouse cursor when hovering over the image using the intrinsic and extrinsic calibrations.
     - Record the reported position (x,y,z) of the center of the top of a stack of large blocks placed at the following locations for a stack size of [0,1,2,4,6] blocks (total of 20 measurements): (0,175), (-300, -75), (300, -75), (300, 325)

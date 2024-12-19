@@ -7,8 +7,6 @@ grand_parent: Botlab
 last_modified_at: 2024-04-04 1:00:00 -0500
 ---
 
-**Update 11/21/24:** Fixes to paths and instructions.
-
 Using the SLAM algorithm implemented previously, you can now construct a map of an environment using the MBot simulator. You will implement additional capabilities for the MBot: path planning using A* and autonomous exploration of an environment.
 
 ### Contents

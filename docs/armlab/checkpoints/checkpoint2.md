@@ -94,9 +94,19 @@ It is worth trying both of the methods out to see which produces a more accurate
 
 **Homography**
 
-As you may have noticed, the camera is not facing directly down to the board but is at a position and orientation offset. In order to work with our workspace as if you were looking at it from above (which will be much more helpful for the future tasks), you'll need to apply a projective transformation. To do this, you'll first determine the homography matrix using reference points in the image frame, then apply the transform to change the perspective from the "trapezoid" to a rectangle. An example of doing this on the image plane is given in the `homography_transform.py` script in the `armlab_opencv_examples` repo.
+As you may have noticed, the camera is not facing directly down to the board but is at a position and orientation offset. In order to work with our workspace as if you were looking at it from above (which will be much more helpful for the future tasks), you'll need to apply a projective transformation. To do this, you'll first determine the homography matrix using reference points in the image frame, then apply the transform to change the perspective from a trapezoid to a rectangle. An example of doing this on the image plane is given in the `homography_transform.py` script in the `armlab_opencv_examples` repo.
 
-The source points you use to compute the homography matrix should either be the corners of the board or the Apriltag positions. If you choose Apriltag positions, you already have those pixel coordinates from the detector. If you choose to use the board corners, you know their world coordinates and you have the necessary information to transform those world coordinates into image coordinates using the intrinsic and extrinsic parameters. The destination points are ones that you choose yourself based on where you want the transformed points to be on the final image frame. As an example, you would want the transformed points to form a rectangle, while being spaced apart the right amount to not stretch the board.
+The _source_ points you use to compute the homography matrix should either be the corners of the board or the Apriltag positions. If you choose Apriltag positions, you already have those pixel coordinates from the detector. If you choose to use the board corners, you know their world coordinates and you have the necessary information to transform those world coordinates into image coordinates using the intrinsic and extrinsic parameters. The _destination_ points are ones that you choose yourself based on where you want the transformed points to be on the final image frame. In general, you would want the transformed points to form a rectangle, while being spaced apart the right amount to not stretch the board.
+
+This is what your board will look like before the transformation:
+
+<a class="image-link" href="/assets/images/armlab/checkpoints/checkpoint2-homography-before.png"><img src="/assets/images/armlab/checkpoints/checkpoint2-homography-before.png" alt="A top-down view of the board before the homography transformation, showing a visible skew." style="max-width:600px;"/>
+</a>
+
+And this is what your board should look like after the transformation:
+
+<a class="image-link" href="/assets/images/armlab/checkpoints/checkpoint2-homography-after.png"><img src="/assets/images/armlab/checkpoints/checkpoint2-homography-after.png" alt="A top-down view of the board after the homography transformation, showing it rectified and centered in frame." style="max-width:600px;"/>
+</a>
 
 **Combined**
 

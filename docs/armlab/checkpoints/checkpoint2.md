@@ -81,14 +81,14 @@ While your result doesn't have to be identical, the goal is to verify the accura
 ### Task 2.2 Camera Calibration Using GUI
 Add a workspace calibration procedure. This procedure should be initiated by one of the user buttons in the GUI, integrated into the state machine as a `calibration` state. 
 
-The procedure will display status messages at the bottom of the GUI window, which will guide users through the calibration steps if you choose a manual or semi-automatic calibration. This button will not only find the extrinsic matrix, but also apply a projective transform to adjust the camera's perspective. The end result should center the board in the video frmae so it no longer looks tilted.
+The procedure will display status messages at the bottom of the GUI window, which will guide users through the calibration steps if you want to do a semi-automatic calibration. This button will not only find the extrinsic matrix, but also apply a projective transform to adjust the camera's perspective. The end result should center the board in the video frame so it no longer looks tilted.
 
 **Extrinsic Matrix**
 
 Similar to the extrinsic matrix you calculated before using measurements of the board, the Apriltags can be used to calculate an extrinsic matrix automatically. There are two main options to do this: Perspective N-Point (PnP) solving and Rigid Transformation solving. Examples of how to do both of these are found in the `solve_extrinsics.py` script in the [`armlab_opencv_examples`](https://gitlab.eecs.umich.edu/ROB550-F24/armlab_opencv_examples) repo.
 
 1. [Perspective N-Point](https://docs.opencv.org/4.x/d5/d1f/calib3d_solvePnP.html) pose computation takes in known image coordinates (from the detector) and known world coordinates (from measuring the board). An example of how to do this is found in the `recover_homogenous_transform_pnp` function in `solve_extrinsics.py`.
-2. Rigid Transformation solving pose computation takes in known camera frame coordinates (using your image coordinates and intrinsic matrix) and known world coordinates (from measuring the board). An example of how to do this is found in the `recover_homogenous_affine_transformation` function in `solve_extrinsics.py`. Note: This method takes in a maximum of three world/camera points, so if you have 4 Apriltags you'll only end up using 3.
+2. Rigid Transformation pose computation takes in known camera frame coordinates (using your image coordinates and intrinsic matrix) and known world coordinates (from measuring the board). An example of how to do this is found in the `recover_homogenous_affine_transformation` function in `solve_extrinsics.py`. Note: This method takes in a maximum of three world/camera points, so if you have 4 Apriltags you'll only end up using 3.
 
 It is worth trying both of the methods out to see which produces a more accurate calibration.
 
@@ -103,14 +103,11 @@ The source points you use to compute the homography matrix should either be the 
 After the calibration is performed, update the display under the video in the GUI to show the world coordinates of the mouse location as you hover over the video. Measurements only need to be valid for points on or above the board.
 
 Hints:
-- A manual calibration might go as follows (this is the "semi-automatic" calibration):
-    1. Use mouse clicks to get pixel locations of known locations in the workspace. Repeat with the depth frame and use an affine transformation to register the two together if necessary.  
-    2. Using the intrinsic matrix you find for the RGB camera along with any depth calibration you determine, create a function that takes pixel coordinates from the image and returns world coordinates.
-- Alternatively, you may implement an auto-calibration routine using Apriltags visible in the workspace, or possibly by detecting the grid in the image. This is the “automatic” calibration.
+- You may implement an auto-calibration routine using Apriltags visible in the workspace, or possibly by detecting the grid in the image.
 - Don't forget to undo your homography transformation when you go from mouse coordinates to world coordinates.
 
 {: .required_for_report }
-1) Report your extrinsic matrix and depth calibration function. <br>
+1) Report your extrinsic matrix. <br>
 2) Report the equations used to turn [u,v,d] coordinates in the image frames to [x,y,z] coordinates in the world frame. <br>
 3) Describe how you verified the calibration was correct, what additional steps you took to correct it, and provide evidence for the accuracy of your calibration.
 <br><br>
@@ -131,7 +128,7 @@ Instructions:
 
 {: .required_for_report }
 1) Quantitatively or qualitatively, assess your calibration routine using the grid point projection. <br>
-2) Which points did you use for your perspective transformation? Report the homography matrix.
+2) Which points did you use to compute your projective transform? Report the homography matrix.
 <br><br>
 Questions to consider:<br>
 What does each of the entries of your homography matrix represent?

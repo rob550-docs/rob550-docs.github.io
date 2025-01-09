@@ -169,7 +169,7 @@ The end effector position is defined by $$(x, y, z, \varphi, \theta, \psi)$$ whe
     - (300, 325)
 
 ### Part 2
-Record a video showing your Forward Kinematics results and arm positions while manually driving the end effector to the following positions:
+Record a video showing your Forward Kinematics results and arm positions while manually driving the end effector to the following positions. The easiest way to do this is to turn torque off and manually move the end effector to the following positions:
 - (0, 175, 100)
 - (-300, -75, 25)
 - (300, -75, 50)

@@ -158,10 +158,10 @@ The end effector position is defined by $$(x, y, z, \varphi, \theta, \psi)$$ whe
 
 ## Checkpoint Submission
 ### Part 1
-- Demonstrate your calibration procedure in a video
-    1. Show your GUI.
+- Demonstrate your calibration procedure in a video. The video should contain the following elements:
+    1. Show your GUI before calibration.
     2. Rotate your camera.
-    3. Recalibrate and show your GUI again. We should see that the board becomes centered in frame again.
+    3. Click the calibration button and show your GUI again. We should see that the board becomes centered in frame.
 - With the camera rotated, record the reported position (x,y,z) of the center of the top of a stack of large blocks placed at the following locations for a stack size of [0,1,2,4,6] blocks (total of 4x5=20 measurements):
     - (0,175)
     - (-300, -75)

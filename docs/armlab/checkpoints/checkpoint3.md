@@ -7,7 +7,7 @@ grand_parent: Armlab
 last_modified_at: 2024-02-26 15:00:00 -0500
 ---
 
-In this part, we will first build a block detector, and then implement inverse kinematics, and eventually achieve the click-to-grab level of autonomous where you can click on the control station, and the arm will pick up the block you clicked on.
+In this part, we will first build a block detector, then implement inverse kinematics, and eventually achieve a click-to-grab level of autonomy where you can click on the control station and the arm will pick up the block you clicked on.
 
 ### Contents
 * TOC
@@ -37,7 +37,7 @@ The inverse kinematics function you implement will output the necessary joint an
 You are free to use any representation of orientation you wish (ZYZ Euler angles, 
 Roll-Pitch-Yaw, etc.).  
 
-In `kinematics.py`, the code is set up for a simplified IK function that takes a single orientation angle $$\psi$$, defined as the angle from the horizontal plane or the rotation about the z-axis in frame 1, as shown in figure below. You do not need to use this definition, but it is convenient and is a good starting point for your IK function.
+In `kinematics.py`, the code is set up for a simplified IK function that takes a single orientation angle $$\psi$$, defined as the angle from the horizontal plane or the rotation about the z-axis in frame 1, as shown in the figure below. You do not need to use this definition, but it is convenient and is a good starting point for your IK function.
 
 <a class="image-link" href="/assets/images/armlab/checkpoints/checkpoin3-ik.png"><img src="/assets/images/armlab/checkpoints/checkpoin3-ik.png" alt="" style="max-width:400px;"/>
 </a>

@@ -142,7 +142,7 @@ Assumptions:
 {: .required_for_report }
 Record your extrinsic matrix
 
-## Checkpoint Submission (Due 9/10/24)
+## Checkpoint Submission (Due 1/23/25)
 
 - Task 1.2
     - Record a video of your robot playing back the waypoints 

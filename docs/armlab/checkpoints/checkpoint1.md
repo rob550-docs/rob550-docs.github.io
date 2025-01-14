@@ -41,7 +41,7 @@ There are 2 ways to control the arm:
     2. Use “Open Gripper” and “Close Gripper” anytime to control the gripper.
 
     {: .warning}
-    Alwasy remember to SLEEP ARM before ending the arm node or the arm will crash to the board and may break!!!
+    Always remember to SLEEP ARM before ending the arm node or the arm will crash to the board and may break!!!
 
 2. Autonomous Mode
 

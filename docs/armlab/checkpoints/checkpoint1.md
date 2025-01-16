@@ -7,6 +7,8 @@ grand_parent: Armlab
 last_modified_at: 2024-09-05 15:00:00 -0500
 ---
 
+**Update 1/16/25:** Better instructions for calibration.
+
 The first checkpoint is meant to be an introduction to using the GUI of the lab and to start working with the RGB-D camera. The interaction with the GUI will be under the Basic Motion section of the checkpoint, and the interaction with the RGB-D camera will be through the Camera Calibration portion of the checkpoint.
 
 
@@ -116,8 +118,15 @@ $ ros2 topic echo /the_topic_you_want_to_check
 
 To perform the intrinsic calibration, use the ROS camera calibration package, which should already be installed from the setup guide.
 
-- You need to firstly start the Realsense2 node, then start the camera calibration node. Details on starting the relevant nodes are in the [How to start ROS nodes guide](/docs/armlab/how-to-guide/how-to-start-nodes).
-- You can find official documentation on using the camera_calibration package with a checkerboard [here](https://web.archive.org/web/20230322162201id_/https://navigation.ros.org/tutorials/docs/camera_calibration.html#tutorial-steps). You don't need to run any of the terminal commands on this page.
+1. You need to firstly start the Realsense2 node, then start the camera calibration node. Details on starting the relevant nodes are in the [How to start ROS nodes guide](/docs/armlab/how-to-guide/how-to-start-nodes).
+2. You can find official documentation on using the camera_calibration package with a checkerboard [here](https://web.archive.org/web/20230322162201id_/https://navigation.ros.org/tutorials/docs/camera_calibration.html#tutorial-steps). You don't need to run any of the terminal commands on this page.
+3. Quickly move the checkerboard through a variety of tilts and positions so the bars fill up. You don't want this to take too long or the calibration process will hang forever.
+4. As soon as the "Calibrate" button lights up, click it.
+5. When you start the calibration process, the window will display that it is not responding and will give you the option to "Force Quit" or "Wait". Be patient! Do not force quit the application, as it is working in the background, albeit slowly.
+6. After a minute or so, the calibration results will print to the terminal. If you have waited more than 2 minutes and nothing happens, try again or ask for help.
+
+Notes:
+
 - The ROS camera calibration package will also identify lens distortion parameters, which can be used to reduce video distortion. However, this might not be essential since the Realsense camera usually has low distortion in the imaging area of interest. The distortion for the depth camera is unknown. 
 - Make sure that you save the calibration values obtained from this process. A pixel in the depth image from the ROS driver is a 16-bit integer representing a distance from the camera frame in millimeters.  
 
@@ -132,7 +141,10 @@ Question to consider: <br>
 ### Task 1.5 Extrinsic Camera Calibration
 Using physical measurements of the lab apparatus, come up with a rough extrinsic matrix for the camera. Use the extrinsic matrix and the camera intrinsic matrix to map image coordinates (u,v,d) to world coordinates. Have them displayed in the GUI.
 
-You may also use the `realsense-viewer` program to find a readout of the camera’s accelerometer, which should give you an approximation of the orientation of the sensor. Launch the program by running `$ realsense-viewer` in the terminal. To see the accelerometer, enable the Motion Module then click on the "2D" text on the top right.
+There are two possible ways of finding the rotation of the camera. The first way is accurate enough for our purposes. You only need to do option 2 if you are personally interested in how to get the best possible calibration accuracy.
+
+1. (Easy, Less Accurate) Use your phone as a protractor and measure the tilt of the camera relative to the horizontal.
+2. (Hard, More Accurate) You may also use the `realsense-viewer` program to find a readout of the camera’s accelerometer, which should give you an approximation of the orientation of the sensor. Launch the program by running `$ realsense-viewer` in the terminal. To see the accelerometer, enable the Motion Module then click on the "2D" text on the top right.
 
 Assumptions: 
 1. X axis of the world frame are parallel to U axes of the sensor 

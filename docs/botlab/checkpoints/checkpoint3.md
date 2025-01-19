@@ -55,7 +55,7 @@ For the advanced competition tasks, you will be asked to localize on a map where
 {: .required_for_report } 
 Explain the methods used for initial localization.
 
-## Checkpoint Submission
+## Checkpoint Submission (Due 4/17/25)
 
 Demonstrate your path planner and show your bot moving in a maze while avoiding obstacles.
 

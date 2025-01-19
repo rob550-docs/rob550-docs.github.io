@@ -185,7 +185,7 @@ Do these every time you run a new test.
 7. To compare your results with the ground truth results, stop your SLAM and play the log with the SLAM_* channels enabled.
 
 
-## Checkpoint Submission
+## Checkpoint Submission (Due 4/8/25)
 <br>
 <a class="image-link" href="/assets/images/botlab/checkpoints/checkpoint1-maze.png">
 <img src="/assets/images/botlab/checkpoints/checkpoint1-maze.png" alt=" " style="max-width:600px;"/>

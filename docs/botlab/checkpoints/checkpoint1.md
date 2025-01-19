@@ -97,7 +97,7 @@ Describe and document your motion control algorithm for getting between waypoint
 <br> 1) Include a plot of your robot’s dead reckoning estimated pose as the robot is commanded to drive a 1m square 4 times.
 <br> 2) Include a plot of the robot's linear and rotational velocity as it drives one loop around the square
 
-## Checkpoint Submission
+## Checkpoint Submission (Due 3/25/25)
 <br>
 <a class="image-link" href="/assets/images/botlab/checkpoints/checkpoint1-maze.png">
 <img src="/assets/images/botlab/checkpoints/checkpoint1-maze.png" alt=" " style="max-width:600px;"/>

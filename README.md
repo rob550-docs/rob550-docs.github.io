@@ -9,12 +9,10 @@ Simply using the edit feature on GitHub is sufficient. Once you save, the GitHub
 
 ### 1. Set up environment and host locally
 1. Install Jekyll: install all the prerequisites following the instruction there: [Jekyll doc](https://jekyllrb.com/docs/)
-2. Since we already have the site, after install jekyll and bundler gems by running `sudo gem install jekyll bundler`, we can directly cd to this folder, then run
+2. Since we already have the site, after install jekyll and bundler gems by running `gem install jekyll bundler`, we can directly cd to this folder, then run
     ```
     bundle exec jekyll serve
     ```
-    - You might encounter error for the first time set up, you need to run `sudo bundle install` as the error message indicates, then run the command above.
-
 Now we are hosting it locally and can access to the website from http://localhost:4000.
 
 ### 2. Modify the existed articles

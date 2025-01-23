@@ -128,7 +128,7 @@ To perform the intrinsic calibration, use the ROS camera calibration package, wh
 Notes:
 
 - The ROS camera calibration package will also identify lens distortion parameters, which can be used to reduce video distortion. However, this might not be essential since the Realsense camera usually has low distortion in the imaging area of interest. The distortion for the depth camera is unknown. 
-- Make sure that you save the calibration values obtained from this process. A pixel in the depth image from the ROS driver is a 16-bit integer representing a distance from the camera frame in millimeters.  
+- Make sure that you save the calibration values obtained from this process.
 
 {: .required_for_report }
 Record your average intrinsic calibration after performing the checkerboard calibration 3-5 times. Compare it to the factory calibration.
@@ -139,7 +139,7 @@ Question to consider: <br>
 3) What are the sources of error and how large are they? 
 
 ### Task 1.5 Extrinsic Camera Calibration
-Using physical measurements of the lab apparatus, come up with a rough extrinsic matrix for the camera. Use the extrinsic matrix and the camera intrinsic matrix to map image coordinates (u,v,d) to world coordinates. Have them displayed in the GUI.
+Using physical measurements of the lab apparatus, come up with a rough extrinsic matrix for the camera. Use the extrinsic matrix and the camera intrinsic matrix to map image coordinates (u,v,d) to world coordinates. Have them displayed in the GUI. A pixel in the depth image from the ROS driver is a 16-bit integer representing a distance from the camera frame in millimeters.
 
 There are two possible ways of finding the rotation of the camera. The first way is accurate enough for our purposes. You only need to do option 2 if you are personally interested in how to get the best possible calibration accuracy.
 

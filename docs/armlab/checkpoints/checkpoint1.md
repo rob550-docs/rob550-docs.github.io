@@ -160,7 +160,8 @@ Record your extrinsic matrix
     - Record a video of your robot playing back the waypoints 
 - Task 1.3
     - Demonstrate the teach-and-repeat in a video by recording the process of teaching the robot and repeating at least once the cycle task from the "required for the report" subsection
-- Task 1.4/1.5: 
+- Task 1.4/1.5:
+    - Report your factory and calibrated camera intrinsic matrices.
     - Record a screenshot or video of the GUI reporting world coordinates of the mouse cursor when hovering over the image using the intrinsic and extrinsic calibrations.
     - Record the reported position (x,y,z) of the center of the top of a stack of large blocks placed at the following locations for a stack size of [0,1,2,4,6] blocks (total of 20 measurements): (0,175), (-300, -75), (300, -75), (300, 325)
 

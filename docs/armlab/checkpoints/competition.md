@@ -7,6 +7,8 @@ grand_parent: Armlab
 last_modified_at: 2024-10-07 12:00:00 -0500
 ---
 
+**Updated 1/30/25:** Remove aiming component of basketball launcher.
+
 It's time to showcase your hard work and effort!
 
 <a class="image-link" href="https://i.imgflip.com/3t9jkg.jpg"><img src="https://i.imgflip.com/3t9jkg.jpg" alt="" style="max-width:400px;"/>
@@ -143,10 +145,6 @@ The hoop comes in 3 sizes: small, medium, and large.
 - +40 bonus points for each three-basket streak
 
 Deductions/bonuses for manual/automatic control: The deduction is applied to your score. For bonuses, your score is still capped at 400.
-* +30% for RX200 pitch/yaw control
-* +0% for servo pitch/yaw control
-* -10% for manual pitch/yaw control
-* +20% for detecting hoop position automatically
 * -20% for manual loading (moving the ball from the holding area to the receptacle)
 * -30% for manual arming (storing the potential energy used to fire the ball)
 * -20% for manual firing (making the ball shoot)
@@ -167,10 +165,6 @@ For this event, the basketball hoops are setup as shown in the figure
 - Incomplete cycle point is calculated based on the points for individual hoops, halved
 
 Deductions/bonuses for manual/automatic control: The deduction is applied to your score. For bonuses, your score is still capped at 400.
-* +30% for RX200 pitch/yaw control (max score is still 400)
-* +0% for servo pitch/yaw control
-* -10% for manual pitch/yaw control
-* +20% for detecting hoop position automatically
 * -20% for manual loading (moving the ball from the holding area to the receptacle)
 * -30% for manual arming (storing the potential energy used to fire the ball)
 * -20% for manual firing (making the ball shoot)

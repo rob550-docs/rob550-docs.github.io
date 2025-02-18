@@ -9,6 +9,8 @@ last_modified_at: 2024-10-07 12:00:00 -0500
 
 **Updated 1/30/25:** Remove aiming component of basketball launcher.
 
+**Updated 2/18/25:** Explicitly specify the height range where the hoop can be placed.
+
 It's time to showcase your hard work and effort! The competition consists of several challenges that will test every component of your project, from camera calibration to inverse kinematics. Based on your performance on the competition tasks, you are eligible for points of extra credit that are added to your report grade. **The competition is only for extra credit, and your performance cannot negatively affect your grade.**
 
 <a class="image-link" href="https://i.imgflip.com/3t9jkg.jpg"><img src="https://i.imgflip.com/3t9jkg.jpg" alt="" style="max-width:400px;"/>
@@ -95,6 +97,10 @@ Requirements:
 
 ### Task Setup
 Design a mechanism that can aim and launch a mini-basketball using the RX200, then score as many points as possible, with a maximum 400 points. 
+
+**Hoop**
+
+The basketball hoop(s) will be placed in a range between 14 cm and 24 cm above the board. We may shift this range between every attempt.
 
 **Arena**
 

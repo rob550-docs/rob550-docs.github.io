@@ -23,7 +23,7 @@ It's time to showcase your hard work and effort! The competition consists of sev
 
 ## Event 1: Sort 'n stack! (300 points)
 ### Task Setup
-Based on your selected level, specific blocks (cubes) will be placed on the positive half-plane (in front of the robotic arm). Your team needs to sort small blocks to the left and large ones to the right of the arm in the negative half plane. Depending on the level, you may need to stack them as well.
+Based on your selected level, specific blocks (cubes) will be placed on the positive half-plane (in front of the robotic arm). Your team needs to sort small blocks to the left and large ones to the right of the arm in the negative half plane (negative y coordinates). Depending on the level, you may need to stack them as well.
 
 Requirements:
 - Choose a level for the task.

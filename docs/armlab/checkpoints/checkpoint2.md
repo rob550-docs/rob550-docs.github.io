@@ -7,6 +7,8 @@ grand_parent: Armlab
 last_modified_at: 2024-02-26 15:00:00 -0500
 ---
 
+**Update 2/20/25:** Clarify requirements for grid point on report.
+
 ### Contents
 * TOC
 {:toc}
@@ -137,7 +139,7 @@ Instructions:
 - Finally, apply a perspective transform. This will change your image's perspective to resemble a bird's-eye view, providing a different angle of the workspace.
 
 {: .required_for_report }
-1) Quantitatively or qualitatively, assess your calibration routine using the grid point projection. <br>
+1) Quantitatively or qualitatively, assess your calibration routine using the grid point projection. Include a figure. <br>
 2) Which points did you use to compute your projective transform? Report the homography matrix.
 <br><br>
 Questions to consider:<br>

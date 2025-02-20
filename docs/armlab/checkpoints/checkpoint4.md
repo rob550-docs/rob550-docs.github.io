@@ -24,7 +24,8 @@ This will be similar to the teach-and-repeat planner, except you will need to au
 Implement logic for the final competitions into your state machine.
 
 {: .required_for_report }
-1) Evaluate the performance of your system during the competition. Include discussion on the basketball launcher. <br>
+1) Evaluate the performance of your system during the competition. <br>
+2) Include discussion on the basketball launcher mechanism and include a figure, either a photograph or a CAD render. <br>
 2) Discuss what improvements could be made to improve performance
 
 ## Checkpoint Submission

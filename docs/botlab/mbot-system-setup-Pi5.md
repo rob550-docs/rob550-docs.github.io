@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Botlab
 nav_order: 2
-last_modified_at: 2024-10-17 12:59:00 -0500
+last_modified_at: 2025-03-03 12:59:00 -0500
 ---
 
 {: .important}
@@ -29,7 +29,7 @@ If you've already powered on the Raspberry Pi and notice the LED light has "4 lo
 
 ## Set up RPi 5 System
 ### 1. Flash the image
-1. Download the custom Pi5 image `2024-10-16-mbot-base-bookworm.img` from this [link](https://www.dropbox.com/scl/fi/tyyslhj3fz7dd2y6267mp/2024-10-16-mbot-base-bookworm.img.gz?rlkey=4k3qe7knhqhabw4g17n9feukj&st=1knc90ky&dl=0) to your laptop. We use a custom image with RPiOS based on Debian 12 Bookworm
+1. Download the custom Pi5 image `2024-11-20-mbot-base-bookworm.img.gz` from this [link](https://www.dropbox.com/scl/fi/psz70s9ja5syyhhk82dv3/2024-11-20-mbot-base-bookworm.img.gz?rlkey=71fy1nf2hqf6s8fq2r81za9lk&st=qxs08er4&dl=0) to your laptop. We use a custom image with RPiOS based on Debian 12 Bookworm
 2. Download [Balena Etcher](https://etcher.balena.io/) to your laptop, it is a tool to flash the OS image to the SD card. Plug in the SD card to your laptop using SD card reader then following the steps in Balena Etcher.
 
 You now have an SD card with the OS image flashed on it for the Pi5. Keep the card in your laptop for now and proceed to the next step.
@@ -60,8 +60,8 @@ Then save the file. Now you can eject the SD card.
 2. Turn on the power bank and ensure that the power cables are connected as per the [assembly guide](https://mbot.robotics.umich.edu/docs/hardware/classic/assembly/mbot-wiring/).
 3. **Wait for about 1 minute until the OLED screen lights up** like the image below, where the IP should be something like `192.168.X.X` meaning it is part of a local network and not directly accessible from the public internet. Once you see this, you can proceed to the next step.
 
-    <a class="image-link" href="https://mbot.robotics.umich.edu/assets/images/tutorials/mbot-oled-ip.jpg">
-    <img src="https://mbot.robotics.umich.edu/assets/images/tutorials/mbot-oled-ip.jpg" alt="Image from RPi Foundation" style="max-width:300px;"/>
+    <a class="image-link" href="/assets/images/botlab/system-setup-oled.jpg">
+    <img src="/assets/images/botlab/system-setup-oled.jpg" alt="" style="max-width:300px;"/>
     </a>
 
 
@@ -72,15 +72,15 @@ Then save the file. Now you can eject the SD card.
     - **At the second step**, you can:
         1. Either eneter the numeric IP address on the OLED screen.
         2. Or enter `<MBOT-HOSTNAME>.local` like in the video demo.
-    - Note: NoMachine can be SLOW so please be EXTRA PATIENT. In the video demo below, we reopen NoMachine a few times due to delays. If you feel it's taking too long, you can try reopening the connection as well. you will eventually get through.
+    - Note: NoMachine can be SLOW so please be PATIENT. In the video demo below, we reopen NoMachine a few times due to delays. If you feel it's taking too long, you can try reopening the connection as well. you will eventually get through.
 
 3. Connect the MBot to the Internet. Open a terminal in the NoMachine desktop and run the following commands to connect the MBot to the Internet:
     ```bash
-    $ cd ~
-    $ ./SecureW2_JoinNow.run
+    cd ~
+    ./SecureW2_JoinNow.run
     ```
 
-4. When prompted for your unique name and password, use the course credentials provided by your instructor (for Fall 2024, these will be sent via Discord).
+4. When prompted for your unique name and password, use the 550 course credentials, it will be distributed during lab. Avoid using your own UM credentials for your privacy safety.
 
 5. After entering your credentials, NoMachine will disconnect during the process. Close the NoMachine window and wait for about 1 minute. Check the OLED screen to see if the IP address has changed from `192.168.X.X` to a different one. This indicates that the MBot has successfully connected to the Internet.
 
@@ -120,7 +120,7 @@ For mbot network security, we encourage you to change your password once you hav
 
 The output will look like this:
 ```bash
-$  passwd
+mbot@mbot-0018-shaw:~ $  passwd
 Changing password for mbot.
 Current password:
 New password:
@@ -138,24 +138,24 @@ Now you have completed all the basic setup for MBot! Next, we are going to insta
 1. Firstly, connect to the MBot and open a terminal, then run:
     ```bash
     # move to the home directory
-    $ cd ~
+    cd ~
     # create a new folder called mbot_ws
-    $ mkdir mbot_ws
+    mkdir mbot_ws
     # navigate to mbot_ws
-    $ cd ~/mbot_ws
+    cd ~/mbot_ws
     ```
 
-2. Clone [mbot_lcm_base](https://github.com/mbot-project/mbot_lcm_base.git) to `~/mbot_ws` and install.
+2. Clone [mbot_lcm_base](https://gitlab.eecs.umich.edu/ROB550-F24/mbot_lcm_base) to `~/mbot_ws` and install.
     1. Clone from Github
         ```bash
-        $ cd ~/mbot_ws/
-        $ git clone https://github.com/mbot-project/mbot_lcm_base.git
+        cd ~/mbot_ws/
+        git clone https://gitlab.eecs.umich.edu/ROB550-F24/mbot_lcm_base
         ```
     2. Install lcm related stuff
 
         ```bash
-        $ cd ~/mbot_ws/mbot_lcm_base
-        $ ./scripts/install.sh
+        cd ~/mbot_ws/mbot_lcm_base
+        ./scripts/install.sh
         ```
 
 3. Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/ROB550-F24/mbot_firmware) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to the Pi5 in `~/mbot_ws`.
@@ -164,16 +164,16 @@ Now you have completed all the basic setup for MBot! Next, we are going to insta
 
     1. Run the firmware setup script
         ```bash
-        $ cd ~/mbot_ws/mbot_firmware
-        $ ./setup.sh
+        cd ~/mbot_ws/mbot_firmware
+        ./setup.sh
         ```
     2. Build firmware
         ```bash
-        $ cd ~/mbot_ws/mbot_firmware
-        $ mkdir build
-        $ cd build
-        $ cmake -DMBOT_TYPE=CLASSIC -DENC=48 ..
-        $ make
+        cd ~/mbot_ws/mbot_firmware
+        mkdir build
+        cd build
+        cmake -DMBOT_TYPE=CLASSIC -DENC=48 ..
+        make
         ```
 
 ### 2. Calibrate the MBot and flash the firmware
@@ -192,11 +192,11 @@ In this step, we are going to flash the calibration script onto the Pico to cali
 Minicom is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts during the flash process.
 - After flashing the firmware to the Pico, run the following command to start minicom
     ```bash
-    $ minicom -D /dev/mbot_tty -b 115200
+    minicom -D /dev/mbot_tty -b 115200
     ```
     - If the minicom command doesn't work, run this command in the Terminal: `ls /dev | grep mbot`
     ```bash
-    $ mbot@mbot-0018-shaw:/dev$ ls /dev | grep mbot
+    mbot@mbot-0018-shaw:/dev$ ls /dev | grep mbot
     mbot_lcm
     mbot_tty
     ```
@@ -210,8 +210,8 @@ Minicom is a program designed for serial communication that connects devices to 
 **Note:**<br>
 To make running minicom easier, consider creating a [permanent alias](https://askubuntu.com/questions/154640/how-to-add-an-alias-to-a-command-in-terminal) by editing your .bashrc file. Run the following commands in your terminal:
 ```bash
-$ echo "alias start-minicom='minicom -D /dev/mbot_tty -b 115200'" >> ~/.bashrc
-$ source ~/.bashrc
+echo "alias start-minicom='minicom -D /dev/mbot_tty -b 115200'" >> ~/.bashrc
+source ~/.bashrc
 ```
 This will let you run minicom using the command `start-minicom`.
 
@@ -220,35 +220,35 @@ This will let you run minicom using the command `start-minicom`.
 
 1. Clone [RP Lidar Driver](https://github.com/mbot-project/rplidar_lcm_driver) and [MBot Bridge](https://github.com/mbot-project/mbot_bridge.git) to your Pi5 under folder `mbot_ws`
     ```bash
-    $ cd ~/mbot_ws/
-    $ git clone https://github.com/mbot-project/rplidar_lcm_driver.git
-    $ git clone https://github.com/mbot-project/mbot_bridge.git
+    cd ~/mbot_ws/
+    git clone https://github.com/mbot-project/rplidar_lcm_driver.git
+    git clone https://github.com/mbot-project/mbot_bridge.git
     ```
 2. Install the MBot Bridge and the RPLidar driver
     ```bash
-    $ cd ~/mbot_ws/mbot_bridge/
-    $ ./scripts/install.sh
+    cd ~/mbot_ws/mbot_bridge/
+    ./scripts/install.sh
 
-    $ cd ~/mbot_ws/rplidar_lcm_driver/
-    $ ./scripts/install.sh
+    cd ~/mbot_ws/rplidar_lcm_driver/
+    ./scripts/install.sh
     ```
 3. Install the MBot Web App
     1. Download the latest web app release and unpack it
     ```bash
-    $ cd ~/mbot_ws
-    $ wget https://github.com/mbot-project/mbot_web_app/releases/download/v1.3.0/mbot_web_app-v1.3.0.tar.gz
-    $ tar -xvzf mbot_web_app-v1.3.0.tar.gz
+    cd ~/mbot_ws
+    wget https://github.com/mbot-project/mbot_web_app/releases/download/v2.0.0/mbot_web_app-v2.0.0.tar.gz
+    tar -xvzf mbot_web_app-v2.0.0.tar.gz
     ```
     2. Install the web app dependencies
     ```bash
-    $ cd mbot_web_app-v1.3.0/
-    $ ./install_nginx.sh
-    $ ./install_python_deps.sh
+    cd mbot_web_app-v2.0.0/
+    ./install_nginx.sh
+    ./install_python_deps.sh
     ```
 
     3. Build and install the app
     ```bash
-    $ ./deploy_app.sh --no-rebuild
+    ./deploy_app.sh --no-rebuild
     ```
 
     {: .highlight }
@@ -262,9 +262,9 @@ This will let you run minicom using the command `start-minicom`.
         - Your MBot setup is complete, and you're ready for development.
         - To save space, you can now safely delete all the web app related code by running:
             ```bash
-            $ cd ~/mbot_ws
-            $ rm mbot_web_app-v1.3.0.tar.gz
-            $ rm -r mbot_web_app-v1.3.0/
+            cd ~/mbot_ws
+            rm mbot_web_app-v1.3.0.tar.gz
+            rm -r mbot_web_app-v1.3.0/
             ```
     - **If the robot does not respond,**
         - Start minicom and check if you can see the table output in the terminal. If minicom shows no output, re-flash the firmware (not the calibration script) while keeping minicom running in a second terminal. Once the flashing is complete, restart the MBot and repeat this step. If the robot still does not respond, ask the instructors for help.
@@ -273,26 +273,26 @@ This will let you run minicom using the command `start-minicom`.
 
 5. **Fork** [MBot Autonomy](https://gitlab.eecs.umich.edu/ROB550-F24/mbot_autonomy) to your group and **then clone** the forked code to Pi5, then install the MBot Autonomy code
     ```bash
-    $ cd ~/mbot_ws/mbot_autonomy
-    $ mkdir build
-    $ cd build
-    $ cmake -DMBOT_TYPE=DIFF ..
-    $ make
+    cd ~/mbot_ws/mbot_autonomy
+    mkdir build
+    cd build
+    cmake -DMBOT_TYPE=DIFF ..
+    make
     ```
 
 6. Clone [mbot_gui](https://github.com/mbot-project/mbot_gui) and install it.
     ```bash
-    $ cd ~/mbot_ws
-    $ git clone https://github.com/mbot-project/mbot_gui.git
-    $ sudo apt install libgtk2.0-dev \
+    cd ~/mbot_ws
+    git clone https://github.com/mbot-project/mbot_gui.git
+    sudo apt install libgtk2.0-dev \
                      mesa-common-dev \
                      libgl1-mesa-dev \
                      libglu1-mesa-dev \
                      libusb-dev libusb-1.0-0-dev \
                      libdc1394-dev libgsl-dev
     
-    $ cd mbot_gui
-    $ mkdir build
-    $ cd build
-    $ cmake .. && make
+    cd mbot_gui
+    mkdir build
+    cd build
+    cmake .. && make
     ```

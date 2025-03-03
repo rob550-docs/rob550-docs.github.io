@@ -13,20 +13,6 @@ last_modified_at: 2024-11-13 16:37:48 -0500
 * TOC
 {:toc}
 
-## Prerequisite
-Run the following commands to pull the latest `mbot_lcm_base` updates:
-```
-$ cd ~/mbot_ws/mbot_lcm_base
-$ git pull
-$ ./scripts/install.sh
-```
-
-If you have pushed the GitHub mbot_lcm_base repository to your group’s GitLab repository, you can still pull from the GitHub upstream:
-1. Run `git remote -v` to check the old GitHub remote’s name, for example, "old-origin".
-2. Run `git fetch old-origin` to get the latest updates from GitHub.
-3. Run `git merge old-origin/main` to merge the updates from the main branch of "old-origin" to your current branch. For instance, if you are on a branch named "test", the updates will merge into your "test" branch.
-4. Run `git push` to push the changes to your GitLab repository.
-
 ## Video Demo
 <iframe width="560" height="315" src="https://www.youtube.com/embed/cVtnwtbuxPw?si=6Wio0GMkb4QAe3Ma" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 

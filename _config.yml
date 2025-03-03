@@ -14,7 +14,7 @@ logo: "/assets/images/robotics-logo.svg"
 favicon_ico: "/assets/images/mbot-logo.png"
 math: katex
 url: "https://rob550-docs.github.io"
-enable_copy_code_button: false
+enable_copy_code_button: true
 
 callouts_level: quiet # or loud
 callouts:

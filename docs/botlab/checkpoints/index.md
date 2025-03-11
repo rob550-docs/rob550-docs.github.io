@@ -40,7 +40,6 @@ Part 1:
 Part 2:
 - Design a feedback controller to control the motor speed
 - Design a controller to move the robot based on velocity commands
-- Implement servo.c in the mbot library to control servo motors for the gripping mechanism
 
 Part 3:
 - Implement 2D mapping using the 2D Lidar

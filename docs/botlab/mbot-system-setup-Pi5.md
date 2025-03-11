@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Botlab
 nav_order: 2
-last_modified_at: 2025-03-03 12:59:00 -0500
+last_modified_at: 2025-03-11 12:59:00 -0500
 ---
 
 {: .important}
@@ -158,9 +158,20 @@ Now you have completed all the basic setup for MBot! Next, we are going to insta
         ./scripts/install.sh
         ```
 
-3. Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/ROB550-F24/mbot_firmware) to your group first, you will need to modify them for course assignment later, **then clone** your forked codebase to the Pi5 in `~/mbot_ws`.
+3. As in Armlab, one group member needs to create a GitLab Group and add all members. Follow these steps:
+    On the left-hand menu of the GitLab webapp, click on "Groups" to access the [Groups page](https://gitlab.eecs.umich.edu/dashboard/groups), then click the "New Group" button to initiate the group creation process.
+    Group Details:
+        - Group name: enter `botlab-s<SECTION#>_g<GROUP #>` (i.e. botlab-s012_g7)
+        - Visibility level: select “Private”
+        - Leave other fields blank
+    Invite your team members as “owners” of the project
+        - Firstly, go to groups page: sidebar -> groups
+        - Click your team group
+        - Add members: sidebar -> Manage -> Members -> invite members
 
-4. Compile the firmware code to get .uf2 binary files
+4. Next, **fork** [mbot_firmware](https://gitlab.eecs.umich.edu/ROB550-F24/mbot_firmware) to your group first, as you will need to modify them for course assignment later, **then clone** your forked codebase to the Pi5 in `~/mbot_ws`.
+
+5. Compile the firmware code to get .uf2 binary files
 
     1. Run the firmware setup script
         ```bash

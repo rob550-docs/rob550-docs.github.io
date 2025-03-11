@@ -80,9 +80,9 @@ Then save the file. Now you can eject the SD card.
     ./SecureW2_JoinNow.run
     ```
 
-4. When prompted for your unique name and password, use the 550 course credentials, it will be distributed during lab. Avoid using your own UM credentials for your privacy safety.
+4. When prompted for your unique name and password, use the 550 course credentials, it will be distributed during lab. Avoid using your own UM credentials for your privacy safety. You will be disconnected from the NoMachine session, but that is normal.
 
-5. After entering your credentials, NoMachine will disconnect during the process. Close the NoMachine window and wait for about 1 minute. Check the OLED screen to see if the IP address has changed from `192.168.X.X` to a different one. This indicates that the MBot has successfully connected to the Internet.
+5. After entering your credentials, NoMachine will disconnect during the process. Close the NoMachine window and wait for about 1 minute. Check the OLED screen to see if the IP address has changed from `192.168.X.X` to a different one. This indicates that the MBot has successfully connected to the Internet. If the OLED screen says "IP Not Found" and has been that way for over two minutes, you aren't connected to the network, so come see a GSI and ask to connect to an external monitor.
 
 **Video Demo:**
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Fw_pE00xbsA?si=eVlwtsD_uPoY55II" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

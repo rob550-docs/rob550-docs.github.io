@@ -47,7 +47,10 @@ The odometry functions are implemented in `odometry.c` and the estimated positio
 ### Task 1.2
 You need to test the provided odometry implementation by moving the robot known distances and turning by known angles. Verify if the odometry calculations match these values.
 
-You can use `mbot_firmware/python/mbot_move_simple.py` to drive the MBot: drive 1m straight see if x = 1, or turn half a cycle to check if odometry theta is pi. To verify odometry, run: `mbot lcm-spy --channels MBOT_ODOMETRY`, refer to the [MBot CLI Tools](/docs/botlab/how-to-guide/mbot-cli-tools) guide for more details.
+You can use `mbot_firmware/python/mbot_move_simple.py` to drive the MBot: drive 1m straight and see if x is approximately 1, or turn half a cycle to check if odometry theta is about pi. To verify odometry, run: `mbot lcm-spy --channels MBOT_ODOMETRY`, refer to the [MBot CLI Tools](/docs/botlab/how-to-guide/mbot-cli-tools) guide for more details.
+
+{: .important }
+Due to imprecise timings, your bot will *never* go the exact distance you tell it to in the mbot_move_simple script. The proper way to determine if your odometry is correct is to mark the starting position, measure how far it moved, then compare to your robot's internal odometry readings.
 
 If you are unsatisfied with the accuracy of the provided odometry, you can include some of the features discussed in lecture, for example, gyrodometry, to improve the accuracy.
 
@@ -62,12 +65,14 @@ $ sudo mbot-upload-firmware flash mbot_classic_v1.1.0_enc48.uf2
 Evaluate the performance of your odometry system with, and/or without, the improvements you made.
 
 ## Wheel Speed PID Controller
-The file `mbot_firmware/src/mbot_classic.c` includes the main control function `mbot_loop(repeating_timer_t *rt)`. This function reads sensor data, estimates the current state, and updates motor commands. The motor controller operates in various modes, including PWM mode, motor velocity mode, and body velocity mode.
+The file `mbot_firmware/src/mbot_classic.c` includes the main control function `mbot_loop(repeating_timer_t *rt)`. This function reads sensor data, estimates the current state, and updates motor commands. The motor controller operates in various modes, including PWM mode, motor velocity mode, and body velocity mode. For this task, you will edit the code inside the "MODE_MBOT_VEL" if statement, which corresponds to body velocity mode.
 
-Current controllers utilize calibration data for driving the MBot at set speeds.
+The current controllers utilize calibration data for driving the MBot at set speeds.
 
 ### Task 1.3
 Your task is to develop enhanced wheel speed and body velocity controllers for more precise and effective robot movement.
+
+The parameters for the controller are defined in a struct of type `mbot_ctlr_cfg_t`. To use the controller, implement the remaining functions in `mbot_controller.c` and call them.
 
 Features you should consider adding/changing for your controller:
 - Integrate Feed-Forward (FF) and Feedback (FB) controllers by summing their outputs. This approach allows the PID to focus solely on correcting the error between measured speed and the calibration function, potentially reducing or even eliminating the need for an integral term.
@@ -84,7 +89,7 @@ Provide a detailed description of your final controller, including a table of pa
 
 
 ## Motion Controller
-The motion controller on the MBot is the interface between the planner and the low level controller. It reads in a planned path (`robot_path_t`) on the `CONTROLLER_PATH` channel and executes the planned motion of the robot.
+The motion controller on the MBot is the interface between the planner and the low level controller. It reads in a planned path (`robot_path_t`) on the `CONTROLLER_PATH` channel and executes the planned motion of the robot. There is a working motion controller already implemented for you, so you do not need to write any code for this part. However, for better performance it may be wise to tweak some gains, and for maximum performance you may wish to write a more advanced controller.
 
 {: .important }
 The motion controller isn't running by default. If you ever want to send waypoints to the bot, such as in `drive_square.cpp`, you need to first run the program with `mbot_autonomy/build/mbot_motion_controller`. The program must be running in an active terminal window every time you send a path.

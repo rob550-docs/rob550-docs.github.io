@@ -25,7 +25,7 @@ The calibration program for the pico measures the robot’s motion to determine 
 ### Task 1.1
 You should perform the calibration several times and record your results in a file for comparison. We will collect this data to determine the consistency of the MBot’s drive system across all bots.
 
-Open one terminal with Minicom to view the calibration output, and use another terminal to run the calibration process.
+Open one terminal with Minicom to view the calibration output, and use another terminal to flash the calibration firmware to the pico.
 
 The calibration data consists of:
 - Encoder Polarity: Describes whether the encoder's count increases or decreases when a positive PWM signal is applied to the motor.

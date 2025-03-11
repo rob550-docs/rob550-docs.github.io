@@ -264,7 +264,7 @@ This will let you run minicom using the command `start-minicom`.
     ```
 
     {: .highlight }
-    You can now use the web app by going to your browser and typing in the robot’s IP address.
+    You can now use the web app by going to your browser and typing in the robot’s IP address. <br>This doesn't support HTTPS, so if you can't connect you may need to modify the URL from https to http.
     - If the firmware is flashed and the serial server is running, you should be able to drive the robot through the web app. Toggle "Drive Mode" on, then use the W, S, Q, and E keys to control the robot.
     - You don't have to re-run any of these steps, the web app will automatically start when you start the robot.
 4. Restart the MBot

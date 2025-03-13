@@ -7,8 +7,6 @@ grand_parent: Armlab
 last_modified_at: 2024-09-05 15:00:00 -0500
 ---
 
-**Update 1/16/25:** Better instructions for calibration.
-
 The first checkpoint is meant to be an introduction to using the GUI of the lab and to start working with the RGB-D camera. The interaction with the GUI will be under the Basic Motion section of the checkpoint, and the interaction with the RGB-D camera will be through the Camera Calibration portion of the checkpoint.
 
 
@@ -154,7 +152,7 @@ Assumptions:
 {: .required_for_report }
 Record your extrinsic matrix
 
-## Checkpoint Submission (Due 1/23/25)
+## Checkpoint Submission
 
 - Task 1.2
     - Record a video of your robot playing back the waypoints 

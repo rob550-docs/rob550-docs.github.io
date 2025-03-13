@@ -70,7 +70,7 @@ Consider to implement:
 {: .required_for_report }
 Describe the algorithm you used to create and execute the RX200 arm motion plan.
 
-## Checkpoint Submission (Due 2/16/25)
+## Checkpoint Submission
 ### Part 1
 - Record a video demonstrating click to grab & click to place. (Please show the view of control station gui as well as real world view in your video)
 

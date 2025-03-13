@@ -7,8 +7,6 @@ grand_parent: Armlab
 last_modified_at: 2024-02-26 15:00:00 -0500
 ---
 
-**Update 2/20/25:** Clarify requirements for grid point on report.
-
 ### Contents
 * TOC
 {:toc}
@@ -168,7 +166,7 @@ The end effector position is defined by $$(x, y, z, \varphi, \theta, \psi)$$ whe
 3) Describe how you verified that your arm tooltip achieved expected workspace coordinates for your test cases, estimate the error, and justify the accuracy of your measurements.
 
 
-## Checkpoint Submission (Due 1/31/25)
+## Checkpoint Submission
 ### Part 1
 - Demonstrate your calibration procedure in a video. The video should contain the following elements:
     1. Show your GUI before calibration.

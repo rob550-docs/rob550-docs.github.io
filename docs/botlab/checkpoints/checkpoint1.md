@@ -42,7 +42,7 @@ Report the motor calibration with variance for the robot on a concrete floor (li
 
 
 ## Odometry
-The odometry functions are implemented in `odometry.c` and the estimated position and orientation of the MBot is calculated using dead reckoning equations with the mbot velocity based on wheel encoders only.
+The odometry functions are implemented in `mbot_odometry.c` and the estimated position and orientation of the MBot is calculated using dead reckoning equations with the mbot velocity based on wheel encoders only.
 
 ### Task 1.2
 You need to test the provided odometry implementation by moving the robot known distances and turning by known angles. Verify if the odometry calculations match these values.

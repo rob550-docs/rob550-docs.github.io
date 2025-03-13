@@ -4,8 +4,10 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-10-17 17:37:48 -0500
+last_modified_at: 2025-03-13 17:37:48 -0500
 ---
+
+**Edit 3/13/25:** Correct odometry filename, add information about where to modify for odometry.
 
 To control the robot’s position, we need to tell it how to move. The basic command for moving the robot is the motor PWM, which determines how much effort the motors use.
 
@@ -42,7 +44,7 @@ Report the motor calibration with variance for the robot on a concrete floor (li
 
 
 ## Odometry
-The odometry functions are implemented in `mbot_odometry.c` and the estimated position and orientation of the MBot is calculated using dead reckoning equations with the mbot velocity based on wheel encoders only.
+The odometry functions are implemented in `mbot_odometry.c` and `mbot_classic.c` and the estimated position and orientation of the MBot is calculated using dead reckoning equations with the mbot velocity based on wheel encoders only.
 
 ### Task 1.2
 You need to test the provided odometry implementation by moving the robot known distances and turning by known angles. Verify if the odometry calculations match these values.

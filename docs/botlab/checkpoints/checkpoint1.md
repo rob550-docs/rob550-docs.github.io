@@ -7,7 +7,9 @@ grand_parent: Botlab
 last_modified_at: 2025-03-13 17:37:48 -0500
 ---
 
-**Edit 3/13/25:** Correct odometry filename, add information about where to modify for odometry.
+**Update 3/13/25:** Correct odometry filename, add information about where to modify for odometry.
+
+**Update 3/19/25:** Clarify mbot_move_simple in 1.2 and talk about polarities in 1.3 
 
 To control the robot’s position, we need to tell it how to move. The basic command for moving the robot is the motor PWM, which determines how much effort the motors use.
 
@@ -49,7 +51,7 @@ The odometry functions are implemented in `mbot_odometry.c` and `mbot_classic.c`
 ### Task 1.2
 You need to test the provided odometry implementation by moving the robot known distances and turning by known angles. Verify if the odometry calculations match these values.
 
-You can use `mbot_firmware/python/mbot_move_simple.py` to drive the MBot: drive 1m straight and see if x is approximately 1, or turn half a cycle to check if odometry theta is about pi. To verify odometry, run: `mbot lcm-spy --channels MBOT_ODOMETRY`, refer to the [MBot CLI Tools](/docs/botlab/how-to-guide/mbot-cli-tools) guide for more details.
+You can use `mbot_firmware/python/mbot_move_simple.py` to drive the MBot. This script lets you change how fast your bot moves forward and rotates, and how long it will move for. To verify odometry, run: `mbot lcm-spy --channels MBOT_ODOMETRY`, refer to the [MBot CLI Tools](/docs/botlab/how-to-guide/mbot-cli-tools) guide for more details.
 
 {: .important }
 Due to imprecise timings, your bot will *never* go the exact distance you tell it to in the mbot_move_simple script. The proper way to determine if your odometry is correct is to mark the starting position, measure how far it moved, then compare to your robot's internal odometry readings.
@@ -82,6 +84,9 @@ Features you should consider adding/changing for your controller:
 - Introduce acceleration and deceleration limits for the robot to prevent abrupt movements by filtering the command setpoints.
 
 To test your updated controller, you can modify the Python script `mbot_firmware/python/mbot_move_simple.py`, using them to create commands that challenge and evaluate your controller's performance.
+
+{: .note}
+You will need to compensate both your commanded and measured wheel velocities (`mbot_motor_vel_cmd` and `mbot_motor_vel`) according to their motor polarities. This is already done for you for the feed-forward controller, but you must also do it for wheel PID.
 
 {: .required_for_report }
 Provide a detailed description of your final controller, including a table of parameters (gains, filter parameters, etc.). Additionally, include an evaluation of the controller's performance.

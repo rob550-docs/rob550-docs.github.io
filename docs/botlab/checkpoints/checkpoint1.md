@@ -4,12 +4,14 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-03-13 17:37:48 -0500
+last_modified_at: 2025-03-20 17:37:48 -0500
 ---
 
 **Update 3/13/25:** Correct odometry filename, add information about where to modify for odometry.
 
 **Update 3/19/25:** Clarify mbot_move_simple in 1.2 and talk about polarities in 1.3 
+
+**Update 3/20/25:** Make mbot_move_simple more obvious
 
 To control the robot’s position, we need to tell it how to move. The basic command for moving the robot is the motor PWM, which determines how much effort the motors use.
 
@@ -54,7 +56,8 @@ You need to test the provided odometry implementation by moving the robot known 
 You can use `mbot_firmware/python/mbot_move_simple.py` to drive the MBot. This script lets you change how fast your bot moves forward and rotates, and how long it will move for. To verify odometry, run: `mbot lcm-spy --channels MBOT_ODOMETRY`, refer to the [MBot CLI Tools](/docs/botlab/how-to-guide/mbot-cli-tools) guide for more details.
 
 {: .important }
-Due to imprecise timings, your bot will *never* go the exact distance you tell it to in the mbot_move_simple script. The proper way to determine if your odometry is correct is to mark the starting position, measure how far it moved, then compare to your robot's internal odometry readings.
+Due to imprecise timings, your bot will *never* go the exact distance you tell it to in the mbot_move_simple script. The proper way to determine if your odometry is correct is to mark the starting position, measure how far it moved, then compare to your robot's internal odometry readings.<br><br>
+To reiterate: **DO NOT USE** `mbot_move_simple` **TO TRY TO MOVE EXACT DISTANCES**. It is **ONLY** meant to test speeds. If you tell your bot to move 1 m/s for 1 second, it will **never** reach 1 meter, and that is okay. {: .text-red-200}
 
 If you are unsatisfied with the accuracy of the provided odometry, you can include some of the features discussed in lecture, for example, gyrodometry, to improve the accuracy.
 

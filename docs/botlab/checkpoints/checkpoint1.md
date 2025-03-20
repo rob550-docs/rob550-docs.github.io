@@ -57,7 +57,7 @@ You can use `mbot_firmware/python/mbot_move_simple.py` to drive the MBot. This s
 
 {: .important }
 Due to imprecise timings, your bot will *never* go the exact distance you tell it to in the mbot_move_simple script. The proper way to determine if your odometry is correct is to mark the starting position, measure how far it moved, then compare to your robot's internal odometry readings.<br><br>
-To reiterate: **DO NOT USE** `mbot_move_simple` **TO TRY TO MOVE EXACT DISTANCES**. It is **ONLY** meant to test speeds. If you tell your bot to move 1 m/s for 1 second, it will **never** reach 1 meter, and that is okay. {: .text-red-200}
+To reiterate: **DO NOT USE** `mbot_move_simple` **TO TRY TO MOVE EXACT DISTANCES**. It is **ONLY** meant to test speeds. If you tell your bot to move 1 m/s for 1 second, it will **never** reach 1 meter, and that is okay.
 
 If you are unsatisfied with the accuracy of the provided odometry, you can include some of the features discussed in lecture, for example, gyrodometry, to improve the accuracy.
 

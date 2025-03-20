@@ -105,7 +105,7 @@ The motion controller on the MBot is the interface between the planner and the l
 The motion controller isn't running by default. If you ever want to send waypoints to the bot, such as in `drive_square.cpp`, you need to first run the program with `mbot_autonomy/build/mbot_motion_controller`. The program must be running in an active terminal window every time you send a path.
 
 ### Task 1.4
-Study the motion controller in `mbot_autonomy/src/mbot/diff_motion_controller.cpp`. This program will run on the Raspberry Pi. The stock controller implements basic PID waypoint following, which is sufficient to follow a given path, although it may be wise to implement a more advanced motion controller such as carrot following or smooth pursuit.
+Study the motion controller in `mbot_autonomy/src/mbot/diff_motion_controller.cpp`. This program will run on the Raspberry Pi. The stock controller implements basic PID waypoint following, which is sufficient to follow a given path, although it may be wise to implement a more advanced motion controller such as carrot following or pure pursuit.
 
 {: .required_for_report }
 Describe and document your motion control algorithm for getting between waypoints.

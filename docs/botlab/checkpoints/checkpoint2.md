@@ -193,7 +193,7 @@ NOTE: The above logic is already implemented for you. Your goal for this task is
 <img src="/assets/images/botlab/checkpoints/checkpoint1-maze.png" alt=" " style="max-width:600px;"/>
 </a>
 
-Demonstrate your SLAM system by mapping the maze used for Checkpoint 1. You may either manually drive the path with teleop, click to drive in botgui, or try using your python script from checkpoint 1.
+Demonstrate your SLAM system by mapping the maze used for Checkpoint 1. You may either manually drive the path with teleop, click to drive in botgui, or try using your script from checkpoint 1.
 1. Submit a screenshot of the map on botgui, showing the SLAM_POSE and MBOT_ODOMETRY pose traces (turn off lasers, & frontiers)
 2. Submit a lcm log file of the run and a .map file as well
     - You can uncomment the line map_.saveToFile("current.map"); in slam.cpp to output maps

@@ -22,9 +22,9 @@ Botgui is a legacy GUI and alternative to the webapp. It has more functionality 
 To run it you can execute the following commands, but they must be executed **on NoMachine**! As botgui opens a new GUI, it will not work on SSH.
 
 ```bash
-$ cd ~/mbot_ws/mbot_gui
-$ source setenv.sh
-$ ./build/botgui
+cd ~/mbot_ws/mbot_gui
+source setenv.sh
+./build/botgui
 ```
 
 ### LCM Logs
@@ -33,28 +33,28 @@ For this phase, we have provided some LCM logs containing sensor data from the M
 The logs are in the [`mbot_example_logs`](https://gitlab.eecs.umich.edu/ROB550-F24/mbot_example_logs) repo, which you can clone to your bot with the following commands:
 
 ```bash
-$ cd ~/mbot_ws
-$ git clone https://gitlab.eecs.umich.edu/ROB550-F24/mbot_example_logs.git
+cd ~/mbot_ws
+git clone https://gitlab.eecs.umich.edu/ROB550-F24/mbot_example_logs.git
 ```
 
 Here are a few logs that will be helpful to tune your SLAM:
 
-- `mbot_example_logs/botlab/center_maze_full_rays.log`: convex environment, where all walls are always visible and the robot remains stationary (use for initial testing of algorithms).
-- `mbot_example_logs/botlab/drive_square.log`: a convex environment while driving a square
-- `mbot_example_logs/botlab/drive_maze.log`: driving a circuit in an environment with several obstacles
-- `mbot_example_logs/botlab/drive_maze_full_rays.log`: driving a circuit in an environment with several obstacles and more dense rays.
+- `mbot_example_logs/botlab_w25/center_maze_full_rays.log`: convex environment, where all walls are always visible and the robot remains stationary (use for initial testing of algorithms).
+- `mbot_example_logs/botlab_w25/drive_square.log`: a convex environment while driving a square
+- `mbot_example_logs/botlab_w25/drive_maze.log`: driving a circuit in an environment with several obstacles
+- `mbot_example_logs/botlab_w25/drive_maze_full_rays.log`: driving a circuit in an environment with several obstacles and more dense rays.
 
 To play back these recorded LCM sessions, you can use lcm-logplayer-gui. Be careful, because the following command opens a new GUI and will only run **on NoMachine**!
 ```bash
-$ lcm-logplayer-gui <log_file.log>
+lcm-logplayer-gui <log_file.log>
 ```
 You can also run the command line version, lcm-logplayer, if the system does not have Java. In the GUI version you can turn off LCM channels with a checkbox. The same functionality is available in the command line version, check the help with:
 ```bash
-$ lcm-logplayer --help
+lcm-logplayer --help
 ```
 Similarly, to record your own lcm logs, for testing or otherwise, you can use the lcm-logger:
 ```bash
-$ lcm-logger -c SLAM_POSE my_lcm_log.log 
+lcm-logger -c SLAM_POSE my_lcm_log.log 
 ```
 This example would store data from the SLAM_POSE channel in the file `my_lcm_log.log`. With no channels specified, all channels will be recorded over the interval.  
 
@@ -86,13 +86,13 @@ As discussed in the lecture, Monte Carlo Localization (MCL) is a particle-filter
 
 In these tasks, you’ll run the slam program in localization-only mode using a saved map. Use the ground-truth maps provided with the sensor logs. You can run slam using: 
 ```bash
-$ cd ~/mbot_ws/mbot_autonomy/build
-$ ./mbot_slam --localization-only --map <map_file.map>
+cd ~/mbot_ws/mbot_autonomy/build
+./mbot_slam --localization-only --map <map_file.map>
 ```
 
 To test the action model only, you can run in action-only mode:
 ```bash
-$ ./mbot_slam --action-only
+./mbot_slam --action-only
 ```
 
 ### Task 2.2.1 Action Model
@@ -166,19 +166,19 @@ Do these every time you run a new test.
 4. Run mbot_slam with a different command line argument depending on what you are testing:
     - Testing mapping:
         ```bash
-        $ ./mbot_slam --mapping-only
+        ./mbot_slam --mapping-only
         ```
     - Testing action model:
         ```bash
-        $ ./mbot_slam --action-only
+        ./mbot_slam --action-only
         ```
     - Testing localization:
         ```bash
-        $ ./mbot_slam --localization-only --map <map_file.map>
+        ./mbot_slam --localization-only --map <map_file.map>
         ```
     - Testing full SLAM:
         ```bash
-        $ ./mbot_slam
+        ./mbot_slam
         ```
 5. Press "Play" on lcm-logplayer-gui.
 6. Observe your SLAM results.

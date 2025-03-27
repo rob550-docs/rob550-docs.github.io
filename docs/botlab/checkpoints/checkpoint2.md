@@ -194,8 +194,8 @@ NOTE: The above logic is already implemented for you. Your goal for this task is
 </a>
 
 Demonstrate your SLAM system by mapping the maze used for Checkpoint 1. You may either manually drive the path with teleop, click to drive in botgui, or try using your script from checkpoint 1.
-1. Submit a screenshot of the map on botgui, showing the SLAM_POSE and MBOT_ODOMETRY pose traces (turn off lasers, & frontiers)
+1. Submit a screenshot of the map on botgui, showing the SLAM_POSE and MBOT_ODOMETRY pose traces (turn off lasers & frontiers)
 2. Submit a lcm log file of the run and a .map file as well
-    - You can uncomment the line map_.saveToFile("current.map"); in slam.cpp to output maps
+    - You can uncomment the line `map_.saveToFile("current.map");` in slam.cpp to output maps
     - You can also use the Download Map functionality of the webapp
 4. Write a short description of your SLAM system (1/2 page) and any features we should be aware of.

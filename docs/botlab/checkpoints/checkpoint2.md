@@ -96,7 +96,7 @@ Do these every time you run a new test.
 1. Close botgui and kill your SLAM program if it's still running
 2. Start botgui
 3. Scrub the log player progress bar (the dark blue one at the top) slightly ahead of the start but not at the very start. See the image above for an example. This may not be necessary for every log file but playing from the very start can sometimes cause your SLAM to fail.
-4. Run mbot_slam with a different command line argument depending on what you are testing:
+4. Change the directory to `mbot_ws/mbot_autonomy/build`, then run mbot_slam with a different command line argument depending on what you are testing:
     - Testing mapping:
         ```bash
         ./mbot_slam --mapping-only

@@ -66,6 +66,58 @@ The laser rangefinder beam rotates 360 degrees at a sufficiently slow rate such 
 
 To do so, you must interpolate between the robot pose estimate of the current scan and the scan immediately before. Remember that the pose estimate of the previous SLAM update occurred immediately before the current scan started. Likewise, the pose estimate of the current SLAM update will occur when the final beam of the current scan is measured. We have provided code to handle this interpolation for you, located in `mbot_autonomy/src/slam/moving_laser_scan.hpp`. You only need to implement the poses to use for the interpolation. 
 
+
+## Testing Your SLAM
+
+### Setup
+
+Do these at the start of a session.
+
+1. Connect to the bot using **NoMachine**
+2. Unplug your Lidar and Pico.
+3. Prepare a log file for playback using lcm-logplayer-gui.
+    ```bash
+    $ lcm-logplayer-gui log_file.log
+    ```
+    Disable the following channels depending on what you're testing:
+    - Testing mapping: Disable SLAM_MAP
+    - Testing anything else: Disable all SLAM_* channels
+
+    Here is an image of what the GUI would look like if you're testing mapping:
+
+<a class="image-link" href="/assets/images/botlab/checkpoints/logplayer_gui_mapping.png">
+<img src="/assets/images/botlab/checkpoints/logplayer_gui_mapping.png" alt="This image shows the Lcm-Logplayer-GUI application playing the log file 'center_maze_full_rays.log'. The interface includes a play button, a step button, and a slider for navigating the log timeline. The slider is positioned at approximately 1.302 seconds into the log file. Below the timeline, a table lists various log channels and their corresponding playback channels. Each row represents a different data channel, with checkboxes in the 'Enable' column to toggle their playback status. The 'SLAM MAP' channel is highlighted, indicating it is currently selected but not enabled for playback." style="max-width:500px;"/>
+</a>
+
+### Running
+
+Do these every time you run a new test.
+
+1. Close botgui and kill your SLAM program if it's still running
+2. Start botgui
+3. Scrub the log player progress bar (the dark blue one at the top) slightly ahead of the start but not at the very start. See the image above for an example. This may not be necessary for every log file but playing from the very start can sometimes cause your SLAM to fail.
+4. Run mbot_slam with a different command line argument depending on what you are testing:
+    - Testing mapping:
+        ```bash
+        ./mbot_slam --mapping-only
+        ```
+    - Testing action model:
+        ```bash
+        ./mbot_slam --action-only
+        ```
+    - Testing localization:
+        ```bash
+        ./mbot_slam --localization-only --map <map_file.map>
+        ```
+    - Testing full SLAM:
+        ```bash
+        ./mbot_slam
+        ```
+5. Press "Play" on lcm-logplayer-gui.
+6. Observe your SLAM results.
+7. To compare your results with the ground truth results, stop your SLAM and play the log with the SLAM_* channels enabled.
+
+
 ## Mapping - Occupancy Grid
 ### Task 2.1
 Implement the occupancy grid mapping algorithm in the Mapping class in `mbot_autonomy/src/slam/mapping.cpp|hpp`.
@@ -133,56 +185,6 @@ NOTE: The above logic is already implemented for you. Your goal for this task is
 {: .required_for_report } 
 1) Create a block diagram of how the SLAM system components interact
 <br> 2) Compare the estimated poses from your SLAM system against the ground-truth poses in `drive_maze_full_rays.log`. Use this to estimate the accuracy of your system and include statistics such as RMS error etc.
-
-## Testing Your SLAM
-
-### Setup
-
-Do these at the start of a session.
-
-1. Connect to the bot using **NoMachine**
-2. Unplug your Lidar and Pico.
-3. Prepare a log file for playback using lcm-logplayer-gui.
-    ```bash
-    $ lcm-logplayer-gui log_file.log
-    ```
-    Disable the following channels depending on what you're testing:
-    - Testing mapping: Disable SLAM_MAP
-    - Testing anything else: Disable all SLAM_* channels
-
-    Here is an image of what the GUI would look like if you're testing mapping:
-
-<a class="image-link" href="/assets/images/botlab/checkpoints/logplayer_gui_mapping.png">
-<img src="/assets/images/botlab/checkpoints/logplayer_gui_mapping.png" alt="This image shows the Lcm-Logplayer-GUI application playing the log file 'center_maze_full_rays.log'. The interface includes a play button, a step button, and a slider for navigating the log timeline. The slider is positioned at approximately 1.302 seconds into the log file. Below the timeline, a table lists various log channels and their corresponding playback channels. Each row represents a different data channel, with checkboxes in the 'Enable' column to toggle their playback status. The 'SLAM MAP' channel is highlighted, indicating it is currently selected but not enabled for playback." style="max-width:500px;"/>
-</a>
-
-### Running
-
-Do these every time you run a new test.
-
-1. Close botgui and kill your SLAM program if it's still running
-2. Start botgui
-3. Scrub the log player progress bar (the dark blue one at the top) slightly ahead of the start but not at the very start. See the image above for an example. This may not be necessary for every log file but playing from the very start can sometimes cause your SLAM to fail.
-4. Run mbot_slam with a different command line argument depending on what you are testing:
-    - Testing mapping:
-        ```bash
-        ./mbot_slam --mapping-only
-        ```
-    - Testing action model:
-        ```bash
-        ./mbot_slam --action-only
-        ```
-    - Testing localization:
-        ```bash
-        ./mbot_slam --localization-only --map <map_file.map>
-        ```
-    - Testing full SLAM:
-        ```bash
-        ./mbot_slam
-        ```
-5. Press "Play" on lcm-logplayer-gui.
-6. Observe your SLAM results.
-7. To compare your results with the ground truth results, stop your SLAM and play the log with the SLAM_* channels enabled.
 
 
 ## Checkpoint Submission (Due 4/8/25)

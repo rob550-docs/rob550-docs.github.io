@@ -39,10 +39,10 @@ git clone https://gitlab.eecs.umich.edu/ROB550-F24/mbot_example_logs.git
 
 Here are a few logs that will be helpful to tune your SLAM:
 
-- `mbot_example_logs/botlab_w25/center_maze_full_rays.log`: convex environment, where all walls are always visible and the robot remains stationary (use for initial testing of algorithms).
-- `mbot_example_logs/botlab_w25/drive_square.log`: a convex environment while driving a square
-- `mbot_example_logs/botlab_w25/drive_maze.log`: driving a circuit in an environment with several obstacles
-- `mbot_example_logs/botlab_w25/drive_maze_full_rays.log`: driving a circuit in an environment with several obstacles and more dense rays.
+- `mbot_example_logs/botlab_w25/center_maze_full_rays_w25.log`: convex environment, where all walls are always visible and the robot remains stationary (use for initial testing of algorithms).
+- `mbot_example_logs/botlab_w25/drive_square_w25.log`: a convex environment while driving a square
+- `mbot_example_logs/botlab_w25/drive_maze_w25.log`: driving a circuit in an environment with several obstacles
+- `mbot_example_logs/botlab_w25/drive_maze_full_rays_w25.log`: driving a circuit in an environment with several obstacles and more dense rays.
 
 To play back these recorded LCM sessions, you can use lcm-logplayer-gui. Be careful, because the following command opens a new GUI and will only run **on NoMachine**!
 ```bash

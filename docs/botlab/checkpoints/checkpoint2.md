@@ -164,6 +164,8 @@ Refer to Chapter 6 of Probabilistic Robotics for a discussion of common sensor m
 
 Implement the particle filter functions in `mbot_autonomy/src/slam/particle_filter.cpp|hpp`.
 
+You can use the helpful resampling functions `lowVarianceSample` and `importanceSample` to resample your posterior distribution.
+
 Refer to Chapter 4 of Probabilistic Robotics for information implementing the particle filter.
 
 Hint: In case of slow performance of your sensor model, consider increasing the ray stride in the MovingLaserScan call.

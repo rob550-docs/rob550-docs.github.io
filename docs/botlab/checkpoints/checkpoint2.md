@@ -147,10 +147,12 @@ To test the action model only, you can run in action-only mode:
 ./mbot_slam --action-only
 ```
 
-### Task 2.2.1 Action Model
+### Task 2.2.1 Action Model & Particle Filter
 Implement an action (or motion) model using some combination of sensors. This could be odometry with wheel encoders alone, or it could be some other estimate of action incorporating the IMU or using computer vision. The skeleton of the action model can be found in `mbot_autonomy/src/slam/action_model.cpp|hpp`.
 
 Refer to Chapter 5 of Probabilistic Robotics for a discussion of common action models. You can base your implementation on the pseudo-code in this chapter. There are two action models that are discussed in detail, the Velocity Model (Sec. 5.3) and the Odometry Model (Sec. 5.4).
+
+You will also need to implement several functions in `mbot_autonomy/src/slam/particle_filter.cpp|hpp` to have your action model affect the particles.
 
 If you test in action-only mode you will see the particles spread out over time. That is expected. The action model adds randomness to your position, so your estimated position will get worse and worse if you don't use the sensor model to filter your position.
 
@@ -162,7 +164,7 @@ Implement a sensor model that calculates the likelihood of a pose given a laser 
 
 Refer to Chapter 6 of Probabilistic Robotics for a discussion of common sensor models. You can base your implementation on the pseudo-code in this chapter.  
 
-Implement the particle filter functions in `mbot_autonomy/src/slam/particle_filter.cpp|hpp`.
+Implement the remainder of the particle filter functions in `mbot_autonomy/src/slam/particle_filter.cpp|hpp`.
 
 You can use the helpful resampling functions `lowVarianceSample` and `importanceSample` to resample your posterior distribution.
 

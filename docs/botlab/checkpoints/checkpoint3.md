@@ -23,6 +23,8 @@ Write an A* path planner that will allow you to find plans from one pose in the 
 
 For this phase, you will implement an A* planner and a simple configuration space for the MBot. The skeleton for the A* planner is located in `mbot_autonomy/src/planning/astar.cpp|hpp` Your implementation will be called by the code in `mbot_autonomy/src/planning/motion_planner.cpp|hpp`. You can test your astar_test code using botgui, check the astar_test code for the appropriate arguments. The astar_test program can be used to test the performance of your A* planner.
 
+Your A* implementation may fail on a certain test case in the narrow constriction grid. This happens because the narrow constriction is on the edge of what is safe and what is unsafe. To fix this, you can multiply the `params.minDistanceToObstacle` variable by 1.01 when you are checking if something is safe inside `astar.cpp`.
+
 Once your planner is implemented, test it in a real maze by constructing a map using your SLAM algorithm and then using botgui to generate a plan. The full process to testing your A* in a real maze is:
 
 1. Start botgui

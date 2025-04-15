@@ -4,10 +4,10 @@ title: Checkpoint 3
 nav_order: 5
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2024-04-04 1:00:00 -0500
+last_modified_at: 2025-04-15 1:00:00 -0500
 ---
 
-Using the SLAM algorithm implemented previously, you can now construct a map of an environment using the MBot simulator. You will implement additional capabilities for the MBot: path planning using A* and autonomous exploration of an environment.
+Using the SLAM algorithm implemented previously, you can now construct a map of an environment using the MBot. You will implement additional capabilities for the MBot: path planning using A* and autonomous exploration of an environment.
 
 ### Contents
 * TOC
@@ -41,7 +41,7 @@ Once your planner is implemented, test it in a real maze by constructing a map u
 
 ## Task 3.3 Map Exploration
 
-Up to now, your MBot has always been driven by hand or driven to goals selected by you. For this task, you’ll write an exploration algorithm that will have the MBot autonomously select its motion targets and plan and follow a series of paths to fully explore an environment.
+Up to now, your MBot has always been driven by hand or driven to goals selected by you. For this task, you’ll write an exploration algorithm that will have the MBot autonomously select its motion targets and plan and follow a series of paths to fully explore an environment. This is useful in the competition but is **not used in the Checkpoint 3 submission**.
 
 We have provided an algorithm for finding the frontiers -- the borders between free space and unexplored space -- in `mbot_autonomy/src/planning/frontiers.cpp|hpp`. 
 
@@ -52,7 +52,7 @@ Explain the strategy used for finding frontiers and any other details about your
 
 ## Task 3.4 Map Localization with Estimated and Unknown Starting Position:
 
-For the advanced competition tasks, you will be asked to localize on a map where you do not know, or must estimate your initial position. This will require initializing your particles in some distribution in open space on the map, and converging on a pose.
+For the advanced competition tasks, you will be asked to localize on a map where you do not know, or must estimate your initial position. This will require initializing your particles in some distribution in open space on the map, and converging on a pose. This is useful in the competition but is **not used in the Checkpoint 3 submission**.
 
 {: .required_for_report } 
 Explain the methods used for initial localization.

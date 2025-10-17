@@ -4,12 +4,12 @@ title: Checkpoints
 nav_order: 3
 parent: Botlab
 has_children: true
-last_modified_at: 2023-12-23 14:37:48 -0500
+last_modified_at: 2025-10-17 18:37:48 -0500
 ---
 
-In this lab, you will be working with the MBot (Classic). Each MBot moves with differential drive, 2 parallel wheels with a rear caster.  Each motor is equipped with a magnetic wheel encoder. 
+In this lab, you will be working with the ROS2 MBot Classic. Each MBot moves with differential drive, 2 parallel wheels with a rear caster.  Each motor is equipped with a magnetic wheel encoder. 
 
-The robot also has a scanning 2D Lidar, and a MEMS 3-axis IMU. The MBot has a Wi-Fi connection for communicating with its onboard Jetson Nano compute module. The low level motor control is implemented on the MBot Control Board on a RaspberryPi RP2040 based microcontroller.
+The robot also has a scanning 2D Lidar, and a MEMS 3-axis IMU. The MBot has a Raspberry Pi 5. The low level motor control is implemented on the MBot Control Board on a Raspberry Pi RP2040 based microcontroller.
 
 
 ### Overview
@@ -38,7 +38,7 @@ Part 1:
 - Assemble the MBot
 
 Part 2:
-- Design a feedback controller to control the motor speed
+- Tune the feedback controller to control the motor speed
 - Design a controller to move the robot based on velocity commands
 
 Part 3:

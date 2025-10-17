@@ -142,14 +142,14 @@ In this step, we are going to flash the calibration script onto the Pico to cali
 2. First, flash the calibration file to calibrate your MBot.
     ```bash
     cd ~/botlab_uf2
-    sudo mbot-upload-firmware flash mbot_calibrate_classic_v1.1.0.uf2
+    sudo mbot-upload-firmware flash mbot_calibrate_classic_v1.1.1.uf2
     ```
     Expected output:
     ```bash
-    $ sudo mbot-upload-firmware flash mbot_calibrate_classic_v1.1.0.uf2
+    $ sudo mbot-upload-firmware flash mbot_calibrate_classic_v1.1.1.uf2
     [sudo] password for mbot: 
     Detected Raspberry Pi 5, entering flash mode...
-    Flashing action for mbot_calibrate_classic_v1.1.0.uf2...
+    Flashing action for mbot_calibrate_classic_v1.1.1.uf2...
     Loading into Flash:   [==============================]  100%
     The device was rebooted into application mode.
     ```
@@ -160,7 +160,7 @@ In this step, we are going to flash the calibration script onto the Pico to cali
     - **Allow the Pico to finish its calibration routine without interference.** The calibration script will save the parameters onto the Pico’s memory.
 3. Then, you can flash the firmware that will run on the Pico during operation.
     ```bash
-    sudo mbot-upload-firmware flash mbot_classic_ros_v1.1.0.uf2 
+    sudo mbot-upload-firmware flash mbot_classic_ros_v1.1.1.uf2 
     ```
 
 

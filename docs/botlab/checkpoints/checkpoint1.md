@@ -4,34 +4,46 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-03-20 17:37:48 -0500
+last_modified_at: 2025-10-20 13:37:48 -0500
 ---
 
-**Update 3/13/25:** Correct odometry filename, add information about where to modify for odometry.
+This checkpoint still under editing
+{: .fs-5 .text-red-200 .fw-500}
 
-**Update 3/19/25:** Clarify mbot_move_simple in 1.2 and talk about polarities in 1.3 
 
-**Update 3/20/25:** Make mbot_move_simple more obvious
-
-To control the robot’s position, we need to tell it how to move. The basic command for moving the robot is the motor PWM, which determines how much effort the motors use.
-
-However, it’s more practical to control the robot by setting its velocity directly. PWM values like give the motor "50% duty cycle" are less intuitive than setting mbot moving by "1 m/s" directly.  To do this, we control the speed of each wheel. There are two main ways:
-- Open Loop: Set the motor PWM to achieve the desired speed without feedback. This is the least accurate.
-- Feedback Control: Use encoder data to adjust the wheel speed with a feedback controller, making it more accurate.
-
-In this lab, you’ll develop different robot controllers and collect data to compare their performance.
+{: .note}
+We don’t need the LiDAR for Checkpoint 1. If you want to stop it from spinning and draining the battery, you can unplug the three jumper wires from the control board. When plugging it back in, be very careful, double-check the cable connections to avoid shorting the LiDAR.
 
 ### Contents
 * TOC
 {:toc}
 
-## Wheel Speed Calibration
-The calibration program for the pico measures the robot’s motion to determine the polarity of the encoders and motors and then performs a wheel speed calibration. The data from the wheel speed calibration are printed to the terminal and stored in non-volatile memory on the MBot.
+## Preparation
 
-### Task 1.1
-You should perform the calibration several times and record your results in a file for comparison. We will collect this data to determine the consistency of the MBot’s drive system across all bots.
+In the system setup, you’re provided with two precompiled `.uf2` files. Those are only for testing whether all the components are functioning correctly and are **not related to any of the checkpoints.**
 
-Open one terminal with Minicom to view the calibration output, and use another terminal to flash the calibration firmware to the pico.
+In Checkpoint 1, you’ll begin working directly with the firmware code.
+
+1. Fork the [mbot_firmware repository](https://gitlab.eecs.umich.edu/rob550-f25/mbot_firmware) to your GitLab group.
+2. Clone mbot_firmware to your mbot's home directory, then compile the code:
+   ```bash
+    cd ~
+    git clone your_url
+    cd mbot_firmware
+    mkdir build
+    cd build
+    cmake ..
+    make
+   ```
+3. Now you should have all the uf2 files in the `build` directory.
+4. For this checkpoint, when you need to flash the uf2 files, run:
+   ```bash
+    cd ~/mbot_firmware/build
+    sudo mbot-upload-firmware flash mbot_classic_ros.uf2
+   ```
+
+## Task 1.1 Wheel Calibration
+The calibration program determines the polarity of the encoders and motors, then performs a wheel speed calibration. The resulting data are printed to the terminal and stored in the MBot’s non-volatile memory.
 
 The calibration data consists of:
 - Encoder Polarity: Describes whether the encoder's count increases or decreases when a positive PWM signal is applied to the motor.
@@ -40,79 +52,109 @@ The calibration data consists of:
 
 $$\text{PWM}=m \times \text{Speed} + b$$
 
+### TODO
+Open one terminal with Minicom to monitor the calibration output, and use another terminal to flash the calibration firmware to the Pico. Run the calibration several times and collect the resulting data for analysis. This task focuses on analyzing the system’s performance.
+
+Important: Perform the calibration using the .uf2 file you compiled from the source code, not the precompiled .uf2 files provided. The precompiled files may be outdated, as the source code could be updated throughout the semester.
+
 {: .required_for_report }
-Report the motor calibration with variance for the robot on a concrete floor (like in the lab)
+Report the motor calibration with variance for the robot on a concrete floor (like in the lab).
 <br><br> Questions to Consider:
 <br> 1) How much variation is there in the calibration?
 <br> 2) What do you think is the source of variation?
 
 
-## Odometry
-The odometry functions are implemented in `mbot_odometry.c` and `mbot_classic.c` and the estimated position and orientation of the MBot is calculated using dead reckoning equations with the mbot velocity based on wheel encoders only.
+## Task 1.2 PID Tuning
+There are 3 drive modes and 3 control modes available. You can find this code in `mbot_firmware/src/mbot_classic_ros.c` from line 310.
 
-### Task 1.2
-You need to test the provided odometry implementation by moving the robot known distances and turning by known angles. Verify if the odometry calculations match these values.
+- **PWM Control**
+- **Wheel Velocity Control**
+  - Feedforward (FF) Control 
+  - PID Control
+  - Feedforward + PID Control 
+- **Robot Velocity Control**
+  - Feedforward (FF) Control
+  - PID Control
+  - Feedforward + PID Control 
 
-You can use `mbot_firmware/python/mbot_move_simple.py` to drive the MBot. This script lets you change how fast your bot moves forward and rotates, and how long it will move for. To verify odometry, run: `mbot lcm-spy --channels MBOT_ODOMETRY`, refer to the [MBot CLI Tools](/docs/botlab/how-to-guide/mbot-cli-tools) guide for more details.
+The **drive mode is automatically selected** based on the type of control command you send:
+- If you publish to `/cmd_vel`, **Robot Velocity Control** mode will be selected, meaning the robot will interpret commands as body velocities.
 
-{: .important }
-Due to imprecise timings, your bot will *never* go the exact distance you tell it to in the mbot_move_simple script. The proper way to determine if your odometry is correct is to mark the starting position, measure how far it moved, then compare to your robot's internal odometry readings.<br><br>
-To reiterate: **DO NOT USE** `mbot_move_simple` **TO TRY TO MOVE EXACT DISTANCES**. It is **ONLY** meant to test speeds. If you tell your bot to move 1 m/s for 1 second, it will **never** reach 1 meter, and that is okay.
+The **control mode is automatically selected** when you run calibration script, the default is "Feedforward + PID Control ". The calibration will read this header file (`mbot_firmware_ros/include/config/mbot_classic_default_pid.h`) and write the default values to FRAM.
 
-If you are unsatisfied with the accuracy of the provided odometry, you can include some of the features discussed in lecture, for example, gyrodometry, to improve the accuracy.
+You can tune the PID gains via the ROS parameter server at runtime.
 
-To apply the changes, you need to compile the mbot_firmware, and flash the .uf2 files to the control board same as we did in the system setup guide.
-```bash
-$ cd build
-$ make
-$ sudo mbot-upload-firmware flash mbot_classic_v1.1.0_enc48.uf2
-```
+### TODO
+Tune the PID values to achieve a desired system response.
 
-{: .required_for_report }
-Evaluate the performance of your odometry system with, and/or without, the improvements you made.
+**How to tune?**
+1. First, modify the values in `include/config/mbot_classic_pid.yaml`. There are pre-tuned values in there, the same as the `mbot_classic_default_pid.h.`
+2. After modifying the values in the yaml file, run the command below to load the new configs:
+    ```bash
+    cd ~/mbot_firmware_ros
+    ros2 param load /mbot_control_node include/config/mbot_classic_pid.yaml
+    ```
+3. If you want to check whether the values are actually loaded, run:
+    ```bash
+    ros2 param dump /mbot_control_node 
+    ```
+    - If you see the values you set, it means the new PID gains have been applied to the MBot and written to the FRAM. 
+    - The values will persist after rebooting. However, if you run the calibration again, it will overwrite your new PID gains, and you’ll need to reload the YAML file to restore them.
 
-## Wheel Speed PID Controller
-The file `mbot_firmware/src/mbot_classic.c` includes the main control function `mbot_loop(repeating_timer_t *rt)`. This function reads sensor data, estimates the current state, and updates motor commands. The motor controller operates in various modes, including PWM mode, motor velocity mode, and body velocity mode. For this task, you will edit the code inside the "MODE_MBOT_VEL" if statement, which corresponds to body velocity mode.
-
-The current controllers utilize calibration data for driving the MBot at set speeds.
-
-### Task 1.3
-Your task is to develop enhanced wheel speed and body velocity controllers for more precise and effective robot movement.
-
-The parameters for the controller are defined in a struct of type `mbot_ctlr_cfg_t`. To use the controller, implement the remaining functions in `mbot_controller.c` and call them.
-
-Features you should consider adding/changing for your controller:
-- Integrate Feed-Forward (FF) and Feedback (FB) controllers by summing their outputs. This approach allows the PID to focus solely on correcting the error between measured speed and the calibration function, potentially reducing or even eliminating the need for an integral term.
-- Implement a low-pass filter on the wheel velocity estimates to minimize discretization noise, particularly at low speeds.
-- Introduce acceleration and deceleration limits for the robot to prevent abrupt movements by filtering the command setpoints.
-
-To test your updated controller, you can modify the Python script `mbot_firmware/python/mbot_move_simple.py`, using them to create commands that challenge and evaluate your controller's performance.
-
-{: .note}
-You will need to compensate both your commanded and measured wheel velocities (`mbot_motor_vel_cmd` and `mbot_motor_vel`) according to their motor polarities. This is already done for you for the feed-forward controller, but you must also do it for wheel PID.
+**How to test?**
+- We provide a simple python script: `mbot_firmware_ros/python-tests/test_wheel_pid.py`. It will drive the robot and print the target vs. real speed to the terminal. Use this file as a starting point, modify it to make comparisons, and collect data for plots.
 
 {: .required_for_report }
-Provide a detailed description of your final controller, including a table of parameters (gains, filter parameters, etc.). Additionally, include an evaluation of the controller's performance.
-<br><br>Questions to Consider:
-<br> 1) How did you tune the parameters in your controller? What metric did you use to decide it was sufficiently tuned?
-<br> 2) What additional features did you implement, and what were the effects?
+Plots of time vs. velocity with robot driving in FF model vs. PID controller model vs. FF + PID controller
+<br><br> Questions to Consider:
+<br> 1) Which wheel controller performs the best and the worst, why?
+<br> 2) Is there any improvement we can make?
 
 
-## Motion Controller
-The motion controller on the MBot is the interface between the planner and the low level controller. It reads in a planned path (`robot_path_t`) on the `CONTROLLER_PATH` channel and executes the planned motion of the robot. There is a working motion controller already implemented for you, so you do not need to write any code for this part. However, for better performance it may be wise to tweak some gains, and for maximum performance you may wish to write a more advanced controller.
+## Task 1.3 Motion Controller
 
-{: .important }
-The motion controller isn't running by default. If you ever want to send waypoints to the bot, such as in `drive_square.cpp`, you need to first run the program with `mbot_autonomy/build/mbot_motion_controller`. The program must be running in an active terminal window every time you send a path.
+### TODO
 
-### Task 1.4
-Study the motion controller in `mbot_autonomy/src/mbot/diff_motion_controller.cpp`. This program will run on the Raspberry Pi. The stock controller implements basic PID waypoint following, which is sufficient to follow a given path, although it may be wise to implement a more advanced motion controller such as carrot following or pure pursuit.
+**How to test?**
 
 {: .required_for_report }
 Describe and document your motion control algorithm for getting between waypoints.
-<br> 1) Include a plot of your robot’s dead reckoning estimated pose as the robot is commanded to drive a 1m square 4 times.
-<br> 2) Include a plot of the robot's linear and rotational velocity as it drives one loop around the square
+<br><br>Questions to Consider:
+<br> 1) Include a plot of your robot’s estimated pose as the robot is commanded to drive a 1m square 4 times.
+<br> 2) Include a plot of the robot’s linear and rotational velocity as it drives one loop around the square
 
-## Checkpoint Submission (Due 3/25/25)
+
+## Task 1.4 (Optional) Update Firmware
+After Checkpoint 1, we will use the full firmware implementation, replacing the odometry code you implemented from the `mbot_setpoints` package. So later, you don’t have to run the node to publish odom, the firmware will take care of it. However, the current firmware odometry has limitations:
+- Uses only wheel encoder dead reckoning (no IMU fusion)
+- No sensor filtering or drift compensation
+- Accumulates error over time
+
+This optional task allows you to improve odometry accuracy by modifying the firmware directly. You don’t have to finish this task. 
+
+### TODO
+1. Use `mbot_odometry.c` as the start point to understand the current implementation.
+2. Add one or more enhancements.
+
+
+**How to apply the changes?**
+1. After modifying the code, first compile: 
+    ```bash
+    cd ~/mbot_firmware
+    cd build
+    cmake ..
+    make
+    ```
+2. Flash to the pico: `sudo mbot-upload-firmware flash mbot_classic_ros.uf2`
+3. Run drive test to see improvements
+
+
+{: .required_for_report }
+Explain what additional implementations you added to the firmware.
+<br><br>Questions to Consider:
+<br> 1) Is perfect odometry necessary for achieving reliable autonomous navigation? Why or why not?
+
+## Checkpoint Submission
 <br>
 <a class="image-link" href="/assets/images/botlab/checkpoints/checkpoint1-maze.png">
 <img src="/assets/images/botlab/checkpoints/checkpoint1-maze.png" alt=" " style="max-width:600px;"/>
@@ -121,6 +163,4 @@ Describe and document your motion control algorithm for getting between waypoint
 - Demonstrate your motion controller by having it drive the illustrated path in one of the mazes set up in the lab. Record a video of the robot attempting the path at a slow speed (~0.2m/s & pi/4 rad/s) and a high speed (~0.8m/s, pi rad/s) and provide a link to it.
     - The robot motion does NOT need to be perfect
 - Produce a plot of the (x,y) odometry position as the robot executes the path at both speeds.
-    - To record a log, use `lcm-logger -c MBOT_ODOMETRY my_lcm_log.log`
-    - To parse a log and make a plot, refer to the first Botlab lecture slides.
 - Write a short description of your controllers (1/2 page) and any features we should be aware of. It is OK to use the stock controllers.

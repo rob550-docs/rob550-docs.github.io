@@ -7,6 +7,9 @@ grand_parent: Botlab
 last_modified_at: 2024-11-17 16:37:48 -0500
 ---
 
+This checkpoint still under editing
+{: .fs-5 .text-red-200 .fw-500}
+
 <a class="image-link" href="/assets/images/botlab/checkpoints/doge-meme.png">
 <img src="/assets/images/botlab/checkpoints/doge-meme.png" alt=" " style="max-width:250px;"/>
 </a>

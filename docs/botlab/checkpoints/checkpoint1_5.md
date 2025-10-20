@@ -6,6 +6,8 @@ parent: Checkpoints
 grand_parent: Botlab
 last_modified_at: 2024-11-05 15:37:48 -0500
 ---
+This checkpoint still under editing
+{: .fs-5 .text-red-200 .fw-500}
 
 The MBot has a camera that can be used to perform vision tasks like identifying Apriltags and other obstacles in the environment.
 

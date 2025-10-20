@@ -7,6 +7,9 @@ grand_parent: Botlab
 last_modified_at: 2025-04-15 1:00:00 -0500
 ---
 
+This checkpoint still under editing
+{: .fs-5 .text-red-200 .fw-500}
+
 Using the SLAM algorithm implemented previously, you can now construct a map of an environment using the MBot. You will implement additional capabilities for the MBot: path planning using A* and autonomous exploration of an environment.
 
 ### Contents

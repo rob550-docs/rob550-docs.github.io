@@ -3,8 +3,11 @@ layout: default
 title: MBot System Setup
 parent: Botlab
 nav_order: 2
-last_modified_at: 2025-10-14 12:59:00 -0500
+last_modified_at: 2025-10-20 14:38:00 -0500
 ---
+
+{: .new}
+This guide has been updated on Oct. 20!
 
 {: .important}
 This guide has been updated for **ROS2** MBot Classic!
@@ -216,4 +219,75 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
     - `j` = turn left
     - `l` = turn right
 
-If you’ve successfully driven your robot around, your system setup is complete!
+If you’ve successfully driven your robot around, your control board setup is complete!
+
+## Setup mbot_ws
+1. Fork the [mbot_ws code](https://gitlab.eecs.umich.edu/rob550-f25/mbot_ros2_ws) to your group, and clone it to your mbot home directory.
+   ```bash
+    cd ~
+    mkdir mbot_ws
+    cd ~/mbot_ws
+    git clone --recurse-submodules your_group_url src
+   ```
+    - The repository is called `mbot_ros2_ws`, but here we clone it into `~/mbot_ws/src`, the repo's name is irrelevant.
+2. Run the following commands:
+    ```bash
+    cd ~/mbot_ws
+    # install ros dependencies
+    rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO --skip-keys=libcamera
+    # build the packages
+    colcon build --symlink-install
+    # source the env
+    echo "source $PWD/install/local_setup.bash" >> ~/.bashrc
+    source install/local_setup.bash
+    ```
+    - There might be warnings after running colcon build from sllidar_ros2 package, it is normal, if you re-run the command the warnings will be gone.
+
+### Test Camera
+
+Test your camera by going through the following steps in order. If any of the steps produce unexpected results, contact the GSIs for assistance.
+
+1. To test if camera is detected, run:
+   ```bash
+   rpicam-hello
+   ```
+   - If the terminal didn't say "ERROR: *** no cameras available ***", your camera is detected. Everything is good, use `ctrl+C` to quit.
+2. To test if camera is working, run:
+   ```bash
+   cd ~
+   rpicam-still -t 1 -o test.jpg
+   ```
+   - This will take a photo and save it in the home directory, you can use vscode to check the photo. The photo will be upside-down, that's expected.
+3. To test if camera ROS driver is working, run in vscode terminal:
+   ```bash
+    # bring up the camera node and flip the image
+    ros2 run camera_ros camera_node --ros-args \
+    -p orientation:=180 \
+    -p width:=640 -p height:=480 \
+    -p format:=BGR888
+   ```
+   - Ignore the errors about calibration files.
+   - You can visualize the camera view in rqt on NoMachine desktop. Run the following in NoMachine Terminal:
+    ```bash
+    ros2 run rqt_image_view rqt_image_view
+    ```
+    - Select the image topic `/camera/image_raw`
+
+### Test LiDAR
+1. Run the following in vscode terminal:
+    ```bash
+    ros2 launch mbot_bringup mbot_bringup.launch.py 
+    ```
+    - This will bring up the lidar driver, the robot description for visualization, and the static tf.
+2. Run the following on NoMachine:
+   ```bash
+   ros2 launch mbot_bringup mbot_viz.launch.py
+   ```
+   You should see the rviz with the robot model and the LiDAR scan show up.
+
+    <a class="image-link" href="/assets/images/botlab/rviz0.png">
+    <img src="/assets/images/botlab/rviz0.png" alt="Image from RPi Foundation" style="max-width:600px;"/>
+    </a>
+
+
+If you have successfully completed both tests, your MBot setup is complete, which means Checkpoint 0 is finished. Make sure everything is working properly before the lab starts Checkpoint 1.

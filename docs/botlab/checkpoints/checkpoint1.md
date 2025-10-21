@@ -109,7 +109,7 @@ Tune the PID values to achieve a desired system response.
 - We provide a simple python script: `mbot_firmware_ros/python-tests/test_wheel_pid.py`. It will drive the robot and print the target vs. real speed to the terminal. Use this file as a starting point, modify it to make comparisons, and collect data for plots.
 
 {: .required_for_report }
-Plots of time vs. velocity with robot driving in FF model vs. PID controller model vs. FF + PID controller
+Plot of time vs. velocity with robot responding to a step command of 0.5 m/s for the FF model, PID controller model and FF + PID controller (3 traces on one plot).
 <br><br> Questions to Consider:
 <br> 1) Which wheel controller performs the best and the worst, why?
 <br> 2) Is there any improvement we can make?

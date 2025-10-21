@@ -17,7 +17,7 @@ We don’t need the LiDAR for Checkpoint 1. If you want to stop it from spinning
 
 ## Preparation
 
-In the system setup, you’re provided with two precompiled `.uf2` files. Those are only for testing whether all the components are functioning correctly and are **not related to any of the checkpoints.**
+In the system setup, you’re provided with two precompiled `.uf2` files. They are for testing whether all components are functioning correctly. We will continue releasing additional `.uf2` files for each checkpoint, so please pay attention to the filenames.
 
 First pull from the uf2 repo, get the latest checkpoint 1 uf2 file.
 ```bash

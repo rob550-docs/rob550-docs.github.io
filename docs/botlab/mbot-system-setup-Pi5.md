@@ -230,7 +230,11 @@ If you’ve successfully driven your robot around, your control board setup is c
     git clone --recurse-submodules your_group_url src
    ```
     - The repository is called `mbot_ros2_ws`, but here we clone it into `~/mbot_ws/src`, the repo's name is irrelevant.
-2. Run the following commands:
+2. Update the package lists, then reboot the mbot.
+    ```bash
+    sudo apt update
+    ```
+3. Run the following commands:
     ```bash
     cd ~/mbot_ws
     # install ros dependencies

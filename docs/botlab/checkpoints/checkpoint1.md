@@ -4,11 +4,8 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-10-20 13:37:48 -0500
+last_modified_at: 2025-10-21 11:37:48 -0500
 ---
-
-This checkpoint still under editing
-{: .fs-5 .text-red-200 .fw-500}
 
 
 {: .note}
@@ -22,25 +19,20 @@ We don’t need the LiDAR for Checkpoint 1. If you want to stop it from spinning
 
 In the system setup, you’re provided with two precompiled `.uf2` files. Those are only for testing whether all the components are functioning correctly and are **not related to any of the checkpoints.**
 
-In Checkpoint 1, you’ll begin working directly with the firmware code.
+First pull from the uf2 repo, get the latest checkpoint 1 uf2 file.
+```bash
+cd ~/botlab_uf2
+git pull
+```
+- You should now have "mbot_classic_ros_checkpoint1.uf2".
 
-1. Fork the [mbot_firmware repository](https://gitlab.eecs.umich.edu/rob550-f25/mbot_firmware) to your GitLab group.
-2. Clone mbot_firmware to your mbot's home directory, then compile the code:
+Then fork the firmware repository and clone it to your MBot. **You don’t need to modify the firmware codebase for checkpoint 1**, you’ll only use some of the configuration files from this repository.
+1. Fork the [mbot_firmware_ros repository](https://gitlab.eecs.umich.edu/rob550-f25/mbot_firmware_ros) to your GitLab group.
+2. Clone mbot_firmware_ros to your mbot's home directory:
    ```bash
     cd ~
     git clone your_url
-    cd mbot_firmware
-    mkdir build
-    cd build
-    cmake ..
-    make
-   ```
-3. Now you should have all the uf2 files in the `build` directory.
-4. For this checkpoint, when you need to flash the uf2 files, run:
-   ```bash
-    cd ~/mbot_firmware/build
-    sudo mbot-upload-firmware flash mbot_classic_ros.uf2
-   ```
+    ```
 
 ## Task 1.1 Wheel Calibration
 The calibration program determines the polarity of the encoders and motors, then performs a wheel speed calibration. The resulting data are printed to the terminal and stored in the MBot’s non-volatile memory.
@@ -55,7 +47,19 @@ $$\text{PWM}=m \times \text{Speed} + b$$
 ### TODO
 Open one terminal with Minicom to monitor the calibration output, and use another terminal to flash the calibration firmware to the Pico. Run the calibration several times and collect the resulting data for analysis. This task focuses on analyzing the system’s performance.
 
-Important: Perform the calibration using the .uf2 file you compiled from the source code, not the precompiled .uf2 files provided. The precompiled files may be outdated, as the source code could be updated throughout the semester.
+```bash
+# terminal 1
+sudo minicom -D /dev/ttyACM0 -b 115200
+# terminal 2
+cd ~/botlab_uf2
+sudo mbot-upload-firmware flash mbot_calibrate_classic_v1.1.1.uf2
+```
+
+Once you’ve finished collecting data, remember to flash **the Checkpoint 1 firmware** to the control board.
+```bash
+cd ~/botlab_uf2
+sudo mbot-upload-firmware flash mbot_classic_ros_checkpoint1.uf2
+```
 
 {: .required_for_report }
 Report the motor calibration with variance for the robot on a concrete floor (like in the lab).
@@ -65,7 +69,7 @@ Report the motor calibration with variance for the robot on a concrete floor (li
 
 
 ## Task 1.2 PID Tuning
-There are 3 drive modes and 3 control modes available. You can find this code in `mbot_firmware/src/mbot_classic_ros.c` from line 310.
+There are 3 drive modes and 3 control modes in firmware.
 
 - **PWM Control**
 - **Wheel Velocity Control**
@@ -110,6 +114,11 @@ Plots of time vs. velocity with robot driving in FF model vs. PID controller mod
 <br> 1) Which wheel controller performs the best and the worst, why?
 <br> 2) Is there any improvement we can make?
 
+---
+
+Below this point is still under editing
+{: .fs-5 .text-red-200 .fw-500}
+
 
 ## Task 1.3 Motion Controller
 
@@ -123,36 +132,6 @@ Describe and document your motion control algorithm for getting between waypoint
 <br> 1) Include a plot of your robot’s estimated pose as the robot is commanded to drive a 1m square 4 times.
 <br> 2) Include a plot of the robot’s linear and rotational velocity as it drives one loop around the square
 
-
-## Task 1.4 (Optional) Update Firmware
-After Checkpoint 1, we will use the full firmware implementation, replacing the odometry code you implemented from the `mbot_setpoints` package. So later, you don’t have to run the node to publish odom, the firmware will take care of it. However, the current firmware odometry has limitations:
-- Uses only wheel encoder dead reckoning (no IMU fusion)
-- No sensor filtering or drift compensation
-- Accumulates error over time
-
-This optional task allows you to improve odometry accuracy by modifying the firmware directly. You don’t have to finish this task. 
-
-### TODO
-1. Use `mbot_odometry.c` as the start point to understand the current implementation.
-2. Add one or more enhancements.
-
-
-**How to apply the changes?**
-1. After modifying the code, first compile: 
-    ```bash
-    cd ~/mbot_firmware
-    cd build
-    cmake ..
-    make
-    ```
-2. Flash to the pico: `sudo mbot-upload-firmware flash mbot_classic_ros.uf2`
-3. Run drive test to see improvements
-
-
-{: .required_for_report }
-Explain what additional implementations you added to the firmware.
-<br><br>Questions to Consider:
-<br> 1) Is perfect odometry necessary for achieving reliable autonomous navigation? Why or why not?
 
 ## Checkpoint Submission
 <br>

@@ -3,11 +3,8 @@ layout: default
 title: MBot System Setup
 parent: Botlab
 nav_order: 2
-last_modified_at: 2025-10-20 14:38:00 -0500
+last_modified_at: 2025-10-21 13:20:00 -0500
 ---
-
-{: .new}
-This guide has been updated on Oct. 20!
 
 {: .important}
 This guide has been updated for **ROS2** MBot Classic!
@@ -97,7 +94,7 @@ Then save the file. Now you can eject the SD card.
 If you have successfully connected your MBot to MWireless or your home Wi-Fi, you can use its IP address to remotely access the MBot. From now on, you can always find the IP address on the OLED screen. Proceed to the next step for more details.
 
 ### 5. Remote Access
-**Upon this step, your laptop is now just a gateway for the SSH connection to your MBot. All programming is executed on the MBot, not on your laptop. When we mention opening a terminal in this guide later, we're referring to using a VSCode terminal to access your MBot.**
+**At this point, your laptop functions only as a gateway for the SSH connection to your MBot. All programming is executed on the MBot, not on your laptop. When this guide later refers to opening a terminal, it means using the VS Code terminal to access your MBot, unless stated otherwise.**
 {: .text-red-200}
 
 To access the mbot, your laptop and the MBot must always be on the same network. And there are 2 options to connect:
@@ -251,8 +248,8 @@ If you’ve successfully driven your robot around, your control board setup is c
 
 Test your camera by going through the following steps in order. If any of the steps produce unexpected results, contact the GSIs for assistance.
 
-1. To test if camera is detected, run:
-   ```bash
+1. To test if camera is detected, run this in the **VSCode terminal**:
+    ```
    rpicam-hello
    ```
    - If the terminal didn't say "ERROR: *** no cameras available ***", your camera is detected. Everything is good, use `ctrl+C` to quit.
@@ -261,8 +258,8 @@ Test your camera by going through the following steps in order. If any of the st
    cd ~
    rpicam-still -t 1 -o test.jpg
    ```
-   - This will take a photo and save it in the home directory, you can use vscode to check the photo. The photo will be upside-down, that's expected.
-3. To test if camera ROS driver is working, run in vscode terminal:
+   - This will take a photo and save it in the home directory, you can use VSCode to check the photo. The photo will be upside-down, that's expected.
+3. To test if camera ROS driver is working, run the following in the **VSCode terminal**:
    ```bash
     # bring up the camera node and flip the image
     ros2 run camera_ros camera_node --ros-args \
@@ -271,19 +268,19 @@ Test your camera by going through the following steps in order. If any of the st
     -p format:=BGR888
    ```
    - Ignore the errors about calibration files.
-   - You can visualize the camera view in rqt on NoMachine desktop. Run the following in NoMachine Terminal:
+   - You can visualize the camera view in rqt on NoMachine desktop. Run the following in the **NoMachine Terminal**:
     ```bash
     ros2 run rqt_image_view rqt_image_view
     ```
     - Select the image topic `/camera/image_raw`
 
 ### Test LiDAR
-1. Run the following in vscode terminal:
+1. Run the following in the **VSCode terminal**:
     ```bash
     ros2 launch mbot_bringup mbot_bringup.launch.py 
     ```
     - This will bring up the lidar driver, the robot description for visualization, and the static tf.
-2. Run the following on NoMachine:
+2. Run the following in the **NoMachine Terminal**:
    ```bash
    ros2 launch mbot_bringup mbot_viz.launch.py
    ```

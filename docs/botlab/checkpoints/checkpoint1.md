@@ -4,7 +4,7 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-10-21 11:37:48 -0500
+last_modified_at: 2025-10-22 11:37:48 -0500
 ---
 
 
@@ -26,7 +26,7 @@ git pull
 ```
 - You should now have "mbot_classic_ros_checkpoint1.uf2".
 
-Then fork the firmware repository and clone it to your MBot. **You don’t need to modify the firmware codebase for checkpoint 1**, you’ll only use some of the configuration files from this repository.
+Then fork the firmware repository and clone it to your MBot for now.
 1. Fork the [mbot_firmware_ros repository](https://gitlab.eecs.umich.edu/rob550-f25/mbot_firmware_ros) to your GitLab group.
 2. Clone mbot_firmware_ros to your mbot's home directory:
    ```bash
@@ -39,13 +39,15 @@ The calibration program determines the polarity of the encoders and motors, then
 
 The calibration data consists of:
 - Encoder Polarity: Describes whether the encoder's count increases or decreases when a positive PWM signal is applied to the motor.
-- Motor Polarity: Refers to the relationship between the motor’s actual rotation direction and the commands it receives.
+- Motor Polarity: Refers to the relationship between the motor’s actual rotation direction and the command it receives.
+  - For example: if the right wheel’s polarity is **-1**, and you command it to “rotate forward at 1 m/s,” the wheel will rotate forward, which might seem counterintuitive given the negative polarity.
+    - The reason is that the z-axes of the wheels point outward. According to the right-hand rule, the positive rotation direction for the right wheel corresponds to a backward rotation relative to the MBot’s body frame.
 - Slopes and Intercepts: Define the linear relationship between the PWM duty cycles and the actual speeds of the wheels.
 
 $$\text{PWM}=m \times \text{Speed} + b$$
 
 ### TODO
-Open one terminal with Minicom to monitor the calibration output, and use another terminal to flash the calibration firmware to the Pico. Run the calibration several times and collect the resulting data for analysis. This task focuses on analyzing the system’s performance.
+Open one terminal with Minicom to monitor the calibration output, and use another terminal to flash the calibration firmware to the Pico. Run the calibration several times and collect the resulting data for analysis. Also record your **encoder polarities**, you will need it for Task 1.3. This task focuses on analyzing the system’s performance.
 
 ```bash
 # terminal 1
@@ -120,14 +122,45 @@ Below this point is still under editing
 {: .fs-5 .text-red-200 .fw-500}
 
 
-## Task 1.3 Motion Controller
+## Task 1.3 Odometry
+
+Odometry estimates your robot's position and orientation by integrating wheel encoder measurements over time. You'll subscribe to wheel velocity messages and use differential drive kinematics to calculate how the robot moves.
+
+### TODO
+1. First fork the mbot_ros_labs repository to your group
+2. Make a directory and clone the repository as `src`
+  ```bash
+  cd ~
+  mkdir mbot_ros_labs
+  cd ~/mbot_ros_labs
+  git clone your_url src
+  ```
+
+**How to test?**
+1. Place robot at a marked starting point and run the odom node
+  ```bash
+  ros2 run mbot_setpoint odom
+  ```
+2. Use teleop to drive the robot to a known length and angle
+  ```bash
+  ros2 run teleop_twist_keyboard teleop_twist_keyboard
+  ```
+3. Then check your odometry values
+  ```bash
+  ros2 topic echo /odom
+  ```
+
+{: .required_for_report }
+Evaluate the performance of your odometry system.
+
+## Task 1.4 Motion Controller
 
 ### TODO
 
 **How to test?**
 
 {: .required_for_report }
-Describe and document your motion control algorithm for getting between waypoints.
+Describe your motion control algorithm.
 <br><br>Questions to Consider:
 <br> 1) Include a plot of your robot’s estimated pose as the robot is commanded to drive a 1m square 4 times.
 <br> 2) Include a plot of the robot’s linear and rotational velocity as it drives one loop around the square
@@ -139,7 +172,7 @@ Describe and document your motion control algorithm for getting between waypoint
 <img src="/assets/images/botlab/checkpoints/checkpoint1-maze.png" alt=" " style="max-width:600px;"/>
 </a>
 
-- Demonstrate your motion controller by having it drive the illustrated path in one of the mazes set up in the lab. Record a video of the robot attempting the path at a slow speed (~0.2m/s & pi/4 rad/s) and a high speed (~0.8m/s, pi rad/s) and provide a link to it.
-    - The robot motion does NOT need to be perfect
-- Produce a plot of the (x,y) odometry position as the robot executes the path at both speeds.
-- Write a short description of your controllers (1/2 page) and any features we should be aware of. It is OK to use the stock controllers.
+- Run you motion controller to drive the path show in the image above. Include the following items in your submission:
+  1. Record a video of the robot attempting the path at a slow speed (~0.2m/s & pi/4 rad/s) and a high speed (~0.8m/s, pi rad/s) and provide a link to it. The robot motion does NOT need to be perfect
+  2. Include a plot of the (x, y) odometry position as the robot executes the path at both speeds.
+  3. Write a short description of your controllers (1/2 page) and any features we should be aware of.

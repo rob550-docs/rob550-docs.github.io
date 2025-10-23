@@ -65,7 +65,7 @@ Open one terminal with Minicom to monitor the calibration output, and use anothe
 sudo minicom -D /dev/ttyACM0 -b 115200
 # terminal 2
 cd ~/mbot_firmware_ros/build
-sudo mbot-upload-firmware flash mbot_classic_ros.uf2
+sudo mbot-upload-firmware flash mbot_calibrate_classic.uf2 
 ```
 
 Once you’ve finished collecting data, remember to flash **the firmware** back to the control board.

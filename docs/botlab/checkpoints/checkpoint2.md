@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Checkpoint 2
-nav_order: 4
+nav_order: 3
 parent: Checkpoints
 grand_parent: Botlab
 last_modified_at: 2024-04-02 12:16:00 -0500

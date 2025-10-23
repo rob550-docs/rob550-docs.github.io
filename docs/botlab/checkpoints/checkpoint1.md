@@ -108,7 +108,7 @@ Tune the PID values to achieve a desired system response.
     ```
     - If you see the values you set, it means the new PID gains have been applied to the MBot and written to the FRAM. You can run test now!
     - The PID values will persist after rebooting. However, if you run the calibration again, the calibration script will overwrite your tuned PID gains, and you’ll need to reload the YAML file to restore them.
-      - After you are satisfied with your PID gains,if you really want to check whether the gains persist after rebooting, you can verify this as follows:
+      - After you are satisfied with your PID gains, if you really want to check whether the gains persist after rebooting, you can verify this as follows:
         - Open a terminal and start Minicom.
         - In another terminal, flash the firmware. Before the data table is printed, the firmware will first display all the saved parameters, check the PID values there.
 
@@ -172,7 +172,9 @@ Please rememeber, you should flash the `mbot_classic_ros_checkpoint1.uf2` to you
 Evaluate the performance of your odometry system.
 
 ## Task 1.4 Motion Controller
-The motion controller will take a series of waypoints and navigate through them. In this task, you will implement a simple rotate-translate-rotate controller.
+The motion controller will take a series of waypoints and navigate through them. 
+
+In this task, you will implement a rotate-translate-rotate controller. This is a high-level strategy that uses a PID controller to precisely execute each movement (rotating to the goal, driving forward, and rotating to the final orientation).
 
 ### TODO
 1. Implement the controller in the file `mbot_setpoint/src/motion_controller_diff.cpp`.

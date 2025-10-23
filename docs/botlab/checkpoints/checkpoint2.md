@@ -24,9 +24,20 @@ During the SLAM part of the lab, you will build an increasingly sophisticated al
 
 ## Task 2.1 Mapping
 
-An occupancy grid maps the space surrounding the robot by assigning probabilities to each cell, indicating whether they are occupied or free. In our case, we'll use a grid where cells are at most 10 cm in size, and their log-odds values range from -127 to 127, represented as integers. To accurately trace the rays across your occupancy grid, consider implementing Bresenham’s line algorithm, as discussed in our class lecture.
+In this task, you will implement odometry-based occupancy grid mapping.
+
+The outcome from this lab will be to move the MBot around using the teleop keyboard and run the occupancy grid mapper to map the environment. You will implement the mapping functionality in `mbot_mapping/src/mapping.cpp`.
 
 ### TODO
+1. Read the mapping code `mbot_mapping/src/mapping.cpp`
+2. Once you are finished, compile your code:
+    ```bash
+    cd ~/mbot_ros_labs
+    colcon build
+    source install/setup.bash
+    ```
+
+**How to test?**
 
 {: .required_for_report } 
 Include the map screenshot.

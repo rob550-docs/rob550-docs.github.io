@@ -130,6 +130,13 @@ We provide two Python scripts for testing:
 2. `mbot_firmware_ros/python-tests/drive_square.py`: This script drives the robot in a square pattern. Use the taped square on the lab floor and check whether your robot can follow the square and return to the starting point.
   - Note that every robot is slightly different in size. Not only are the PID gains different for each robot, but so are the hardware parameters. 
   - Go to `~/mbot_firmware_ros/include/config` and open `mbot_classic_config.h`. You may adjust the `DIFF_BASE_RADIUS` value (in meter), this value represents the **robot’s base radius**. The **base diameter** is the distance from the center of one wheel to the center of the other. If your robot isn’t driving in a proper square, this parameter may be inaccurate.
+  - If you modified the **robot’s base radius**, remember to recompile the firmware and flash it to the control board.
+    ```bash
+      cd ~/mbot_firmware_ros/build
+      cmake ..
+      make
+      sudo mbot-upload-firmware flash mbot_classic_ros.uf2
+    ```
 
 **Tip #1**: You don’t have to make all controllers perfect. The required plots are only for comparison, to show how the PID controller improves performance.
 
@@ -173,7 +180,7 @@ In this section, you’ll have the opportunity to enhance the firmware following
 Describe what you added to the firmware and explain your reasoning.
 
 ## Task 1.4 Motion Controller
-The motion controller will take a series of waypoints and navigate through them.
+The motion controller takes a series of waypoints as input and generates velocity commands as output to navigate through them.
 
 In this task, you will implement a rotate-translate-rotate controller. This is a high-level strategy that uses a PID controller to precisely execute each movement: rotating to the goal, driving forward, and rotating to the final orientation.
 
@@ -204,6 +211,9 @@ You can search for the keyword “TODO”, all the functions you need to complet
     echo "source $PWD/install/local_setup.bash" >> ~/.bashrc
     ```
 
+
+**Tip:** You don’t have to strictly follow the provided TODOs to fill up the blanks, if you want to implement a more sophisticated controller, feel free to do so. The template is intended to make things easier, not necessarily to achieve the best possible performance.
+
 **How to test?**
 1. Run the motion controller
   ```bash
@@ -218,7 +228,6 @@ You can search for the keyword “TODO”, all the functions you need to complet
   python3 motion_controller_plot.py
   ```
   - The log can help you tune the PID gains, and the logging code in the controller program can also be used as a starting point for the required plots.
-
 
 {: .required_for_report }
 Describe your motion control algorithm.

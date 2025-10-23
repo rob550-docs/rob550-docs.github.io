@@ -4,9 +4,17 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-10-22 21:16:48 -0500
+last_modified_at: 2025-10-23 12:16:48 -0500
 ---
 
+Oct. 23 Update
+{: .fs-5 .text-red-200 .fw-500}
+
+- **If you just finished setup**: You are not affected, please proceed as it is.
+- **If you are working on Task 1.1**: Keep going. Once you’re done, revisit the Preparation section to compile the latest .uf2 files, then proceed to Task 1.2.
+- **If you are working on Task 1.2**: Revisit the Preparation section to compile the latest .uf2 files. Then review Task 1.2 again. You’ll notice that the command used to upload the .uf2 files has changed. This is because we’re no longer using the provided precompiled files; instead, you need to compile them yourself from the source code.
+
+---
 
 {: .note}
 We don’t need the LiDAR for Checkpoint 1. If you want to stop it from spinning and draining the battery, you can unplug the three jumper wires from the control board. When plugging it back in, be very careful, double-check the cable connections to avoid shorting the LiDAR.
@@ -16,23 +24,26 @@ We don’t need the LiDAR for Checkpoint 1. If you want to stop it from spinning
 {:toc}
 
 ## Preparation
-
-In the system setup, you’re provided with two precompiled `.uf2` files. They are for testing whether all components are functioning correctly. We will continue releasing additional `.uf2` files for each checkpoint, so please pay attention to the filenames.
-
-First pull from the uf2 repo, get the latest checkpoint 1 uf2 file.
-```bash
-cd ~/botlab_uf2
-git pull
-```
-- You should now have "mbot_classic_ros_checkpoint1.uf2".
-
-Then fork the firmware repository and clone it to your MBot for now.
+Fork the firmware repository to your group and clone it to your MBot.
 1. Fork the [mbot_firmware_ros repository](https://gitlab.eecs.umich.edu/rob550-f25/mbot_firmware_ros) to your GitLab group.
 2. Clone mbot_firmware_ros to your mbot's home directory:
    ```bash
     cd ~
     git clone your_url
     ```
+3. Compile the code
+  ```bash
+  cd ~/mbot_firmware_ros
+  mkdir build
+  cd build
+  cmake ..
+  make
+  ```
+  - This is going to take a while.
+4. After it's done, flash the compiled uf2 files
+  ```bash
+  sudo mbot-upload-firmware flash mbot_classic_ros.uf2
+  ```
 
 ## Task 1.1 Wheel Calibration
 The calibration program determines the polarity of the encoders and motors, then performs a wheel speed calibration. The resulting data are printed to the terminal and stored in the MBot’s non-volatile memory.
@@ -53,14 +64,14 @@ Open one terminal with Minicom to monitor the calibration output, and use anothe
 # terminal 1
 sudo minicom -D /dev/ttyACM0 -b 115200
 # terminal 2
-cd ~/botlab_uf2
-sudo mbot-upload-firmware flash mbot_calibrate_classic_v1.1.1.uf2
+cd ~/mbot_firmware_ros/build
+sudo mbot-upload-firmware flash mbot_classic_ros.uf2
 ```
 
-Once you’ve finished collecting data, remember to flash **the Checkpoint 1 firmware** to the control board.
+Once you’ve finished collecting data, remember to flash **the firmware** back to the control board.
 ```bash
-cd ~/botlab_uf2
-sudo mbot-upload-firmware flash mbot_classic_ros_checkpoint1.uf2
+cd ~/mbot_firmware_ros/build
+sudo mbot-upload-firmware flash mbot_classic_ros.uf2
 ```
 
 {: .required_for_report }
@@ -113,7 +124,12 @@ Tune the PID values to achieve a desired system response.
         - In another terminal, flash the firmware. Before the data table is printed, the firmware will first display all the saved parameters, check the PID values there.
 
 **How to test?**
-- We provide a simple python script: `mbot_firmware_ros/python-tests/test_wheel_pid.py`. It will drive the robot and print the target vs. real speed to the terminal. Use this file as a starting point, modify it to make comparisons, and collect data for plots.
+1. We provide a simple python script: `mbot_firmware_ros/python-tests/test_wheel_pid.py`. It will drive the robot and print the target vs. real speed to the terminal. Use this file as a starting point, modify it to make comparisons, and collect data for plots.
+2. You can also use the Python script `mbot_firmware_ros/python-tests/drive_square.py` to make the robot drive in a square. Use the taped square on the lab floor and check whether your robot can drive along the square and return to the starting point.
+  - Note that every robot is slightly different in size. Not only are the PID gains different for each robot, but so are the hardware parameters.
+  - Go to `~/mbot_firmware_ros/include/config` and open `mbot_classic_config.h`. You may adjust the `DIFF_BASE_RADIUS` value (in meter), this represents the distance from the center of one wheel to the center of the other. If your robot isn’t driving in a proper square, this value may be inaccurate.
+
+**Tip**: You don’t have to make all controllers perfect. The required plots are only for comparison, to show how the PID controller improves performance.
 
 {: .required_for_report }
 Plot of time vs. velocity with robot responding to a step command of 0.5 m/s for the FF model, PID controller model and FF + PID controller (3 traces on one plot).
@@ -121,6 +137,10 @@ Plot of time vs. velocity with robot responding to a step command of 0.5 m/s for
 <br> 1) Which wheel controller performs the best and the worst, why?
 <br> 2) Is there any improvement we can make?
 
+---
+
+Sorry still under editing - Oct. 23 2025
+{: .fs-5 .text-red-200 .fw-500}
 
 ## Task 1.3 Odometry
 

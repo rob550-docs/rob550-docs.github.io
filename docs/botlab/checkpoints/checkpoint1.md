@@ -58,7 +58,7 @@ The calibration data consists of:
 $$\text{PWM}=m \times \text{Speed} + b$$
 
 ### TODO
-Open one terminal with Minicom to monitor the calibration output, and use another terminal to flash the calibration firmware to the Pico. Run the calibration several times and collect the resulting data for analysis. Also record your **encoder polarities**, you will need it for Task 1.3. This task focuses on analyzing the system’s performance.
+Open one terminal with Minicom to monitor the calibration output, and use another terminal to flash the calibration firmware to the Pico. Run the calibration several times and collect the resulting data for analysis. This task focuses on analyzing the system’s performance.
 
 ```bash
 # terminal 1

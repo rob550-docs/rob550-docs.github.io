@@ -4,7 +4,7 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-10-22 11:37:48 -0500
+last_modified_at: 2025-10-22 21:16:48 -0500
 ---
 
 
@@ -94,7 +94,9 @@ You can tune the PID gains via the ROS parameter server at runtime.
 Tune the PID values to achieve a desired system response.
 
 **How to tune?**
-1. First, modify the values in `include/config/mbot_classic_pid.yaml`. There are pre-tuned values in there, the same as the `mbot_classic_default_pid.h.`
+1. First, modify the values in `include/config/mbot_classic_pid.yaml`. 
+
+    This file contains pre-tuned values that are the same as those in `mbot_classic_default_pid.h`. However, these default parameters may not be compatible with your specific robot and could cause your MBot to perform poorly when using the teleop controller.
 2. After modifying the values in the yaml file, run the command below to load the new configs:
     ```bash
     cd ~/mbot_firmware_ros
@@ -104,8 +106,11 @@ Tune the PID values to achieve a desired system response.
     ```bash
     ros2 param dump /mbot_control_node 
     ```
-    - If you see the values you set, it means the new PID gains have been applied to the MBot and written to the FRAM. 
-    - The values will persist after rebooting. However, if you run the calibration again, it will overwrite your new PID gains, and you’ll need to reload the YAML file to restore them.
+    - If you see the values you set, it means the new PID gains have been applied to the MBot and written to the FRAM. You can run test now!
+    - The PID values will persist after rebooting. However, if you run the calibration again, the calibration script will overwrite your tuned PID gains, and you’ll need to reload the YAML file to restore them.
+      - After you are satisfied with your PID gains,if you really want to check whether the gains persist after rebooting, you can verify this as follows:
+        - Open a terminal and start Minicom.
+        - In another terminal, flash the firmware. Before the data table is printed, the firmware will first display all the saved parameters, check the PID values there.
 
 **How to test?**
 - We provide a simple python script: `mbot_firmware_ros/python-tests/test_wheel_pid.py`. It will drive the robot and print the target vs. real speed to the terminal. Use this file as a starting point, modify it to make comparisons, and collect data for plots.
@@ -116,48 +121,87 @@ Plot of time vs. velocity with robot responding to a step command of 0.5 m/s for
 <br> 1) Which wheel controller performs the best and the worst, why?
 <br> 2) Is there any improvement we can make?
 
----
-
-Below this point is still under editing
-{: .fs-5 .text-red-200 .fw-500}
-
 
 ## Task 1.3 Odometry
 
-Odometry estimates your robot's position and orientation by integrating wheel encoder measurements over time. You'll subscribe to wheel velocity messages and use differential drive kinematics to calculate how the robot moves.
+Odometry estimates your robot's position and orientation by integrating wheel encoder measurements over time. You'll subscribe to encoder messages and use differential drive kinematics to calculate how the robot moves.
+
+{: .note}
+Please rememeber, you should flash the `mbot_classic_ros_checkpoint1.uf2` to you pico, not `mbot_classic_ros_v1.1.1.uf2`.
 
 ### TODO
-1. First fork the mbot_ros_labs repository to your group
-2. Make a directory and clone the repository as `src`
+1. First fork the [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) repository to your group. This repository contains the code for checkpoints.
+2. Create a workspace directory named `mbot_ros_labs`, and clone the forked repository into a subdirectory called `src`:
   ```bash
   cd ~
   mkdir mbot_ros_labs
   cd ~/mbot_ros_labs
   git clone your_url src
   ```
+  - Please follow the exact name used in this document. Some paths (for logging and other files) are hardcoded in the codebase, so directory names must match exactly.
+3. Implement the wheel velocity calculation, robot body velocity calculation, and odometry calculation in the file `mbot_setpoint/src/odom.cpp`. You can search for the keyword “TODO”, all the functions you need to complete are marked with “TODO” and numbered in order. Follow the numbering sequence as you implement them.
+4. Once you’ve finished writing your code, compile it:
+  ```bash
+  cd ~/mbot_ros_labs
+  colcon build
+  source install/setup.bash
+  ```
+  - Always remember to source your workspace after building!
+  - Or you can add the sourcing command to your bash configuration:
+    ```bash
+    cd ~/mbot_ros_labs
+    echo "source $PWD/install/local_setup.bash" >> ~/.bashrc
+    ```
 
 **How to test?**
-1. Place robot at a marked starting point and run the odom node
+1. Place robot at a marked starting point and run the odom node.
   ```bash
   ros2 run mbot_setpoint odom
   ```
-2. Use teleop to drive the robot to a known length and angle
+2. Use teleop to drive the robot to a known length and angle.
   ```bash
   ros2 run teleop_twist_keyboard teleop_twist_keyboard
   ```
 3. Then check your odometry values
   ```bash
-  ros2 topic echo /odom
+  ros2 topic echo /odom --field pose
   ```
+4. If you want to achieve more accurate odometry, consider adding enhancement code. For example, you could incorporate gyro readings and implement gyrodometry. This will require you to add an IMU subscriber on your own.
 
 {: .required_for_report }
 Evaluate the performance of your odometry system.
 
 ## Task 1.4 Motion Controller
+The motion controller will take a series of waypoints and navigate through them. In this task, you will implement a simple rotate-translate-rotate controller.
 
 ### TODO
+1. Implement the controller in the file `mbot_setpoint/src/motion_controller_diff.cpp`.
+You can search for the keyword “TODO”, all the functions you need to complete are marked with “TODO” and numbered. Follow the numbering sequence as you implement them.
+2. Once you’ve finished writing your code, compile it:
+  ```bash
+  cd ~/mbot_ros_labs
+  colcon build
+  source install/setup.bash
+  ```
 
 **How to test?**
+1. Place robot at a marked starting point and run the odom node.
+  ```bash
+  ros2 run mbot_setpoint odom
+  ```
+2. Run the motion controller
+  ```bash
+  ros2 run mbot_setpoint motion_controller_diff
+  ```
+3. Publish the waypoints. By default, this node publishes a square with 1-meter sides:
+  ```bash
+  ros2 run mbot_setpoint square_publisher
+  ```
+4. The motion controller node will also log some values and save them in the `logs` directory.
+You can run the Python script to plot the data, the generated images will also be saved in the `logs` directory.
+  ```bash
+  python3 motion_controller_plot.py
+  ```
 
 {: .required_for_report }
 Describe your motion control algorithm.

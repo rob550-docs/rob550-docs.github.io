@@ -142,17 +142,42 @@ Plot of time vs. velocity with robot responding to a step command of 0.5 m/s for
 <br> 1) Which wheel controller performs the best and the worst, why?
 <br> 2) Is there any improvement we can make?
 
----
 
-Sorry still under editing - Oct. 23 2025
-{: .fs-5 .text-red-200 .fw-500}
+## Task 1.3 Improve firmware (optional)
 
-## Task 1.3 Odometry
+Odometry estimates your robot’s position and orientation by integrating wheel encoder measurements over time. In the firmware code `~/mbot_firmware_ros/src/mbot_odometry.c`, we currently use a simple dead-reckoning approach, which may not provide the most accurate results.
 
-Odometry estimates your robot's position and orientation by integrating wheel encoder measurements over time. You'll subscribe to encoder messages and use differential drive kinematics to calculate how the robot moves.
+While the PID controllers help maintain accurate wheel speeds, you can add further enhancements to improve overall motion performance.
 
-{: .note}
-Please rememeber, you should flash the `mbot_classic_ros_checkpoint1.uf2` to you pico, not `mbot_classic_ros_v1.1.1.uf2`.
+In this section, you’ll have the opportunity to enhance the firmware following the provided guide. **This task is optional**, you can choose to improve it for future challenges, or skip Task 1.3 entirely if your robot already performs well enough for your needs.
+
+### TODO
+1. Use `~/mbot_firmware_ros/src/mbot_odometry.c` as a starting point to understand how odometry is calculated, and consider adding improvements. For example, you could incorporate gyro readings and implement gyrodometry for better accuracy.
+2. Read `~/mbot_firmware_ros/src/mbot_classic_ros.c`. This is the source code of the firmware uf2 file you compiled. The PID controller implementation starts around line 309, if you want to add features such as filters, this is a good place to begin.
+
+**How to test your changes?**
+1. Compile your code and flash it to the control board:
+  ```bash
+  cd ~/mbot_firmware_ros/build
+  cmake ..
+  make
+  sudo mbot-upload-firmware flash mbot_classic_ros.uf2
+  ```
+2. Use teleop to drive the robot over a known distance and angle, then check your odometry values:
+  ```bash
+  ros2 topic echo /odom --field pose
+  ```
+3. Run the `mbot_firmware_ros/python-tests/drive_square.py` script and see if the robot’s performance has improved.
+
+{: .required_for_report }
+Describe what you added to the firmware and explain your reasoning.
+
+## Task 1.4 Motion Controller
+The motion controller will take a series of waypoints and navigate through them.
+
+In this task, you will implement a rotate-translate-rotate controller. This is a high-level strategy that uses a PID controller to precisely execute each movement: rotating to the goal, driving forward, and rotating to the final orientation.
+
+The PID controller in the firmware is used to control the wheel speed, while the PID controller in this task is used to control the traveled distance.
 
 ### TODO
 1. First fork the [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) repository to your group. This repository contains the code for checkpoints.
@@ -164,7 +189,8 @@ Please rememeber, you should flash the `mbot_classic_ros_checkpoint1.uf2` to you
   git clone your_url src
   ```
   - Please follow the exact name used in this document. Some paths (for logging and other files) are hardcoded in the codebase, so directory names must match exactly.
-3. Implement the wheel velocity calculation, robot body velocity calculation, and odometry calculation in the file `mbot_setpoint/src/odom.cpp`. You can search for the keyword “TODO”, all the functions you need to complete are marked with “TODO” and numbered in order. Follow the numbering sequence as you implement them.
+3. Implement the controller in the file `mbot_setpoint/src/motion_controller_diff.cpp`.
+You can search for the keyword “TODO”, all the functions you need to complete are marked with “TODO” and numbered. Follow the numbering sequence as you implement them.
 4. Once you’ve finished writing your code, compile it:
   ```bash
   cd ~/mbot_ros_labs
@@ -179,56 +205,20 @@ Please rememeber, you should flash the `mbot_classic_ros_checkpoint1.uf2` to you
     ```
 
 **How to test?**
-1. Place robot at a marked starting point and run the odom node.
-  ```bash
-  ros2 run mbot_setpoint odom
-  ```
-2. Use teleop to drive the robot to a known length and angle.
-  ```bash
-  ros2 run teleop_twist_keyboard teleop_twist_keyboard
-  ```
-3. Then check your odometry values
-  ```bash
-  ros2 topic echo /odom --field pose
-  ```
-4. If you want to achieve more accurate odometry, consider adding enhancement code. For example, you could incorporate gyro readings and implement gyrodometry. This will require you to add an IMU subscriber on your own.
-
-{: .required_for_report }
-Evaluate the performance of your odometry system.
-
-## Task 1.4 Motion Controller
-The motion controller will take a series of waypoints and navigate through them. 
-
-In this task, you will implement a rotate-translate-rotate controller. This is a high-level strategy that uses a PID controller to precisely execute each movement (rotating to the goal, driving forward, and rotating to the final orientation).
-
-### TODO
-1. Implement the controller in the file `mbot_setpoint/src/motion_controller_diff.cpp`.
-You can search for the keyword “TODO”, all the functions you need to complete are marked with “TODO” and numbered. Follow the numbering sequence as you implement them.
-2. Once you’ve finished writing your code, compile it:
-  ```bash
-  cd ~/mbot_ros_labs
-  colcon build
-  source install/setup.bash
-  ```
-
-**How to test?**
-1. Place robot at a marked starting point and run the odom node.
-  ```bash
-  ros2 run mbot_setpoint odom
-  ```
-2. Run the motion controller
+1. Run the motion controller
   ```bash
   ros2 run mbot_setpoint motion_controller_diff
   ```
-3. Publish the waypoints. By default, this node publishes a square with 1-meter sides:
+2. Publish the waypoints. By default, this node publishes a square with 1-meter sides:
   ```bash
   ros2 run mbot_setpoint square_publisher
   ```
-4. The motion controller node will also log some values and save them in the `logs` directory.
-You can run the Python script to plot the data, the generated images will also be saved in the `logs` directory.
+3. The motion controller node will log values and save them in the `logs` directory. Once the square-driving task is complete, you can run the Python script to plot the data. The generated images will also be saved in the `logs` directory.
   ```bash
   python3 motion_controller_plot.py
   ```
+  - The log can help you tune the PID gains, and the logging code in the controller program can also be used as a starting point for the required plots.
+
 
 {: .required_for_report }
 Describe your motion control algorithm.

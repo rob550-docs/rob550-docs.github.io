@@ -124,12 +124,17 @@ Tune the PID values to achieve a desired system response.
         - In another terminal, flash the firmware. Before the data table is printed, the firmware will first display all the saved parameters, check the PID values there.
 
 **How to test?**
-1. We provide a simple python script: `mbot_firmware_ros/python-tests/test_wheel_pid.py`. It will drive the robot and print the target vs. real speed to the terminal. Use this file as a starting point, modify it to make comparisons, and collect data for plots.
-2. You can also use the Python script `mbot_firmware_ros/python-tests/drive_square.py` to make the robot drive in a square. Use the taped square on the lab floor and check whether your robot can drive along the square and return to the starting point.
-  - Note that every robot is slightly different in size. Not only are the PID gains different for each robot, but so are the hardware parameters.
-  - Go to `~/mbot_firmware_ros/include/config` and open `mbot_classic_config.h`. You may adjust the `DIFF_BASE_RADIUS` value (in meter), this represents the distance from the center of one wheel to the center of the other. If your robot isn’t driving in a proper square, this value may be inaccurate.
 
-**Tip**: You don’t have to make all controllers perfect. The required plots are only for comparison, to show how the PID controller improves performance.
+We provide two Python scripts for testing:
+1. `mbot_firmware_ros/python-tests/test_wheel_pid.py`: This script drives the robot and prints the target vs. actual wheel speeds in the terminal. Use it as a starting point, modify it to drive longer or more complex paths, then use it to make comparisons and collect data for your plots.
+2. `mbot_firmware_ros/python-tests/drive_square.py`: This script drives the robot in a square pattern. Use the taped square on the lab floor and check whether your robot can follow the square and return to the starting point.
+  - Note that every robot is slightly different in size. Not only are the PID gains different for each robot, but so are the hardware parameters. 
+  - Go to `~/mbot_firmware_ros/include/config` and open `mbot_classic_config.h`. You may adjust the `DIFF_BASE_RADIUS` value (in meter), this value represents the **robot’s base radius**. The **base diameter** is the distance from the center of one wheel to the center of the other. If your robot isn’t driving in a proper square, this parameter may be inaccurate.
+
+**Tip #1**: You don’t have to make all controllers perfect. The required plots are only for comparison, to show how the PID controller improves performance.
+
+**Tip #2**: If the robot doesn’t drive a perfect square, it also might not be your controller, it could be due to inaccurate odometry. Continue to Task 1.3 to explore ways to improve it further.
+
 
 {: .required_for_report }
 Plot of time vs. velocity with robot responding to a step command of 0.5 m/s for the FF model, PID controller model and FF + PID controller (3 traces on one plot).

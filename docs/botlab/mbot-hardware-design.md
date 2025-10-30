@@ -3,7 +3,7 @@ layout: default
 title: MBot Hardware Design
 nav_order: 5
 parent: Botlab
-last_modified_at: 2023-12-23 14:20:48 -0500
+last_modified_at: 2025-10-30 12:37:48 -0500
 ---
 
 ### Contents
@@ -28,11 +28,7 @@ last_modified_at: 2023-12-23 14:20:48 -0500
 ### 3D CAD model 
 {: .py-2 }
 
-[Open Model in new tab](https://a360.co/3FDWpSI){: .btn target="_blank" }
+[Open Model in new tab](https://umich2673.autodesk360.com/g/shares/SH30dd5QT870c25f12fcdf2d18fed05cc396){: .btn target="_blank" }
 {: .py-1 }
 
-<iframe src="https://a360.co/3FDWpSI?mode=embed" width="640" height="480" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" frameborder="0"></iframe>
-
-### CAD STEP File
-{: .py-2 }
-[Click to download](https://www.dropbox.com/scl/fi/pqqv7auzamibjmqkde0ee/MBot-Classic-Jetson-Nano-Full-Assembly.stp?rlkey=vllsbdbvedzpoi7u19yh7uqnc&dl=0){: .btn target="_blank" }
+<iframe src="https://umich2673.autodesk360.com/shares/public/SH30dd5QT870c25f12fcdf2d18fed05cc396?mode=embed" width="800" height="600" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" frameborder="0"></iframe>

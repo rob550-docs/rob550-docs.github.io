@@ -4,11 +4,9 @@ title: Checkpoint 2
 nav_order: 3
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-10-23 14:16:00 -0500
+last_modified_at: 2025-10-30 12:37:48 -0500
 ---
 
-This checkpoint still under editing
-{: .fs-5 .text-red-200 .fw-500}
 
 During the SLAM part of the lab, you will build an increasingly sophisticated algorithm for mapping and localizing in the environment. You will begin by constructing an occupancy grid using known poses. Following that, you’ll implement Monte Carlo Localization in a known map. Finally, you will put each of these pieces together to create a full SLAM system.
 
@@ -17,20 +15,31 @@ During the SLAM part of the lab, you will build an increasingly sophisticated al
 * TOC
 {:toc}
 
-## Preparation
+Below this point is still under editing
+{: .fs-5 .text-red-200 .fw-500}
 
-1. Pull from the [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream to get the template code for checkpoint 2. 
-2. Read the guide on how to use Foxglove: [link](). Foxglove is a web-based visualization tool that provides all the functionalities of RViz. We offer it as an alternative if RViz feels slow or cumbersome when running through NoMachine.
+## Design Lab
+
+We’ve released the [Design Lab Guide](/docs/botlab/checkpoints/design-lab)!
+
+You need to design and build a forklift mechanism. The design file is due with your Checkpoint 2 submission, but it doesn’t need to be final, a prototype version is perfectly fine. The goal is to help you stay on track.
+
+Designing, prototyping, and testing should continue alongside the main checkpoints until the final competition.
 
 ## Task 2.1 Mapping
 
 In this task, you will implement odometry-based occupancy grid mapping.
 
-The outcome from this lab will be to move the MBot around using the teleop keyboard and run the occupancy grid mapper to map the environment. You will implement the mapping functionality in `mbot_mapping/src/mapping.cpp`.
+Topic covers:
+- Motion-corrected laser scans
+- Ray-tracing with Bresenham algorithm
+- Hit/miss scoring with inverse sensor model
+- Log-odds occupancy grid representation
 
 ### TODO
-1. Read the mapping code `mbot_mapping/src/mapping.cpp`
-2. Once you are finished, compile your code:
+1. Pull from the [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream to get the template code for checkpoint 2. 
+2. Read the mapping code `mbot_mapping/src/mapping.cpp`
+3. Once you are finished, compile your code:
     ```bash
     cd ~/mbot_ros_labs
     colcon build
@@ -113,3 +122,4 @@ Demonstrate your SLAM system by mapping the maze used in Checkpoint 1. You may e
 1. Submit a screenshot of the generated map.
 2. Submit the map file itself.
 3. Submit a short description of your SLAM system, including how it works and any key observations.
+4. Submit your forklift design prototype CAD file.

@@ -4,7 +4,7 @@ title: mbot_xl320_lib Guide
 parent: How-to Guide
 grand_parent: Botlab
 nav_order: 2
-last_modified_at: 2025-09-25 17:37:48 -0500
+last_modified_at: 2025-10-30 12:37:48 -0500
 ---
 
 > This guide introduces how to program the XL320 servo using the `mbot_xl320_library` code example provided.
@@ -106,12 +106,10 @@ The result should look like the image below:
     ```
 
 ## Install
-**TODO: the code link to be updated!!!**
-
 Run the following commands to install the XL320 library
 ```bash
 cd ~
-git clone https://gitlab.eecs.umich.edu/rob550-f23/mbot_xl320_library.git
+git clone https://gitlab.eecs.umich.edu/rob550-f25/mbot_xl320_library
 cd ~/mbot_xl320_library
 ./install.sh
 ```
@@ -156,7 +154,7 @@ If everything still functions but you continue to see these errors, try unpluggi
 
 
 ## Legacy
-> This is irrelavant to 2025 ROS2 MBot.
+> This is irrelavant to 2025 ROS2 MBot!!!
 
 ### 0. Using USB to TTL adapter and AX to XL320 adapter
 1. To prepare your adapter board for connection, you need to solder a 3-pin right-angle header onto the board, and snip the middle pin. Refer to the first image below for details.

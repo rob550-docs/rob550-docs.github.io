@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Competition
-nav_order: 6
+nav_order: 7
 parent: Checkpoints
 grand_parent: Botlab
 last_modified_at: 2024-11-17 16:37:48 -0500

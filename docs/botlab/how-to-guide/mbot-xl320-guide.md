@@ -120,7 +120,20 @@ cd ~/mbot_xl320_library
     cd ~/mbot_xl320_library/tests
     sudo python3 check_servo_id.py
     ```
-2. We have 2 exmaples `tests/rotate_full_range.py` and `tests/rotate_in_circle.py`. You need to define the servo ID to use the 2 examples, and the IDs are the ones you obtain from the step 1.
+    - Check the ID output. If you have two or more servos connected but the program detects none, or doesn’t list all of them, it likely means:
+        - either one of the servos is broken
+        - or multiple DYNAMIXELs share the same ID.
+    - **It is recommended to connect only one servo at a time to check its ID and change it if you find duplicates.**
+2. If there are duplicate IDs, connect only one of the affected servos to the board (no other servos should be connected), then modify `change_servo_id.py` to assign it a new ID.
+    ```python
+    CURRENT_ID = 1  # The ID you want to change
+    NEW_ID = 3      # The new ID you want to set
+    ```
+    Then run:
+    ```bash
+    sudo python3 change_servo_id.py
+    ```
+3. We have 2 exmaples `tests/rotate_full_range.py` and `tests/rotate_in_circle.py`. You need to define the servo ID to use the 2 examples, and the IDs are the ones you obtain from the step 1.
 ```python
 # defines the servo's ID
 servo1_ID = 1

@@ -10,13 +10,9 @@ last_modified_at: 2025-10-30 12:37:48 -0500
 
 During the SLAM part of the lab, you will build an increasingly sophisticated algorithm for mapping and localizing in the environment. You will begin by constructing an occupancy grid using known poses. Following that, you’ll implement Monte Carlo Localization in a known map. Finally, you will put each of these pieces together to create a full SLAM system.
 
-
 ### Contents
 * TOC
 {:toc}
-
-Below this point is still under editing
-{: .fs-5 .text-red-200 .fw-500}
 
 ## Design Lab
 
@@ -25,6 +21,11 @@ We’ve released the [Design Lab Guide](/docs/botlab/checkpoints/design-lab)!
 You need to design and build a forklift mechanism. The design file is due with your Checkpoint 2 submission, but it doesn’t need to be final, a prototype version is perfectly fine. The goal is to help you stay on track.
 
 Designing, prototyping, and testing should continue alongside the main checkpoints until the final competition.
+
+---
+Below this point is still under editing
+{: .fs-5 .text-red-200 .fw-500}
+
 
 ## Task 2.1 Mapping
 

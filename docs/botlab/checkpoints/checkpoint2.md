@@ -148,13 +148,6 @@ Starting from `localization_node.cpp`, you have 2 main TODOs:
     4. Estimate the new pose – compute the weighted mean of the particles based on the posterior distribution.
 
 **How to test?**
-
-A few things to know:
-- This ROS bag includes the `/cmd_vel` topic. Unplug the Type-C cable from the Pi to the Pico to prevent the robot from driving away.
-- Since the ROS bag contains all the necessary topics, you do not need to run `ros2 launch mbot_bringup mbot_bringup.launch.py`.
-- All the data required for this checkpoint comes from the ROS bag, so you can unplug the LiDAR to save battery power.
-{: .fs-4 .text-red-200}
-
 1. Run RViz **on NoMachine** using provided rviz config file:
     ```bash
     cd ~/mbot_ros_labs/src/mbot_localization/rviz
@@ -169,8 +162,14 @@ A few things to know:
     cd ~/mbot_ros_labs/src/mbot_rosbags/maze1
     ros2 bag play maze1.mcap
     ```
-    - The ROS bag publishes all the topics your node needs. You can use command `ros2 bag info` to check what is in the bag.
+    - **We provide a rosbag because** this task focuses on localization only, and we need a good map for that. Mapping the maze every time before testing your localization code would be a pain, and you probably can’t reuse your map since the maze changes when other people’s MBots bump into the walls. Using the bag saves time and lets you work anywhere.
+    {: .text-red-200}
+    - This ROS bag includes the `/cmd_vel` topic. **Unplug the Type-C cable from the Pi to the Pico** to prevent the robot from driving away.
+    - All the data required for this checkpoint comes from the ROS bag, you don't have to manually publish `/initialpose`, and do not need to run `ros2 launch mbot_bringup mbot_bringup.launch.py`.
+    
     ```bash
+    # use the following command to check what is in the bag
+    $ cd ~/mbot_ros_labs/src/mbot_rosbags
     $ ros2 bag info maze1
     ---
     Files:             maze1.mcap
@@ -202,24 +201,38 @@ A few things to know:
 1) Report in a table the time it takes to update the particle filter for 100, 500 and 1000 particles. Estimate the maximum number of particles your filter can support running at 10Hz.
 <br> 2) Include a screenshot comparing your estimated pose path with the reference pose path.
 
----
-Below this point is still under editing
-{: .fs-5 .text-red-200 .fw-500}
-
 
 ## Task 2.3 Simultaneous Localization and Mapping (SLAM)
+Task 2.3 is still under editing
+{: .fs-6 .text-red-200 .fw-500}
+
 You have now implemented mapping using known poses and localization using a known map. You can now implement the following simple SLAM algorithm:
 - Use the first laser scan received to construct an initial map.
 - For subsequent laser scans:
     - Localize using the map from the previous iteration.
     - Update the map using the pose estimate from your localization.
 
-NOTE: The above logic is already implemented for you. Your goal for this task is to make sure your localization and mapping are accurate enough to provide a stable estimate of the robot pose and map. You will need good SLAM performance to succeed at the robot navigation task.
+### TODO
+1. Pull the latest code from [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream to get the Task 2.3 template.
+2. All work for this task is in the package `mbot_slam`.
+    - Start with `slam_node.cpp`, search for TODOs.
+    - TODOs in each file are numbered in order. The order is how you should work within that file, not the overall task order across the project.
+3. When finished, compile your code:
+    ```bash
+    cd ~/mbot_ros_labs
+    colcon build --packages-select mbot_slam
+    source install/setup.bash
+    ```
+
+**Explanation of TODOs**
+
+**How to test?**
+
+### Demo Video
 
 {: .required_for_report } 
 1) Create a block diagram of how the SLAM system components interact
-<br> 2) Compare the estimated poses from your SLAM system against the reference poses in `maze.mcap`. Use this to estimate the accuracy of your system.
-
+<br> 2) 
 
 ## Checkpoint Submission
 <br>

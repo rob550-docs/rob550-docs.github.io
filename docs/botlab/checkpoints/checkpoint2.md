@@ -93,6 +93,10 @@ You have 3 major tasks in this task:
     - Option 1: Use a local viewer. Install a VSCode extension like PGM Viewer to open your map file.
     - Option 2: Publish the map in ROS2
         ```bash
+        cd ~/mbot_ros_labs
+        # we need to re-compile so the launch file can find the newly saved map
+        colcon build --packages-select mbot_mapping
+        source install/setup.bash
         ros2 launch mbot_mapping view_map.launch.py map_name:=map_name
         ```
         - This will publish the map to the `/map` topic.

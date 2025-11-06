@@ -197,4 +197,4 @@ Demonstrate your SLAM system by mapping the maze used in Checkpoint 1. You may e
 1. Submit a screenshot of the generated map.
 2. Submit the map file itself.
 3. Submit a short description of your SLAM system, including how it works and any key observations.
-4. Submit your forklift design prototype CAD file.
+4. Submit your forklift design prototype, **it can be in any form, such as a simple sketch, a CAD file, or other representation.**

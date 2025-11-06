@@ -148,6 +148,13 @@ Starting from `localization_node.cpp`, you have 2 main TODOs:
     4. Estimate the new pose – compute the weighted mean of the particles based on the posterior distribution.
 
 **How to test?**
+
+A few things to know:
+- This ROS bag includes the `/cmd_vel` topic. Unplug the Type-C cable from the Pi to the Pico to prevent the robot from driving away.
+- Since the ROS bag contains all the necessary topics, you do not need to run `ros2 launch mbot_bringup mbot_bringup.launch.py`.
+- All the data required for this checkpoint comes from the ROS bag, so you can unplug the LiDAR to save battery power.
+{: .fs-4 .text-red-200}
+
 1. Run RViz **on NoMachine** using provided rviz config file:
     ```bash
     cd ~/mbot_ros_labs/src/mbot_localization/rviz
@@ -162,8 +169,31 @@ Starting from `localization_node.cpp`, you have 2 main TODOs:
     cd ~/mbot_ros_labs/src/mbot_rosbags/maze1
     ros2 bag play maze1.mcap
     ```
-    - The ROS bag publishes all the topics your node needs.
-
+    - The ROS bag publishes all the topics your node needs. You can use command `ros2 bag info` to check what is in the bag.
+    ```bash
+    $ ros2 bag info maze1
+    ---
+    Files:             maze1.mcap
+    Bag size:          12.8 MiB
+    Storage id:        mcap
+    ROS Distro:        jazzy
+    Duration:          86.383675802s
+    Start:             Nov  3 2025 12:30:46.701887210 (1762191046.701887210)
+    End:               Nov  3 2025 12:32:13.085563012 (1762191133.085563012)
+    Messages:          16171
+    Topic information: Topic: /amcl_pose | Type: geometry_msgs/msg/PoseWithCovarianceStamped | Count: 259 | Serialization Format: cdr
+                    Topic: /cmd_vel | Type: geometry_msgs/msg/Twist | Count: 1251 | Serialization Format: cdr
+                    Topic: /imu | Type: sensor_msgs/msg/Imu | Count: 8080 | Serialization Format: cdr
+                    Topic: /initialpose | Type: geometry_msgs/msg/PoseWithCovarianceStamped | Count: 1 | Serialization Format: cdr
+                    Topic: /map | Type: nav_msgs/msg/OccupancyGrid | Count: 1 | Serialization Format: cdr
+                    Topic: /odom | Type: nav_msgs/msg/Odometry | Count: 2020 | Serialization Format: cdr
+                    Topic: /scan | Type: sensor_msgs/msg/LaserScan | Count: 898 | Serialization Format: cdr
+                    Topic: /tf | Type: tf2_msgs/msg/TFMessage | Count: 3660 | Serialization Format: cdr
+                    Topic: /tf_static | Type: tf2_msgs/msg/TFMessage | Count: 1 | Serialization Format: cdr
+    Service:           0
+    Service information: 
+    ```
+    - `/amcl_pose` serves as the reference pose, the "ground truth" you can use to compare against your estimated pose.
 
 ### Demo Video
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nieEYElK_Kc?si=OTV2XaRHv4rlvkNS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

@@ -4,7 +4,7 @@ title: Checkpoint 2
 nav_order: 3
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-11-03 19:52:48 -0500
+last_modified_at: 2025-11-10 15:42:00 -0500
 ---
 
 
@@ -203,9 +203,6 @@ Starting from `localization_node.cpp`, you have 2 main TODOs:
 
 
 ## Task 2.3 Simultaneous Localization and Mapping (SLAM)
-Task 2.3 is still under editing
-{: .fs-6 .text-red-200 .fw-500}
-
 You have now implemented mapping using known poses and localization using a known map. You can now implement the following simple SLAM algorithm:
 - Use the first laser scan received to construct an initial map.
 - For subsequent laser scans:
@@ -215,8 +212,8 @@ You have now implemented mapping using known poses and localization using a know
 ### TODO
 1. Pull the latest code from [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream to get the Task 2.3 template.
 2. All work for this task is in the package `mbot_slam`.
-    - Start with `slam_node.cpp`, search for TODOs.
-    - TODOs in each file are numbered in order. The order is how you should work within that file, not the overall task order across the project.
+    - Start with `slam_node.cpp`, search for TODOs. **All the TODOs come from Task 2.1 and Task 2.2.**
+    - You can simply copy and paste your code from those tasks, tune the parameters, and achieve a good working SLAM system. You don’t need to follow the TODOs strictly, feel free to implement them in your own preferred way.
 3. When finished, compile your code:
     ```bash
     cd ~/mbot_ros_labs
@@ -224,15 +221,29 @@ You have now implemented mapping using known poses and localization using a know
     source install/setup.bash
     ```
 
-**Explanation of TODOs**
-
 **How to test?**
-
-### Demo Video
+1. Start the SLAM Node:
+    ```bash
+    ros2 run mbot_slam slam_node
+    ```
+2. Start Rviz on NoMachine:
+    ```bash
+    cd ~/mbot_ros_labs/src/mbot_slam/rviz
+    ros2 run rviz2 rviz2 -d slam.rviz
+    ```
+3. Map in the lab maze, drive the robot manually using the teleop package:
+    ```bash
+    ros2 run teleop_twist_keyboard teleop_twist_keyboard
+    ```
+    - Alternatively, you can work from anywhere using the provided rosbag:
+    ```bash
+    cd ~/mbot_ros_labs/src/mbot_rosbags
+    ros2 bag play slam_test
+    ```
 
 {: .required_for_report } 
-1) Create a block diagram of how the SLAM system components interact
-<br> 2) 
+1) Create a block diagram showing how the SLAM system components interact.
+<br> 2) Include a screenshot of your map, and explain why your SLAM-generated map is better than the one from Task 2.1.
 
 ## Checkpoint Submission
 <br>

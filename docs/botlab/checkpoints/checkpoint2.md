@@ -240,7 +240,7 @@ You have now implemented mapping using known poses and localization using a know
     cd ~/mbot_ros_labs/src/mbot_rosbags
     ros2 bag play slam_test
     ```
-    - This ROS bag includes the `/cmd_vel` topic. Unplug the Type-C cable from the Pi to the Pico to prevent the robot from driving away.
+        - This ROS bag includes the `/cmd_vel` topic. Unplug the Type-C cable from the Pi to the Pico before run the ros bag.
 
 {: .required_for_report } 
 1) Create a block diagram showing how the SLAM system components interact.

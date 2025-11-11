@@ -4,7 +4,7 @@ title: Checkpoint 2
 nav_order: 3
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-11-10 15:42:00 -0500
+last_modified_at: 2025-11-11 12:09:00 -0500
 ---
 
 
@@ -220,6 +220,11 @@ You have now implemented mapping using known poses and localization using a know
     colcon build --packages-select mbot_slam
     source install/setup.bash
     ```
+
+**Notice: The LiDAR is physically mounted backward**, resulting in a 3.14 rad yaw offset between the base_footprint frame and the lidar frame. When projecting LiDAR data into the world frame, be sure to account for this offset.
+- This offset is defined in the URDF file located at: `~/mbot_ws/src/mbot_description/urdf`
+- **However**, the TF tree is structured as follows: `map → odom → base_footprint → base_link → lidar_link`. When you query the transform `odom → base_footprint`, the system does not include the relationship between `base_footprint → lidar_link`. When you query `odom → lidar_link`, the yaw offset is automatically included.
+
 
 **How to test?**
 1. Start the SLAM Node:

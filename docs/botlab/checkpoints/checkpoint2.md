@@ -223,7 +223,7 @@ You have now implemented mapping using known poses and localization using a know
 
 **Notice: The LiDAR is physically mounted backward**, resulting in a 3.14 rad yaw offset between the base_footprint frame and the lidar frame. When projecting LiDAR data into the world frame, be sure to account for this offset.
 - This offset is defined in the URDF file located at: `~/mbot_ws/src/mbot_description/urdf`
-- **However**, the TF tree is structured as follows: `map → odom → base_footprint → base_link → lidar_link`. When you query the transform `odom → base_footprint`, the system does not include the relationship between `base_footprint → lidar_link`. When you query `odom → lidar_link`, the yaw offset is automatically included.
+- **However**, the TF tree is structured as follows: `map → odom → base_footprint → base_link → lidar_link`. When you query the transform `odom → base_footprint`, the system does not include the relationship between `base_footprint → lidar_link`, we have to manually add the offset. When you query `odom → lidar_link`, the yaw offset is already included, so no manual adjustment is needed.
 
 
 **How to test?**

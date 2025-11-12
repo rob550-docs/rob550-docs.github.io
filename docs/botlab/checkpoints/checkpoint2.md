@@ -212,7 +212,7 @@ You have now implemented mapping using known poses and localization using a know
 ### TODO
 1. Pull the latest code from [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream to get the Task 2.3 template.
 2. All work for this task is in the package `mbot_slam`.
-    - Start with `slam_node.cpp`, search for TODOs. **All the TODOs come from Task 2.1 and Task 2.2.**
+    - Start with `slam_node.cpp`, search for TODOs. **Most TODOs come from Task 2.1 and Task 2.2, except lidar interpolate TODO#6 in slam_node.cpp**.
     - You can simply copy and paste your code from those tasks, tune the parameters, and achieve a good working SLAM system. You don’t need to follow the TODOs strictly, feel free to implement them in your own preferred way.
 3. When finished, compile your code:
     ```bash
@@ -225,6 +225,35 @@ You have now implemented mapping using known poses and localization using a know
 - This offset is defined in the URDF file located at: `~/mbot_ws/src/mbot_description/urdf`
 - **However**, the TF tree is structured as follows: `map → odom → base_footprint → base_link → lidar_link`. When you query the transform `odom → base_footprint`, the system does not include the relationship between `base_footprint → lidar_link`, we have to manually add the offset. When you query `odom → lidar_link`, the yaw offset is already included, so no manual adjustment is needed.
 
+---
+
+**Nov. 11 update** - There is a bug in the `mbot_slam` template code. Please pull the latest, and see this [commit](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws/-/commit/da6c85a1303d8e374db3932cfdd3ebcbfb89f7f4) in [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws). The issue is related to LiDAR scan interpolation. This fix should noticeably improve your SLAM performance if you’ve been struggling with mapping quality.
+
+**What was wrong:**
+
+According to the message definition of [sensor_msgs/LaserScan Message](https://docs.ros.org/en/lunar/api/sensor_msgs/html/msg/LaserScan.html):
+```
+Header header            # timestamp in the header is the acquisition time of 
+                         # the first ray in the scan.
+```
+
+This means the odometry queried by the following line corresponds to the robot’s pose when the first LiDAR ray was fired:
+```cpp
+geometry_msgs::msg::TransformStamped tf_odom_base = tf_buffer_->lookupTransform("odom", "base_footprint", scan->header.stamp);
+```
+However, in the template code before this fix, we had the following line, which is incorrect:
+```cpp
+MovingLaserScan interpolated_scan(*scan, previous_est_pose_, est_pose);
+```
+If you want to interpolate the LiDAR rays, please check TODO #6 in `slam_node.cpp`:
+- The start pose should be est_pose.
+- The end pose should be computed based on the scan duration and the robot’s motion.
+  
+If you do not wish to interpolate the LiDAR rays, you can simply use the same pose for both start and end, as shown in the updated template code.
+- When the robot moves slowly, the difference will be small. However, when it moves quickly, not interpolating will noticeably degrade map quality.
+  
+
+---
 
 **How to test?**
 1. Start the SLAM Node:

@@ -4,7 +4,7 @@ title: Checkpoint 2
 nav_order: 3
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-11-11 12:09:00 -0500
+last_modified_at: 2025-11-13 14:09:00 -0500
 ---
 
 
@@ -251,7 +251,29 @@ If you want to interpolate the LiDAR rays, please check TODO #6 in `slam_node.cp
   
 If you do not wish to interpolate the LiDAR rays, you can simply use the same pose for both start and end, as shown in the updated template code.
 - When the robot moves slowly, the difference will be small. However, when it moves quickly, not interpolating will noticeably degrade map quality.
-  
+
+---
+**Nov. 13 Update** - important hints:
+{: .text-red-200}
+
+If your mapping and localization are working well, but your full SLAM system is struggling, the problem is often in parameter tuning. Here are some hints to guide your tuning:
+1. Action model `action_model.hpp`
+    - Observe your particle cloud: What is its shape? Is it a tight circle, or an elongated oval following the robot's path? If `k2_` or `k1_` is too high, your particle cloud might be a "high oval".
+    - We know the robot's odometry isn't perfect, but it's also not completely wrong. Is a large noise value like 1.0 necessary, or would a much smaller value like 0.001 be more appropriate? Think about how much you trust the odometry.
+2. Sensor model `sensor_model.hpp`
+    - `sigma_hit_` is in meters. If your map resolution is 0.05m (5cm) and your `sigma_hit_` is also 0.05m, what does that imply? It means a lidar ray landing one cell away from the obstacle in the map is already at one standard deviation of error.
+    - A smaller `sigma_hit_` makes your sensor model stricter, demanding scans align almost perfectly. A larger value is more forgiving. Given the map resolution, experiment with values larger or smaller than 0.05m to see how it affects particle weights.
+3. Mapping `mapping.hpp`
+    - Do you see cells "flickering" between free and occupied? This can happen if a few bad scans can erase a well-defined wall. Tune the log-odds limits: Consider tunning `kMaxLogOdds` and `kMinLogOdds`. to make it harder for a cell's state to be "flipped" after it's been confidently marked as occupied or free.
+4. Map resolution `slam_node.cpp`
+    - High-resolution maps help localization. Your Task 2.2 may have worked well because the provided map was "crispy" (e.g., 0.01m resolution). If you are using a coarser resolution like 0.05m, try decreasing the cell size (e.g., to 0.03m or 0.02m) here `grid_(10.0, 10.0, 0.02, -5.0, -5.0)`.
+
+Here are examples of "OK," "Good," and "Excellent" maps generated from the slam_test bag. These are related to how competition scoring will be evaluated.
+<div class="popup-gallery">
+    <a href="/assets/images/botlab/checkpoints/checkpoint2-ok-map.png" title=""><img src="/assets/images/botlab/checkpoints/checkpoint2-ok-map.png" width="200" height="200"></a>
+    <a href="/assets/images/botlab/checkpoints/checkpoint2-good-map.png" title=""><img src="/assets/images/botlab/checkpoints/checkpoint2-good-map.png" width="220" height="200"></a>
+    <a href="/assets/images/botlab/checkpoints/checkpoint2-excellent-map.png" title=""><img src="/assets/images/botlab/checkpoints/checkpoint2-excellent-map.png" width="225" height="200"></a>
+</div>
 
 ---
 

@@ -258,7 +258,7 @@ If you do not wish to interpolate the LiDAR rays, you can simply use the same po
 
 If your mapping and localization are working well, but your full SLAM system is struggling, the problem is often in parameter tuning. Here are some hints to guide your tuning:
 1. Action model `action_model.hpp`
-    - Observe your particle cloud: What is its shape? Is it a tight circle, or an elongated oval following the robot's path? If `k2_` or `k1_` is too high, your particle cloud might be a "high oval".
+    - Observe your particle cloud: What is its shape? Is it a tight circle, or an elongated oval following the robot's path? If `k2_` or `k1_` is too high, your particle cloud might be a "long oval".
     - We know the robot's odometry isn't perfect, but it's also not completely wrong. Is a large noise value like 1.0 necessary, or would a much smaller value like 0.001 be more appropriate? Think about how much you trust the odometry.
 2. Sensor model `sensor_model.hpp`
     - `sigma_hit_` is in meters. If your map resolution is 0.05m (5cm) and your `sigma_hit_` is also 0.05m, what does that imply? It means a lidar ray landing one cell away from the obstacle in the map is already at one standard deviation of error.

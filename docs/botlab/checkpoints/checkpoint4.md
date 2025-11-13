@@ -4,12 +4,10 @@ title: Checkpoint 4
 nav_order: 5
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-10-23 14:37:48 -0500
+last_modified_at: 2025-11-13 11:09:48 -0500
 ---
-This checkpoint still under editing
-{: .fs-5 .text-red-200 .fw-500}
 
-The MBot has a camera that can be used to perform vision tasks like identifying Apriltags and other obstacles in the environment.
+The MBot is equipped with a camera that can be used for vision-based tasks, such as identifying AprilTags and detecting obstacles in the environment.
 
 ### Contents
 * TOC
@@ -18,9 +16,11 @@ The MBot has a camera that can be used to perform vision tasks like identifying 
 ## Computer Vision
 ### Task 4.1 Camera Calibration
 
-1. Find a checkerboard in the lab
+1. Find a checkerboard in the lab.
 
-    The size of the checkerboard is determined by the number of intersections, not squares. For instance, a notation of [8, 6] means the board has 8 intersections along one dimension and 6 along the other, corresponding to a grid of 9 by 7 squares. You need this information.
+    **The checkerboard size is defined by the number of intersections, not the number of squares.**
+
+    For example, size 8x6 means the board has 8 intersections along one dimension and 6 along the other, corresponding to a grid of 9×7 squares. You’ll need this information for calibration.
 2. Run the camera node in the **VSCode Terminal**:
     ```bash
     ros2 run camera_ros camera_node --ros-args \
@@ -33,19 +33,19 @@ The MBot has a camera that can be used to perform vision tasks like identifying 
     ros2 run camera_calibration cameracalibrator \
     --size 6x8 --square 0.025 --ros-args -r image:=/camera/image_raw -p camera:=/camera
     ```
-    - `--size` is the num of intersections we introduced at the step 1.
-    - `--square` is the size of the block in meter. Here 0.025 means the block is 25 mm.
-    - Adjust the values based on your checkerboard.
-4. Use this [link](https://docs.nav2.org/tutorials/docs/camera_calibration.html#tutorial-steps) for reference if you don't know how to use the calibrator.
-    - Read from: Tutorial Steps -> 5- Start the camera calibration node
-5. Once you get the calibration result, move it to the mbot workspace:
+    - `--size` specifies the number of intersections (as noted in Step 1).
+    - `--square` defines the size of each checkerboard square in meters.
+    - Adjust the values based on your checkerboard. 0.025 means each square is 25 mm.
+4. How to use the calibrator GUI? Refer to the [ROS2 Camera Calibration Tutorial](https://docs.nav2.org/tutorials/docs/camera_calibration.html#tutorial-steps)
+    - Start reading from: Tutorial Steps → Step 5: Start the camera calibration node.
+5. Once calibration is complete, move the results to your MBot workspace by running the following commands:
     ```bash
     cp /tmp/calibrationdata.tar.gz ~/mbot_ws/src/mbot_vision
     cd ~/mbot_ws/src/mbot_vision
     tar -xvf calibrationdata.tar.gz -C calibration/
     ```
-    - This will unzip the calibration results to `/calibration`.
-6. Rebuild the packages so the calibration file is accessible anywhere:
+    - This will unzip the calibration results to `~/mbot_ws/src/mbot_vision/calibration`.
+6. Rebuild the packages so the calibration file is accessible system-wide:
     ```bash
     cd ~/mbot_ws
     colcon build
@@ -54,14 +54,14 @@ The MBot has a camera that can be used to perform vision tasks like identifying 
 
 ### Launch files
 
-To save time on `ros2 run` all the node individually, we also provide launch files.
+To save time on `ros2 run` all the node individually, you can use the provided launch files.
 
 - To launch camera node only, run the following in the **VSCode Terminal**:
     ```bash
     ros2 launch mbot_vision camera.launch.py
     ```
     - This will publish topics `/camera/image_raw` and `/camera/camera_info`
-    - You can view the camera feed in rqt after launching this node.
+    - You can view the camera feed in rqt on NoMachine or Foxglove after launching this node.
 - To launch the camera with image rectification using the calibration results (camera node + rectification node), run the following in the **VSCode Terminal**:
     ```bash
     ros2 launch mbot_vision camera_rectify.launch.py
@@ -78,3 +78,5 @@ To save time on `ros2 run` all the node individually, we also provide launch fil
 
 ## Checkpoint Submission
 No submission is required for this checkpoint.
+
+However, **ensure your camera can successfully detect AprilTags, you’ll need this for the competition.**

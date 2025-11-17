@@ -4,7 +4,7 @@ title: Competition
 nav_order: 7
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-11-13 17:09:48 -0500
+last_modified_at: 2025-11-15 13:09:48 -0500
 ---
 
 <a class="image-link" href="/assets/images/botlab/checkpoints/doge-meme.png">
@@ -22,6 +22,7 @@ You will complete two runs: one judged on **accuracy** and one on **speed**.
 ### 1. Accuracy Run
 - The MBot must **follow the given path** while running **SLAM** to generate a map of the arena.
 - After completing the path, the MBot should **return to the starting pose**.
+- Full autonomy using motion controller only, no teleop.
 - Judging criteria:
   - Final pose error (position and heading)
   - Map quality
@@ -37,6 +38,7 @@ Map Quality Scoring: [+100, +50, +25] for [Excellent, Good, OK] quality
 ### 2. Speed Run
 - The MBot must **drive quickly** along the path: **Start → End → Start**
 - You will be judged only on speed, not on final pose accuracy.
+- Full autonomy using motion controller only, no teleop.
 - Judged only on speed, but the final position must still be on the starting marker. Off-marker completion yields 0 points.
 
 Time Scoring:
@@ -63,7 +65,7 @@ You may attempt any level directly and still earn partial credit if a level is n
 
 Starting from the designated position, explore the area and generate a map, then return to the starting pose.
 - Optional:
-  - Use RViz to set goal poses for navigation (25% deduction)
+  - Use RViz to set goal poses for exploration (25% deduction)
   - Or use manual teleop (points awarded **only for map quality, no points for pose return**)
 
 **Scoring**
@@ -80,24 +82,24 @@ Deductions: -25% if navigation goals were set manually in RViz instead of using 
 
 ### Level 2 - Worksite Patrol
 
-Goal: Identify and visit marked inspection points (AprilTags). Three unique AprilTags (no duplicates) will be placed in the area.
-
-This level begins like Level 1 (explore and map the environment). Then, the MBot must **navigate autonomously** to the tags in ascending order (by tag ID) and return to the starting point, no teleop or manual goal-setting.
+Goal: Patrol the inspection points (AprilTags). Three unique AprilTags (no duplicates) will be placed in the area.
+1. First, perform mapping as in Level 1.
+2. When mapping is complete, inform the instructor. You may stop your code, save the map, recompile, or adjust configurations. Your Level 1 points will be evaluated at this time.
+3. Then the MBot must **navigate autonomously** to the tags in ascending order (by tag ID) and return to the starting point, no teleop or manual goal-setting.
+  - For the patrol requirement, each AprilTag must come within 50 cm of the MBot’s camera view to count.
 
 **Scoring**
 
 Earn Level 1 points, plus
 - +100 points for completing the Worksite Patrol
-- Mapping by manual goal-setting in RViz only affects Level 1 points (25% deduction)
+- Level 1 deduction only affects Level 1 points
 - Total: Level 1 points + 100
 
 
 ### Level 3 - Autonomous Recovery
 Goal: Restart operations from an unknown location using the saved map.
-
-This level tests localization and robustness.
 1. First, perform mapping as in Level 1.
-2. When mapping is complete, inform the instructor. You may stop your code, save the map, recompile, or adjust configurations.
+2. When mapping is complete, inform the instructor. You may stop your code, save the map, recompile, or adjust configurations. Your Level 1 points will be evaluated at this time.
 3. The instructor will place the robot at a random location. The location will be unique to avoid ambiguous symmetries.
 4. Then the robot must operate **fully autonomously** to localize itself and complete the Worksite Patrol (as in Level 2). No teleop or manual goal-setting is allowed.
 
@@ -107,7 +109,7 @@ Tip: Save your map and AprilTag positions to initialize your particle filter wit
 
 Earn all Level 1 + Level 2 points, plus
 - +100 points for completing Level 3
-- Mapping by manual goal-setting in RViz only affects Level 1 points (25% deduction)
+- Level 1 deduction only affects Level 1 points
 - Total: Level 1 points + 100 + 100
 
 
@@ -127,7 +129,7 @@ Below is an example of the warehouse arena:
 - Pick up the green boxes (also IDs [1–7]) and stack each on the matching red box.
 
 **Scoring**
-- +50 points for moving a crate to match its ID but failing to stack
+- +50 points for moving a crate to match its ID but failing to stack. (If the two crates with matching IDs physically touch, you earn +50 points. Simply lifting a crate does **not** count.)
 - +100 points for successfully stacking crates with the same ID (e.g., stacking all ID 1 crates and all ID 3 crates yields 200 pts)
 - 50% deduction if the robot navigates by manually specifying goals in RViz instead of fully autonomously
 

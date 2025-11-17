@@ -4,7 +4,7 @@ title: Checkpoint 3
 nav_order: 4
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-11-16 11:58:00 -0500
+last_modified_at: 2025-11-17 15:58:00 -0500
 ---
 
 Using the SLAM algorithm you implemented previously, you can now construct a map of an environment with the MBot. In this checkpoint, you will add path planning and autonomous exploration capabilities.
@@ -85,8 +85,7 @@ ros2 bag play maze1.mcap
 
 ### Video Demo
 
-Video will be released soon.
-{: .text-red-200}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6DEOXMysMj0?si=vDEOTjKrgOOb5TID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 {: .required_for_report } 
 Provide a figure showing the planned path in the map.
@@ -141,8 +140,8 @@ ros2 bag play slam_test
 ```
 
 ### Video Demo
-Video will be released soon.
-{: .text-red-200}
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Xv6DzklfyJw?si=vwaTLCAai_BdfFvc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 {: .required_for_report } 
 Explain the strategy used for finding frontiers and any other details about your implementation that you found important for making your algorithm work.

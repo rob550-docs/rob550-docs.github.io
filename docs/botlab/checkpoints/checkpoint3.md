@@ -60,7 +60,7 @@ Write an A* path planner. The A* skeleton is provided in the `mbot_nav` package.
       ```bash
       ros2 run mbot_localization localization_node
       ```
-      - **Notice**: In `localization_node.cpp`, set `publish_map_odom_{true}` for real-world operation. Then **recompile the `mbot_slam`**.
+      - **Notice**: In `localization_node.cpp`, set `publish_map_odom_{true}` for real-world operation. Then **recompile the `mbot_localization`**.
       {: .text-red-200}
    4. Start rviz and set initial pose in **NoMachine Terminal #1**, localization node needs it to initialize particles.
       ```bash

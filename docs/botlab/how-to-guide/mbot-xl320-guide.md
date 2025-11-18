@@ -4,7 +4,7 @@ title: mbot_xl320_lib Guide
 parent: How-to Guide
 grand_parent: Botlab
 nav_order: 2
-last_modified_at: 2025-10-30 12:37:48 -0500
+last_modified_at: 2025-11-18 12:37:48 -0500
 ---
 
 > This guide introduces how to program the XL320 servo using the `mbot_xl320_library` code example provided.
@@ -104,6 +104,11 @@ The result should look like the image below:
     ttyAMA0
     ttyAMA10
     ```
+5. Run the following to add user to `dialout` group:
+    ```bash
+    sudo usermod -a -G dialout $USER
+    ```
+    - Test, run `groups` and you should see `dialout` listed.
 
 ## Install
 Run the following commands to install the XL320 library
@@ -118,7 +123,7 @@ cd ~/mbot_xl320_library
 1. Check the servo ID. This program will ping all the possible IDs and give you the list of connected ID.
     ```bash
     cd ~/mbot_xl320_library/tests
-    sudo python3 check_servo_id.py
+    python3 check_servo_id.py
     ```
     - Check the ID output. If you have two or more servos connected but the program detects none, or doesn’t list all of them, it likely means:
         - either one of the servos is broken
@@ -131,7 +136,7 @@ cd ~/mbot_xl320_library
     ```
     Then run:
     ```bash
-    sudo python3 change_servo_id.py
+    python3 change_servo_id.py
     ```
 3. We have 2 exmaples `tests/rotate_full_range.py` and `tests/rotate_in_circle.py`. You need to define the servo ID to use the 2 examples, and the IDs are the ones you obtain from the step 1.
 ```python
@@ -141,7 +146,7 @@ servo2_ID = 2
 ```
 Then run:
 ```bash
-sudo python3 rotate_in_circle.py
+python3 rotate_in_circle.py
 ```
 
 ## Uninstall

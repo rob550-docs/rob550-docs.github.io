@@ -7,6 +7,14 @@ grand_parent: Botlab
 last_modified_at: 2025-11-17 15:58:00 -0500
 ---
 
+**Nov. 18 Update**: 
+{: .text-red-200}
+Please pull from [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream to get the latest commit to `mbot_nav`. We added motion controller to the `mbot_nav` to resolve issues caused by the previous custom message definitions. 
+{: .text-red-200}
+- Task 3.1 and Task 3.2 instructions have also been updated accordingly.
+{: .text-red-200}
+---
+
 Using the SLAM algorithm you implemented previously, you can now construct a map of an environment with the MBot. In this checkpoint, you will add path planning and autonomous exploration capabilities.
 
 ### Contents
@@ -21,7 +29,7 @@ Write an A* path planner. The A* skeleton is provided in the `mbot_nav` package.
 1. Pull the latest code from [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream to get the `mbot_nav`.
 2. All work for this task is in the package `mbot_nav`.
    - Start with `navigation_node.cpp`, search for TODOs. All the actual code writing is in `astar.cpp`.
-   - You also need to complete `obstacle_distance_grid.cpp`. The TODO matches earlier tasks, so you can copy/paste your previous implementation. A new function `getOccupancy` has been added.
+   - You also need to complete `obstacle_distance_grid.cpp` and `motion_controller_diff.cpp`. The TODOs match the earlier tasks, so you can reuse your previous implementations. `obstacle_distance_grid.cpp` now includes a new getOccupancy function. Note, **do not copy/paste the entire old file, only reuse the TODO parts.**
    - You don’t need to follow the TODOs strictly, feel free to implement them in your own preferred way.
 3. When finished, compile your code:
     ```bash
@@ -69,7 +77,7 @@ Write an A* path planner. The A* skeleton is provided in the `mbot_nav` package.
       ```
    5. Run motion controller in **VSCode Terminal #3**:
       ```bash
-      ros2 run mbot_setpoint motion_controller_diff
+      ros2 run mbot_nav motion_controller_diff
       ```
    6. Then set the goal pose on rviz.
 
@@ -120,7 +128,7 @@ This task is useful for competition but **not required for Checkpoint 3 submissi
    ```
 3. Run motion controller in **VSCode Terminal #2**:
    ```bash
-   ros2 run mbot_setpoint motion_controller_diff
+  ros2 run mbot_nav motion_controller_diff
    ```
 4. Run the exploration node in **VSCode Terminal #3**:
    ```bash

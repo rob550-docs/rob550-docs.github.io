@@ -4,7 +4,7 @@ title: Checkpoint 3
 nav_order: 4
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-11-17 15:58:00 -0500
+last_modified_at: 2025-11-18 14:56:00 -0500
 ---
 
 **Nov. 18 Update**: 

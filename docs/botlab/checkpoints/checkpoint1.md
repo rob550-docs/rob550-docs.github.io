@@ -4,16 +4,7 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-10-23 12:16:48 -0500
----
-
-Oct. 23 Update
-{: .fs-5 .text-red-200 .fw-500}
-
-- **If you just finished setup**: You are not affected, please proceed as it is.
-- **If you are working on Task 1.1**: Keep going. Once you’re done, revisit the Preparation section to compile the latest .uf2 files, then proceed to Task 1.2.
-- **If you are working on Task 1.2**: Revisit the Preparation section to compile the latest .uf2 files. Then review Task 1.2 again. You’ll notice that the command used to upload the .uf2 files has changed. This is because we’re no longer using the provided precompiled files; instead, you need to compile them yourself from the source code.
-
+last_modified_at: 2025-11-19 12:16:48 -0500
 ---
 
 {: .note}

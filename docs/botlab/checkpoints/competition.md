@@ -4,7 +4,7 @@ title: Competition
 nav_order: 7
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-11-15 13:09:48 -0500
+last_modified_at: 2025-11-19 13:09:48 -0500
 ---
 
 <a class="image-link" href="/assets/images/botlab/checkpoints/doge-meme.png">
@@ -39,7 +39,7 @@ Map Quality Scoring: [+100, +50, +25] for [Excellent, Good, OK] quality
 - The MBot must **drive quickly** along the path: **Start → End → Start**
 - You will be judged only on speed, not on final pose accuracy.
 - Full autonomy using motion controller only, no teleop.
-- Judged only on speed, but the final position must still be on the starting marker. Off-marker completion yields 0 points.
+- Judged only on speed, but the final position must still be within (20 cm, 20 cm, 45°) of the starting location, or no points will be given.
 
 Time Scoring:
 - 100 points: ≤ 50s
@@ -64,9 +64,10 @@ You may attempt any level directly and still earn partial credit if a level is n
 ### Level 1 - Facility Exploration
 
 Starting from the designated position, explore the area and generate a map, then return to the starting pose.
-- Optional:
-  - Use RViz to set goal poses for exploration (25% deduction)
-  - Or use manual teleop (points awarded **only for map quality, no points for pose return**)
+- Alternative ways to complete this level:
+  - Use RViz to set goal poses for exploration -> 25% deduction
+  - Use manual teleop for exploration -> points awarded **only for map quality, no points for pose return**.
+  - Use `slam_toolbox` for mapping -> 50% deduction
 
 **Scoring**
 
@@ -78,22 +79,20 @@ Pose Return Accuracy:
 
 Map Quality: [+100, +50, +25] for map quality [Excellent, Good, OK]
 
-Deductions: -25% if navigation goals were set manually in RViz instead of using full autonomous control.
-
 ### Level 2 - Worksite Patrol
 
-Goal: Patrol the inspection points (AprilTags). Three unique AprilTags (no duplicates) will be placed in the area.
+Goal: Patrol the inspection points (AprilTags). Four unique AprilTags (no duplicates) will be placed in the area.
 1. First, perform mapping as in Level 1.
 2. When mapping is complete, inform the instructor. You may stop your code, save the map, recompile, or adjust configurations. Your Level 1 points will be evaluated at this time.
-3. Then the MBot must **navigate autonomously** to the tags in ascending order (by tag ID) and return to the starting point, no teleop or manual goal-setting.
-  - For the patrol requirement, each AprilTag must come within 50 cm of the MBot’s camera view to count.
+3. Then the MBot must **navigate autonomously** from start point to the tags in ascending order (by tag ID) and return to the starting point, no teleop or manual goal-setting.
+  - For the patrol requirement, each AprilTag must come within 50 cm of the MBot’s camera view, then the robot should stop, rotate 360 degrees before continuing to the next tag.
 
 **Scoring**
 
 Earn Level 1 points, plus
-- +100 points for completing the Worksite Patrol
+- +25 points for each apriltag survey in the correct order
 - Level 1 deduction only affects Level 1 points
-- Total: Level 1 points + 100
+- Max Total: Level 1 points + 100
 
 
 ### Level 3 - Autonomous Recovery
@@ -102,6 +101,7 @@ Goal: Restart operations from an unknown location using the saved map.
 2. When mapping is complete, inform the instructor. You may stop your code, save the map, recompile, or adjust configurations. Your Level 1 points will be evaluated at this time.
 3. The instructor will place the robot at a random location. The location will be unique to avoid ambiguous symmetries.
 4. Then the robot must operate **fully autonomously** to localize itself and complete the Worksite Patrol (as in Level 2). No teleop or manual goal-setting is allowed.
+  - For example, if the robot wakes up near ID 3, it should autonomously visit ID 1 first, then return to 3, and continue to 4, 5, etc.
 
 Tip: Save your map and AprilTag positions to initialize your particle filter with a detected tag and refine localization using wall data.
 
@@ -110,14 +110,18 @@ Tip: Save your map and AprilTag positions to initialize your particle filter wit
 Earn all Level 1 + Level 2 points, plus
 - +100 points for completing Level 3
 - Level 1 deduction only affects Level 1 points
-- Total: Level 1 points + 100 + 100
+- Max Total: Level 1 points + 100 + 100
 
 
 ## Event 3: Warehouse Chanllenge [600 points max]
 
 **Time limit:** 10 minutes
 
-Apriltag crates will be placed randomly in the warehouse. The goal is to **locate the Apriltag crates and stack them together by matching their IDs**, simulating warehouse operations. Each ID will have only two Apriltag plates. You may map the area before starting.
+Apriltag crates will be placed in the maze. Their positions are fixed, and all teams will have the same setup (the final layout may differ slightly from the image below).
+
+The goal is to **locate the Apriltag crates and stack them together by matching their IDs**, simulating warehouse operations.
+- You may map the area before starting.
+- You may use `slam_toolbox` for mapping — no point deductions.
 
 Below is an example of the warehouse arena:
 
@@ -125,8 +129,10 @@ Below is an example of the warehouse arena:
 <img src="/assets/images/botlab/checkpoints/competition.png" alt=" " style="max-width:400px;"/>
 </a>
 
-- Start in the red box area (may contain IDs [1–7]).
-- Pick up the green boxes (also IDs [1–7]) and stack each on the matching red box.
+- Start in the red box area. The red boxes contain four ID pairs: 1–2, 3–4, 5–6, 7–8.
+- The green boxes contain the same four pairs. Pick up each green box and stack it onto the matching red box.
+
+Note: Each box has two Apriltag IDs. The even-numbered tags mark the two sides that cannot be forklifted, while the odd-numbered tags mark the two sides with forklift slots, where the pallet can be lifted.
 
 **Scoring**
 - +50 points for moving a crate to match its ID but failing to stack. (If the two crates with matching IDs physically touch, you earn +50 points. Simply lifting a crate does **not** count.)

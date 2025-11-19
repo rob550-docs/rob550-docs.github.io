@@ -4,7 +4,7 @@ title: Checkpoint 2
 nav_order: 3
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-11-13 14:09:00 -0500
+last_modified_at: 2025-11-19 13:09:00 -0500
 ---
 
 
@@ -278,16 +278,20 @@ Here are examples of "OK," "Good," and "Excellent" maps generated from the slam_
 ---
 
 **How to test?**
-1. Start the SLAM Node:
+1. Run the following in **VSCode Terminal #1**:
+    ```bash
+    ros2 launch mbot_bringup mbot_bringup.launch.py
+    ```
+2. Put the robot in the maze and start the SLAM Node in **VSCode Terminal #2**:
     ```bash
     ros2 run mbot_slam slam_node
     ```
-2. Start Rviz on NoMachine:
+3. Start Rviz **on NoMachine**:
     ```bash
     cd ~/mbot_ros_labs/src/mbot_slam/rviz
     ros2 run rviz2 rviz2 -d slam.rviz
     ```
-3. Map in the lab maze, drive the robot manually using the teleop package:
+4. Map in the lab maze, drive the robot manually using the teleop in **VSCode Terminal #3**:
     ```bash
     ros2 run teleop_twist_keyboard teleop_twist_keyboard
     ```
@@ -297,6 +301,12 @@ Here are examples of "OK," "Good," and "Excellent" maps generated from the slam_
     ros2 bag play slam_test
     ```
         - This ROS bag includes the `/cmd_vel` topic. Unplug the Type-C cable from the Pi to the Pico before run the ros bag.
+5. After mapping the whole area, **do not stop the mapping node yet**. Save the map in **VSCode Terminal #4**:
+    ```bash
+    cd ~/mbot_ros_labs/src/mbot_slam/maps
+    ros2 run nav2_map_server map_saver_cli -f map_name
+    ```
+    - Replace `map_name` with the name you want for your map.
 
 {: .required_for_report } 
 1) Create a block diagram showing how the SLAM system components interact.

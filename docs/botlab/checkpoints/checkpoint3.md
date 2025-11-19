@@ -10,9 +10,17 @@ last_modified_at: 2025-11-18 14:56:00 -0500
 **Nov. 18 Update**: 
 {: .text-red-200}
 Please pull from [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream to get the latest commit to `mbot_nav`. We added motion controller to the `mbot_nav` to resolve issues caused by the previous custom message definitions. 
-{: .text-red-200}
 - Task 3.1 and Task 3.2 instructions have also been updated accordingly.
+
+---
+
+**Nov. 19 Update**:
 {: .text-red-200}
+
+We’ve released a guide on [how to use slam_toolbox](/docs/botlab/how-to-guide/slam-toolbox-guide)! If you’re not satisfied with your mapping performance and need a map to test your A* or exploration algorithms, feel free to take a look.
+
+You may also use slam_toolbox for mapping in Competition Event 2 and Event 3 (with point deductions). For details, please check the competition page.
+
 ---
 
 Using the SLAM algorithm you implemented previously, you can now construct a map of an environment with the MBot. In this checkpoint, you will add path planning and autonomous exploration capabilities.

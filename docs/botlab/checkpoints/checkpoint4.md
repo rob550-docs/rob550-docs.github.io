@@ -4,7 +4,7 @@ title: Checkpoint 4
 nav_order: 5
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-11-13 11:09:48 -0500
+last_modified_at: 2025-11-20 15:09:48 -0500
 ---
 
 The MBot is equipped with a camera that can be used for vision-based tasks, such as identifying AprilTags and detecting obstacles in the environment.
@@ -73,8 +73,21 @@ To save time on `ros2 run` all the node individually, you can use the provided l
     ```bash
     ros2 launch mbot_vision apriltag.launch.py
     ```
-    - This will also publish AprilTag detection results on `/detections`
+    - This will publish AprilTag detection results on `/detections`.
+    - It will also publish the TF from `/camera` to each Apriltag, so you do not need to decode `/detections` or convert tag coordinates from the 2D image plane into the 3D world frame yourself.
 
+You can visualize the camera view in rqt on NoMachine desktop:
+```bash
+ros2 run rqt_image_view rqt_image_view
+```
+
+Or on foxglove studio by running the bridge:
+```bash
+ros2 launch foxglove_bridge foxglove_bridge_launch.xml
+```
+
+### Video Demo
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6qcvDb_q0TQ?si=3X5i8moHI6Qk0ZgI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Checkpoint Submission
 No submission is required for this checkpoint.

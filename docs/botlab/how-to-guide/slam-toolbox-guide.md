@@ -77,6 +77,10 @@ In this guide, we list all the commands you’ll need for tasks related to the f
     ros2 run nav2_map_server map_saver_cli -f map_name
     ```
 
+### Video Demo
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HTP2kHmTvoQ?si=Ke9m9sMpRcZUkIQ_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## Autonomous Exploration
 1. **VSCode Terminal #1**: launch the robot model, TF, LiDAR node.
     ```bash

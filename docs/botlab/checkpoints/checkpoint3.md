@@ -4,7 +4,25 @@ title: Checkpoint 3
 nav_order: 4
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-11-18 14:56:00 -0500
+last_modified_at: 2025-11-25 14:56:00 -0500
+---
+
+
+**Nov. 25 Update**:
+{: .text-red-200}
+
+Please pull from the [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream to get the latest update to `mbot_nav`. There was a bug in `mbot_nav/src/motion_controller_diff.cpp`. Please check the latest commit to see the changes.
+
+What the bug was:
+- The code was copy-pasted from `mbot_setpoint` with only the message types changed. However, the two systems are conceptually very different.
+
+In `mbot_setpoint`, the waypoint publisher sends poses in the `/odom` frame, and the controller follows these waypoints using odometry. Everything operates in the odom frame.
+
+In `mbot_nav`, we perform A* planning in the `/map` frame. The navigation node publishes waypoints in map frame, so the controller must follow the path in map frame. 
+- This means the controller cannot use odometry (odom) to track the path. Instead, it must use the robot’s pose in the `/map` frame: the transform map -> base_footprint provided by the localization node.
+
+The bug fix updates the controller to obtain the pose through TF, using the map-frame pose estimate. The previous version was conceptually incorrect because it used odom-frame data against a map-frame path.
+
 ---
 
 **Nov. 18 Update**: 
@@ -68,28 +86,36 @@ Write an A* path planner. The A* skeleton is provided in the `mbot_nav` package.
       colcon build --packages-select mbot_nav
       source install/setup.bash
       ```
-   2. Run launch file to publish map and run nagivation node in **VSCode Terminal #1**:
+   2. Launch the robot model, TF, LiDAR node in **VSCode Terminal #1**.
+    ```bash
+    ros2 launch mbot_bringup mbot_bringup.launch.py 
+    ```
+   3. Run launch file to publish map and run nagivation node in **VSCode Terminal #2**:
       ```bash
       ros2 launch mbot_nav path_planning.launch.py map_name:=your_map pose_source:=tf
       ```
-   3. Run localization node in **VSCode Terminal #2**:
+   4. Run localization node in **VSCode Terminal #3**:
       ```bash
       ros2 run mbot_localization localization_node
       ```
       - **Notice**: In `localization_node.cpp`, set `publish_map_odom_{true}` for real-world operation. Then **recompile the `mbot_localization`**.
       {: .text-red-200}
-   4. Start rviz and set initial pose in **NoMachine Terminal #1**, localization node needs it to initialize particles.
+   5. Start rviz and set initial pose in **NoMachine Terminal #1**, localization node needs it to initialize particles.
       ```bash
       cd ~/mbot_ros_labs/src/mbot_nav/rviz
       ros2 run rviz2 rviz2 -d path_planning.rviz
       ```
-   5. Run motion controller in **VSCode Terminal #3**:
+   6. Run motion controller in **VSCode Terminal #4**:
       ```bash
       ros2 run mbot_nav motion_controller_diff
       ```
-   6. Then set the goal pose on rviz.
+   7. Then set the goal pose on rviz.
 
+### Video Demo - real world
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tvFl81xeLKM?si=2kD8L4bCE4BTx1s-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### Video Demo - rosbag
 You may also test using rosbag playback. This is useful for A* debugging but does not reflect real-world localization performance. Instructions for rosbag testing are shown in the video demo.
 ```bash
 ros2 run mbot_nav navigation_node --ros-args -p pose_source:=tf
@@ -98,8 +124,6 @@ ros2 run mbot_nav navigation_node --ros-args -p pose_source:=tf
 cd ~/mbot_ros_labs/src/mbot_rosbags/maze1
 ros2 bag play maze1.mcap
 ```
-
-### Video Demo
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/6DEOXMysMj0?si=vDEOTjKrgOOb5TID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 

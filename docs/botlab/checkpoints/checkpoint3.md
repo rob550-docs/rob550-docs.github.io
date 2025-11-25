@@ -154,15 +154,19 @@ This task is useful for competition but **not required for Checkpoint 3 submissi
    cd ~/mbot_ros_labs/src/mbot_nav/rviz
    ros2 run rviz2 rviz2 -d path_planning.rviz
    ```
-2. Run slam in **VSCode Terminal #1**:
+2. Launch the robot model, TF, LiDAR node in **VSCode Terminal #1**.
+   ```bash
+   ros2 launch mbot_bringup mbot_bringup.launch.py 
+   ```
+3. Run slam in **VSCode Terminal #2**:
    ```bash
    ros2 run mbot_slam slam_node
    ```
-3. Run motion controller in **VSCode Terminal #2**:
+4. Run motion controller in **VSCode Terminal #3**:
    ```bash
-  ros2 run mbot_nav motion_controller_diff
+   ros2 run mbot_nav motion_controller_diff
    ```
-4. Run the exploration node in **VSCode Terminal #3**:
+5. Run the exploration node in **VSCode Terminal #4**:
    ```bash
    ros2 run mbot_nav exploration_node
    ```

@@ -4,7 +4,7 @@ title: slam_toolbox Guide
 parent: How-to Guide
 grand_parent: Botlab
 nav_order: 6
-last_modified_at: 2025-11-19 15:37:48 -0500
+last_modified_at: 2025-11-25 15:37:48 -0500
 ---
 
 Slam Toolbox is a set of tools and capabilities for 2D SLAM. More details can be found on its [GitHub page](https://github.com/SteveMacenski/slam_toolbox).
@@ -102,8 +102,8 @@ In this guide, we list all the commands you’ll need for tasks related to the f
 6. Start rviz or foxglove
     ```bash
     # NoMachine
-    cd ~/mbot_ws/src/mbot_navigation/rviz
-    ros2 run rviz2 rviz2 -d mapping.rviz
+    cd ~/mbot_ros_labs/src/mbot_nav/rviz
+    ros2 run rviz2 rviz2 -d path_planning.rviz
     ```
     ```bash
     # VSCode Terminal #5

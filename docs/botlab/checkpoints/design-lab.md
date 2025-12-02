@@ -4,7 +4,7 @@ title: Design Lab
 nav_order: 6
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-10-30 12:37:48 -0500
+last_modified_at: 2025-12-02 14:00:48 -0500
 ---
 
 ### Contents

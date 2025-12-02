@@ -50,3 +50,12 @@ The assembly guide, library, and example code are available in: [mbot_xl320_lib 
 1. Phase 1: 3D CAD model of your forklift assembly (due with checkpoint 2)
 2. Phase 2: Working prototype mounted on MBot (testing and improving)
 3. Phase 3: Autonomous pick-up and delivery (competition)
+
+{: .required_for_report } 
+Document your forklift design, including:
+<br> 1. Detailed drawings
+<br> 2. Bill of Materials (BOM)
+<br> 3. Step-by-step instructions:
+<br>&nbsp;&nbsp;&nbsp;&nbsp; - How is it assembled?
+<br>&nbsp;&nbsp;&nbsp;&nbsp; - How does the mechanism work?
+<br>&nbsp;&nbsp;&nbsp;&nbsp; - How do the servos coordinate and operate together?

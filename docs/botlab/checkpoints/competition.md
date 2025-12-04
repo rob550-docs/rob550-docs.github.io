@@ -113,7 +113,7 @@ Earn all Level 1 + Level 2 points, plus
 - Max Total: Level 1 points + 100 + 100
 
 
-## Event 3: Warehouse Chanllenge [600 points max]
+## Event 3: Warehouse Chanllenge [400 points max]
 
 **Time limit:** 10 minutes
 
@@ -137,7 +137,8 @@ Note: Each box has two Apriltag IDs. The even-numbered tags mark the two sides t
 **Scoring**
 - +50 points for moving a crate to match its ID but failing to stack. (If the two crates with matching IDs physically touch, you earn +50 points. Simply lifting a crate does **not** count.)
 - +100 points for successfully stacking crates with the same ID (e.g., stacking all ID 1 crates and all ID 3 crates yields 200 pts)
-- 50% deduction if the robot navigates by manually specifying goals in RViz instead of fully autonomously
+- 50% deduction if the robot navigates by teleop to get closer to the tag, **BUT** autonomously uses the forklift to lift the tag box (instead of manually driving the fork into the pallet).
+- 75% deduction if the robot navigates by teleop **AND** the forklift is manually controlled (i.e., you manually drive the fork into the tag box).
 
 ## Score Calculation
 Your overall score will be the sum of your best run on each event. Each event can be completed multiple times at different levels.

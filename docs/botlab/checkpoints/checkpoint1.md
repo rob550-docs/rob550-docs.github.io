@@ -4,40 +4,17 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-11-19 12:16:48 -0500
+last_modified_at: 2025-12-15 15:16:48 -0500
 ---
 
-{: .note}
-We don’t need the LiDAR for Checkpoint 1. If you want to stop it from spinning and draining the battery, you can unplug the three jumper wires from the control board. When plugging it back in, be very careful, double-check the cable connections to avoid shorting the LiDAR.
+In Checkpoint 1, you will tune the PID gains for wheel velocity, improve the firmware odometry calculations, and implement a motion controller. The controller will take in waypoints and automatically follow the path.
 
 ### Contents
 * TOC
 {:toc}
 
-## Preparation
-Fork the firmware repository to your group and clone it to your MBot.
-1. Fork the [mbot_firmware_ros repository](https://gitlab.eecs.umich.edu/rob550-f25/mbot_firmware_ros) to your GitLab group.
-2. Clone mbot_firmware_ros to your mbot's home directory:
-   ```bash
-    cd ~
-    git clone your_url
-    ```
-3. Compile the code
-  ```bash
-  cd ~/mbot_firmware_ros
-  mkdir build
-  cd build
-  cmake ..
-  make
-  ```
-  - This is going to take a while.
-4. After it's done, flash the compiled uf2 files
-  ```bash
-  sudo mbot-upload-firmware flash mbot_classic_ros.uf2
-  ```
-
 ## Task 1.1 Wheel Calibration
-The calibration program determines the polarity of the encoders and motors, then performs a wheel speed calibration. The resulting data are printed to the terminal and stored in the MBot’s non-volatile memory.
+The calibration program checks the polarity of the encoders and motors, then performs a wheel speed calibration. The resulting data are printed to the terminal and stored in the MBot’s non-volatile memory.
 
 The calibration data consists of:
 - Encoder Polarity: Describes whether the encoder's count increases or decreases when a positive PWM signal is applied to the motor.
@@ -73,24 +50,31 @@ Report the motor calibration with variance for the robot on a concrete floor (li
 
 
 ## Task 1.2 PID Tuning
-There are 3 drive modes and 3 control modes in firmware.
+There are 3 drive modes and 3 control modes in firmware source code.
 
-- **PWM Control**
-- **Wheel Velocity Control**
-  - Feedforward (FF) Control 
-  - PID Control
-  - Feedforward + PID Control 
-- **Robot Velocity Control**
-  - Feedforward (FF) Control
-  - PID Control
-  - Feedforward + PID Control 
+**Drive Modes**
+- **PWM Control** — You directly send PWM commands to individual motors.
+- **Wheel Velocity Control** — You send wheel velocity commands to individual wheels.
+- **Robot Velocity Control** — You send robot body velocity commands `vx` and `wz`.
+
+**Control Modes**
+- Feedforward (FF) Control Only
+- PID Control Only
+- Feedforward + PID Control
+
 
 The **drive mode is automatically selected** based on the type of control command you send:
 - If you publish to `/cmd_vel`, **Robot Velocity Control** mode will be selected, meaning the robot will interpret commands as body velocities.
 
-The **control mode is automatically selected** when you run calibration script, the default is "Feedforward + PID Control ". The calibration will read this header file (`mbot_firmware_ros/include/config/mbot_classic_default_pid.h`) and write the default values to FRAM.
+The **control mode is automatically selected** when you flash the calibration script. The default mode is Feedforward + PID Control. During calibration, the script reads the default parameters from
+`mbot_firmware_ros/include/config/mbot_classic_default_pid.h`
+and writes them to FRAM.
 
-You can tune the PID gains via the ROS parameter server at runtime.
+You can tune the PID gains at runtime via the ROS parameter server.
+
+You may notice that only wheel-level PID gains are exposed. This is because Robot Velocity Control is implemented on top of Wheel Velocity Control:
+- The commanded body velocities (vx, wz) are first converted into individual wheel velocities using the robot kinematics.
+- These wheel velocity commands are then tracked using the selected control mode (FF, PID, or FF+PID), which ultimately generates PWM commands for the motors.
 
 ### TODO
 Tune the PID values to achieve a desired system response.
@@ -109,7 +93,7 @@ Tune the PID values to achieve a desired system response.
     ros2 param dump /mbot_control_node 
     ```
     - If you see the values you set, it means the new PID gains have been applied to the MBot and written to the FRAM. You can run test now!
-    - The PID values will persist after rebooting. However, if you run the calibration again, the calibration script will overwrite your tuned PID gains, and you’ll need to reload the YAML file to restore them.
+    - The PID values will persist after rebooting. However, if you flash the calibration again, the calibration script will overwrite your tuned PID gains by the values in `mbot_firmware_ros/include/config/mbot_classic_default_pid.h`, and you’ll need to reload the YAML file to restore them.
       - After you are satisfied with your PID gains, if you really want to check whether the gains persist after rebooting, you can verify this as follows:
         - Open a terminal and start Minicom.
         - In another terminal, flash the firmware. Before the data table is printed, the firmware will first display all the saved parameters, check the PID values there.
@@ -129,7 +113,7 @@ We provide two Python scripts for testing:
       sudo mbot-upload-firmware flash mbot_classic_ros.uf2
     ```
 
-**Tip #1**: You don’t have to make all controllers perfect. The required plots are only for comparison, to show how the PID controller improves performance.
+**Tip #1**: You don’t have to make all control mode drive perfectly. The required plots are only for comparison, to show how the PID controller improves performance.
 
 **Tip #2**: If the robot doesn’t drive a perfect square, it also might not be your controller, it could be due to inaccurate odometry. Continue to Task 1.3 to explore ways to improve it further.
 
@@ -141,13 +125,11 @@ Plot of time vs. velocity with robot responding to a step command of 0.5 m/s for
 <br> 2) Is there any improvement we can make?
 
 
-## Task 1.3 Improve firmware (optional)
+## Task 1.3 Improve firmware
 
-Odometry estimates your robot’s position and orientation by integrating wheel encoder measurements over time. In the firmware code `~/mbot_firmware_ros/src/mbot_odometry.c`, we currently use a simple dead-reckoning approach, which may not provide the most accurate results.
+Odometry estimates your robot’s position and orientation by integrating wheel encoder measurements over time. In the firmware code we currently use a simple dead-reckoning approach, which may not provide the most accurate results.
 
-While the PID controllers help maintain accurate wheel speeds, you can add further enhancements to improve overall motion performance.
-
-In this section, you’ll have the opportunity to enhance the firmware following the provided guide. **This task is optional**, you can choose to improve it for future challenges, or skip Task 1.3 entirely if your robot already performs well enough for your needs.
+While the PID controllers help maintain accurate wheel speeds, you can add further enhancements to improve overall motion performance. 
 
 ### TODO
 1. Use `~/mbot_firmware_ros/src/mbot_odometry.c` as a starting point to understand how odometry is calculated, and consider adding improvements. For example, you could incorporate gyro readings and implement gyrodometry for better accuracy.
@@ -155,11 +137,11 @@ In this section, you’ll have the opportunity to enhance the firmware following
 
 **How to test your changes?**
 1. Compile your code and flash it to the control board:
-  ```bash
-  cd ~/mbot_firmware_ros/build
-  cmake ..
-  make
-  sudo mbot-upload-firmware flash mbot_classic_ros.uf2
+    ```bash
+    cd ~/mbot_firmware_ros/build
+    cmake ..
+    make
+    sudo mbot-upload-firmware flash mbot_classic_ros.uf2
   ```
 2. Use teleop to drive the robot over a known distance and angle, then check your odometry values:
   ```bash
@@ -189,19 +171,13 @@ The PID controller in the firmware is used to control the wheel speed, while the
   - Please follow the exact name used in this document. Some paths (for logging and other files) are hardcoded in the codebase, so directory names must match exactly.
 3. Implement the controller in the file `mbot_setpoint/src/motion_controller_diff.cpp`.
 You can search for the keyword “TODO”, all the functions you need to complete are marked with “TODO” and numbered. Follow the numbering sequence as you implement them.
-4. Once you’ve finished writing your code, compile it:
+4. Once you finish writing your code, build and source the workspace:
   ```bash
   cd ~/mbot_ros_labs
   colcon build
   source install/setup.bash
   ```
-  - Always remember to source your workspace after building!
-  - Or you can add the sourcing command to your bash configuration:
-    ```bash
-    cd ~/mbot_ros_labs
-    echo "source $PWD/install/local_setup.bash" >> ~/.bashrc
-    ```
-
+  - {: .text-red-200} **Important: You must source the workspace after every build. If you don’t, ROS will keep using the old code, and your changes will not take effect.**
 
 **Tip:** You don’t have to strictly follow the provided TODOs to fill up the blanks, if you want to implement a more sophisticated controller, feel free to do so. The template is intended to make things easier, not necessarily to achieve the best possible performance.
 
@@ -214,17 +190,12 @@ You can search for the keyword “TODO”, all the functions you need to complet
   ```bash
   ros2 run mbot_setpoint square_publisher
   ```
-3. The motion controller node will log values and save them in the `logs` directory. Once the square-driving task is complete, you can run the Python script to plot the data. The generated images will also be saved in the `logs` directory.
-  ```bash
-  python3 motion_controller_plot.py
-  ```
-  - The log can help you tune the PID gains, and the logging code in the controller program can also be used as a starting point for the required plots.
 
 {: .required_for_report }
 Describe your motion control algorithm.
 <br><br>Questions to Consider:
 <br> 1) Include a plot of your robot’s estimated pose as the robot is commanded to drive a 1m square 4 times.
-<br> 2) Include a plot of the robot’s linear and rotational velocity as it drives one loop around the square
+<br> 2) Include a plot of the robot’s linear and rotational velocity as it drives one loop around the square.
 
 
 ## Checkpoint Submission

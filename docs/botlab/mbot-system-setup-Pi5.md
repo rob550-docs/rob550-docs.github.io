@@ -284,5 +284,22 @@ Test your camera by going through the following steps in order. If any of the st
     <img src="/assets/images/botlab/rviz0.png" alt="Image from RPi Foundation" style="max-width:600px;"/>
     </a>
 
-
 If you have successfully completed both tests, your MBot setup is complete, which means Checkpoint 0 is finished. Make sure everything is working properly before the lab starts Checkpoint 1.
+
+## Useful commands
+### Turn LiDAR ON/OFF
+If you don’t need the LiDAR but it keeps spinning (which is loud and drains the power bank), you can turn it off using the following command:
+```bash
+# Turn the power off
+ros2 service call /lidar_power std_srvs/srv/SetBool "{data: false}"
+```
+To turn the LiDAR back on:
+```bash
+# Turn the power on
+ros2 service call /lidar_power std_srvs/srv/SetBool "{data: true}"
+```
+### Reset odometry
+If you need to re-run the program and the odometry has already accumulated drift, you can reset all odometry calculations back to zero:
+```bash
+ros2 service call /reset_odometry std_srvs/srv/Trigger
+```

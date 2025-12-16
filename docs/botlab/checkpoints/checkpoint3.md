@@ -4,44 +4,15 @@ title: Checkpoint 3
 nav_order: 4
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-11-25 14:56:00 -0500
+last_modified_at: 2025-12-15 19:09:00 -0500
 ---
 
-
-**Nov. 25 Update**:
-{: .text-red-200}
-
-Please pull from the [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream to get the latest update to `mbot_nav`. There was a bug in `mbot_nav/src/motion_controller_diff.cpp`. Please check the latest commit to see the changes.
-
-What the bug was:
-- The code was copy-pasted from `mbot_setpoint` with only the message types changed. However, the two systems are conceptually very different.
-
-In `mbot_setpoint`, the waypoint publisher sends poses in the `/odom` frame, and the controller follows these waypoints using odometry. Everything operates in the odom frame.
-
-In `mbot_nav`, we perform A* planning in the `/map` frame. The navigation node publishes waypoints in map frame, so the controller must follow the path in map frame. 
-- This means the controller cannot use odometry (odom) to track the path. Instead, it must use the robot’s pose in the `/map` frame: the transform map -> base_footprint provided by the localization node.
-
-The bug fix updates the controller to obtain the pose through TF, using the map-frame pose estimate. The previous version was conceptually incorrect because it used odom-frame data against a map-frame path.
-
----
-
-**Nov. 18 Update**: 
-{: .text-red-200}
-Please pull from [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream to get the latest commit to `mbot_nav`. We added motion controller to the `mbot_nav` to resolve issues caused by the previous custom message definitions. 
-- Task 3.1 and Task 3.2 instructions have also been updated accordingly.
-
----
-
-**Nov. 19 Update**:
-{: .text-red-200}
-
-We’ve released a guide on [how to use slam_toolbox](/docs/botlab/how-to-guide/slam-toolbox-guide)! If you’re not satisfied with your mapping performance and need a map to test your A* or exploration algorithms, feel free to take a look.
-
-You may also use slam_toolbox for mapping in Competition Event 2 and Event 3 (with point deductions). For details, please check the competition page.
-
----
 
 Using the SLAM algorithm you implemented previously, you can now construct a map of an environment with the MBot. In this checkpoint, you will add path planning and autonomous exploration capabilities.
+
+We also provide a guide on [how to use slam_toolbox](/docs/botlab/how-to-guide/slam-toolbox-guide)! If you’re not satisfied with your mapping performance and need a map to test your A* or exploration algorithms, feel free to take a look.
+
+You may also use slam_toolbox for mapping in Competition Event 2 and Event 3 (with point deductions). For details, please check the competition page.
 
 ### Contents
 * TOC
@@ -52,10 +23,9 @@ Using the SLAM algorithm you implemented previously, you can now construct a map
 Write an A* path planner. The A* skeleton is provided in the `mbot_nav` package.
 
 ### TODO
-1. Pull the latest code from [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream to get the `mbot_nav`.
-2. All work for this task is in the package `mbot_nav`.
-   - Start with `navigation_node.cpp`, search for TODOs. All the actual code writing is in `astar.cpp`.
-   - You also need to complete `obstacle_distance_grid.cpp` and `motion_controller_diff.cpp`. The TODOs match the earlier tasks, so you can reuse your previous implementations. `obstacle_distance_grid.cpp` now includes a new getOccupancy function. Note, **do not copy/paste the entire old file, only reuse the TODO parts.**
+1. Check the [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream for any new commits to pull.
+2. All work for this task is in the package `mbot_nav`. Start with `navigation_node.cpp`, search for TODOs. All the actual code writing is in `astar.cpp`.
+   - You also need to complete `obstacle_distance_grid.cpp`. The TODOs match the earlier tasks, so you can reuse your previous implementations.
    - You don’t need to follow the TODOs strictly, feel free to implement them in your own preferred way.
 3. When finished, compile your code:
     ```bash
@@ -63,13 +33,10 @@ Write an A* path planner. The A* skeleton is provided in the `mbot_nav` package.
     colcon build --packages-select mbot_nav
     source install/setup.bash
     ```
-
+   - {: .text-red-200} **Important: You must source the workspace in every relevant terminal after each build. If you don’t, ROS will keep using the old code, and your changes will not take effect.**
+  
 **How to test?**
-- **Unit test**: This test will simply test if the code can find a valid path.
-   ```bash
-   ros2 run mbot_nav astar_test
-   ```
-- **Testing Mode**: this mode, the navigation node listens to `/initialpose` and `/goal_pose`. Setting both in RViz triggers the A* planner, the planned path will appear in RViz if successful.
+- **Testing Mode**: In this mode, the navigation node listens to `/initialpose` and `/goal_pose` topics. Setting both in RViz triggers the A* planner, and the planned path will be displayed in RViz if successful. No real robot movement occurs, this is purely a software path calculation. Start with Testing Mode to verify that your A* algorithm works correctly.
    1. Run launch file to publish map and run nagivation node in **VSCode Terminal**:
       ```bash
       ros2 launch mbot_nav path_planning.launch.py map_name:=maze1
@@ -79,53 +46,47 @@ Write an A* path planner. The A* skeleton is provided in the `mbot_nav` package.
       cd ~/mbot_ros_labs/src/mbot_nav/rviz
       ros2 run rviz2 rviz2 -d path_planning.rviz
       ```
+
+   **Video Demo**
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/6DEOXMysMj0?si=vDEOTjKrgOOb5TID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 - **Real-world mode (with localization)**: After validating your planner in the previous tests, run in the real maze.
-   1. Construct a map and save it in `mbot_ros_labs/src/mbot_nav/maps`. Then compile the `mbot_nav` package:
+   1. Construct a map and save it in `mbot_ros_labs/src/mbot_nav/maps`. You may use your own mapping code or slam_toolbox.
+   2. Then compile the `mbot_nav` package:
       ```bash
       cd ~/mbot_ros_labs
       colcon build --packages-select mbot_nav
       source install/setup.bash
       ```
-   2. Launch the robot model, TF, LiDAR node in **VSCode Terminal #1**.
-    ```bash
-    ros2 launch mbot_bringup mbot_bringup.launch.py 
-    ```
-   3. Run launch file to publish map and run nagivation node in **VSCode Terminal #2**:
+   3. Launch the robot model, TF, LiDAR node in **VSCode Terminal #1**.
+      ```bash
+      ros2 launch mbot_bringup mbot_bringup.launch.py 
+      ```
+   4. Run launch file to publish map and run nagivation node in **VSCode Terminal #2**:
       ```bash
       ros2 launch mbot_nav path_planning.launch.py map_name:=your_map pose_source:=tf
       ```
-   4. Run localization node in **VSCode Terminal #3**:
+   5. Run localization node in **VSCode Terminal #3**:
       ```bash
       ros2 run mbot_localization localization_node
       ```
-      - **Notice**: In `localization_node.cpp`, set `publish_map_odom_{true}` for real-world operation. Then **recompile the `mbot_localization`**.
-      {: .text-red-200}
-   5. Start rviz and set initial pose in **NoMachine Terminal #1**, localization node needs it to initialize particles.
+   6. Start rviz and set initial pose in **NoMachine Terminal #1**, localization node needs it to initialize particles.
       ```bash
       cd ~/mbot_ros_labs/src/mbot_nav/rviz
       ros2 run rviz2 rviz2 -d path_planning.rviz
       ```
-   6. Run motion controller in **VSCode Terminal #4**:
+   7. Run motion controller in **VSCode Terminal #4**:
       ```bash
-      ros2 run mbot_nav motion_controller_diff
+      ros2 run mbot_setpoint motion_controller_diff --ros-args -p use_localization:=true
       ```
-   7. Then set the goal pose on rviz.
+   8. Then set the goal pose on rviz.
 
-### Video Demo - real world
+   **Video Demo**
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/tvFl81xeLKM?si=2kD8L4bCE4BTx1s-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+   Some of the website content shown in the video may look different. Please follow the current version of the website, the video is only meant to demonstrate how to set the pose in RViz and what the expected results should look like.
 
-### Video Demo - rosbag
-You may also test using rosbag playback. This is useful for A* debugging but does not reflect real-world localization performance. Instructions for rosbag testing are shown in the video demo.
-```bash
-ros2 run mbot_nav navigation_node --ros-args -p pose_source:=tf
-```
-```bash
-cd ~/mbot_ros_labs/src/mbot_rosbags/maze1
-ros2 bag play maze1.mcap
-```
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/6DEOXMysMj0?si=vDEOTjKrgOOb5TID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/tvFl81xeLKM?si=2kD8L4bCE4BTx1s-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 {: .required_for_report } 
 Provide a figure showing the planned path in the map.
@@ -138,8 +99,7 @@ Until now, the MBot has only moved using teleop commands or manually set goal po
 This task is useful for competition but **not required for Checkpoint 3 submission**.
 
 ### TODO
-1. All work is in `mbot_nav`.
-   - Start with `exploration_node.cpp`, search for TODOs. All the actual code writing is in `frontier_explorer.cpp`.
+1. All work is in `mbot_nav`. Start with `exploration_node.cpp`, search for TODOs. All the actual code writing is in `frontier_explorer.cpp`.
    - You don’t need to follow the TODOs strictly, feel free to implement them in your own preferred way.
 2. When finished, compile your code:
     ```bash
@@ -147,7 +107,8 @@ This task is useful for competition but **not required for Checkpoint 3 submissi
     colcon build --packages-select mbot_nav
     source install/setup.bash
     ```
-
+   - {: .text-red-200} **Important: You must source the workspace in every relevant terminal after each build. If you don’t, ROS will keep using the old code, and your changes will not take effect.**
+  
 **How to test?**
 1. Start rviz in **NoMachine Terminal #1**:
    ```bash
@@ -164,28 +125,12 @@ This task is useful for competition but **not required for Checkpoint 3 submissi
    ```
 4. Run motion controller in **VSCode Terminal #3**:
    ```bash
-   ros2 run mbot_nav motion_controller_diff
+   ros2 run mbot_setpoint motion_controller_diff --ros-args -p use_localization:=true
    ```
 5. Run the exploration node in **VSCode Terminal #4**:
    ```bash
    ros2 run mbot_nav exploration_node
    ```
-
-You may also test with rosbag playback. This is useful for algorithm debugging but does not represent true performance with real motion control. Instructions for rosbag testing are shown in the video demo.
-```bash
-# first
-ros2 run mbot_nav exploration_node
-# then 
-ros2 run mbot_slam slam_node
-```
-```bash
-cd ~/mbot_ros_labs/src/mbot_rosbags
-ros2 bag play slam_test
-```
-
-### Video Demo
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Xv6DzklfyJw?si=vwaTLCAai_BdfFvc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 {: .required_for_report } 
 Explain the strategy used for finding frontiers and any other details about your implementation that you found important for making your algorithm work.

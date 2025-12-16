@@ -177,7 +177,7 @@ You can search for the keyword “TODO”, all the functions you need to complet
   colcon build
   source install/setup.bash
   ```
-  - {: .text-red-200} **Important: You must source the workspace after every build. If you don’t, ROS will keep using the old code, and your changes will not take effect.**
+  - {: .text-red-200} **Important: You must source the workspace in every relevant terminal after each build. If you don’t, ROS will keep using the old code, and your changes will not take effect.**
 
 **Tip:** You don’t have to strictly follow the provided TODOs to fill up the blanks, if you want to implement a more sophisticated controller, feel free to do so. The template is intended to make things easier, not necessarily to achieve the best possible performance.
 

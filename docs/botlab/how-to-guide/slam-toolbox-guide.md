@@ -57,9 +57,9 @@ In this guide, we list all the commands you’ll need for tasks related to the f
     ```bash
     ros2 launch mbot_navigation slam_toolbox_online_async_launch.py
     ```
-4. **VSCode Terminal #3**: Run motion controller, notice, this is the controller in `mbot_nav`.
+4. **VSCode Terminal #3**: Run motion controller
     ```bash
-    ros2 run mbot_nav motion_controller_diff
+    ros2 run mbot_setpoint motion_controller_diff --ros-args -p use_localization:=true
     ```
 5. **VSCode Terminal #4**: Run path planner
     ```bash
@@ -91,9 +91,9 @@ In this guide, we list all the commands you’ll need for tasks related to the f
     ```bash
     ros2 launch mbot_navigation slam_toolbox_online_async_launch.py
     ```
-4. **VSCode Terminal #3**: Run motion controller, notice, this is the controller in `mbot_nav`.
+4. **VSCode Terminal #3**: Run motion controller
     ```bash
-    ros2 run mbot_nav motion_controller_diff
+    ros2 run mbot_setpoint motion_controller_diff --ros-args -p use_localization:=true
     ```
 5. **VSCode Terminal #4**: Run exploration node
     ```bash

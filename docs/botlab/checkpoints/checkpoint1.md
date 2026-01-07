@@ -4,7 +4,7 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-12-15 15:16:48 -0500
+last_modified_at: 2026-01-07 17:20:00 -0500
 ---
 
 In Checkpoint 1, you will tune the PID gains for wheel velocity, improve the firmware odometry calculations, and implement a motion controller. The controller will take in waypoints and automatically follow the path.
@@ -30,7 +30,7 @@ Open one terminal with Minicom to monitor the calibration output, and use anothe
 
 ```bash
 # terminal 1
-sudo minicom -D /dev/ttyACM0 -b 115200
+sudo minicom -D /dev/mbot_debug -b 115200
 # terminal 2
 cd ~/mbot_firmware_ros/build
 sudo mbot-upload-firmware flash mbot_calibrate_classic.uf2 

@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Botlab
 nav_order: 2
-last_modified_at: 2025-12-15 13:20:00 -0500
+last_modified_at: 2026-01-07 17:20:00 -0500
 ---
 
 {: .important}
@@ -117,6 +117,41 @@ For mbot network security, you may change your password once you have set up you
     passwd: password updated successfully
     ```
 
+## System config
+1. Git clone the system utility repository using the following command:
+    ```bash
+    cd ~
+    git clone https://github.com/mbot-project/mbot_sys_utils
+    ```
+2. Install udev rules, run the following commands:
+   ```bash
+   cd ~/mbot_sys_utils/ros2_mbot_sys_utils/udev_rules
+   ./install_rules.sh 
+   ```
+   and you will see
+   ```bash
+   ✅ MBot USB CDC rules installed.
+      /dev/mbot_debug  -> Debug/printf console
+      /dev/mbot_microros    -> MicroROS communication
+      Verify with: ls -l /dev/mbot_*
+
+   ✅ User 'mbot' has been added to the 'video' group.
+      You need to reboot for the change to take effect.
+    ```
+3. Install system services, run the following commands:
+    ```bash
+    cd ~/mbot_sys_utils/ros2_mbot_sys_utils/services
+   ./install_mbot_ros_services.sh 
+   ```
+   and you will see:
+   ```bash
+   Installed, enabled, and started the following services:
+
+       mbot-start-network.service
+       mbot-microros-agent.service
+       mbot-oled.service
+    ```
+
 ## Flash MBot firmware
 In this session, we are going to work on setup of the Control Board.
 
@@ -183,7 +218,7 @@ No accessible RP-series devices in BOOTSEL mode were found.
 Minicom is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts during the flash process.
 - After flashing the firmware to the Pico, run the following command to start minicom
     ```bash
-    sudo minicom -D /dev/ttyACM0 -b 115200
+    sudo minicom -D /dev/mbot_debug -b 115200
     ```
     You should see output like this:
 

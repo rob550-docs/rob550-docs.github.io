@@ -151,6 +151,13 @@ For mbot network security, you may change your password once you have set up you
        mbot-microros-agent.service
        mbot-oled.service
     ```
+4. Reboot your mbot
+5. If your OLED screen shows battery readings, instead of ???; 
+   and run:
+   ```bash
+   ls /dev | grep mbot 
+   ```
+   if you have `mbot_debug` and `mbot_microros` listed, that you means system config is all set.
 
 ## Flash MBot firmware
 In this session, we are going to work on setup of the Control Board.

@@ -4,7 +4,7 @@ title: Checkpoint 1
 nav_order: 1
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-09-05 15:00:00 -0500
+last_modified_at: 2026-01-08 16:20:00 -0500
 ---
 
 The first checkpoint is meant to be an introduction to using the GUI of the lab and to start working with the RGB-D camera. The interaction with the GUI will be under the Basic Motion section of the checkpoint, and the interaction with the RGB-D camera will be through the Camera Calibration portion of the checkpoint.
@@ -108,9 +108,9 @@ For this part, you will be performing a camera calibration process:
 The camera comes with an internal factory calibration, and this information is published by the camera's ROS node. You can access it by echoing the ROS topic using following commands:
 ```bash
 # list all the topics available
-$ ros2 topic list
+ros2 topic list
 # echo the specific topic
-$ ros2 topic echo /the_topic_you_want_to_check
+ros2 topic echo /the_topic_you_want_to_check
 ```
 - The k matrix from camera info usually means intrinsic matrix. 
 
@@ -142,7 +142,7 @@ Using physical measurements of the lab apparatus, come up with a rough extrinsic
 There are two possible ways of finding the rotation of the camera. The first way is accurate enough for our purposes. You only need to do option 2 if you are personally interested in how to get the best possible calibration accuracy.
 
 1. (Easy, Less Accurate) Use your phone as a protractor and measure the tilt of the camera relative to the horizontal.
-2. (Hard, More Accurate) You may also use the `realsense-viewer` program to find a readout of the camera’s accelerometer, which should give you an approximation of the orientation of the sensor. Launch the program by running `$ realsense-viewer` in the terminal. To see the accelerometer, enable the Motion Module then click on the "2D" text on the top right.
+2. (Hard, More Accurate) You may also use the `realsense-viewer` program to find a readout of the camera’s accelerometer, which should give you an approximation of the orientation of the sensor. Launch the program by running `realsense-viewer` in the terminal. To see the accelerometer, enable the Motion Module then click on the "2D" text on the top right.
 
 Assumptions: 
 1. X axis of the world frame are parallel to U axes of the sensor 

@@ -4,7 +4,7 @@ title: Checkpoint 2
 nav_order: 2
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2024-02-26 15:00:00 -0500
+last_modified_at: 2026-01-08 16:20:00 -0500
 ---
 
 ### Contents
@@ -26,13 +26,13 @@ Once the AprilTag detection node is initiated, it detects all tags within the ca
 
 - To determine the message type of the AprilTag detection topic `/detections`, use the following command:
     ```bash
-    $ ros2 topic type /detections 
+    ros2 topic type /detections 
     ```
     - The message type is a data structure that describes the content of the message.
     - The output will indicate that the topic type is `apriltag_msgs/msg/AprilTagDetectionArray`. This is a specific data structure utilized for describing the tag detections and is defined by the package author.
 - To check the details of this message type:
     ```bash
-    $ ros2 interface show apriltag_msgs/msg/AprilTagDetectionArray
+    ros2 interface show apriltag_msgs/msg/AprilTagDetectionArray
     ```
     - The output would be something like this:
     ```bash
@@ -57,7 +57,7 @@ Once the AprilTag detection node is initiated, it detects all tags within the ca
     ```
 - To check the actual value of the message:
     ```bash
-    $ ros2 topic echo /detections
+    ros2 topic echo /detections
     ```
 - To learn more about ros2 humble topic commands, check the [official docs](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html).
 

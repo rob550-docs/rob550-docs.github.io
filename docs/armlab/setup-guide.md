@@ -3,7 +3,7 @@ layout: default
 title: Setup Guide
 nav_order: 1
 parent: Armlab
-last_modified_at: 2025-08-27 14:37:48 -0500
+last_modified_at: 2026-01-08 16:20:00 -0500
 ---
 
 > This guide will walk you through the setup steps you need before starting Armlab.
@@ -19,6 +19,12 @@ In Armlab, each station is provided with a laptop running Ubuntu 22.04:
 
 Same password for both users: **i<3robots!**
 
+Each laptop and its charger are labeled with a station number, do not remove the stickers. If your team is instructed to switch to a different station, please move **without** taking the laptops.
+{: .note}
+
+Please ensure that you log out of your team account when finished. Before logging out, make sure all running programs are closed and all changes are pushed to GitLab.
+{:.important}
+
 ## Fork codebase
 ### 1. Sign into Umich GitLab 
 
@@ -26,7 +32,11 @@ Same password for both users: **i<3robots!**
 <img src="/assets/images/armlab/setup-guide/gitlab_login.png" alt="" style="max-width:300px;"/>
 </a>
 
-The code that we will be using for this lab is hosted on GitLab. Go to this [link](https://gitlab.eecs.umich.edu/) and use your UM credentials to sign into your account.
+The code that we will be using for this lab is hosted on GitLab. Use your laptop or the lab laptop here, go to this [link](https://gitlab.eecs.umich.edu/) and use your UM credentials to sign into your account.
+
+{: .important}
+For the lab laptop, use an Ethernet cable for a stable internet connection.
+
 
 ### 2. Create a Group on GitLab and Adding Members
 One group member needs to create a GitLab Group and add all members. Follow these steps:
@@ -60,48 +70,44 @@ One group member needs to create a GitLab Group and add all members. Follow thes
     <img src="/assets/images/armlab/setup-guide/clone.png" alt="" style="max-width:400px;"/>
     </a>
 
-{: .warning}
-The repo must be cloned to the home directory `~`. If you clone your armlab repo into a subfolder you will not be able to run the control station!
-
-2. Then open a Terminal (shortcut: ctrl+alt+t), run the following commands: 
+2. **On the lab laptop**, open a Terminal (shortcut: ctrl+alt+t), run the following commands: 
 ```bash
 # move to home directory
-$ cd ~
+cd ~
 # clone the codebase to your laptop
-$ git clone https://your_groups_url 
+git clone https://your_groups_url 
 ```
-- To copy-paste anything in the terminal, we use `ctrl+shift+c`/`ctrl+shift+v`
-- The `git clone` command will prompt you for a username and password. Please enter your UMICH credentials
+- To copy-paste anything in the terminal, we can use `ctrl+shift+c`/`ctrl+shift+v`
+- The `git clone` command will prompt you for a username and password. Please enter your UMICH credentials.
+
+    The repo **must be** cloned to the home directory `~`. If you clone your armlab repo into a subfolder you will not be able to run the control station!
+    {: .warning}
 
 3. After cloning the code, enter this command in the terminal to see the cloned directory:
 ```bash
 # ls will show all the files/folders under the current directory
-$ ls
+ls
 ```
 
     {: .note}
     The commands we use here are known as **Linux command line tools**. Understanding the basics of Linux CLT is essential for smooth progress in this class. If you are not familiar with it, [this post](/docs/armlab/how-to-guide/linux-clt) provides some basic information you need to know. 
 
 {: .sanity_check}
-At this point, you should have your team forked Armlab codebase downloaded/cloned on the Ubuntu laptop at your team's station.
+At this point, you should have your team forked Armlab codebase and cloned it on the Ubuntu laptop at your team's station.
 
 ## Installation
 To use the code, firstly, we need to install all the dependencies/SDKs we need. 
-
-{: .important}
-Use an Ethernet cable for a stable connection when running scripts. If an Ethernet cable is not available, connect to the "MWireless" network instead of "MGuest". "MGuest" may lack stability, potentially leading to interruptions or failures during the installation process.
-
 
 ### 1. Install all the dependencies and packages
     
 If this is your first time setting up, you need to install the necessary dependencies and packages. Open a terminal and navigate to folder `/install_scripts`. Then, run the following command:
 ```bash
-$ ./install_Dependencies.sh
+./install_Dependencies.sh
 ```
 - **Tip:** The "TAB" key is a handy tool for auto-completing your input commands. For instance, try typing "./install_De" and then press the "TAB" key. This should automatically complete the rest of the command for you.
 - **Note:** If the auto-complete feature does not work, it often indicates insufficient permissions for the install script file, which may also prevent the file from running. To address this, grant the necessary permissions using the command:
     ```bash
-    $ chmod +x ./install_Dependencies.sh
+    chmod +x ./install_Dependencies.sh
     ```
 
 Wait until it's complete before proceeding to the next step.
@@ -110,7 +116,7 @@ Wait until it's complete before proceeding to the next step.
 
 Run the following command:
 ```bash
-$ ./install_Interbotix.sh
+./install_Interbotix.sh
 ```
 During the installation, you'll encounter prompts. For prompts related to AprilTag and MATLAB-ROS installation, type **no** and press Enter.
 
@@ -127,7 +133,7 @@ Wait until it's complete before proceeding to the next step.
 
 Run the following command:
 ```bash
-$ ./install_LaunchFiles.sh
+./install_LaunchFiles.sh
 ```
 - This file is used to move the config files. The configurations are based on the AprilTag family we have and the specific camera model we use.
 
@@ -135,7 +141,7 @@ $ ./install_LaunchFiles.sh
 
 **Open a NEW terminal window to run the following command.** If you use an existing terminal, the installation will fail.
 ```bash
-$ ./install_Calibration.sh
+./install_Calibration.sh
 ```
 
 Wait until it’s complete before proceeding to the next step.
@@ -144,13 +150,13 @@ Wait until it’s complete before proceeding to the next step.
 
 Run the following command:
 ```bash
-$ echo "export ROS_DOMAIN_ID=your_station_number" >> ~/.bashrc
+echo "export ROS_DOMAIN_ID=your_station_number" >> ~/.bashrc
 ```
-- Note, replace `your_station_number` with the actual number on the wall next to your station's desk. For example station 1 should have: `$ echo "export ROS_DOMAIN_ID=1" >> ~/.bashrc`
+- Note, replace `your_station_number` with the actual number on the wall next to your station's desk. For example station 1 should have: `echo "export ROS_DOMAIN_ID=1" >> ~/.bashrc`
 - **Set up ROS_DOMAIN_ID is crucial. Ensure it's done correctly to prevent chaos in the lab.**{: .text-red-200} 
 - To check if you set it successfully, **open a new terminal** and run:
 ```bash
-$ printenv | grep ROS
+printenv | grep ROS
 ```
     - where you should see the output has all the environmental variables related to ROS, and you should see ROS_DOMAIN_ID=the_number_you_set print out in the terminal
     
@@ -159,7 +165,7 @@ $ printenv | grep ROS
 ### 6. Reboot
 If you have successfully completed all the steps above, please reboot the computer.
 ```bash
-$ sudo reboot
+sudo reboot
 ```
 
 ## Testing
@@ -168,13 +174,13 @@ After successfully installing all the necessary components for the workstation, 
 ### To launch everything
 First, connect the camera USB and arm USB to the lab laptop, then open a terminal and navigate to the folder `/launch`. Run the provided command. Remember that to halt any node, use `ctrl + C` in its respective terminal. Until you stop this node, the terminal will be occupied. If you need to run another command, open a new terminal.
 ```bash
-$ ./launch_armlab.sh
+./launch_armlab.sh
 ```
 - This one starts all 3 nodes we need: camera, apriltag, interbotix_arm.
 
 Then in a new terminal, run the following command:
 ```bash
-$ ./launch_control_station.sh
+./launch_control_station.sh
 ```
 - This one starts the control station GUI.
 - To stop the control station, you just need to close the GUI window.

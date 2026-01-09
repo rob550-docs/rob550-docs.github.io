@@ -117,42 +117,6 @@ For mbot network security, you may change your password once you have set up you
     passwd: password updated successfully
     ```
 
-## System config
-1. Git clone the system utility repository using the following command:
-    ```bash
-    cd ~
-    git clone https://github.com/mbot-project/mbot_sys_utils
-    ```
-2. Install udev rules, run the following commands:
-   ```bash
-   cd ~/mbot_sys_utils/ros2_mbot_sys_utils/udev_rules
-   ./install_rules.sh 
-   ```
-   and you will see
-   ```bash
-   ✅ MBot USB CDC rules installed.
-      /dev/mbot_debug  -> Debug/printf console
-      /dev/mbot_microros    -> MicroROS communication
-      Verify with: ls -l /dev/mbot_*
-
-   ✅ User 'mbot' has been added to the 'video' group.
-      You need to reboot for the change to take effect.
-    ```
-3. Install system services, run the following commands:
-    ```bash
-    cd ~/mbot_sys_utils/ros2_mbot_sys_utils/services
-   ./install_mbot_ros_services.sh 
-   ```
-   and you will see:
-   ```bash
-   Installed, enabled, and started the following services:
-
-       mbot-start-network.service
-       mbot-microros-agent.service
-       mbot-oled.service
-    ```
-4. Reboot your mbot
-
 ## Flash MBot firmware
 In this session, we are going to work on setup of the Control Board, which is the board located at the bottom of the mbot.
 
@@ -233,6 +197,47 @@ Minicom is a program designed for serial communication that connects devices to 
 
 - **To exit Minicom**, press `CTRL-A`, then press `X`, then press `Enter` to quit.
 
+## System config
+1. Git clone the system utility repository using the following command:
+    ```bash
+    cd ~
+    git clone https://github.com/mbot-project/mbot_sys_utils
+    ```
+2. Install udev rules, run the following commands:
+   ```bash
+   cd ~/mbot_sys_utils/ros2_mbot_sys_utils/udev_rules
+   ./install_rules.sh 
+   ```
+   and you will see
+   ```bash
+   ✅ MBot USB CDC rules installed.
+      /dev/mbot_debug  -> Debug/printf console
+      /dev/mbot_microros    -> MicroROS communication
+      Verify with: ls -l /dev/mbot_*
+
+   ✅ User 'mbot' has been added to the 'video' group.
+      You need to reboot for the change to take effect.
+    ```
+3. Install system services, run the following commands:
+    ```bash
+    cd ~/mbot_sys_utils/ros2_mbot_sys_utils/services
+   ./install_mbot_ros_services.sh 
+   ```
+   and you will see:
+   ```bash
+   Installed, enabled, and started the following services:
+
+       mbot-start-network.service
+       mbot-microros-agent.service
+       mbot-oled.service
+    ```
+4. Reboot your mbot
+5. Run the following command in the VSCode Terminal:
+   ```bash
+   ls /dev | grep mbot 
+   ```
+   if you have `mbot_debug` and `mbot_microros` listed, that you means system config is all set.
+   
 ## Drive the mbot
 Run the following command in the VSCode terminal:
 ```bash

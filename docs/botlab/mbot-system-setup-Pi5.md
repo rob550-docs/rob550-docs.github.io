@@ -79,7 +79,7 @@ Then save the file. Now you can eject the SD card.
    - If the OLED screen says "IP Not Found" or "Error" and has been that way for over two minutes, you aren't connected to the network, you might have typo when input the UM account password, find GSIs and ask to connect to an external monitor.
    - If you encountered issue with "license expired", use the following command to set the time back one year to trick the script:
    ```bash
-    sudo date -s "2024-01-01 12:00:00"
+    sudo date -s "2025-01-01 12:00:00"
    ```
 
 ### 4.2 Connect to the Internet at Home

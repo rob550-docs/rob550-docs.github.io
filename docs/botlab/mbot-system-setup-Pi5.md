@@ -183,6 +183,9 @@ No accessible RP-series devices in BOOTSEL mode were found.
 1. Check if all the cables are connected correctly (USB-C from Pico to Pi; Pico's power cable; the GREEN/WHITE jumper wire to the control board).
 2. If all the cables are connected, please use the "Manual Boot Mode" in this [tutorial](https://mbot.robotics.umich.edu/docs/setup/firmware/#1-manual-boot-mode) to flash the firmware.
 
+**Please do the system config section below first, then come back to use minicom, otherwise the minicom will say cannot find `/dev/mbot_debug`.**
+{: .fs-5 .text-red-200 .fw-500}
+
 ### 3. Minicom to verify the flash operation
 Minicom is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts during the flash process.
 - After flashing the firmware to the Pico, run the following command to start minicom

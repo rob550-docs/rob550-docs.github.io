@@ -131,7 +131,7 @@ In this session, we are going to work on setup of the Control Board, which is th
     ```bash
     # cd to the home directory
     cd ~
-    git clone https://gitlab.eecs.umich.edu/rob550-f25/mbot_firmware_ros.git
+    git clone your_group_forked_firmware_url
     ```
 4. Compile the firmware files.
     ```bash

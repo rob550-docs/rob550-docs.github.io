@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Botlab
 nav_order: 2
-last_modified_at: 2026-01-08 16:20:00 -0500
+last_modified_at: 2026-01-09 15:00:00 -0500
 ---
 
 {: .important}
@@ -152,11 +152,6 @@ For mbot network security, you may change your password once you have set up you
        mbot-oled.service
     ```
 4. Reboot your mbot
-5. Run the following command in the VSCode Terminal:
-   ```bash
-   ls /dev | grep mbot 
-   ```
-   if you have `mbot_debug` and `mbot_microros` listed, that you means system config is all set.
 
 ## Flash MBot firmware
 In this session, we are going to work on setup of the Control Board, which is the board located at the bottom of the mbot.

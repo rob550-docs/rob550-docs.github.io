@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Botlab
 nav_order: 2
-last_modified_at: 2026-01-09 15:00:00 -0500
+last_modified_at: 2026-01-12 12:00:00 -0500
 ---
 
 {: .important}
@@ -183,10 +183,10 @@ No accessible RP-series devices in BOOTSEL mode were found.
 1. Check if all the cables are connected correctly (USB-C from Pico to Pi; Pico's power cable; the GREEN/WHITE jumper wire to the control board).
 2. If all the cables are connected, please use the "Manual Boot Mode" in this [tutorial](https://mbot.robotics.umich.edu/docs/setup/firmware/#1-manual-boot-mode) to flash the firmware.
 
-**Please do the system config section below first, then come back to use minicom, otherwise the minicom will say cannot find `/dev/mbot_debug`.**
-{: .fs-5 .text-red-200 .fw-500}
-
 ### 3. Minicom to verify the flash operation
+**Please do the system config section below first, then come back to use minicom, otherwise the minicom will say cannot find `/dev/mbot_debug`.**
+{: .fs-5 .text-red-200}
+
 Minicom is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts during the flash process.
 - After flashing the firmware to the Pico, run the following command to start minicom
     ```bash
@@ -336,6 +336,9 @@ If you have successfully completed both tests, your MBot setup is complete, whic
 
 ## Useful commands
 ### Turn LiDAR ON/OFF
+**This LiDAR switch command is for the mbots that have done the [hardware setup](/docs/botlab/mbot-hardware-setup-Pi5), in which the LiDAR is powered through the Bottom Board’s SV3 slot.**
+{: .text-red-200}
+
 If you don’t need the LiDAR but it keeps spinning (which is loud and drains the power bank), you can turn it off using the following command:
 ```bash
 # Turn the power off

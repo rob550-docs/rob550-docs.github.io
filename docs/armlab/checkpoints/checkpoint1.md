@@ -114,10 +114,24 @@ ros2 topic echo /the_topic_you_want_to_check
 ```
 - The k matrix from camera info usually means intrinsic matrix. 
 
-To perform the intrinsic calibration, use the ROS camera calibration package, which should already be installed from the setup guide.
+To perform the intrinsic calibration, use the ROS camera calibration package, which should already been installed from the setup guide.
 
-1. You need to firstly start the Realsense2 node, then start the camera calibration node. Details on starting the relevant nodes are in the [How to start ROS nodes guide](/docs/armlab/how-to-guide/how-to-start-nodes).
-2. You can find official documentation on using the camera_calibration package with a checkerboard [here](https://web.archive.org/web/20230322162201id_/https://navigation.ros.org/tutorials/docs/camera_calibration.html#tutorial-steps). You don't need to run any of the terminal commands on this page.
+1. You can find official documentation on how to use the camera_calibration package with a checkerboard [here](https://web.archive.org/web/20230322162201id_/https://navigation.ros.org/tutorials/docs/camera_calibration.html#tutorial-steps). You do not need to run any of the commands in that guide, it is provided solely as a reference for how the package works.
+2. To do the calibration, you need to:
+   1. Firstly start the Realsense2 node
+   ```bash
+   ros2 launch realsense2_camera rs_l515_launch.py
+   ```
+   2. Then start the camera calibration node:
+   ```bash
+    cd ~/image_pipeline
+    source install/setup.bash
+    # the size of the checkerboard and the dimensions of its squares may vary
+    ros2 run camera_calibration cameracalibrator --size 6x8 --square 0.025 \
+        --no-service-check --ros-args \
+        -r image:=/camera/color/image_raw  \
+        -p camera:=/camera
+   ```
 3. Quickly move the checkerboard through a variety of tilts and positions so the bars fill up. You don't want this to take too long or the calibration process will hang forever.
 4. As soon as the "Calibrate" button lights up, click it.
 5. When you start the calibration process, the window will display that it is not responding and will give you the option to "Force Quit" or "Wait". Be patient! Do not force quit the application, as it is working in the background, albeit slowly.

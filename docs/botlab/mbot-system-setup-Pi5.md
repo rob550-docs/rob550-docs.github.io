@@ -3,12 +3,31 @@ layout: default
 title: MBot System Setup
 parent: Botlab
 nav_order: 2
-last_modified_at: 2026-01-12 12:00:00 -0500
+last_modified_at: 2026-01-13 12:20:00 -0500
 ---
 
-{: .important}
-This guide has been updated for **ROS2** MBot Classic!
+**Note for ROS2 MBot Classic users/instructors outside ROB 550:** 
+{: .text-red-200}
+- All BotLab documentation is compatible only with ROS2 MBot Classic systems running **at least** the following versions:
+{: .text-red-200}
 
+| Repository | Version | Visibility | Note |
+| ---        | ---     | ---        | ---  |
+|[mbot_firmware_ros](https://github.com/mbot-project/mbot_firmware_ros)|v1.1.5| Public| Firmware code |
+|[mbot_ros2_ws](https://github.com/mbot-project/mbot_ros2_ws)|v1.0.3| Public| ROS ecosystem|
+|mbot_ros_labs|W26| Private | Lab Assignments |
+
+How to check your version:
+- Check the file VERSION in the repository root.
+- If it is missing, your copy is outdated, pull the latest release.
+
+To follow MBot software updates, go to the repository and select Watch → Custom → Releases on GitHub. You will receive an email whenever a new release is published. **We recommend that instructors follow the repositories, as new releases may be published during the semester.**
+
+<a class="image-link" href="/assets/images/botlab/github-watch.png">
+<img src="/assets/images/botlab/github-watch.png" alt="" style="max-width:500px;"/>
+</a>
+
+---
 
 The following items are needed:
 1. microSD card
@@ -125,14 +144,18 @@ For mbot network security, you may change your password once you have set up you
 In this session, we are going to work on setup of the Control Board, which is the board located at the bottom of the mbot.
 
 ### 1. Compile the firmware
-1. Go to the GitLab [mbot_firmware_ros](https://gitlab.eecs.umich.edu/rob550-f25/mbot_firmware_ros) repository.
+1. Go to the Class **GitLab** page, and find `mbot_firmware_ros` repository.
 2. Fork it to your GitLab group.
 3. Clone the forked repository to your home directory.
     ```bash
     # cd to the home directory
     cd ~
-    git clone your_group_forked_firmware_url
+    git clone your_group_forked_url
     ```
+    - When we say `your_group_forked_url`, we mean the URL shown in the image. Go to your group’s forked repository on GitLab (not the original), click Code, and copy that URL.
+    <a class="image-link" href="/assets/images/botlab/gitlab-group-url.png">
+    <img src="/assets/images/botlab/gitlab-group-url.png" alt="" style="max-width:300px;"/>
+    </a>
 4. Compile the firmware files.
     ```bash
     # cd to the firmware folder
@@ -261,7 +284,7 @@ If you’ve successfully driven your robot around, your control board setup is c
 - If the robot does not drive straight forward when you press `i` and instead turns, but your calibration results look correct and the minicom table shows reasonable motor velocities, then the issue is likely related to the PID gains. We will address PID tuning in **Checkpoint 1**, so don’t worry about this for now.
 
 ## Setup mbot_ws
-1. Fork the [mbot_ros2_ws](https://gitlab.eecs.umich.edu/rob550-f25/mbot_ros2_ws) repository to your group, and clone it to your mbot home directory.
+1. Go to the Class **GitLab** page, fork the `mbot_ros2_ws` repository to your group, and clone it to your mbot home directory.
    ```bash
     cd ~
     mkdir mbot_ws

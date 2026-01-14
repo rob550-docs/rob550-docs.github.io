@@ -160,7 +160,7 @@ In this task, you will implement a rotate-translate-rotate controller. This is a
 The PID controller in the firmware is used to control the wheel speed, while the PID controller in this task is used to control the traveled distance.
 
 ### TODO
-1. First fork the [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) repository to your group. This repository contains the code for checkpoints.
+1. Go to the Class **GitLab** page, fork the `mbot_ros_labs` repository to your group. This repository contains the code for checkpoints.
 2. Create a workspace directory named `mbot_ros_labs`, and clone the forked repository into a subdirectory called `src`:
   ```bash
   cd ~

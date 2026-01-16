@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Doxygen
-parent: Staff Guide
+parent: Legacy Guides
 nav_order: 2
 last_modified_at: 2023-10-23 15:20:48 -0500
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: MBot LCM User Guide
-parent: Staff Guide
+parent: Legacy Guides
 nav_order: 4
 last_modified_at: 2024-10-09 14:20:48 -0500
 ---

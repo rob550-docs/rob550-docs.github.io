@@ -3,30 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Botlab
 nav_order: 2
-last_modified_at: 2026-01-13 12:20:00 -0500
----
-
-**Note for ROS2 MBot Classic users/instructors outside ROB 550:** 
-{: .text-red-200}
-- All BotLab documentation is compatible only with ROS2 MBot Classic systems running **at least** the following versions:
-{: .text-red-200}
-
-| Repository | Version | Visibility | Note |
-| ---        | ---     | ---        | ---  |
-|[mbot_firmware_ros](https://github.com/mbot-project/mbot_firmware_ros)|v1.1.5| Public| Firmware code |
-|[mbot_ros2_ws](https://github.com/mbot-project/mbot_ros2_ws)|v1.0.3| Public| ROS ecosystem|
-|mbot_ros_labs|W26| Private | Lab Assignments |
-
-How to check your version:
-- Check the file VERSION in the repository root.
-- If it is missing, your copy is outdated, pull the latest release.
-
-To follow MBot software updates, go to the repository and select Watch → Custom → Releases on GitHub. You will receive an email whenever a new release is published. **We recommend that instructors follow the repositories, as new releases may be published during the semester.**
-
-<a class="image-link" href="/assets/images/botlab/github-watch.png">
-<img src="/assets/images/botlab/github-watch.png" alt="" style="max-width:500px;"/>
-</a>
-
+last_modified_at: 2026-01-16 12:20:00 -0500
 ---
 
 The following items are needed:
@@ -44,7 +21,7 @@ The following items are needed:
 
 ## Set up RPi 5 System
 ### 1. Flash the image
-1. Download the custom image `2025-08-15-mbot-ros2-base-ubuntu24.img.gz` from this [link](https://www.dropbox.com/scl/fi/urrfxt71np1r4875pukzo/2025-08-15-mbot-ros2-base-ubuntu24.img.gz?rlkey=zztcp8wjjofmft918imdroptg&st=gvhvc8qx&dl=0) to your laptop.
+1. Download the custom image `2026-01-15-mbot-ros2-base-ubuntu24.img.gz` from this [link](https://www.dropbox.com/scl/fi/1ikeu5tf3qwdb0fjo6o3v/2026-01-15-mbot-ros2-base-ubuntu24.img.gz?rlkey=rtsieyxcbuzksxb2z63eieyla&st=42v6g0wq&dl=0) to your laptop.
 2. Download [Balena Etcher](https://etcher.balena.io/) to your laptop, it is a tool to flash the OS image to the SD card. Plug in the SD card to your laptop using SD card reader then following the steps in Balena Etcher. (The image is 18GB, this can take 15 min).
 
 Once you have the SD card with the OS image flashed on it, don't insert the SD card in the Pi 5 yet, continue to the next step.
@@ -207,8 +184,6 @@ No accessible RP-series devices in BOOTSEL mode were found.
 2. If all the cables are connected, please use the "Manual Boot Mode" in this [tutorial](https://mbot.robotics.umich.edu/docs/setup/firmware/#1-manual-boot-mode) to flash the firmware.
 
 ### 3. Minicom to verify the flash operation
-**Please do the system config section below first, then come back to use minicom, otherwise the minicom will say cannot find `/dev/mbot_debug`.**
-{: .fs-5 .text-red-200}
 
 Minicom is a program designed for serial communication that connects devices to a Linux PC via serial ports, we will use Minicom to read the pico printouts during the flash process.
 - After flashing the firmware to the Pico, run the following command to start minicom
@@ -226,47 +201,6 @@ Minicom is a program designed for serial communication that connects devices to 
     - **Unsuccessful Firmware Flashing:** If the firmware doesn't flash correctly, repeat the calibration and firmware flashing steps. This time, open a second terminal window with Minicom running, so we can monitor its outputs for debugging. If there was an error, take a screenshot and send to the GSIs for better troubleshooting.
 
 - **To exit Minicom**, press `CTRL-A`, then press `X`, then press `Enter` to quit.
-
-## System config
-1. Git clone the system utility repository using the following command:
-    ```bash
-    cd ~
-    git clone https://github.com/mbot-project/mbot_sys_utils
-    ```
-2. Install udev rules, run the following commands:
-   ```bash
-   cd ~/mbot_sys_utils/ros2_mbot_sys_utils/udev_rules
-   ./install_rules.sh 
-   ```
-   and you will see
-   ```bash
-   ✅ MBot USB CDC rules installed.
-      /dev/mbot_debug  -> Debug/printf console
-      /dev/mbot_microros    -> MicroROS communication
-      Verify with: ls -l /dev/mbot_*
-
-   ✅ User 'mbot' has been added to the 'video' group.
-      You need to reboot for the change to take effect.
-    ```
-3. Install system services, run the following commands:
-    ```bash
-    cd ~/mbot_sys_utils/ros2_mbot_sys_utils/services
-   ./install_mbot_ros_services.sh 
-   ```
-   and you will see:
-   ```bash
-   Installed, enabled, and started the following services:
-
-       mbot-start-network.service
-       mbot-microros-agent.service
-       mbot-oled.service
-    ```
-4. Reboot your mbot
-5. Run the following command in the VSCode Terminal:
-   ```bash
-   ls /dev | grep mbot 
-   ```
-   if you have `mbot_debug` and `mbot_microros` listed, that you means system config is all set.
    
 ## Drive the mbot
 Run the following command in the VSCode terminal:
@@ -284,6 +218,8 @@ If you’ve successfully driven your robot around, your control board setup is c
 - If the robot does not drive straight forward when you press `i` and instead turns, but your calibration results look correct and the minicom table shows reasonable motor velocities, then the issue is likely related to the PID gains. We will address PID tuning in **Checkpoint 1**, so don’t worry about this for now.
 
 ## Setup mbot_ws
+> This repository contains hardware ROS drivers, custom ROS messages, MBot URDF files, and the other ROS packages.
+
 1. Go to the Class **GitLab** page, fork the `mbot_ros2_ws` repository to your group, and clone it to your mbot home directory.
    ```bash
     cd ~
@@ -292,13 +228,11 @@ If you’ve successfully driven your robot around, your control board setup is c
     git clone --recurse-submodules your_group_url src
    ```
     - The repository is called `mbot_ros2_ws`, but here we clone it into `~/mbot_ws/src`, the repo's name is irrelevant.
-2. Update the package lists
-    ```bash
-    sudo apt update
-    ```
-3. Run the following commands:
+2. Run the following commands:
     ```bash
     cd ~/mbot_ws
+    # Update package list
+    sudo apt update
     # install ros dependencies
     rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO --skip-keys=libcamera
     # build the packages
@@ -307,7 +241,7 @@ If you’ve successfully driven your robot around, your control board setup is c
     echo "source $PWD/install/local_setup.bash" >> ~/.bashrc
     source install/local_setup.bash
     ```
-    - There might be warnings after running colcon build from sllidar_ros2 package, it is normal, if you re-run the command the warnings will be gone.
+    - There might be warnings after running colcon build from sllidar_ros2 package: `1 package had stderr output: sllidar_ros2`, it is normal, if you re-run the command the warnings will be gone.
 
 ### Test Camera
 
@@ -359,7 +293,7 @@ If you have successfully completed both tests, your MBot setup is complete, whic
 
 ## Useful commands
 ### Turn LiDAR ON/OFF
-**This LiDAR switch command is for the mbots that have done the [hardware setup](/docs/botlab/mbot-hardware-setup-Pi5), in which the LiDAR is powered through the Bottom Board’s SV3 slot.**
+This LiDAR switch command is for the mbots that have done the [hardware setup](/docs/botlab/mbot-hardware-setup-Pi5), in which the LiDAR is powered through the Bottom Board’s SV3 slot.
 {: .text-red-200}
 
 If you don’t need the LiDAR but it keeps spinning (which is loud and drains the power bank), you can turn it off using the following command:

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Troubleshooting
-parent: Staff Guide
+parent: Legacy Guides
 nav_order: 3
 last_modified_at: 2024-02-08 14:37:48 -0500
 ---

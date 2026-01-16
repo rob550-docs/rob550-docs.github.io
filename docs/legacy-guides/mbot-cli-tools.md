@@ -1,8 +1,7 @@
 ---
 layout: default
 title: MBot CLI Tools
-parent: How-to Guide
-grand_parent: Botlab
+parent: Legacy Guides
 nav_order: 3
 last_modified_at: 2024-10-10 17:45:48 -0500
 ---

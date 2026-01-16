@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Dev Setup for Pi5 Classic
-parent: Staff Guide
+parent: Legacy Guides
 nav_order: 6
 last_modified_at: 2024-07-12 10:37:48 -0500
 ---

@@ -3,7 +3,7 @@ layout: default
 title: slam_toolbox Guide
 parent: How-to Guide
 grand_parent: Botlab
-nav_order: 6
+nav_order: 1
 last_modified_at: 2025-11-25 15:37:48 -0500
 ---
 

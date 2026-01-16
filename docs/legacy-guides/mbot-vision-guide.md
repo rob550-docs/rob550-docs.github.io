@@ -1,9 +1,8 @@
 ---
 layout: default
 title: mbot_vision Guide
-parent: How-to Guide
-grand_parent: Botlab
-nav_order: 1
+parent: Legacy Guides
+nav_order: 5
 last_modified_at: 2024-11-13 16:37:48 -0500
 ---
 

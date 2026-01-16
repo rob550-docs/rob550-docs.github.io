@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Jetson Image
-parent: Staff Guide
+parent: Legacy Guides
 nav_order: 1
 last_modified_at: 2024-01-13 14:37:48 -0500
 ---

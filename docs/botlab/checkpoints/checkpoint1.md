@@ -174,7 +174,7 @@ You can search for the keyword “TODO”, all the functions you need to complet
 4. Once you finish writing your code, build and source the workspace:
   ```bash
   cd ~/mbot_ros_labs
-  colcon build
+  colcon build --packages-select mbot_setpoint
   source install/setup.bash
   ```
   - {: .text-red-200} **Important: You must source the workspace in every relevant terminal after each build. If you don’t, ROS will keep using the old code, and your changes will not take effect.**

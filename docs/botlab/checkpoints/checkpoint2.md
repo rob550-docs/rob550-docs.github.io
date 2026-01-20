@@ -4,7 +4,7 @@ title: Checkpoint 2
 nav_order: 3
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-12-15 19:09:00 -0500
+last_modified_at: 2026-01-20 12:09:00 -0500
 ---
 
 During the SLAM part of the lab, you will build an increasingly sophisticated algorithm for mapping and localizing in the environment. You will begin by constructing an occupancy grid using known poses. Following that, you’ll implement Monte Carlo Localization in a known map. Finally, you will put each of these pieces together to create a full SLAM system.
@@ -29,7 +29,7 @@ In this task, you will implement odometry-based occupancy grid mapping.
 There is a demo video below shows the workflow **after completing all TODOs in the template code**. It demonstrates how to map and how to view your map in RViz or Foxglove Studio.
 
 ### TODO
-1. Check the [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream for any new commits to pull.
+1. Check the ROB550 GitLab `mbot_ros_labs` upstream to see if there is any new commits to pull.
 2. Install Foxglove Bridge. We will introduce Foxglove Studio, a web-based visualization tool in this task, as an alternative to NoMachine.
     ```bash
     sudo apt install ros-$ROS_DISTRO-foxglove-bridge
@@ -48,23 +48,20 @@ There is a demo video below shows the workflow **after completing all TODOs in t
 
 You have 3 major tasks in this task:
 1. Lidar ray interpolation
-    - A laser scan isn’t instantaneous, it takes time to complete. The robot is moving while the lidar is spinning, then:
-        - The first beams are measured at start_pose.
-        - The last beams are measured at end_pose.
-    - We solve this in the function `MovingLaserScan::interpolateRay` in `moving_laser_scan.cpp`, which estimates the robot’s pose for each beam.
+    - A laser scan isn’t instantaneous, the sensor rotates over a finite time interval, the robot's motion causes spatial distortion. If the robot is moving while scanning:
+        - The initial beam is captured at start_pose (e.g., x=1.0, y=0).
+        - The last beam is captured at end_pose say (e.g., x=1.1, y=0).
+    - According to the message definition of [sensor_msgs/LaserScan Message](https://docs.ros.org/en/lunar/api/sensor_msgs/html/msg/LaserScan.html), "timestamp in the header is the acquisition time of the first ray in the scan." This means the odometry queried by the following line corresponds to the robot’s pose when the first LiDAR ray was fired:
+        ```cpp
+        geometry_msgs::msg::TransformStamped tf_odom_base = tf_buffer_->lookupTransform("odom", "base_footprint", scan->header.stamp);
+        ```
+    - To account for this, the function `MovingLaserScan::interpolateRay` in `moving_laser_scan.cpp` estimates the specific robot pose for each individual beam, effectively "deskewing" the scan data. In the function `MovingLaserScan scan(*msg, current_pose, current_pose_end);`, which calls `interpolateRay(scan, start_pose, end_pose);`
+        - The start pose should be estimate pose.
+        - The end pose should be computed based on the scan duration and the robot’s motion.
 2. Bresenham’s algorithm
     - After interpolating all rays, use Bresenham’s algorithm to determine which cells in the occupancy grid each ray passes through.
 3. Update map cells
     - For each beam, update the corresponding cells using log-odds to reflect occupancy probabilities.
-
-For the Lidar ray interpolation part:
-- According to the message definition of [sensor_msgs/LaserScan Message](https://docs.ros.org/en/lunar/api/sensor_msgs/html/msg/LaserScan.html), "timestamp in the header is the acquisition time of the first ray in the scan." This means the odometry queried by the following line corresponds to the robot’s pose when the first LiDAR ray was fired:
-    ```cpp
-    geometry_msgs::msg::TransformStamped tf_odom_base = tf_buffer_->lookupTransform("odom", "base_footprint", scan->header.stamp);
-    ```
-- Thus, in the function `MovingLaserScan scan(*msg, current_pose, current_pose_end);`, which calls `interpolateRay(scan, start_pose, end_pose);`
-  - The start pose should be estimate pose.
-  - The end pose should be computed based on the scan duration and the robot’s motion.
 
 
 **How to test?**
@@ -74,6 +71,8 @@ For the Lidar ray interpolation part:
     ```
 2. Run the following in the **VSCode Terminal #2** to start the mapping node:
     ```bash
+    cd ~/mbot_ros_labs
+    source install/setup.bash 
     ros2 launch mbot_mapping mapping.launch.py
     ```
 3. Using teleop control to move the robot in the maze, run in **VSCode Terminal #3**:
@@ -81,7 +80,7 @@ For the Lidar ray interpolation part:
     ros2 run teleop_twist_keyboard teleop_twist_keyboard
     ```
 4. Visualize the progress:
-    - Option 1: In RViz (via NoMachine):
+    - Option 1: In RViz (via NoMachine), details see the demo video.
         ```bash
         rviz2
         ```
@@ -90,7 +89,7 @@ For the Lidar ray interpolation part:
         # Start the ROS2-Foxglove bridge:
         ros2 launch foxglove_bridge foxglove_bridge_launch.xml
         ```
-        - You can now visualize topics in Foxglove Studio.
+        - You can now visualize topics in Foxglove Studio. Details see the demo video.
 5. After mapping the whole area, **do not stop the mapping node yet**. Save the map in **VSCode Terminal #4**:
     ```bash
     cd ~/mbot_ros_labs/src/mbot_mapping/maps
@@ -151,34 +150,37 @@ Starting from `localization_node.cpp`, you have 2 main TODOs:
 1. Construct the obstacle distance grid in `obstacle_distance_grid.cpp`. Pre-compute how far each cell is from the nearest obstacle. This will be used in the sensor model.
 2. Complete the particle filter (more complex)
     1. Resample particles – resample particles based on their weights.
-    2. Apply the action model – move the particles according to odometry, adding noise.
+    2. Apply the action model – move the particles according to odometry; add noise.
     3. Apply the sensor model – update each particle’s weight based on how well its predicted sensor readings match the actual laser scan. Here we can use the pre-computed obstacle distance grid to calculate these likelihoods.
     4. Estimate the new pose – compute the weighted mean of the particles based on the posterior distribution.
 
 **How to test?**
-1. Run RViz **on NoMachine** using provided rviz config file:
+
+For task 2.2, **we provide a rosbag because** this task focuses on localization only, and we need a good map for that. Using the bag saves time and lets you work anywhere. All the data required for this task comes from the ROS bag, you **DO NOT** need to manually publish anything, and **DO NOT** need to run `ros2 launch mbot_bringup mbot_bringup.launch.py`.
+```bash
+# You can use the following command to check what is in the bag
+$ cd ~/mbot_ros_labs/src/mbot_rosbags
+$ ros2 bag info maze1
+```
+- `/amcl_pose` serves as the reference pose, it is the "ground truth" you can use to compare against your estimated pose.
+
+1. This ROS bag includes the `/cmd_vel` topic, **unplug the Type-C cable from the Pi to the Pico** to prevent the robot from driving away.
+2. Run RViz **on NoMachine** using provided rviz config file:
     ```bash
     cd ~/mbot_ros_labs/src/mbot_localization/rviz
     ros2 run rviz2 rviz2 -d localization.rviz
     ```
-2. Run the localization node in the **VSCode Terminal #1**:
+3. Run the localization node in the **VSCode Terminal #1**:
     ```bash
+    cd ~/mbot_ros_labs
+    source install/setup.bash 
     ros2 run mbot_localization localization_node --ros-args -p publish_tf:=false
     ```
-3. Play the ROS bag in the **VSCode Terminal #2**:
+4. Play the ROS bag in the **VSCode Terminal #2**:
     ```bash
     cd ~/mbot_ros_labs/src/mbot_rosbags/maze1
     ros2 bag play maze1.mcap
     ```
-    - **We provide a rosbag because** this task focuses on localization only, and we need a good map for that. Using the bag saves time and lets you work anywhere.
-    - This ROS bag includes the `/cmd_vel` topic. You need to **unplug the Type-C cable from the Pi to the Pico** to prevent the robot from driving away.
-    - All the data required for this task comes from the ROS bag, you **DO NOT** need to manually publish `/initialpose`, and **DO NOT** need to run `ros2 launch mbot_bringup mbot_bringup.launch.py`.
-        ```bash
-        # use the following command to check what is in the bag
-        $ cd ~/mbot_ros_labs/src/mbot_rosbags
-        $ ros2 bag info maze1
-        ```
-        - `/amcl_pose` serves as the reference pose, the "ground truth" you can use to compare against your estimated pose.
 
 ### Demo Video
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nieEYElK_Kc?si=OTV2XaRHv4rlvkNS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -196,10 +198,9 @@ You have now implemented mapping using known poses and localization using a know
     - Update the map using the pose estimate from your localization.
 
 ### TODO
-1. Check the [mbot_ros_labs](https://gitlab.eecs.umich.edu/rob550-f25/mbot_labs_ws) upstream for any new commits to pull.
-2. All work for this task is in the package `mbot_slam`. Start with `slam_node.cpp`, search for TODOs. 
+1. All work for this task is in the package `mbot_slam`. Start with `slam_node.cpp`, search for TODOs. 
     - Most TODOs come from Task 2.1 and Task 2.2. You can simply copy and paste your code from those tasks, tune the parameters, and achieve a good working SLAM system. You don’t need to follow the TODOs strictly, feel free to implement them in your own preferred way.
-3. When finished, compile your code:
+2. When finished, compile your code:
     ```bash
     cd ~/mbot_ros_labs
     colcon build --packages-select mbot_slam

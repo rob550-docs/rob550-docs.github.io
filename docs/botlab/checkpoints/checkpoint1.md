@@ -4,7 +4,7 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2026-01-07 17:20:00 -0500
+last_modified_at: 2026-01-20 12:20:00 -0500
 ---
 
 In Checkpoint 1, you will tune the PID gains for wheel velocity, improve the firmware odometry calculations, and implement a motion controller. The controller will take in waypoints and automatically follow the path.
@@ -93,10 +93,10 @@ Tune the PID values to achieve a desired system response.
     ros2 param dump /mbot_control_node 
     ```
     - If you see the values you set, it means the new PID gains have been applied to the MBot and written to the FRAM. You can run test now!
-    - The PID values will persist after rebooting. However, if you flash the calibration again, the calibration script will overwrite your tuned PID gains by the values in `mbot_firmware_ros/include/config/mbot_classic_default_pid.h`, and you’ll need to reload the YAML file to restore them.
+    - The PID values will persist after rebooting. However, if you flash the calibration again, the calibration script will overwrite your tuned PID gains by the values in `mbot_firmware_ros/include/config/mbot_classic_default_pid.h`, and you’ll need to reload the YAML file to restore them by running the command from step 2.
       - After you are satisfied with your PID gains, if you really want to check whether the gains persist after rebooting, you can verify this as follows:
         - Open a terminal and start Minicom.
-        - In another terminal, flash the firmware. Before the data table is printed, the firmware will first display all the saved parameters, check the PID values there.
+        - In another terminal, flash the firmware (not calibrationty). Before the data table is printed, the firmware will first display all the saved parameters, check the PID values there.
 
 **How to test?**
 
@@ -168,7 +168,6 @@ The PID controller in the firmware is used to control the wheel speed, while the
   cd ~/mbot_ros_labs
   git clone your_url src
   ```
-  - Please follow the exact name used in this document. Some paths (for logging and other files) are hardcoded in the codebase, so directory names must match exactly.
 3. Implement the controller in the file `mbot_setpoint/src/motion_controller_diff.cpp`.
 You can search for the keyword “TODO”, all the functions you need to complete are marked with “TODO” and numbered. Follow the numbering sequence as you implement them.
 4. Once you finish writing your code, build and source the workspace:
@@ -179,7 +178,7 @@ You can search for the keyword “TODO”, all the functions you need to complet
   ```
   - {: .text-red-200} **Important: You must source the workspace in every relevant terminal after each build. If you don’t, ROS will keep using the old code, and your changes will not take effect.**
 
-**Tip:** You don’t have to strictly follow the provided TODOs to fill up the blanks, if you want to implement a more sophisticated controller, feel free to do so. The template is intended to make things easier, not necessarily to achieve the best possible performance.
+**Tip:** You don’t have to strictly follow the provided TODOs to fill up the blanks in the code, if you want to implement a more sophisticated controller, feel free to do so. The template is intended to make things easier, not necessarily to achieve the best possible performance.
 
 **How to test?**
 1. Run the motion controller

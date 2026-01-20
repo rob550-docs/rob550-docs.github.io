@@ -4,7 +4,7 @@ title: Misc
 parent: How-to Guide
 grand_parent: Botlab
 nav_order: 3
-last_modified_at: 2024-10-25 13:37:48 -0500
+last_modified_at: 2026-01-20 12:37:48 -0500
 ---
 
 > This guide provides instructions on miscellaneous how-to questions.
@@ -14,10 +14,10 @@ last_modified_at: 2024-10-25 13:37:48 -0500
 {:toc}
 
 ## How to charge the power bank
-1. Push the switch of the power bank to position "I" to make the charging circuit breakout.
-2. Connect the charger to the power bank
-3. The LED indicator on the AC-DC charger head showing RED means the charging process is working.
-4. The LED indicator on the AC-DC charger head showing GREEN means the charging process has completed.
+1. Turn the battery ON by pushing the switch to 'I' before charging. The battery cannot charge to 100% while in the 'O' (Off) position.
+2. Connect the charger to the power strip.
+- The LED indicator on the AC-DC charger head showing RED means the charging process is working.
+- The LED indicator on the AC-DC charger head showing GREEN means the charging process has completed.
 
 ## How to transfer file from MBot to your laptop - wormhole
 

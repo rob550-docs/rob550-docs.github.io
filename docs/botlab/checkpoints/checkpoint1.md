@@ -4,7 +4,7 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2026-01-20 12:20:00 -0500
+last_modified_at: 2026-01-23 12:20:00 -0500
 ---
 
 In Checkpoint 1, you will tune the PID gains for wheel velocity, improve the firmware odometry calculations, and implement a motion controller. The controller will take in waypoints and automatically follow the path.
@@ -35,6 +35,11 @@ sudo minicom -D /dev/mbot_debug -b 115200
 cd ~/mbot_firmware_ros/build
 sudo mbot-upload-firmware flash mbot_calibrate_classic.uf2 
 ```
+**To quit minicom, first press CTRL + A, then press X**, then press Enter to quit. Alternatively, you can simply close the terminal window.
+
+**Pro Tips:**
+1. Close your current Minicom session before starting a new one (prevents port errors).
+2. Stay organized: Don't hoard terminal windows. Keep only what you need open so you don't get confused.
 
 Once you’ve finished collecting data, remember to flash **the firmware** back to the control board.
 ```bash
@@ -189,6 +194,16 @@ You can search for the keyword “TODO”, all the functions you need to complet
   ```bash
   ros2 run mbot_setpoint square_publisher
   ```
+
+**Pro Tips:**
+- Always reset odometry between tests. You can either 1) Run the command below or 2) Press the RST button on the control board.
+  ```bash
+  ros2 service call /reset_odometry std_srvs/srv/Trigger
+  ``` 
+- Why Reset Odometry?
+  - The motion controller and square_publisher both operate in the odom frame right now.
+  - The Problem: Your robot rarely finishes exactly at (0, 0, 0). If a run ends at (0, 1, 0) and you restart without resetting, the robot still thinks it is at (0, 1, 0). When you send the first waypoint, the robot won't drive forward. It will calculate a path from (0, 1, 0) to (1, 0, 0), likely causing an unexpected turn or diagonal movement.
+
 
 {: .required_for_report }
 Describe your motion control algorithm.

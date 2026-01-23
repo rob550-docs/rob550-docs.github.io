@@ -200,7 +200,7 @@ Minicom is a program designed for serial communication that connects devices to 
           - This is the expected behavior. The wheel frames have their z-axes pointing outward, so based on right hand rule, rotating the right wheel forward corresponds to a negative rotation about its local z-axis. One purpose of calibration is to ensure the signs are correct and consistent with the coordinate definitions.
     - **Unsuccessful Firmware Flashing:** If the firmware doesn't flash correctly, repeat the calibration and firmware flashing steps. This time, open a second terminal window with Minicom running, so we can monitor its outputs for debugging. If there was an error, take a screenshot and send to the GSIs for better troubleshooting.
 
-- **To exit Minicom**, press `CTRL-A`, then press `X`, then press `Enter` to quit.
+- **To exit Minicom**, press `CTRL + A`, then press `X`, then press `Enter` to quit.
    
 ## Drive the mbot
 Run the following command in the VSCode terminal:

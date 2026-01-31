@@ -243,6 +243,8 @@ Here are examples of "OK," "Good," and "Excellent" maps generated from the slam_
     ```
 2. Put the robot in the maze and start the SLAM Node in **VSCode Terminal #2**:
     ```bash
+    cd ~/mbot_ros_labs
+    source install/setup.bash
     ros2 run mbot_slam slam_node
     ```
 3. Start Rviz **on NoMachine**:
@@ -254,12 +256,6 @@ Here are examples of "OK," "Good," and "Excellent" maps generated from the slam_
     ```bash
     ros2 run teleop_twist_keyboard teleop_twist_keyboard
     ```
-    - Alternatively, you can work from anywhere using the provided rosbag:
-    ```bash
-    cd ~/mbot_ros_labs/src/mbot_rosbags
-    ros2 bag play slam_test
-    ```
-        - This ROS bag includes the `/cmd_vel` topic. Unplug the Type-C cable from the Pi to the Pico before run the ros bag.
 5. After mapping the whole area, **do not stop the mapping node yet**. Save the map in **VSCode Terminal #4**:
     ```bash
     cd ~/mbot_ros_labs/src/mbot_slam/maps
@@ -267,6 +263,13 @@ Here are examples of "OK," "Good," and "Excellent" maps generated from the slam_
     ```
     - Replace `map_name` with the name you want for your map.
 
+Alternatively, you can work from anywhere using the provided rosbag: 1) first start slam_node, then launch rviz for visualization, finally play the rosbag:
+```bash
+cd ~/mbot_ros_labs/src/mbot_rosbags
+ros2 bag play slam_test
+```
+- This ROS bag includes the `/cmd_vel` topic. Unplug the Type-C cable from the Pi to the Pico before run the ros bag.
+   
 {: .required_for_report } 
 1) Create a block diagram showing how the SLAM system components interact.
 <br> 2) Include a screenshot of your map, and explain why your SLAM-generated map is better than the one from Task 2.1.

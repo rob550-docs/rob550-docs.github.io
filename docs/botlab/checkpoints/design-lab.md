@@ -4,7 +4,7 @@ title: Design Lab
 nav_order: 6
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2025-12-02 14:00:48 -0500
+last_modified_at: 2026-01-02 18:00:48 -0500
 ---
 
 ### Contents
@@ -32,9 +32,15 @@ The final system will integrate mechanical design, servo control, and vision-bas
 
 ## Provided Materials
 
-### MBot CAD (STEP) file
+### MBot CAD file
 {: .py-2 }
-[Open Model in new tab](https://umich2673.autodesk360.com/g/shares/SH30dd5QT870c25f12fcdf2d18fed05cc396){: .btn target="_blank" } <- Use this link to download any file format you prefer.
+[Open Simplified Model in new tab](https://umich4087.autodesk360.com/shares/public/SH28cd1QT2badd0ea72bf8261c2ca649dd53){: .btn target="_blank" } <- Use this link to download.
+{: .py-1 }
+
+<iframe src="https://umich4087.autodesk360.com/shares/public/SH28cd1QT2badd0ea72bf8261c2ca649dd53?mode=embed" width="600" height="400" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"  frameborder="0"></iframe>
+
+{: .py-2 }
+[Open Full Model in new tab](https://umich2673.autodesk360.com/g/shares/SH30dd5QT870c25f12fcdf2d18fed05cc396){: .btn target="_blank" } <- Use this link to download.
 {: .py-1 }
 
 <iframe src="https://umich2673.autodesk360.com/shares/public/SH30dd5QT870c25f12fcdf2d18fed05cc396?mode=embed" width="600" height="400" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" frameborder="0"></iframe>

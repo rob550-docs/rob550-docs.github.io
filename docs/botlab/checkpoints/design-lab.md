@@ -39,12 +39,6 @@ The final system will integrate mechanical design, servo control, and vision-bas
 
 <iframe src="https://umich4087.autodesk360.com/shares/public/SH28cd1QT2badd0ea72bf8261c2ca649dd53?mode=embed" width="600" height="400" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"  frameborder="0"></iframe>
 
-{: .py-2 }
-[Open Full Model in new tab](https://umich2673.autodesk360.com/g/shares/SH30dd5QT870c25f12fcdf2d18fed05cc396){: .btn target="_blank" } <- Use this link to download.
-{: .py-1 }
-
-<iframe src="https://umich2673.autodesk360.com/shares/public/SH30dd5QT870c25f12fcdf2d18fed05cc396?mode=embed" width="600" height="400" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" frameborder="0"></iframe>
-
 
 ### Servo control library
 

@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Botlab
 nav_order: 2
-last_modified_at: 2026-01-16 12:20:00 -0500
+last_modified_at: 2026-03-04 12:20:00 -0500
 ---
 
 The following items are needed:
@@ -243,9 +243,9 @@ If you’ve successfully driven your robot around, your control board setup is c
     ```
     - There might be warnings after running colcon build from sllidar_ros2 package: `1 package had stderr output: sllidar_ros2`, it is normal, if you re-run the command the warnings will be gone.
 
-### Test Camera
+## Test Camera
 
-Test your camera by going through the following steps in order. If any of the steps produce unexpected results, contact the GSIs for assistance.
+Test your camera by going through the following steps in order. **If any of the steps produce unexpected results, contact the GSIs for assistance.**
 
 1. To test if camera is detected, run this in the **VSCode terminal**:
     ```
@@ -273,7 +273,12 @@ Test your camera by going through the following steps in order. If any of the st
     ```
     - Select the image topic `/camera/image_raw`
 
-### Test LiDAR
+{: .warning }
+**Do not hot-swap the camera!** Hot swap will leave the camera on ghost state. <br>
+Correct procedure: Power OFF → Wait 30 seconds → Swap cameras or Re-insert ribbon cable → Power ON
+
+
+## Test LiDAR
 1. Run the following in the **VSCode terminal**:
     ```bash
     ros2 launch mbot_bringup mbot_bringup.launch.py 
@@ -290,6 +295,30 @@ Test your camera by going through the following steps in order. If any of the st
     </a>
 
 If you have successfully completed both tests, your MBot setup is complete, which means Checkpoint 0 is finished. Make sure everything is working properly before the lab starts Checkpoint 1.
+
+## Install and test foxglove
+Install Foxglove bridge, a web-based visualization tool as **an alternative to NoMachine**. Use foxglove will save at least 50% CPU usage.
+
+```bash
+sudo apt update
+sudo apt install ros-$ROS_DISTRO-foxglove-bridge
+```
+
+Test:
+1. Go to: [foxglove](https://app.foxglove.dev/) -> Sign in with Google -> Sign in with you UM account
+2. Run the Foxglove bridge in the **VSCode terminal**:
+    ```bash
+    ros2 launch foxglove_bridge foxglove_bridge_launch.xml
+    ```
+3. Run the following in the **VSCode terminal**:
+    ```bash
+    ros2 launch mbot_bringup mbot_bringup.launch.py 
+    ```
+4. Open connection -> Foxglove WebSocket -> Replace `localhost` with your IP address -> Open
+5. If you use chrome, foxglove will pop up a window, follow the instruction there.
+
+Demo video:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xWfMV1e5gKg?si=ucnY2If-2owgw8bM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Useful commands
 ### Turn LiDAR ON/OFF

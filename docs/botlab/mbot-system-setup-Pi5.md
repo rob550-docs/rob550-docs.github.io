@@ -3,7 +3,7 @@ layout: default
 title: MBot System Setup
 parent: Botlab
 nav_order: 2
-last_modified_at: 2026-03-04 12:20:00 -0500
+last_modified_at: 2026-03-06 12:20:00 -0500
 ---
 
 The following items are needed:
@@ -129,7 +129,7 @@ In this session, we are going to work on setup of the Control Board, which is th
     cd ~
     git clone your_group_forked_url
     ```
-    - When we say `your_group_forked_url`, we mean the URL shown in the image. Go to your group’s forked repository on GitLab (not the original), click Code, and copy that URL.
+    - When we say `your_group_forked_url`, we mean the URL shown in the image. Go to your group’s forked repository on GitLab, click Code, and copy that URL.
     <a class="image-link" href="/assets/images/botlab/gitlab-group-url.png">
     <img src="/assets/images/botlab/gitlab-group-url.png" alt="" style="max-width:300px;"/>
     </a>
@@ -137,11 +137,9 @@ In this session, we are going to work on setup of the Control Board, which is th
     ```bash
     # cd to the firmware folder
     cd ~/mbot_firmware_ros
-
     # create the build folder
     mkdir build
     cd build
-
     # compile the firmware
     cmake ..
     make
@@ -266,7 +264,7 @@ Test your camera by going through the following steps in order. **If any of the 
     -p width:=640 -p height:=480 \
     -p format:=BGR888
    ```
-   - Ignore the errors about calibration files.
+   - **Ignore** the errors about calibration files.
    - You can visualize the camera view in rqt on NoMachine desktop. Run the following in the **NoMachine Terminal**:
     ```bash
     ros2 run rqt_image_view rqt_image_view
@@ -274,8 +272,7 @@ Test your camera by going through the following steps in order. **If any of the 
     - Select the image topic `/camera/image_raw`
 
 {: .warning }
-**Do not hot-swap the camera!** Hot swap will leave the camera on ghost state. <br>
-Correct procedure: Power OFF → Wait 30 seconds → Swap cameras or Re-insert ribbon cable → Power ON
+**Do not hot-swap the camera!** Hot swap will leave the camera on ghost state. If you need to replace the camera, the correct procedure is: Power OFF → Wait 30 seconds → Swap cameras or Re-insert ribbon cable → Power ON
 
 
 ## Test LiDAR
@@ -294,7 +291,6 @@ Correct procedure: Power OFF → Wait 30 seconds → Swap cameras or Re-insert r
     <img src="/assets/images/botlab/rviz0.png" alt="Image from RPi Foundation" style="max-width:600px;"/>
     </a>
 
-If you have successfully completed both tests, your MBot setup is complete, which means Checkpoint 0 is finished. Make sure everything is working properly before the lab starts Checkpoint 1.
 
 ## Install and test foxglove
 Install Foxglove bridge, a web-based visualization tool as **an alternative to NoMachine**. Use foxglove will save at least 50% CPU usage.
@@ -336,7 +332,7 @@ To turn the LiDAR back on:
 ros2 service call /lidar_power std_srvs/srv/SetBool "{data: true}"
 ```
 ### Reset odometry
-If you need to re-run the program and the odometry has already accumulated drift, you can reset all odometry calculations back to zero:
+If you need to re-run motion controller test, or slam test, or any tests, and the odometry has already accumulated drift, you can reset all odometry calculations back to zero by:
 ```bash
 ros2 service call /reset_odometry std_srvs/srv/Trigger
 ```

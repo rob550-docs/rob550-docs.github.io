@@ -4,7 +4,7 @@ title: Checkpoint 1
 nav_order: 2
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2026-03-09 12:20:00 -0500
+last_modified_at: 2026-03-17 10:20:00 -0500
 ---
 
 ### Contents
@@ -161,32 +161,35 @@ The PID controller in the firmware is used to control the wheel speed, while the
   git clone your_url src
   ```
 3. Implement the RTR controller in the file `mbot_ros_labs/mbot_nav/src/controllers/rtr_controller.cpp`. All the functions you need to complete are marked with “TODO”.
-4. Once you finish writing your code, build and source the workspace:
+4. Once you finish writing your code, build and source the workspace. We need to re-build the packages every time we make changes.
   ```bash
   cd ~/mbot_ros_labs
   colcon build --packages-select mbot_nav
   source install/setup.bash
   ```
   - {: .text-red-200} **Important: You must source the workspace in every relevant terminal after each build. If you don’t, ROS will keep using the old code, and your changes will not take effect.**
+  - You may notice we do not recommend adding `source ~/mbot_ros_labs/install/setup.bash` to your `~/.bashrc` file. **This is intentional**. Since we are constantly modifying, rebuilding, sometimes performing "clean builds" of the ROS packages, we need to prevent environment pollution. If terminal always source the workspace automatically, it may hold onto "stale" paths or cached variables from previous builds.
 
-**Tip:** 
+**Tips:** 
 1. You are not required to follow the provided TODO comments strictly; they are intended as a helpful guideline for completing the code.
 2. After you have implemented the RTR controller, if you want to implement a more sophisticated controller, feel free to do so. We have provided templates for a Pure Pursuit controller and an additional example. To use a different controller, update the includes and the type definition in `controller_node.cpp`.
 
 
 **How to test?**
-1. Run the motion controller
+1. Run the controller node. This node subscribes to the waypoints topic, and publish the robot body commmand. And the robot body command, is calculated by your motion controller.
   ```bash
   cd ~/mbot_ros_labs
   source install/setup.bash
   ros2 run mbot_nav controller_node
   ```
-2. Publish the waypoints. By default, this node publishes a square with 1-meter sides. Run this to verify if your robot can accurately navigate a square trajectory
+2. Run the trajectory publisher. This nodes publish waypoints. By default, this node publishes a square with 1-meter sides. Run this to verify if your robot can accurately navigate a square trajectory.
   ```bash
   cd ~/mbot_ros_labs
   source install/setup.bash
   ros2 run mbot_nav square_publisher
   ```
+3. We use `ctrl + C` to quit.
+
 
 **Tips:**
 - Always reset odometry between tests. You can either 1) Run the command below or 2) Press the RST button on the control board.

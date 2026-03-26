@@ -4,7 +4,7 @@ title: Design Lab
 nav_order: 6
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2026-01-02 18:00:48 -0500
+last_modified_at: 2026-03-26 16:00:48 -0500
 ---
 
 ### Contents
@@ -42,8 +42,8 @@ The final system will integrate mechanical design, servo control, and vision-bas
 
 ### Servo control library
 
-We provide XL320 servos.
-The assembly guide, library, and example code are available in: [mbot_xl320_lib Guide](/docs/botlab/how-to-guide/mbot-xl320-guide).
+We provide Dynamixel XL330-M288 and XL430-W250.
+The assembly guide, library, and example code are available in: [mbot_servo_lib Guide](/docs/botlab/how-to-guide/mbot-servo-lib-guide).
 
 
 ## Deliverables

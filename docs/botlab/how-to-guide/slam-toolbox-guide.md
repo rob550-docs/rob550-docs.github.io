@@ -4,7 +4,7 @@ title: slam_toolbox Guide
 parent: How-to Guide
 grand_parent: Botlab
 nav_order: 1
-last_modified_at: 2025-11-25 15:37:48 -0500
+last_modified_at: 2026-03-27 15:37:48 -0500
 ---
 
 Slam Toolbox is a set of tools and capabilities for 2D SLAM. More details can be found on its [GitHub page](https://github.com/SteveMacenski/slam_toolbox).
@@ -59,19 +59,23 @@ In this guide, we list all the commands you’ll need for tasks related to the f
     ```
 4. **VSCode Terminal #3**: Run motion controller
     ```bash
-    ros2 run mbot_setpoint motion_controller_diff --ros-args -p use_localization:=true
+   cd ~/mbot_ros_labs
+   source install/setup.bash
+   ros2 run mbot_nav controller_node --ros-args -p use_localization:=true
     ```
 5. **VSCode Terminal #4**: Run path planner
     ```bash
+    cd ~/mbot_ros_labs
+    source install/setup.bash
     ros2 run mbot_nav navigation_node --ros-args -p pose_source:=tf
     ```
-6. Start rviz. You can use "2D Goal Pose" to set the goal pose to lead the mbot to explore.
+1. Start rviz. You can use "2D Goal Pose" to set the goal pose to lead the mbot to explore.
     ```bash
     # NoMachine
     cd ~/mbot_ros_labs/src/mbot_nav/rviz
     ros2 run rviz2 rviz2 -d path_planning.rviz
     ```
-7. **VSCode Terminal #6**: Save the map
+2. **VSCode Terminal #6**: Save the map
     ```bash
     cd ~/mbot_ros_labs/src/mbot_nav/maps
     ros2 run nav2_map_server map_saver_cli -f map_name
@@ -80,37 +84,3 @@ In this guide, we list all the commands you’ll need for tasks related to the f
 ### Video Demo
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HTP2kHmTvoQ?si=Ke9m9sMpRcZUkIQ_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-## Autonomous Exploration
-1. **VSCode Terminal #1**: launch the robot model, TF, LiDAR node.
-    ```bash
-    ros2 launch mbot_bringup mbot_bringup.launch.py 
-    ```
-2. Put the robot in the maze
-3. **VSCode Terminal #2**: launch slam_toolbox
-    ```bash
-    ros2 launch mbot_navigation slam_toolbox_online_async_launch.py
-    ```
-4. **VSCode Terminal #3**: Run motion controller
-    ```bash
-    ros2 run mbot_setpoint motion_controller_diff --ros-args -p use_localization:=true
-    ```
-5. **VSCode Terminal #4**: Run exploration node
-    ```bash
-    ros2 run mbot_nav exploration_node
-    ```
-6. Start rviz or foxglove
-    ```bash
-    # NoMachine
-    cd ~/mbot_ros_labs/src/mbot_nav/rviz
-    ros2 run rviz2 rviz2 -d path_planning.rviz
-    ```
-    ```bash
-    # VSCode Terminal #5
-    ros2 launch foxglove_bridge foxglove_bridge_launch.xml
-    ```
-7. **VSCode Terminal #6**: Save the map
-    ```bash
-    cd ~/mbot_ros_labs/src/mbot_nav/maps
-    ros2 run nav2_map_server map_saver_cli -f map_name
-    ```

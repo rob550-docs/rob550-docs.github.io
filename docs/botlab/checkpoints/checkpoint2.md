@@ -4,7 +4,7 @@ title: Checkpoint 2
 nav_order: 3
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2026-03-17 10:09:00 -0500
+last_modified_at: 2026-03-30 10:09:00 -0500
 ---
 
 ### Contents
@@ -68,12 +68,13 @@ All the data required for this task comes from the ROS bag, you **DO NOT** need 
     source install/setup.bash 
     ros2 launch mbot_slam mapping.launch.py
     ```
-3. Visualization, either thru NoMachine **OR** Foxglove
+3. Visualization, either thru NoMachine 
     ```bash
     # on NoMachine terminal
     cd ~/mbot_ros_labs/src/mbot_slam/rviz
     ros2 run rviz2 rviz2 -d mapping.rviz
     ```
+    **OR** Foxglove
     ```bash
     # Launch foxglove bridge using vscode terminal
     ros2 launch foxglove_bridge foxglove_bridge_launch.xml
@@ -104,12 +105,13 @@ Tip: If your map looks similar to the map in demo video, that’s a good result,
     ```bash
     ros2 run teleop_twist_keyboard teleop_twist_keyboard
     ```
-5. Visualization, either thru NoMachine or Foxglove
+5. Visualization, either thru NoMachine
     ```bash
     # on NoMachine terminal
     cd ~/mbot_ros_labs/src/mbot_slam/rviz
     ros2 run rviz2 rviz2 -d mapping.rviz
     ```
+     or Foxglove
     ```bash
     # Launch foxglove bridge using vscode terminal
     ros2 launch foxglove_bridge foxglove_bridge_launch.xml
@@ -165,12 +167,13 @@ For Task 2.2, we **only** use the provided rosbag, no real-world test is needed.
 The localization node publishes both the estimated path and the reference path, your estimated path shouldn't be too off from the reference. If your output looks similar to the demo video, it’s good enough.
 
 1. This ROS bag includes the `/cmd_vel` topic, **unplug the Type-C cable from the Pi to the Pico** to prevent the robot from driving away.
-2. Visualization, either thru NoMachine or Foxglove
+2. Visualization, either thru NoMachine 
     ```bash
     # On NoMachine
     cd ~/mbot_ros_labs/src/mbot_slam/rviz
     ros2 run rviz2 rviz2 -d localization.rviz
     ```
+    or Foxglove
     ```bash
     # Launch foxglove bridge using vscode terminal
     ros2 launch foxglove_bridge foxglove_bridge_launch.xml
@@ -222,11 +225,12 @@ If your mapping and localization are working well, but your full SLAM system is 
     - Do you see cells "flickering" between free and occupied? This can happen if a few bad scans can erase a well-defined wall. Tune the log-odds limits: Consider tunning `kMaxLogOdds` and `kMinLogOdds`. to make it harder for a cell's state to be "flipped" after it's been confidently marked as occupied or free.
 
 ### ROS bag test
-1. Visualization, either thru NoMachine or Foxglove
+1. Visualization, either thru NoMachine
     ```bash
     cd ~/mbot_ros_labs/src/mbot_slam/rviz
     ros2 run rviz2 rviz2 -d slam.rviz
     ```
+    or Foxglove
     ```bash
     # Launch foxglove bridge using vscode terminal
     ros2 launch foxglove_bridge foxglove_bridge_launch.xml
@@ -247,11 +251,12 @@ If your mapping and localization are working well, but your full SLAM system is 
 
 ### Real world test
 1. Check all the wires are connected, put the robot in the maze you want to map, reset the odometry, 
-2. Visualization, either thru NoMachine or Foxglove
+2. Visualization, either thru NoMachine 
     ```bash
     cd ~/mbot_ros_labs/src/mbot_slam/rviz
     ros2 run rviz2 rviz2 -d slam.rviz
     ```
+    or Foxglove
     ```bash
     # Launch foxglove bridge using vscode terminal
     ros2 launch foxglove_bridge foxglove_bridge_launch.xml

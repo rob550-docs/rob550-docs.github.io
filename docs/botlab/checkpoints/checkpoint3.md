@@ -4,7 +4,7 @@ title: Checkpoint 3
 nav_order: 4
 parent: Checkpoints
 grand_parent: Botlab
-last_modified_at: 2026-03-27 12:09:00 -0500
+last_modified_at: 2026-03-30 12:09:00 -0500
 ---
 
 
@@ -69,13 +69,17 @@ After validating your planner, we can test the full stack in real world.
    ```
 4. Run launch file to publish map and run nagivation node in **VSCode Terminal**:
    ```bash
+   cd ~/mbot_ros_labs
+   source install/setup.bash
    ros2 launch mbot_nav path_planning.launch.py map_name:=your_map pose_source:=tf
    ```
 5. Run localization node in **VSCode Terminal**:
    ```bash
-   ros2 run mbot_localization localization_node
+   cd ~/mbot_ros_labs
+   source install/setup.bash
+   ros2 run mbot_slam localization_node --ros-args -p publish_tf:=true
    ```
-6. Start rviz and set initial pose in **NoMachine Terminal**, localization node needs it to initialize particles.
+6. Start RViz in the **NoMachine Termina**l and **set the initial pose**. This pose should be your best estimate of the robot’s location in the maze. Use the maze view to place it as close as possible to the robot’s actual position, see the demo video below for details. The localization node uses this pose to initialize its particles. In Task 2.2, you do not need to set it manually because the ROS bag already contains this information.
    ```bash
    cd ~/mbot_ros_labs/src/mbot_nav/rviz
    ros2 run rviz2 rviz2 -d path_planning.rviz
@@ -86,15 +90,17 @@ After validating your planner, we can test the full stack in real world.
    ```
 7. Run motion controller in **VSCode Terminal**:
    ```bash
-   ros2 run mbot_setpoint motion_controller_diff --ros-args -p use_localization:=true
+   cd ~/mbot_ros_labs
+   source install/setup.bash
+   ros2 run mbot_nav controller_node --ros-args -p use_localization:=true
    ```
-8. Then set the goal pose on rviz.
+8. Then **set the goal pose** on rviz.
 
 **Video Demo**
 
-**TBD**{: .text-red-200} 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1k5I7wipIsQ?si=v6b-GWF3y0NzjLpK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-After testing all features, we also provide a launch file `navigation.launch.py`, it can start all nodes at once. This is not recommended during development; running each node manually exposes errors earlier and provides clearer diagnostics.
+After testing all features, we also provide a launch file `navigation.launch.py`, it can start all nodes at once. **This is not recommended during development**; running each node manually exposes errors earlier and provides clearer diagnostics.
 1. Bring up the mbot:
     ```bash
     ros2 launch mbot_bringup mbot_bringup.launch.py
@@ -174,7 +180,10 @@ This task is useful for competition but **not required for Checkpoint 3 submissi
    ros2 run mbot_nav exploration_node
    ```
 
-After testing all features, we also provide a launch file `exploration.launch.py`, it can start all nodes at once. This is not recommended during development; running each node manually exposes errors earlier and provides clearer diagnostics.
+**Video Demo**:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9ukhlCYGw0Y?si=LzgiCsqAPhFecLwA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+After testing all features, we also provide a launch file `exploration.launch.py`, it can start all nodes at once. **This is not recommended during development**; running each node manually exposes errors earlier and provides clearer diagnostics.
 1. Bring up the mbot:
     ```bash
     ros2 launch mbot_bringup mbot_bringup.launch.py

@@ -77,7 +77,7 @@ Then save the file. Now you can eject the SD card.
        ```bash
         sudo date -s "2026-08-24 8:00:00"
        ```
-           - Replace `2026-08-24 8:00:00` with today's date.
+        - Replace `2026-08-24 8:00:00` with today's date.
 
 ### 4.2 Connect to the Internet at Home
 1. Ensure the `new_wifi_ssid` and `new_wifi_password` are correctly set in the `mbot_config.txt` file (check for any typos). They should be your home wifi name, and home wifi password.

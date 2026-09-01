@@ -3,7 +3,7 @@ layout: default
 title: Setup Guide
 nav_order: 1
 parent: Armlab
-last_modified_at: 2026-01-08 16:20:00 -0500
+last_modified_at: 2026-08-27 12:00:00 -0400
 ---
 
 > This guide will walk you through the setup steps you need before starting Armlab.
@@ -13,11 +13,10 @@ last_modified_at: 2026-01-08 16:20:00 -0500
 {:toc}
  
 ## Login to the laptop
-In Armlab, each station is provided with a laptop running Ubuntu 22.04:
-- If you are in the morning session, log in to **student_am**
-- If you are in the afternoon session, log in to **student_pm**
+In Armlab, each station is provided with a laptop running Ubuntu 24.04:
+- If you are in the morning session, log in to **ROB550-AM**
+- If you are in the afternoon session, log in to **ROB550-PM**
 
-Same password for both users: **i<3robots!**
 
 Each laptop and its charger are labeled with a station number, do not remove the stickers. If your team is instructed to switch to a different station, please move **without** taking the laptops.
 {: .note}
@@ -54,7 +53,7 @@ One group member needs to create a GitLab Group and add all members. Follow thes
 ### 3. Fork Repositories
 "Forking a repository" refers to the process of creating a personal copy of a repository (a collection of files and code) hosted on a platform like GitHub or GitLab, in our case is GitLab. This copy is entirely separate from the original repository, allowing you to make changes and updates without affecting the original project. In order to create a fork, complete the following steps:
 
-1. Navigate to the repository you’d like to fork, in this case, you should fork the [armlab’s repository](https://gitlab.eecs.umich.edu/rob550-f25/armlab_f25)
+1. Navigate to the repository you’d like to fork, in this case, you should fork the [armlab’s repository](https://gitlab.eecs.umich.edu/rob550-f26)
 2. On the top right, select "Fork"
 3. You can change the name of the repository if you would like, but the key thing is to change the "Project URL" field so that it is forked into the group you just created.
 4. Change the visibility level to "Private".
@@ -63,7 +62,24 @@ One group member needs to create a GitLab Group and add all members. Follow thes
     <img src="/assets/images/armlab/setup-guide/fork_project.png" alt="" style="max-width:500px;"/>
     </a>
     
-### 4. Clone to local
+### 4. Install git and VS Code
+**On the lab laptop**, open a Terminal (shortcut: ctrl+alt+t) and install git:
+```bash
+sudo apt update
+sudo apt install git
+```
+
+If VS Code is not installed yet, download the `.deb` package from [code.visualstudio.com/download](https://code.visualstudio.com/download), then install it from the folder you downloaded it into:
+```bash
+sudo apt install ./<downloaded-file>.deb
+```
+During the installation you will be asked whether to add the Microsoft apt repository. Select `<Yes>` so that VS Code stays up to date through apt.
+
+<a class="image-link" href="/assets/images/armlab/setup-guide/vscode-install.png">
+<img src="/assets/images/armlab/setup-guide/vscode-install.png" alt="" style="max-width:500px;"/>
+</a>
+
+### 5. Clone to local
 1. Go to your group’s armlab repository webpage and copy the URL of “Clone with HTTPS”
 
     <a class="image-link" href="/assets/images/armlab/setup-guide/clone.png">
@@ -96,114 +112,99 @@ ls
 At this point, you should have your team forked Armlab codebase and cloned it on the Ubuntu laptop at your team's station.
 
 ## Installation
-To use the code, firstly, we need to install all the dependencies/SDKs we need. 
+To use the code, firstly, we need to install all the dependencies/SDKs we need.
 
-### 1. Install all the dependencies and packages
-    
-If this is your first time setting up, you need to install the necessary dependencies and packages. Open a terminal and navigate to folder `/install_scripts`. Then, run the following command:
+Open a terminal, navigate to your armlab repository, and run the three scripts below **in this order**. Each one is safe to re-run if something goes wrong.
+
+### 1. Install Anaconda
 ```bash
-./install_Dependencies.sh
+./install_scripts/install_anaconda.sh
+source ~/.bashrc
 ```
-- **Tip:** The "TAB" key is a handy tool for auto-completing your input commands. For instance, try typing "./install_De" and then press the "TAB" key. This should automatically complete the rest of the command for you.
+- **Tip:** The "TAB" key is a handy tool for auto-completing your input commands. For instance, try typing "./install_scripts/install_an" and then press the "TAB" key. This should automatically complete the rest of the command for you.
 - **Note:** If the auto-complete feature does not work, it often indicates insufficient permissions for the install script file, which may also prevent the file from running. To address this, grant the necessary permissions using the command:
     ```bash
-    chmod +x ./install_Dependencies.sh
+    chmod +x ./install_scripts/*.sh
     ```
-
-Wait until it's complete before proceeding to the next step.
-
-### 2. Install interbotix arm 
-
-Run the following command:
-```bash
-./install_Interbotix.sh
-```
-During the installation, you'll encounter prompts. For prompts related to AprilTag and MATLAB-ROS installation, type **no** and press Enter.
-
-<a class="image-link" href="/assets/images/armlab/setup-guide/interbotix_install.png">
-<img src="/assets/images/armlab/setup-guide/interbotix_install.png" alt="" style="max-width:600px;"/>
-</a>
-
-{: .warning}
-Be cautious with the prompts and enter **exactly** what is specified in the image. We install the perception module separately. If you enter 'Yes' to the perceptoin module, it will result in the installation of a duplicate AprilTag module, leading to configuration issues.
-
-Wait until it's complete before proceeding to the next step.
-
-### 3. Move config files
-
-Run the following command:
-```bash
-./install_LaunchFiles.sh
-```
-- This file is used to move the config files. The configurations are based on the AprilTag family we have and the specific camera model we use.
-
-### 4. Install camera calibration package
-
-**Open a NEW terminal window to run the following command.** If you use an existing terminal, the installation will fail.
-```bash
-./install_Calibration.sh
-```
 
 Wait until it’s complete before proceeding to the next step.
 
-### 5. Set up ROS_DOMAIN_ID
-
-Run the following command:
+### 2. Create the conda environment
 ```bash
-echo "export ROS_DOMAIN_ID=your_station_number" >> ~/.bashrc
+./install_scripts/install_conda_env.sh
 ```
-- Note, replace `your_station_number` with the actual number on the wall next to your station's desk. For example station 1 should have: `echo "export ROS_DOMAIN_ID=1" >> ~/.bashrc`
-- **Set up ROS_DOMAIN_ID is crucial. Ensure it's done correctly to prevent chaos in the lab.**{: .text-red-200} 
-- To check if you set it successfully, **open a new terminal** and run:
-```bash
-printenv | grep ROS
-```
-    - where you should see the output has all the environmental variables related to ROS, and you should see ROS_DOMAIN_ID=the_number_you_set print out in the terminal
-    
+- This creates the `env550lab` environment, which is where all of the code runs.
 
-
-### 6. Reboot
-If you have successfully completed all the steps above, please reboot the computer.
+### 3. Install the camera stack
+**Unplug the camera cable from the laptop before running this.**
 ```bash
-sudo reboot
+./install_scripts/install_camera.sh
+source ~/.bashrc
 ```
+- This step builds the RealSense driver from source, expect **5~20 minutes**.
+
+{: .warning}
+Step 3 must come after step 2. It builds the RealSense Python binding against the `env550lab` interpreter, so the environment has to exist first. The script stops with an error message if you run it too early.
+
+{: .note}
+After this, every new terminal you open starts in `env550lab` already, you do not need to activate it by hand.
+
+### 4. Set your station's arm IP
+Open `src/lite6arm.py` and set `XARM_IP` to the IP address of the arm at your station. The IP address is on the label at the back of the arm.
+
+<a class="image-link" href="/assets/images/armlab/setup-guide/arm-ip.jpg">
+<img src="/assets/images/armlab/setup-guide/arm-ip.jpg" alt="" style="max-width:400px;"/>
+</a>
+
+{: .sanity_check}
+At this point, running `python -c "import pyrealsense2, cv2, xarm"` in a new terminal should print nothing and exit without an error.
 
 ## Testing
 After successfully installing all the necessary components for the workstation, now it is time to test.
 
-### To launch everything
-First, connect the camera USB and arm USB to the lab laptop, then open a terminal and navigate to the folder `/launch`. Run the provided command. Remember that to halt any node, use `ctrl + C` in its respective terminal. Until you stop this node, the terminal will be occupied. If you need to run another command, open a new terminal.
+### Run in simulation
+You can check that the installation worked without touching the hardware. Open a terminal and start the simulator:
 ```bash
-./launch_armlab.sh
+mujoco-sim
 ```
-- This one starts all 3 nodes we need: camera, apriltag, interbotix_arm.
+- This one starts the MuJoCo simulation of the arm. Remember that to halt it, use `ctrl + C` in its terminal. Until you stop it, the terminal will be occupied. If you need to run another command, open a new terminal.
+
+<a class="image-link" href="/assets/images/armlab/setup-guide/mujoco.png">
+<img src="/assets/images/armlab/setup-guide/mujoco.png" alt="" style="max-width:600px;"/>
+</a>
 
 Then in a new terminal, run the following command:
 ```bash
-./launch_control_station.sh
+cd src
+python control_station.py --sim
 ```
-- This one starts the control station GUI.
+- This one starts the control station GUI, driving the simulated arm.
+
+<a class="image-link" href="/assets/images/armlab/setup-guide/control-station-sim.png">
+<img src="/assets/images/armlab/setup-guide/control-station-sim.png" alt="" style="max-width:600px;"/>
+</a>
+
+### Run on the real arm
+Connect the camera USB and the arm to the lab laptop, then in a terminal run:
+```bash
+cd src
+python control_station.py
+```
 - To stop the control station, you just need to close the GUI window.
 
-{: .note}
-These two `.sh` files combine multiple single-line commands that we need to start the project, making it simpler to initiate everything from a single location and with fewer open windows.
-
-
-### Result 
-By launching all the ROS nodes we need, you are starting the camera, the apriltag package, and the arm, along with a control station GUI where you can manually control the arm. We will talk about how to control the arm later in the checkpoint 1. 
-
-If you launch everything successfully, this will be the scene on your laptop:
-
-<a class="image-link" href="/assets/images/armlab/setup-guide/testing-gui.png">
-<img src="/assets/images/armlab/setup-guide/testing-gui.png" alt="" style="max-width:600px;"/>
+<a class="image-link" href="/assets/images/armlab/setup-guide/control-station.png">
+<img src="/assets/images/armlab/setup-guide/control-station.png" alt="" style="max-width:600px;"/>
 </a>
-- To quit control station, click the “exit” button on the top right corner
-- To quit other nodes, hit ctrl+c in the terminal
+
+### Result
+The control station GUI opens and the joint readouts update live. We will talk about how to control the arm later in the checkpoint 1.
+
+- To quit the control station, close the GUI window
+- To quit the simulator, hit ctrl+c in its terminal
 
 {: .warning}
-Always put the arm in the sleep position when you stop using the arm node! <br>
-Otherwise the arm loses torque will then splash on the board  : D
+Click **Sleep Arm** before you close the GUI. This drives the arm back to its home position and then powers down the motors. <br>
+Closing the GUI on its own does not do this, the arm stays where it is with the motors still on.
 
 {: .sanity_check}
-At this stage, you should have the nodes and control station GUI launched, indicating that you have completed the setup for Armlab. You can now proceed to the checkpoints if you wish.
-
+At this stage, you should have the control station GUI launched, indicating that you have completed the setup for Armlab. You can now proceed to the checkpoints if you wish.

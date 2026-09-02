@@ -66,10 +66,10 @@ Then save the file. Now you can eject the SD card.
 1. Connect to the MBot's local access point. See the instructions on the official MBot website [here](https://mbot.robotics.umich.edu/docs/setup/networking/#connecting-to-the-mbots-access-point) under the "Connecting to the MBot’s Access Point" section.
 2. Use NoMachine to access the MBot. Follow the instructions on the official MBot website [here](https://mbot.robotics.umich.edu/docs/tutorials/no-machine/).
 3. Once you are have access to the MBot using NoMachine, verify that MBot's date and time. If the date and time are not current, update it using the following command. NOTE: if the date and time are incorrect, you will not be able to connect to WiFi.
-       ```bash
+   ```bash
         sudo date -s "2026-08-24 8:00:00"
-       ```
-        **Replace `2026-08-24 8:00:00` with today's date and time.**
+   ```
+   **Replace `2026-08-24 8:00:00` with today's date and time.**
 4. Connect the MBot to the Internet. Open a terminal in the NoMachine desktop and run the following commands to connect the MBot to the Internet:
     ```bash
     cd ~

@@ -65,19 +65,20 @@ Then save the file. Now you can eject the SD card.
 **Steps:**
 1. Connect to the MBot's local access point. See the instructions on the official MBot website [here](https://mbot.robotics.umich.edu/docs/setup/networking/#connecting-to-the-mbots-access-point) under the "Connecting to the MBot’s Access Point" section.
 2. Use NoMachine to access the MBot. Follow the instructions on the official MBot website [here](https://mbot.robotics.umich.edu/docs/tutorials/no-machine/).
-3. Connect the MBot to the Internet. Open a terminal in the NoMachine desktop and run the following commands to connect the MBot to the Internet:
+3. Once you are have access to the MBot using NoMachine, verify that MBot's date and time. If the date and time are not current, update it using the following command. NOTE: if the date and time are incorrect, you will not be able to connect to WiFi.
+       ```bash
+        sudo date -s "2026-08-24 8:00:00"
+       ```
+        **Replace `2026-08-24 8:00:00` with today's date and time.**
+4. Connect the MBot to the Internet. Open a terminal in the NoMachine desktop and run the following commands to connect the MBot to the Internet:
     ```bash
     cd ~
     ./SecureW2_JoinNow.run
     ```
-4. When prompted for your unique name and password, use the 550 course credentials, it will be distributed during lab. Avoid using your own UM credentials for your privacy safety.
-5. After entering your credentials, NoMachine will disconnect during the process. Close the NoMachine window and wait for about 1 minute. Check the OLED screen to see if the IP address has changed from `192.168.X.X` to a different one. This indicates that the MBot has successfully connected to the Internet. 
+5. When prompted for your unique name and password, use the 550 course credentials, it will be distributed during lab. Avoid using your own UM credentials for your privacy safety.
+6. After entering your credentials, NoMachine will disconnect during the process. Close the NoMachine window and wait for about 1 minute. Check the OLED screen to see if the IP address has changed from `192.168.X.X` to a different one. This indicates that the MBot has successfully connected to the Internet. 
    - If the OLED screen says "IP Not Found" or "Error" and has been that way for over two minutes, you aren't connected to the network, you might have typo when input the UM account password, find GSIs and ask to connect to an external monitor.
-   - If you encountered issue with "license expired", use the following command to set the system time to current time to trick the script:
-       ```bash
-        sudo date -s "2026-08-24 8:00:00"
-       ```
-        - Replace `2026-08-24 8:00:00` with today's date.
+ 
 
 ### 4.2 Connect to the Internet at Home
 1. Ensure the `new_wifi_ssid` and `new_wifi_password` are correctly set in the `mbot_config.txt` file (check for any typos). They should be your home wifi name, and home wifi password.

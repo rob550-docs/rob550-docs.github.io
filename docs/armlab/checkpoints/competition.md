@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Competition
-nav_order: 2
+nav_order: 3
 parent: Checkpoints
 grand_parent: Armlab
 last_modified_at: 2026-09-02 12:00:00 -0400

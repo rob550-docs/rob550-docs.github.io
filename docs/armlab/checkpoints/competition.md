@@ -10,7 +10,7 @@ last_modified_at: 2026-09-02 12:00:00 -0400
 {: .important}
 **The events and point values on this page are not final.** The competition will be updated before the end of the term — expect tasks, levels and scoring to change. Check back here before you start optimizing for a particular event.
 
-It's time to showcase your hard work and effort! The competition consists of several challenges that will test every component of your project, from camera calibration to inverse kinematics. Based on your performance on the competition tasks, you are eligible for points of extra credit that are added to your report grade. **The competition is only for extra credit, and your performance cannot negatively affect your grade.**
+It's time to showcase your hard work and effort! The competition consists of several challenges that will test every component of your project, from camera calibration to inverse kinematics. Based on your performance on the competition tasks, you are eligible for points of extra credit that are added to your report grade. **You must be able to demonstrate at least Event 1 level 1 to receive full marks.**
 
 <a class="image-link" href="https://i.imgflip.com/3t9jkg.jpg"><img src="https://i.imgflip.com/3t9jkg.jpg" alt="" style="max-width:400px;"/>
 </a>

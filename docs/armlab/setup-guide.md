@@ -73,11 +73,7 @@ If VS Code is not installed yet, download the `.deb` package from [code.visualst
 ```bash
 sudo apt install ./<downloaded-file>.deb
 ```
-During the installation you will be asked whether to add the Microsoft apt repository. Select `<Yes>` so that VS Code stays up to date through apt.
-
-<a class="image-link" href="/assets/images/armlab/setup-guide/vscode-install.png">
-<img src="/assets/images/armlab/setup-guide/vscode-install.png" alt="" style="max-width:500px;"/>
-</a>
+During the installation a prompt appears asking whether to add the Microsoft apt repository. Use **Tab** to move between the options, select `<Yes>`, and press **Enter** — this is what keeps VS Code up to date through apt.
 
 ### 5. Clone to local
 1. Go to your group’s armlab repository webpage and copy the URL of “Clone with HTTPS”

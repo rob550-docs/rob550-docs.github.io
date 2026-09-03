@@ -13,7 +13,18 @@ last_modified_at: 2026-09-02 12:00:00 -0400
 {:toc}
 
 ## Station Overview
-TODO: photo of a full station and a short list of everything on it (arm, board, 24 V supply, camera frame, laptop).
+<a class="image-link" href="/assets/images/armlab/hardware/station-overview.jpg">
+<img src="/assets/images/armlab/hardware/station-overview.jpg" alt="A full Arm Lab station: an aluminium frame over the table carrying the camera, the Lite 6 arm behind a gridded board with AprilTags at its corners, a laptop to the left and the red emergency stop in the foreground" style="max-width:560px;"/>
+</a>
+
+Every station has the same parts:
+
+- the **Lite 6 arm**, bolted to the back edge of the board
+- the **board**, marked with a 50 mm grid and carrying an AprilTag near each corner
+- the **aluminium frame** spanning the table, with the RealSense camera mounted on the top rail looking down
+- the **24 V power supply**, under the board
+- the **laptop**, running the control station
+- the **emergency stop**, loose on the table beside the arm — the red button in the foreground above
 
 ## UFactory Lite 6 Arm
 The arm is a **UFACTORY Lite 6**, a 6-DOF collaborative arm with the control electronics built into its base — there is no separate controller cabinet. It is commanded over Ethernet from the station laptop using the xArm Python SDK.
@@ -86,7 +97,13 @@ The gripper is **custom-built for this lab**, mounted on the Lite 6's ISO 9409-1
 
 It is a binary open/closed device: no width control, no force control, and no feedback about whether a grasp succeeded.
 
-TODO: mechanism description and photo, maximum block size it can hold, gripper mass (it counts against the 600 g payload), and the tool center point offset from the flange.
+<a class="image-link" href="/assets/images/armlab/hardware/gripper.jpg">
+<img src="/assets/images/armlab/hardware/gripper.jpg" alt="Close-up of the custom parallel-jaw gripper on the Lite 6 tool flange, its driver board exposed and a cable looping back to the arm" style="max-width:400px;"/>
+</a>
+
+It is a parallel-jaw design: two flat fingers that travel together, driven by the board visible behind them.
+
+TODO: maximum block size it can hold, gripper mass (it counts against the 600 g payload), and the tool center point offset from the flange.
 
 ## Power and Network
 The Lite 6 has no separate controller cabinet — the control electronics are inside the arm's base. Power comes from a **24 V power supply mounted underneath the board** the arm is bolted to.
@@ -136,7 +153,13 @@ The camera is mounted on an **aluminum frame above the arm**, looking down at th
 {: .important}
 Aiming the camera **invalidates your extrinsic calibration**. The calibration solves for where the camera sits relative to the robot, so any time you loosen that screw you have to run Calibrate again before world coordinates mean anything.
 
-TODO: photo of the frame and the adjustment screw, and the approximate mounting height above the board.
+<a class="image-link" href="/assets/images/armlab/hardware/camera-mount.jpg">
+<img src="/assets/images/armlab/hardware/camera-mount.jpg" alt="The RealSense L515 held in a black bracket bolted to the aluminium rail above the board, with the hex screw that sets its aim" style="max-width:400px;"/>
+</a>
+
+The hex screw in the bracket is the one to loosen when you re-aim the camera.
+
+TODO: the approximate mounting height above the board.
 
 ## Board and Workspace
 The arm is mounted on a board carrying AprilTags at fixed positions.

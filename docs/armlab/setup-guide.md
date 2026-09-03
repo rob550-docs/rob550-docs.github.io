@@ -174,11 +174,7 @@ Then in a new terminal, run the following command:
 cd src
 python control_station.py --sim
 ```
-- This one starts the control station GUI, driving the simulated arm.
-
-<a class="image-link" href="/assets/images/armlab/setup-guide/control-station-sim.png">
-<img src="/assets/images/armlab/setup-guide/control-station-sim.png" alt="" style="max-width:600px;"/>
-</a>
+- This one starts the control station GUI, driving the simulated arm. The GUI looks the same whether it is driving the simulator or the real arm — see the screenshot below.
 
 ### Run on the real arm
 Connect the camera USB and the arm to the lab laptop, then in a terminal run:

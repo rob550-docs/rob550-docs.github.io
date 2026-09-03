@@ -93,7 +93,7 @@ The calibration is only as good as the target, and this part is on you rather th
 - Print a checkerboard. A good default is **10×7 squares with 25 mm squares**, which gives a **9×6 grid of inner corners**.
 - Print at 100% scale — "fit to page" silently rescales it and every number you produce will be wrong.
 - Mount it on something **rigid and flat**: foam board, a clipboard, stiff cardboard. A curled sheet of paper will quietly ruin the calibration.
-- **Measure the printed squares with calipers** and use the measured value.
+- **Measure the printed squares with calipers** and use the measured value, not the nominal one. Ours print as **24.8 mm** against a nominal 25 mm — small, but it scales every distance the calibration produces.
 - Matte paper if you have it. Glossy paper reflects the lab lights into the corners.
 
 {: .warning}

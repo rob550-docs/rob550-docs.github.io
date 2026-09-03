@@ -40,7 +40,19 @@ http://192.168.1.xxx:18333
 
 There is no login.
 
-TODO: screenshot of the UFACTORY Studio landing page.
+<a class="image-link" href="/assets/images/armlab/checkpoints/ufactory-studio.png">
+<img src="/assets/images/armlab/checkpoints/ufactory-studio.png" alt="The UFACTORY Studio Live Control page: gripper buttons, speed slider, six joint sliders, a Cartesian jog pad, and the end-effector pose readout on the right" style="max-width:800px; width:100%;"/>
+</a>
+
+You land on **Live Control**. The pieces you need are:
+
+- **Enable** (top right) — the arm will not move until you press it
+- **J1–J6 sliders**, each with `−` and `+` buttons, for joint jogging
+- the **Base** card, with `Z−`/`Z+` and the `XYZ` and `RXYZ` rings, for Cartesian jogging
+- the **pose readout** on the right: X, Y, Z in mm and Roll, Pitch, Yaw in degrees
+- **Gripper**: `OPEN`, `CLOSE`, `OFF`
+- **Speed**, which scales everything — turn it down before going near the board
+- **STOP**, in red
 
 **Instructions**
 
@@ -67,9 +79,16 @@ You have moved a block from one place on the board to another using only the web
 
 ## Task 1.2  Script the arm from the web interface
 
-The web interface has a built-in Python editor with a set of example scripts. Open one of the examples, read it, and use it as your starting point — it will show you the connection and motion calls the arm expects.
+Click **Python** in the left sidebar to open the built-in IDE. Under `Python_Examples` you will find **`0003_pick_and_place.py`** — start from that one. It already does a single pick and place, so most of your work is generalising it to three blocks.
 
-TODO: screenshot of the Python editor with an example loaded, and the name of the example that makes the best starting point.
+<a class="image-link" href="/assets/images/armlab/checkpoints/ufactory-python-editor.png">
+<img src="/assets/images/armlab/checkpoints/ufactory-python-editor.png" alt="The Python IDE in UFACTORY Studio with 0003_pick_and_place.py open, showing the connection, mode and state calls followed by set_position and gripper commands" style="max-width:800px; width:100%;"/>
+</a>
+
+Read it before you change anything. It shows the startup sequence (`set_mode(0)`, `set_state(0)`), the approach-then-descend pattern — move to `z = 300`, then down to `z = 200`, then close the gripper — and the `time.sleep(0.5)` that gives the gripper time to finish.
+
+{: .warning}
+**These examples are in degrees; the control station codebase is in radians.** The web IDE uses the SDK's default, so `set_position(*[300, 0, 300, 180, 0, 0])` has a roll of 180 **degrees**. From Task 1.3 onward you are in a codebase built with `is_radian=True`. Do not carry numbers between the two without converting.
 
 **Instructions**
 

@@ -103,9 +103,16 @@ It is a binary open/closed device: no width control, no force control, and no fe
 
 It is a parallel-jaw design: two flat fingers that travel together, driven by the board visible behind them.
 
-It weighs about **50 g**, so it barely dents the arm's 600 g payload.
+| Property | Value |
+| -------- | ----- |
+| Grasp stroke | 50 mm |
+| Mass | ~50 g |
+| Flange to finger centre | 85 mm |
 
-TODO: maximum block size it can hold, and the tool center point offset from the flange.
+{: .important}
+**The 85 mm offset is the number your kinematics needs.** Forward kinematics gives you the pose of the **tool flange**; the point that actually grasps a block sits 85 mm further along the tool axis. Leave it out and every pick will aim 85 mm short.
+
+A 50 mm stroke sets the ceiling on what you can pick up — and the board's grid squares are 50 mm, which makes them a convenient check on whether a block will fit in the jaws.
 
 ## Power and Network
 The Lite 6 has no separate controller cabinet — the control electronics are inside the arm's base. Power comes from a **24 V power supply mounted underneath the board** the arm is bolted to.

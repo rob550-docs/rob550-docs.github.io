@@ -146,7 +146,7 @@ Step 3 must come after step 2. It builds the RealSense Python binding against th
 After this, every new terminal you open starts in `env550lab` already, you do not need to activate it by hand.
 
 ### 4. Set your station's arm IP
-Open `src/lite6arm.py` and set `XARM_IP` to the IP address of the arm at your station. The IP address is on the label at the back of the arm.
+Open `src/lite6arm.py` and set `XARM_IP` to the IP address of the arm at your station. The IP address is on a label beside the LAN port, on the I/O panel at the back of the arm's base.
 
 <a class="image-link" href="/assets/images/armlab/setup-guide/arm-ip.jpg">
 <img src="/assets/images/armlab/setup-guide/arm-ip.jpg" alt="" style="max-width:400px;"/>

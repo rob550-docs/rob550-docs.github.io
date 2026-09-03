@@ -28,7 +28,7 @@ The board the arm is mounted on has a **50 mm × 50 mm grid**. The frame everyth
 Because the origin is on a grid line, every grid intersection is a whole multiple of 50 mm away from it — which is what makes the board a usable ruler.
 
 {: .warning}
-The gripper can reach the board. When you are driving the arm by hand, watch the **z** readout and keep the tool above the surface — it is very easy to drive the end effector straight into the board while concentrating on x and y.
+The gripper can reach the board. When you are driving the arm by hand, watch the **z** readout and keep the tool above the surface — it is very easy to drive the end effector straight into the board while concentrating on x and y. The gripper hangs **100 mm** below the flange, and the flange is what the readout reports, so that is the clearance you need.
 
 ## Task 1.1  Drive the arm from the web interface
 

@@ -40,3 +40,6 @@ callouts:
     title: Required For the Report
     color: cyan
     opacity: 0.05
+  submission:
+    title: Submit For This Checkpoint
+    color: green

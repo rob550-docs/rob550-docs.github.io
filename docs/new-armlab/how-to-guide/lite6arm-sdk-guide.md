@@ -61,7 +61,7 @@ You must repeat this sequence **every time you clear an error**, and after an em
 | ---- | ------- | --------------- |
 | 0 | Position control | **The default.** Point-to-point moves |
 | 1 | Servo motion | High-frequency small steps, streamed by you |
-| 2 | Joint teaching | **Free-drive.** Motors release so you can move the arm by hand |
+| 2 | Joint teaching | **Free-drive.** Arms hand-guiding — the button on the arm then releases it |
 | 3 | Cartesian teaching | Not available |
 | 4 | Joint velocity control | Velocity commands per joint |
 | 5 | Cartesian velocity control | Velocity commands on the TCP |
@@ -69,10 +69,10 @@ You must repeat this sequence **every time you clear an error**, and after an em
 | 7 | Cartesian online trajectory planning | Retarget a Cartesian move while it runs |
 
 {: .highlight}
-**Mode 2 is how you do teach-and-repeat.** Put the arm in joint teaching mode, physically guide it to a pose, read the joint angles back with `get_servo_angle()`, and store them. Switch back to mode 0 to replay them.
+**Mode 2 is how you do teach-and-repeat.** Put the arm in joint teaching mode, press the button on the arm to release it, physically guide it to a pose, read the joint angles back with `get_servo_angle()`, and store them. Switch back to mode 0 to replay them.
 
-{: .warning}
-In mode 2 the arm is back-driveable, so **support it before you switch** — an arm holding a pose will sag when the motors release.
+{: .note}
+`set_mode(2)` only arms hand-guiding — the arm becomes back-driveable when the button on it is pressed. It stays under gravity compensation throughout, so it holds its own weight rather than dropping.
 
 Mode 1 is a trap for beginners: it executes each command immediately at maximum speed, so it only behaves sensibly if you are streaming small increments at a high, steady rate. Stay in mode 0 unless you know you need otherwise.
 

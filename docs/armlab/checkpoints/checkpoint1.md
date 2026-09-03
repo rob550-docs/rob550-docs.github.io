@@ -156,7 +156,44 @@ Teaching by demonstration is how a lot of industrial arms get programmed: you mo
 {: .sanity_check}
 You can hand-guide the arm, record a sequence that includes gripper actions, and have it stack three blocks on playback without you touching it.
 
-## Task 1.5  Measure the camera extrinsics
+## Task 1.5  Calibrate the camera intrinsics
+
+The camera reports intrinsics of its own, burned in at the factory. Before you trust them, measure them yourself and see how close you get — and, more importantly, find out what makes a calibration worth trusting in the first place. Use the `utils/camera_calibration.py` tool; the [Camera Guide](/docs/armlab/how-to-guide/camera-guide) covers it in detail.
+
+**Instructions**
+
+1. **Measure your checkerboard.** You need two things:
+    - the number of **inner corners** across and down — the points where four squares meet, *not* the number of squares
+    - the size of one square, with calipers
+
+    {: .warning}
+    The values in the script are not the board you have. Count and measure your own before you run anything, or the board will simply never be detected.
+
+2. Set `BOARD_COLS`, `BOARD_ROWS` and `SQUARE_MM` at the top of `utils/camera_calibration.py` to what you measured.
+3. Run the tool and calibrate **three times**, saving the results of each:
+
+    | Run | How to hold the board |
+    | --- | --------------------- |
+    | A | **Flat on the board only.** Leave the checkerboard lying at `z = 0` and slide it around — near, far, left, right, corners — but never lift or tilt it. |
+    | B | **All through the space.** Tilt it, turn it, hold it at different heights and distances, work it into the corners of the image as well as the middle. |
+    | C | Your best effort, using what runs A and B taught you. |
+
+4. For each run, record the RMS reprojection error and the four intrinsic values, next to the factory numbers the tool prints alongside them.
+5. Compare.
+
+**Hints**
+
+- A board with 10 × 7 squares has 9 × 6 inner corners. Getting this wrong is the single most common reason nothing is ever detected.
+- The tool rejects any frame where it cannot see the whole board, so everything you manage to capture is usable.
+- Capture a similar number of frames in each run, so you are comparing technique and not sample size.
+
+{: .highlight}
+**One of these three runs is not a valid calibration, and its reprojection error will not be what gives it away.** Work out which one, and why: think about what the camera never got to see. A flat board slid around in its own plane presents the same orientation to the camera every time, however many frames you take — and a solver that only ever sees one orientation cannot separate how big the board is from how far away it is.
+
+{: .sanity_check}
+You have three sets of intrinsics and their errors written down beside the factory values, and you can say which run you would trust and why.
+
+## Task 1.6  Measure the camera extrinsics
 
 The camera sees pixels. The arm works in millimetres in its own base frame. The **extrinsic matrix** is what connects them: a homogeneous transform describing where the camera sits relative to the robot.
 
@@ -203,14 +240,15 @@ Submit the following on Canvas.
 **1)** A short video of the arm replaying your taught sequence from Task 1.4, gripper actions included. <br>
 **2)** Your recorded waypoint list from Task 1.4 as a table — all six joint angles plus the gripper state for each waypoint, **with units stated**. <br>
 **3)** Two or three sentences on how you represented a waypoint, and why the gripper state is stored with the pose rather than in a separate list. <br>
-**4)** A labelled sketch of your Task 1.5 setup: the robot base frame, the camera frame, both sets of axes, and the distances you measured. <br>
-**5)** Your 4 × 4 extrinsic matrix with real numbers, and a statement of which direction it maps. <br>
-**6)** A table for the four board points: predicted pixel, measured pixel, and the difference for each. <br>
-**7)** Two or three sentences on where the error comes from and how large you expected it to be.
+**4)** Your Task 1.5 intrinsics table: for each of the three runs, the RMS error and fx, fy, cx, cy beside the factory values, plus a sentence on which run you trust and why. <br>
+**5)** A labelled sketch of your Task 1.6 setup: the robot base frame, the camera frame, both sets of axes, and the distances you measured. <br>
+**6)** Your 4 × 4 extrinsic matrix with real numbers, and a statement of which direction it maps. <br>
+**7)** A table for the four board points: predicted pixel, measured pixel, and the difference for each. <br>
+**8)** Two or three sentences on where the error comes from and how large you expected it to be.
 
 {: .required_for_report}
 From this checkpoint, carry the following into your final report: <br>
-**1)** The labelled frame diagram from Task 1.5. <br>
+**1)** The labelled frame diagram from Task 1.6. <br>
 **2)** The extrinsic matrix and how you arrived at it. <br>
 **3)** The predicted-vs-measured pixel table for the four board points. <br>
 **4)** Your analysis of the error — its sources, its size, and what it implies about calibrating this way.

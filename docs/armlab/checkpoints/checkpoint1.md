@@ -17,7 +17,7 @@ This checkpoint gets you moving the arm and reasoning about where things are in 
 
 - Your station is set up and the control station runs. If not, work through the [Setup Guide](/docs/armlab/setup-guide) first.
 - You know where the emergency stop is. It is on the table next to the arm.
-- You have read the [Hardware](/docs/armlab/hardware) page, in particular the joint limits and the 600 g payload.
+- You have read the [Hardware](/docs/armlab/hardware) page, in particular the joint numbering, the rotation directions and the joint limits.
 
 The board the arm is mounted on has a **50 mm × 50 mm grid**. The frame everything in this lab is expressed in is defined like this:
 

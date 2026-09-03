@@ -73,8 +73,8 @@ Joint travel limits are **not symmetric**:
 {: .important}
 J5 (±124°) and J3 (−3.5° to 300°) are the limits you will actually run into. An inverse-kinematics solution can be mathematically correct and still unreachable because it asks one of these joints to go somewhere it cannot. See the [Lite 6 Arm & SDK Guide](/docs/armlab/how-to-guide/lite6arm-sdk-guide) for how this shows up in the software.
 
-{: .warning}
-The 600 g payload is the entire budget and **the gripper counts against it**, leaving very little for the object you are picking up.
+{: .note}
+The 600 g payload includes whatever is bolted to the flange, but the gripper is only about 50 g, so roughly 550 g is left for the object. The wooden blocks used in this lab weigh a small fraction of that — payload is not a constraint you will run into here.
 
 ### Zero position
 
@@ -103,7 +103,9 @@ It is a binary open/closed device: no width control, no force control, and no fe
 
 It is a parallel-jaw design: two flat fingers that travel together, driven by the board visible behind them.
 
-TODO: maximum block size it can hold, gripper mass (it counts against the 600 g payload), and the tool center point offset from the flange.
+It weighs about **50 g**, so it barely dents the arm's 600 g payload.
+
+TODO: maximum block size it can hold, and the tool center point offset from the flange.
 
 ## Power and Network
 The Lite 6 has no separate controller cabinet — the control electronics are inside the arm's base. Power comes from a **24 V power supply mounted underneath the board** the arm is bolted to.
@@ -157,9 +159,10 @@ Aiming the camera **invalidates your extrinsic calibration**. The calibration so
 <img src="/assets/images/armlab/hardware/camera-mount.jpg" alt="The RealSense L515 held in a black bracket bolted to the aluminium rail above the board, with the hex screw that sets its aim" style="max-width:400px;"/>
 </a>
 
-The hex screw in the bracket is the one to loosen when you re-aim the camera.
+The hex screw in the bracket is the one to loosen when you re-aim the camera. The camera sits roughly **1 m above the board**.
 
-TODO: the approximate mounting height above the board.
+{: .note}
+That 1 m working distance is where the L515's quoted ~5 mm depth accuracy applies, and it is comfortably inside the sensor's 0.25–9 m range.
 
 ## Board and Workspace
 The arm is mounted on a board carrying AprilTags at fixed positions.

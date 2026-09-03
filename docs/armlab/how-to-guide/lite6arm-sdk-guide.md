@@ -23,7 +23,7 @@ The Lite 6 is a 6-DOF collaborative arm with the control electronics built into 
 Two hardware facts drive most of the software problems you will hit:
 
 - **The joint limits are asymmetric**, and J5 (±124°) and J3 (−3.5° to 300°) are tight. A mathematically valid IK solution can still be unreachable, which surfaces as error 23 in the [error table](#errors).
-- **The payload is 600 g including the gripper**, so a grasp can fail for reasons that have nothing to do with your code.
+- **The payload is 600 g including the gripper**, which is only about 50 g. That leaves plenty for the blocks, so a failed grasp is almost never a payload problem.
 
 ## Connecting
 

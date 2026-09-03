@@ -1,9 +1,8 @@
 ---
 layout: default
 title: Checkpoint 2
-nav_order: 2
-parent: Checkpoints
-grand_parent: Armlab
+nav_order: 4
+parent: Armlab Legacy
 last_modified_at: 2026-01-08 16:20:00 -0500
 ---
 
@@ -72,7 +71,7 @@ Key elements to include in your drawing are:
 - The tag's edges.
 
 An example of the expected result is provided for reference:
-<a class="image-link" href="/assets/images/armlab/checkpoints/checkpoint2-validate-apriltag.png"><img src="/assets/images/armlab/checkpoints/checkpoint2-validate-apriltag.png" alt="" style="max-width:600px;"/>
+<a class="image-link" href="/assets/images/armlab-legacy/checkpoints/checkpoint2-validate-apriltag.png"><img src="/assets/images/armlab-legacy/checkpoints/checkpoint2-validate-apriltag.png" alt="" style="max-width:600px;"/>
 </a>
 
 While your result doesn't have to be identical, the goal is to verify the accuracy of the detection. A good indication of accurate detection is if your drawing aligns well with the real-world objects. This alignment ensures the reliability of the AprilTag detection output.
@@ -100,12 +99,12 @@ The _source_ points you use to compute the homography matrix should either be th
 
 This is what your board will look like before the transformation:
 
-<a class="image-link" href="/assets/images/armlab/checkpoints/checkpoint2-homography-before.png"><img src="/assets/images/armlab/checkpoints/checkpoint2-homography-before.png" alt="A top-down view of the board before the homography transformation, showing a visible skew." style="max-width:600px;"/>
+<a class="image-link" href="/assets/images/armlab-legacy/checkpoints/checkpoint2-homography-before.png"><img src="/assets/images/armlab-legacy/checkpoints/checkpoint2-homography-before.png" alt="A top-down view of the board before the homography transformation, showing a visible skew." style="max-width:600px;"/>
 </a>
 
 And this is what your board should look like after the transformation:
 
-<a class="image-link" href="/assets/images/armlab/checkpoints/checkpoint2-homography-after.png"><img src="/assets/images/armlab/checkpoints/checkpoint2-homography-after.png" alt="A top-down view of the board after the homography transformation, showing it rectified and centered in frame." style="max-width:600px;"/>
+<a class="image-link" href="/assets/images/armlab-legacy/checkpoints/checkpoint2-homography-after.png"><img src="/assets/images/armlab-legacy/checkpoints/checkpoint2-homography-after.png" alt="A top-down view of the board after the homography transformation, showing it rectified and centered in frame." style="max-width:600px;"/>
 </a>
 
 **Combined**

@@ -3,7 +3,7 @@ layout: default
 title: Setup Guide
 nav_order: 1
 parent: Armlab
-last_modified_at: 2026-08-27 12:00:00 -0400
+last_modified_at: 2026-09-02 12:00:00 -0400
 ---
 
 > This guide will walk you through the setup steps you need before starting Armlab.

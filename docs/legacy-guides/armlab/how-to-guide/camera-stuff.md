@@ -1,9 +1,8 @@
 ---
 layout: default
 title: Armlab Camera Stuff
-nav_order: 4
-grand_parent: Armlab
-parent: How-to Guide
+nav_order: 13
+parent: Armlab Legacy
 last_modified_at: 2024-09-09 16:37:48 -0500
 ---
 
@@ -24,8 +23,8 @@ This is the official GUI for viewing the camera stream. Use it if the camera isn
 
 ### User Interface
 <br>
-<a class="image-link" href="/assets/images/armlab/how-to-guide/camera1.png">
-    <img src="/assets/images/armlab/how-to-guide/camera1.png" alt="" style="max-width:600px;"/>
+<a class="image-link" href="/assets/images/armlab-legacy/how-to-guide/camera1.png">
+    <img src="/assets/images/armlab-legacy/how-to-guide/camera1.png" alt="" style="max-width:600px;"/>
 </a>
 
 In the image above:
@@ -33,8 +32,8 @@ In the image above:
 - **Green box**: RGB and Depth cameras. Both are off in the image, so the view is blank.
 - **Yellow box**: 2D/3D selection. Choose 2D to check the 2D stream.
 
-<a class="image-link" href="/assets/images/armlab/how-to-guide/camera2.png">
-    <img src="/assets/images/armlab/how-to-guide/camera2.png" alt="" style="max-width:600px;"/>
+<a class="image-link" href="/assets/images/armlab-legacy/how-to-guide/camera2.png">
+    <img src="/assets/images/armlab-legacy/how-to-guide/camera2.png" alt="" style="max-width:600px;"/>
 </a>
 
 - **L500 Depth Sensor**: It’s off here, allowing you to see available resolution options.

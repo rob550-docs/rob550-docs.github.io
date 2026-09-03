@@ -1,9 +1,8 @@
 ---
 layout: default
 title: How to start ROS nodes
-nav_order: 2
-grand_parent: Armlab
-parent: How-to Guide
+nav_order: 11
+parent: Armlab Legacy
 last_modified_at: 2023-12-13 18:37:48 -0500
 ---
 

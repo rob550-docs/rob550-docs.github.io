@@ -1,9 +1,8 @@
 ---
 layout: default
 title: Checkpoint 4
-nav_order: 4
-parent: Checkpoints
-grand_parent: Armlab
+nav_order: 6
+parent: Armlab Legacy
 last_modified_at: 2024-02-26 15:00:00 -0500
 ---
 

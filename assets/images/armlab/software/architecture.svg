@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 545" width="900" height="545" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Arm Lab software architecture</title>
+  <desc>The control station is one PyQt5 process with three worker threads. VideoThread drives camera.py, which uses pyrealsense2 and pupil_apriltags to read the RealSense L515 over USB; students implement colour blob and block detection for the coloured wooden blocks the arm sorts and stacks, plus the extrinsic calibration and the pixel-to-world conversion inside it. StateMachineThread drives state_machine.py, which calls camera.py and the arm object. ArmThread polls the arm object, which is either Lite6Arm talking to real hardware through the xArm SDK over Ethernet, or SimArm talking to the mujoco-sim process over LCM. The arm object calls kinematics.py for forward and inverse kinematics.</desc>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6e7781"/>
+    </marker>
+  </defs>
+
+  <style>
+    .box   { fill:#f2f4f7; stroke:#c4cad2; stroke-width:1.2; rx:6; }
+    .stu   { fill:#fdf3e3; stroke:#dda15e; stroke-width:1.5; rx:6; }
+    .stuin { fill:#fdf3e3; stroke:#dda15e; stroke-width:1.2; rx:4; }
+    .hw    { fill:#eaf1fb; stroke:#8aa9cf; stroke-width:1.2; rx:6; }
+    .proc  { fill:#fbfcfd; stroke:#b9c0c9; stroke-width:1.2; stroke-dasharray:5 4; rx:8; }
+    .t     { font-size:13.5px; fill:#1f2328; }
+    .sub   { font-size:10.5px; fill:#5c6570; }
+    .stt   { font-size:10.5px; fill:#8a5a1a; }
+    .lane  { font-size:11px; fill:#8a929c; letter-spacing:.7px; }
+    .edge  { stroke:#6e7781; stroke-width:1.4; fill:none; marker-end:url(#a); }
+    .elab  { font-size:10px; fill:#5c6570; }
+  </style>
+
+  <!-- ============ control station process ============ -->
+  <rect class="proc" x="16" y="34" width="868" height="158"/>
+  <text class="lane" x="28" y="26">CONTROL STATION PROCESS</text>
+  <text class="sub" x="28" y="52" font-style="italic">control_station.py  ·  one PyQt5 process</text>
+
+  <rect class="box" x="30" y="62" width="840" height="32"/>
+  <text class="t" x="450" y="83" text-anchor="middle">Gui (QMainWindow) — widgets, buttons, live readouts</text>
+
+  <text class="elab" x="462" y="122">Qt signals</text>
+  <path class="edge" d="M160,140 L160,98"/>
+  <path class="edge" d="M450,140 L450,98"/>
+  <path class="edge" d="M740,140 L740,98"/>
+
+  <rect class="box" x="30"  y="140" width="260" height="44"/>
+  <text class="t"   x="160" y="160" text-anchor="middle">VideoThread</text>
+  <text class="sub" x="160" y="175" text-anchor="middle">30 Hz</text>
+
+  <rect class="box" x="320" y="140" width="260" height="44"/>
+  <text class="t"   x="450" y="160" text-anchor="middle">StateMachineThread</text>
+  <text class="sub" x="450" y="175" text-anchor="middle">20 Hz</text>
+
+  <rect class="box" x="610" y="140" width="260" height="44"/>
+  <text class="t"   x="740" y="160" text-anchor="middle">ArmThread</text>
+  <text class="sub" x="740" y="175" text-anchor="middle">20 Hz  ·  EE pose at 10 Hz</text>
+
+  <!-- ============ lab code ============ -->
+  <text class="lane" x="28" y="222">LAB CODE</text>
+
+  <path class="edge" d="M160,192 L160,230"/>
+  <path class="edge" d="M450,192 L450,230"/>
+  <path class="edge" d="M740,192 L740,230"/>
+
+  <!-- camera.py: provided pipeline with a student-implemented section inside -->
+  <rect class="box"   x="30"  y="232" width="260" height="70"/>
+  <text class="t"     x="160" y="252" text-anchor="middle">camera.py</text>
+  <text class="sub"   x="160" y="267" text-anchor="middle">RealSense pipeline · AprilTag detection</text>
+  <rect class="stuin" x="40"  y="274" width="240" height="20"/>
+  <text class="stt"   x="160" y="288" text-anchor="middle">color blob &amp; block detection · calibration</text>
+
+  <rect class="stu" x="320" y="232" width="260" height="50"/>
+  <text class="t"   x="450" y="253" text-anchor="middle">state_machine.py</text>
+  <text class="sub" x="450" y="269" text-anchor="middle">waypoints · pick &amp; place</text>
+
+  <rect class="box" x="610" y="232" width="260" height="50"/>
+  <text class="t"   x="740" y="253" text-anchor="middle">Lite6Arm  or  SimArm</text>
+  <text class="sub" x="740" y="269" text-anchor="middle">one interface, two implementations</text>
+
+  <!-- state machine reaches out to camera and arm -->
+  <path class="edge" d="M318,257 L294,257"/>
+  <path class="edge" d="M582,257 L606,257"/>
+
+  <!-- arm object -> kinematics -->
+  <path class="edge" d="M660,284 L660,312 L450,312 L450,338"/>
+  <text class="elab" x="512" y="308">FK / IK</text>
+
+  <!-- ============ math & libraries ============ -->
+  <text class="lane" x="28" y="330">MATH &amp; LIBRARIES</text>
+
+  <path class="edge" d="M160,304 L160,338"/>
+  <path class="edge" d="M690,284 L690,338"/>
+  <path class="edge" d="M800,284 L800,338"/>
+
+  <rect class="box" x="30"  y="340" width="260" height="50"/>
+  <text class="t"   x="160" y="361" text-anchor="middle">pyrealsense2</text>
+  <text class="sub" x="160" y="377" text-anchor="middle">pupil_apriltags · OpenCV</text>
+
+  <rect class="stu" x="320" y="340" width="260" height="50"/>
+  <text class="t"   x="450" y="361" text-anchor="middle">kinematics.py</text>
+  <text class="sub" x="450" y="377" text-anchor="middle">FK (DH / PoX) · IK</text>
+
+  <rect class="box" x="610" y="340" width="150" height="50"/>
+  <text class="t"   x="685" y="361" text-anchor="middle">xArm SDK</text>
+  <text class="sub" x="685" y="377" text-anchor="middle">XArmAPI</text>
+
+  <rect class="box" x="775" y="340" width="95" height="50"/>
+  <text class="t"   x="822" y="361" text-anchor="middle">LCM</text>
+  <text class="sub" x="822" y="377" text-anchor="middle">localhost</text>
+
+  <!-- ============ hardware ============ -->
+  <text class="lane" x="28" y="420">HARDWARE</text>
+
+  <path class="edge" d="M160,392 L160,428"/>
+  <text class="elab" x="168" y="414">USB 3.x</text>
+  <path class="edge" d="M685,392 L685,428"/>
+  <text class="elab" x="693" y="414">Ethernet</text>
+  <path class="edge" d="M822,392 L822,428"/>
+
+  <rect class="hw"  x="30"  y="430" width="260" height="50"/>
+  <text class="t"   x="160" y="451" text-anchor="middle">RealSense L515</text>
+  <text class="sub" x="160" y="467" text-anchor="middle">1280×720 color · 1024×768 depth</text>
+
+  <rect class="hw"  x="610" y="430" width="150" height="50"/>
+  <text class="t"   x="685" y="451" text-anchor="middle">Lite 6 arm</text>
+  <text class="sub" x="685" y="467" text-anchor="middle">6-DOF</text>
+
+  <rect class="hw"  x="775" y="430" width="95" height="50"/>
+  <text class="t"   x="822" y="451" text-anchor="middle">mujoco-sim</text>
+  <text class="sub" x="822" y="467" text-anchor="middle">--sim</text>
+
+  <!-- ============ legend ============ -->
+  <rect class="stu" x="30" y="506" width="16" height="16"/>
+  <text class="sub" x="54" y="518">you implement this</text>
+  <rect class="hw"  x="196" y="506" width="16" height="16"/>
+  <text class="sub" x="220" y="518">hardware or a separate process</text>
+</svg>

@@ -1,13 +1,12 @@
 ---
 layout: default
 title: Design Lab
-nav_order: 5
-parent: Checkpoints
-grand_parent: Armlab
+nav_order: 7
+parent: Armlab Legacy
 last_modified_at: 2024-10-08 16:37:48 -0500
 ---
 
-The main development goal of Armlab is to finish the [final competition](/docs/armlab/checkpoints/competition). One part of this competition involves designing a basketball launcher.
+The main development goal of Armlab is to finish the [final competition](/docs/legacy-guides/armlab/checkpoints/competition). One part of this competition involves designing a basketball launcher.
 
 {: .required_for_report }
 Within the report: <br>

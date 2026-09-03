@@ -1,9 +1,8 @@
 ---
 layout: default
 title: Checkpoint 3
-nav_order: 3
-parent: Checkpoints
-grand_parent: Armlab
+nav_order: 5
+parent: Armlab Legacy
 last_modified_at: 2024-02-26 15:00:00 -0500
 ---
 
@@ -39,7 +38,7 @@ Roll-Pitch-Yaw, etc.).
 
 In `kinematics.py`, the code is set up for a simplified IK function that takes a single orientation angle $$\psi$$, defined as the angle from the horizontal plane or the rotation about the z-axis in frame 1, as shown in the figure below. You do not need to use this definition, but it is convenient and is a good starting point for your IK function.
 
-<a class="image-link" href="/assets/images/armlab/checkpoints/checkpoin3-ik.png"><img src="/assets/images/armlab/checkpoints/checkpoin3-ik.png" alt="" style="max-width:400px;"/>
+<a class="image-link" href="/assets/images/armlab-legacy/checkpoints/checkpoin3-ik.png"><img src="/assets/images/armlab-legacy/checkpoints/checkpoin3-ik.png" alt="" style="max-width:400px;"/>
 </a>
 
 ### Task 3.2 Inverse Kinematics

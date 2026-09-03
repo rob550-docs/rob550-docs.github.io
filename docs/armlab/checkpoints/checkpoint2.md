@@ -7,9 +7,9 @@ grand_parent: Armlab
 last_modified_at: 2026-09-03 12:00:00 -0400
 ---
 
-In Checkpoint 1 you measured the camera's position with a tape measure and found out how rough that answer was. This checkpoint replaces it: the AprilTags on the board have known positions, so the camera can work out where it is by itself. You will build that calibration, turn it into a pixel-to-world pipeline the whole rest of the lab depends on, and then measure honestly how good it is — not just on the board surface, but through the workspace in three dimensions.
+This checkpoint has two halves. First, forward kinematics: given six joint angles, where is the end effector? The real arm answers that for itself, so you will build and test your own in the simulator — where nothing answers it but your code.
 
-The second half is forward kinematics. The real arm reports its own end-effector pose, so your FK is not needed there — but the simulator has no such thing, and its readout stays blank until you write one.
+Then the camera. In Checkpoint 1 you measured its position with a tape measure and found out how rough that answer was. Here you replace it: the AprilTags on the board have known positions, so the camera can work out where it is by itself. You will build that calibration, turn it into the pixel-to-world pipeline the rest of the lab depends on, and then measure honestly how good it is — not just on the board surface, but through the workspace in three dimensions.
 
 ### Contents
 * TOC
@@ -17,17 +17,178 @@ The second half is forward kinematics. The real arm reports its own end-effector
 
 ## Before you start
 
-- Checkpoint 1 is done: you have calibrated intrinsics, a hand-measured extrinsic matrix, and measurements of your board.
-- You know where your AprilTags sit relative to the robot base frame. If you have not measured them yet, do that first — every number in this checkpoint depends on it.
+- Checkpoint 1 is done: you can drive the arm, you have calibrated intrinsics, a hand-measured extrinsic matrix, and measurements of your board.
+- You know where your AprilTags sit relative to the robot base frame. You need those for Part B — if you have not measured them yet, do it before you get there.
+
+---
+
+# Part A — Forward kinematics
+
+## Task 2.1  Forward kinematics
+
+Given six joint angles, where is the end effector? You will answer it twice, by two different formulations — the Denavit-Hartenberg convention here, and the product of exponentials in Task 2.3. On hardware the arm answers it for itself, and the GUI readout comes from the vendor's solver. The simulator has no such thing — `get_ee_pose_sdk()` returns zeros in sim, and the readout is driven entirely by your code.
+
+{: .highlight}
+**Run this task in simulation.** The end-effector readout in `--sim` *is* your forward kinematics. It is blank until you write it, correct when you get it right, and wrong in ways you can see — which makes the simulator a better test harness for this than the real arm, where the vendor's answer would mask your mistakes.
+
+**Instructions**
+
+1. In `src/kinematics.py`, fill in `DH_STD` — one row per joint, `[theta_offset, d, alpha, a]` — from the arm's geometry.
+2. Implement `get_transform_from_dh()` for a single row, and `FK_dh()` to chain them.
+3. Implement `get_pose_from_T()` to extract `[x, y, z, roll, pitch, yaw]` from the transform.
+4. Start the simulator and the control station with `--sim`, and watch the end-effector readout as you jog the joints.
+
+{: .note}
+`SimArm.get_ee_pose()` ships calling `FK_pox`, with the `FK_dh` line commented out just above it. Swap those two lines to drive the readout from your DH implementation. You will swap them back in Task 2.3.
+
+**Four ways to check your answer**
+
+| Check | How |
+| ----- | --- |
+| Self-test | `python src/kinematics.py` — with all zeros, your DH transform should come back as the identity |
+| The zero pose | All six joints at zero puts the flange at **(87, 0, 154.2) mm**. See [Hardware](/docs/armlab/hardware#zero-position) |
+| Visual | `set_fk_display()` draws your computed frame in the MuJoCo viewer. If it sits on the arm's flange, your FK is right — if it floats off, it is not |
+| Against the vendor | The arm has its own FK. Comparing against it properly is Task 2.2 |
+
+**Hints**
+
+- The codebase is **radians and millimetres**. See [Units and conventions](/docs/armlab/software#units-and-conventions).
+- Orientation is roll-pitch-yaw about **fixed** axes, matching the SDK — not ZYZ Euler.
+- FK gives you the **flange**. The point that grasps a block is 85 mm further along the tool axis; you will need that in Checkpoint 3.
+- The visual check is the fastest way to find a sign error. A joint turning the wrong way puts the frame somewhere obviously wrong long before the numbers make it clear.
+
+{: .sanity_check}
+In simulation, jogging any joint moves the end-effector readout the way you would expect, and your displayed frame stays locked to the flange through the whole range of motion.
+
+## Task 2.2  Check your FK against the vendor's
+
+The viewer overlay tells you the FK is roughly right. This task tells you *how* right, and when it is wrong, which parameter is at fault.
+
+The arm carries its own forward kinematics, and `get_forward_kinematics()` takes joint angles as an **argument** rather than reading the arm's current position. So the arm never moves for any of this — it only needs to be connected. Both sides are already in the same units, since the arm object is built with `is_radian=True`.
+
+{: .note}
+This one needs the real arm. In `--sim` there is no vendor solver to compare against — `get_ee_pose_sdk()` returns zeros.
+
+**Instructions**
+
+1. Write a script that repeats the following a few hundred times:
+    - draw a random joint vector `q`, each joint uniform within its row of `JOINT_LIMITS`
+    - ask the vendor: `code, pose_sdk = arm.xarm.get_forward_kinematics(q)`, skipping any sample where `code != 0`
+    - ask your own: `get_pose_from_T(FK_dh(DH_STD, q, 6))`
+    - record both
+2. For each sample, compute two errors:
+    - **position** — the Euclidean distance between the two `xyz`, in mm
+    - **orientation** — see below
+3. Report the mean, median, maximum and 95th percentile of each.
+4. Plot a histogram of the position error, and scatter the error against each joint angle in turn, looking for structure.
+
+**Measuring orientation error**
+
+{: .warning}
+Do not subtract the two roll-pitch-yaw triples. Euler angles wrap at ±180° and the same rotation has more than one representation, so a perfectly correct FK can appear to be 179° out. Compare the rotations themselves.
+
+Build the rotation matrix from each pose, then:
+
+```
+R_err = R_mine.T @ R_sdk
+angle = arccos((trace(R_err) - 1) / 2)
+```
+
+That gives one number — the angle of the shortest rotation taking one frame to the other, and zero when they agree.
+
+**Sample the whole joint space**
+
+Test only near the home pose and you will pass with a table that is wrong somewhere else. Checkpoint 3 drives this arm into the far corners of its range, and that is where an untested error will surface.
+
+**Isolating a bad table from bad chaining**
+
+Run the same sweep twice, changing one argument:
+
+```python
+FK_dh(DH_STD, q, 6)            # your table
+FK_dh(arm.dh_params, q, 6)     # the firmware's table, your code
+```
+
+On hardware `arm.dh_params` is read from the arm itself, so the second call runs *your* chaining code on the *vendor's* parameters. Between them:
+
+| Result | What it means |
+| ------ | ------------- |
+| Both agree with the vendor | You are done |
+| Firmware table passes, yours fails | Your chaining is right and `DH_STD` is wrong |
+| Both fail | The bug is in `get_transform_from_dh` or `FK_dh` |
+
+{: .note}
+The firmware's table has **seven** rows where `DH_STD` has six. Working out why is worth a minute of your time.
+
+**Reading the pattern**
+
+When the numbers disagree, the shape of the disagreement points at the cause:
+
+| What you see | What it usually means |
+| ------------ | --------------------- |
+| Error ≈ 0 everywhere | Correct |
+| A constant offset in the same direction regardless of `q` | A wrong `d` or `a` in one row, or a tool offset set on the arm that your FK does not model |
+| Zero at the zero pose, growing with one joint's angle | A wrong `alpha` or `theta` offset in that joint's row |
+| Position right, orientation wrong | The wrist rows, or a frame convention at the end of the chain |
+| Orientation error clustered near 90° or 180° | An axis convention flipped, not a numerical problem |
+| Large and unpatterned | Transforms chained in the wrong order |
+
+{: .highlight}
+**A correct FK agrees with the vendor to within floating-point noise** — micrometres and millionths of a degree, not millimetres. Both solvers are evaluating the same chain of transforms in double precision, so there is nothing to accumulate. A 2 mm disagreement is not rounding and is not "close enough": it is a real error you have not found yet.
+
+{: .sanity_check}
+Your maximum position error over several hundred random configurations is smaller than a micrometre, and your maximum orientation error is negligible.
+
+## Task 2.3  Forward kinematics again, by product of exponentials
+
+Same arm, same answer, different formulation. Where DH walks link by link through a chain of frames, the product of exponentials describes each joint as a **screw axis fixed in the base frame** at the home configuration, and composes the whole motion as a product of matrix exponentials. Deriving both is the point: they fail in different ways, and agreeing with each other is evidence neither alone can give you.
+
+**Instructions**
+
+1. In `src/kinematics.py`, fill in:
+    - `M` — the 4 × 4 transform of the end effector at the **zero configuration**
+    - `S_list` — six rows, one screw axis per joint, each `[w1, w2, w3, v1, v2, v3]` in the base frame
+2. Implement `to_s_matrix()` to build the 4 × 4 `[S]` from a screw axis, and `FK_pox()` to chain the exponentials.
+3. Swap `SimArm.get_ee_pose()` back to the `FK_pox` line and confirm the simulator behaves exactly as it did with DH.
+4. Re-run your Task 2.2 sweep against the vendor, with `FK_pox` in place of `FK_dh`.
+
+**Building the screw axes**
+
+For a revolute joint, with the arm at its home configuration:
+
+- `w` is the unit vector along the joint's rotation axis, expressed in the **base** frame
+- `v = -w × p`, where `p` is **any** point lying on that axis, also in the base frame
+
+Any point on the axis gives the same `v`, which is a useful thing to check yourself with — pick two different points on the same axis and confirm you get the same answer.
+
+{: .note}
+Units are millimetres, as everywhere else in this file. `w` is dimensionless, `v` carries the length.
+
+**Getting `M` right first**
+
+`M` is the end-effector transform when every joint is at zero, so its translation is the zero pose from the [Hardware page](/docs/armlab/hardware#zero-position): **(87, 0, 154.2) mm**. The rotation is the flange's orientation in that configuration, which you derive from the same drawing.
+
+{: .highlight}
+If your DH implementation is working, `FK_dh(DH_STD, zeros, 6)` **is** `M` — that is what the home configuration means. Use it to confirm you have `M` right before you go near the screw axes. Note the consequence, though: an `M` obtained that way inherits any error in your DH table, so DH and PoX agreeing is no longer fully independent evidence. The comparison against the vendor is what stays independent.
+
+**Two comparisons**
+
+1. **Against the vendor**, exactly as in Task 2.2 — same sweep, same two metrics, same expectation of floating-point agreement.
+2. **Against your own DH**, over the same random configurations. This one needs no vendor at all, and it is the check you would still have on a robot whose manufacturer gave you nothing.
+
+The failure patterns differ from DH's in a useful way. A wrong `w` shows up as an error that grows with that joint's angle and vanishes at zero. A wrong `v` — usually from picking a point that is not actually on the axis — shows up as a position error that persists even when that joint sits at zero. A wrong `M` offsets everything uniformly, at every configuration.
+
+{: .sanity_check}
+`FK_pox` and `FK_dh` agree with each other, and both agree with the vendor, to within floating-point noise across several hundred random configurations. The simulator readout is identical whichever one `SimArm` is wired to.
+
+---
+
+# Part B — Automatic camera calibration
 
 {: .important}
 `TAG_WORLD_POINTS` at the top of `src/camera.py` ships with placeholder positions. Replace them with the positions you measured. A calibration solved against the wrong world points will still return a matrix, and it will be wrong.
 
----
-
-# Part A — Automatic camera calibration
-
-## Task 2.1  Draw the tag detections
+## Task 2.4  Draw the tag detections
 
 Before trusting the detector, look at what it sees. `VideoThread` already runs the detector for you and leaves the results in `self.tag_detections`, refreshed every sixth frame.
 
@@ -43,12 +204,12 @@ Before trusting the detector, look at what it sees. `VideoThread` already runs t
 
 - Each detection carries `tag_id`, `center` and `corners`. The corners come back in a consistent order, which is what lets you draw an outline rather than a scatter of dots.
 - Draw onto a copy of `self.video_frame`, and assign the result to `self.tag_image_frame`.
-- The detector runs at about 5 Hz while the video runs at 30, so your overlay will lag a fast-moving board. That is expected.
+- The detector runs at about 5 Hz while the video runs at 30, so the overlay lags anything moving quickly through the frame. That is expected.
 
 {: .sanity_check}
-Move the board by hand and the outlines and IDs track the tags. If an outline is twisted or the IDs jump between tags, you are reading the corner order wrong.
+All four tags are found, the IDs you draw match the ones printed on the stickers, and each outline sits on the tag's black border rather than near it. Pass a hand over one tag and it should drop out of the overlay and come back — that confirms you are drawing live detections and not a fixed list.
 
-## Task 2.2  Solve the extrinsics from the tags
+## Task 2.5  Solve the extrinsics from the tags
 
 Now compute the camera pose automatically, and put it behind the **Calibrate** button that is already wired to the `calibrate` state.
 
@@ -70,7 +231,7 @@ Now compute the camera pose automatically, and put it behind the **Calibrate** b
 {: .sanity_check}
 Pressing Calibrate reports success, and the recovered camera position is within a few centimetres of where you measured it in Checkpoint 1.
 
-## Task 2.3  From pixels to the world
+## Task 2.6  From pixels to the world
 
 The calibration is only useful once it can answer the question the rest of the lab asks constantly: *this pixel — where is it on the board?*
 
@@ -90,9 +251,9 @@ Implement the three functions that make up the chain:
 - Depth is noisy on dark, shiny or steeply angled surfaces, and returns zero where it has no reading. Decide what your code does with a zero.
 
 {: .sanity_check}
-Hover over a grid intersection you know the coordinates of. The world readout under the video should land within a few millimetres, and reading `(0, 0)` at the base of the arm.
+Hover over a grid intersection you know the coordinates of. The world readout under the video should land within a few millimetres, and read `(0, 0)` at the base of the arm.
 
-## Task 2.4  The top-down workspace view
+## Task 2.7  The top-down workspace view
 
 The camera looks at the board from an angle, so the board appears as a trapezoid. A homography maps it back to a rectangle, which makes everything downstream easier to reason about.
 
@@ -112,23 +273,23 @@ The camera looks at the board from an angle, so the board appears as a trapezoid
 {: .sanity_check}
 The board fills the Workspace view square and level, the grid lines run parallel to the edges of the frame, and hovering still reports correct world coordinates.
 
-## Task 2.5  Measure how good your calibration is
+## Task 2.8  Measure how good your calibration is
 
 A calibration you have not measured is a guess. This task is about producing evidence — and finding where it fails, because it will fail somewhere.
 
-### 2.5a  Project the grid
+### 2.8a  Project the grid
 
 Write a function that takes the known world coordinates of the board's grid intersections, projects them into the image through your intrinsics and extrinsics, and draws them over the video.
 
 Where the projected points sit on the real grid lines, your calibration is good. Where they drift off, it is not. Look especially at the edges and corners of the board.
 
-### 2.5b  Check the board plane
+### 2.8b  Check the board plane
 
 The board surface is `z = 0` everywhere. So sample a grid of pixels across the empty board, run each through `image_to_world`, and record the world `z` you get back. Every one of them should be zero.
 
 Turn the results into a picture — a heat map, or contours over the board. This costs you no measuring at all and shows exactly how the error is distributed across the workspace.
 
-### 2.5c  Check it in three dimensions
+### 2.8c  Check it in three dimensions
 
 The board plane is only one slice of the workspace. To test the rest, you need a target whose true position you know at heights above the board — and the arm is a far better ruler than a tape measure.
 
@@ -155,64 +316,24 @@ You can state your calibration's accuracy as a number with a region attached —
 
 ---
 
-# Part B — Forward kinematics
-
-## Task 2.6  Forward kinematics
-
-Given six joint angles, where is the end effector? On hardware the arm answers this itself, and the GUI readout comes from the vendor's solver. The simulator has no such thing — `get_ee_pose_sdk()` returns zeros in sim, and the readout is driven entirely by your code.
-
-{: .highlight}
-**Run this task in simulation.** The end-effector readout in `--sim` *is* your forward kinematics. It is blank until you write it, correct when you get it right, and wrong in ways you can see — which makes the simulator a better test harness for this than the real arm, where the vendor's answer would mask your mistakes.
-
-**Instructions**
-
-1. In `src/kinematics.py`, implement **one** of the two methods:
-    - **DH** — fill in `DH_STD`, then `get_transform_from_dh()` and `FK_dh()`
-    - **PoX** — fill in `M` and `S_list`, then `to_s_matrix()` and `FK_pox()`
-2. Implement `get_pose_from_T()` to extract `[x, y, z, roll, pitch, yaw]` from the transform.
-3. Start the simulator and the control station with `--sim`, and watch the end-effector readout as you jog the joints.
-
-{: .note}
-`SimArm.get_ee_pose()` currently calls `FK_pox`, with the `FK_dh` line commented out just above it. If you implement the DH method, swap those two lines.
-
-**Four ways to check your answer**
-
-| Check | How |
-| ----- | --- |
-| Self-test | `python src/kinematics.py` — with all zeros, your DH transform should come back as the identity |
-| The zero pose | All six joints at zero puts the flange at **(87, 0, 154.2) mm**. See [Hardware](/docs/armlab/hardware#zero-position) |
-| Visual | `set_fk_display()` draws your computed frame in the MuJoCo viewer. If it sits on the arm's flange, your FK is right — if it floats off, it is not |
-| Against the vendor | On the real arm, compare your `get_ee_pose()` against `get_ee_pose_sdk()` across a spread of configurations |
-
-**Hints**
-
-- The codebase is **radians and millimetres**. See [Units and conventions](/docs/armlab/software#units-and-conventions).
-- Orientation is roll-pitch-yaw about **fixed** axes, matching the SDK — not ZYZ Euler.
-- FK gives you the **flange**. The point that grasps a block is 85 mm further along the tool axis; you will need that in Checkpoint 3.
-- The visual check is the fastest way to find a sign error. A joint turning the wrong way puts the frame somewhere obviously wrong long before the numbers make it clear.
-
-{: .sanity_check}
-In simulation, jogging any joint moves the end-effector readout the way you would expect, and your displayed frame stays locked to the flange through the whole range of motion.
-
----
-
 ## Deliverables
 
 Submit the following on Canvas.
 
 {: .submission}
-**1)** Your extrinsic matrix from Task 2.2, with a statement of which direction it maps, and a comparison against the hand-measured one from Checkpoint 1. <br>
-**2)** A short video of the calibration: the GUI before calibrating, the camera re-aimed, then Calibrate pressed, showing the Workspace view square up again. <br>
-**3)** A figure of your grid projection (2.5a) and your board-plane error map (2.5b). <br>
-**4)** Your twelve-pose fixture table (2.5c): truth, estimate and error per axis, with mean and maximum split by region and by height. <br>
-**5)** Your DH table, or your `M` matrix and screw axes, with a schematic of the arm showing the frames or axes you used. <br>
-**6)** A short video of the simulator with your FK running: jogging the joints, with the end-effector readout and your displayed frame tracking the arm.
+**1)** Your DH table **and** your `M` matrix and screw axes, with a schematic of the arm showing the DH frames and the screw axes you used. <br>
+**2)** Your Task 2.2 verification: the error statistics for position and orientation, a histogram of the position error, and a sentence on what the pattern told you and what you changed. <br>
+**3)** Your Task 2.3 results: the PoX sweep against the vendor, and the agreement between your PoX and DH implementations over the same configurations. <br>
+**4)** Your extrinsic matrix from Task 2.5, with a statement of which direction it maps, and a comparison against the hand-measured one from Checkpoint 1. <br>
+**5)** A short video of the calibration: the GUI before calibrating, then the camera re-aimed on its bracket, then Calibrate pressed, showing the Workspace view square up again. <br>
+**6)** A figure of your grid projection (2.8a) and your board-plane error map (2.8b). <br>
+**7)** Your twelve-pose fixture table (2.8c): truth, estimate and error per axis, with mean and maximum split by region and by height.
 
 {: .required_for_report}
 From this checkpoint, carry the following into your final report: <br>
-**1)** The extrinsic matrix and how you obtained it, compared against the hand-measured result. <br>
-**2)** The equations that take a pixel and a depth reading to a world coordinate. <br>
-**3)** Your homography matrix, and which points you used to compute it. <br>
-**4)** Your calibration accuracy: the grid projection figure, the board-plane error map, and the twelve-pose table — with your account of where the error comes from and how it varies across the workspace. <br>
-**5)** Your DH table or screw axes with the frame schematic. <br>
-**6)** How you verified your forward kinematics, and the error you estimate it has.
+**1)** Your DH table and your screw axes, with the frame schematic for each. <br>
+**2)** How you verified both forward kinematics implementations against the arm's own solver and against each other, the error metrics you used, and the agreement you achieved. <br>
+**3)** The extrinsic matrix and how you obtained it, compared against the hand-measured result. <br>
+**4)** The equations that take a pixel and a depth reading to a world coordinate. <br>
+**5)** Your homography matrix, and which points you used to compute it. <br>
+**6)** Your calibration accuracy: the grid projection figure, the board-plane error map, and the twelve-pose table — with your account of where the error comes from and how it varies across the workspace.

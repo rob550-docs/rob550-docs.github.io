@@ -1,22 +1,15 @@
 ---
 layout: default
 title: Armlab
-nav_order: 3
+nav_order: 2
 has_children: true
-last_modified_at: 2023-11-30 14:37:48 -0500
+last_modified_at: 2026-09-02 12:00:00 -0400
 ---
 
-For this lab, we will work on a 5-DOF robotic arm and learn how to interact with such systems. We will primarily be working towards building the autonomy for this robot, using computer vision techniques, kinematics and  path planning to enable the robot to manipulate various objects. By the end of this lab, we will have learned how to do the following:
+For this lab, we will work on a 6-DOF robotic arm and learn how to interact with such systems. We will primarily be working towards building the autonomy for this robot, using computer vision techniques, kinematics and path planning to enable the robot to manipulate various objects.
 
-- Acting:
-    - Forward kinematics modeling of a manipulator
-    - Inverse kinematics modeling of a manipulator
-    - Grasping
-    - 5-DOF rigid-body coordinate transforms using homogeneous coordinate transforms
-- Sensing:
-    - 3D image calibration
-    - Object detection with OpenCV
-    - Working with depth camera sensors
-- Reasoning
-    - Path planning and path smoothing
-    - Design state machines
+1. [Setup Guide](/docs/armlab/setup-guide) — get your station, codebase and environment running.
+2. [Hardware](/docs/armlab/hardware) — what is on the station and how it is wired.
+3. [Software](/docs/armlab/software) — the code you will be editing.
+4. [Checkpoints](/docs/armlab/checkpoints/) — the graded tasks, in order.
+5. [How-to Guide](/docs/armlab/how-to-guide/) — reference material you will come back to.

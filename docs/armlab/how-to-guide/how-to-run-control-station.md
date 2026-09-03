@@ -2,12 +2,12 @@
 layout: default
 title: How to Run the Control Station
 nav_order: 2
-grand_parent: New Armlab
+grand_parent: Armlab
 parent: How-to Guide
 last_modified_at: 2026-09-02 12:00:00 -0400
 ---
 
-> Quick reference for launching the control station. The [Setup Guide](/docs/new-armlab/setup-guide#testing) walks through your first run with screenshots; this page is what to come back to afterwards. For what the code does once it starts, see [Software](/docs/new-armlab/software).
+> Quick reference for launching the control station. The [Setup Guide](/docs/armlab/setup-guide#testing) walks through your first run with screenshots; this page is what to come back to afterwards. For what the code does once it starts, see [Software](/docs/armlab/software).
 
 ### Contents
 * TOC
@@ -57,4 +57,4 @@ Then, in order: close the GUI window, and `ctrl+c` the simulator in its terminal
 | Arm offline in the status bar | Wrong `XARM_IP`, or the arm is unreachable — `ping` it first |
 | Qt `xcb` plugin error | Broken environment; see the repo's `install_scripts/README.md` |
 
-More detail in [Troubleshooting](/docs/new-armlab/how-to-guide/troubleshooting) and [Linux Command Line Tools](/docs/new-armlab/how-to-guide/linux-clt#managing-running-programs).
+More detail in [Troubleshooting](/docs/armlab/how-to-guide/troubleshooting) and [Linux Command Line Tools](/docs/armlab/how-to-guide/linux-clt#managing-running-programs).

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Fetch updates from upsteam repo
+title: Fetch Updates from the Upstream Repo
 nav_order: 3
 grand_parent: Armlab
 parent: How-to Guide

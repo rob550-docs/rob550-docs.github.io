@@ -2,7 +2,7 @@
 layout: default
 title: Troubleshooting
 nav_order: 6
-grand_parent: New Armlab
+grand_parent: Armlab
 parent: How-to Guide
 last_modified_at: 2026-09-02 12:00:00 -0400
 ---
@@ -22,7 +22,7 @@ Work through these in order:
 **1. Check which port the cable is in.**
 
 {: .warning}
-The arm must be plugged into the **USB-to-Ethernet adapter**, not the laptop's built-in Ethernet port. The built-in port is reserved for internet access and is on a different IP address and subnet, so an arm plugged in there is unreachable. See [Hardware](/docs/new-armlab/hardware#power-and-network).
+The arm must be plugged into the **USB-to-Ethernet adapter**, not the laptop's built-in Ethernet port. The built-in port is reserved for internet access and is on a different IP address and subnet, so an arm plugged in there is unreachable. See [Hardware](/docs/armlab/hardware#power-and-network).
 
 **2. Check the arm has power.** The 24 V supply is mounted under the board. The arm should be powered up and finished booting before you start the control station.
 
@@ -70,7 +70,7 @@ If this reports **USB 2.1**, the high-resolution profiles the control station as
 ps aux | grep -e realsense -e python
 ```
 
-Kill anything left over, then try again. See [Linux Command Line Tools](/docs/new-armlab/how-to-guide/linux-clt#managing-running-programs).
+Kill anything left over, then try again. See [Linux Command Line Tools](/docs/armlab/how-to-guide/linux-clt#managing-running-programs).
 
 **4. Confirm the camera itself works.** Close the control station and open the viewer:
 
@@ -78,7 +78,7 @@ Kill anything left over, then try again. See [Linux Command Line Tools](/docs/ne
 realsense-viewer
 ```
 
-If the stream looks correct there, the camera is fine and the problem is in your setup or your code. See the [Camera Guide](/docs/new-armlab/how-to-guide/camera-guide).
+If the stream looks correct there, the camera is fine and the problem is in your setup or your code. See the [Camera Guide](/docs/armlab/how-to-guide/camera-guide).
 
 ## `ImportError` on `pyrealsense2`, `cv2` or `xarm`
 
@@ -89,4 +89,4 @@ source ~/.bashrc          # the RealSense binding is found through PYTHONPATH
 conda activate env550lab  # if the prompt still does not show it
 ```
 
-See [Software](/docs/new-armlab/software#environment-notes) for why `pyrealsense2` lives outside the environment.
+See [Software](/docs/armlab/software#environment-notes) for why `pyrealsense2` lives outside the environment.

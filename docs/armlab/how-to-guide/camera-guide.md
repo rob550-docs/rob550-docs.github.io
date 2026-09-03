@@ -2,7 +2,7 @@
 layout: default
 title: Camera Guide
 nav_order: 4
-grand_parent: New Armlab
+grand_parent: Armlab
 parent: How-to Guide
 last_modified_at: 2026-09-02 12:00:00 -0400
 ---
@@ -29,7 +29,7 @@ python -c "import pyrealsense2 as rs; print(rs.__version__)"
 ```
 
 {: .warning}
-The camera must be on **USB 3.x** — see [Hardware](/docs/new-armlab/hardware#realsense-camera). If this reports USB 2.1, try a different port and cable before asking an instructor for help.
+The camera must be on **USB 3.x** — see [Hardware](/docs/armlab/hardware#realsense-camera). If this reports USB 2.1, try a different port and cable before asking an instructor for help.
 
 ## RealSense Viewer
 
@@ -41,23 +41,23 @@ realsense-viewer
 
 ### User interface
 
-<a class="image-link" href="/assets/images/new-armlab/how-to-guide/camera1.png">
-    <img src="/assets/images/new-armlab/how-to-guide/camera1.png" alt="" style="max-width:600px;"/>
+<a class="image-link" href="/assets/images/armlab/how-to-guide/camera1.png">
+    <img src="/assets/images/armlab/how-to-guide/camera1.png" alt="" style="max-width:600px;"/>
 </a>
 
 - **Red box**: camera model and USB version. Confirm USB 3.x here.
 - **Green box**: the RGB and depth sensors. Both are off in this screenshot, so the view is blank — toggle them on.
 - **Yellow box**: 2D/3D view selector. Use 2D to check the raw streams; use 3D to eyeball the point cloud.
 
-<a class="image-link" href="/assets/images/new-armlab/how-to-guide/camera2.png">
-    <img src="/assets/images/new-armlab/how-to-guide/camera2.png" alt="" style="max-width:600px;"/>
+<a class="image-link" href="/assets/images/armlab/how-to-guide/camera2.png">
+    <img src="/assets/images/armlab/how-to-guide/camera2.png" alt="" style="max-width:600px;"/>
 </a>
 
 - With a sensor **off**, you can open its dropdown to see the resolution/frame-rate profiles it supports. You cannot change the profile while the sensor is streaming.
 - The RGB camera above is on and streaming a checkerboard.
 
 {: .note}
-The screenshots above show the **L500 Depth Sensor** in the left panel — that is this camera. The lab uses the Intel RealSense L515; see [Hardware](/docs/new-armlab/hardware#realsense-camera).
+The screenshots above show the **L500 Depth Sensor** in the left panel — that is this camera. The lab uses the Intel RealSense L515; see [Hardware](/docs/armlab/hardware#realsense-camera).
 
 ### What to check when something is wrong
 
@@ -268,4 +268,4 @@ $$X = \frac{(u - c_x) \, Z}{f_x}, \qquad Y = \frac{(v - c_y) \, Z}{f_y}, \qquad 
 | Stream fails to start at high resolution | Camera enumerated on USB 2.1 | Different port, different cable |
 | Intrinsics look wrong in the control station | Calibrated at one resolution, streaming at another | Recalibrate at the streaming resolution |
 
-The control station streams color at 1280 × 720 and depth at 1024 × 768, both at 30 fps — calibrate at the color resolution it actually uses. See [Software](/docs/new-armlab/software#camerapy--perception).
+The control station streams color at 1280 × 720 and depth at 1024 × 768, both at 30 fps — calibrate at the color resolution it actually uses. See [Software](/docs/armlab/software#camerapy--perception).

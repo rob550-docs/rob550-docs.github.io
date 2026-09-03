@@ -1,9 +1,8 @@
 ---
 layout: default
 title: armlab_xl320_lib Guide
-parent: How-to Guide
-grand_parent: Armlab
-nav_order: 5
+parent: Armlab Legacy
+nav_order: 14
 last_modified_at: 2024-10-02 17:37:48 -0500
 ---
 
@@ -27,8 +26,8 @@ Instructions:
 2. Assemble them as shown in the image below.
 3. Note: The rightmost board in the image is the Interbotix hub, which is used to power the setup. This hub is located inside the base of your RX200 arm, where you plug in the power cable.
 
-<a class="image-link" href="/assets/images/armlab/how-to-guide/armlab-xl320-1.png">
-<img src="/assets/images/armlab/how-to-guide/armlab-xl320-1.png" alt=" " style="max-width:600px;"/>
+<a class="image-link" href="/assets/images/armlab-legacy/how-to-guide/armlab-xl320-1.png">
+<img src="/assets/images/armlab-legacy/how-to-guide/armlab-xl320-1.png" alt=" " style="max-width:600px;"/>
 </a>
 
 ## Preparation 

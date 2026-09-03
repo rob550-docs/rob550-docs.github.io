@@ -4,177 +4,194 @@ title: Checkpoint 1
 nav_order: 1
 parent: Checkpoints
 grand_parent: Armlab
-last_modified_at: 2026-01-08 16:20:00 -0500
+last_modified_at: 2026-09-02 12:00:00 -0400
 ---
 
-The first checkpoint is meant to be an introduction to using the GUI of the lab and to start working with the RGB-D camera. The interaction with the GUI will be under the Basic Motion section of the checkpoint, and the interaction with the RGB-D camera will be through the Camera Calibration portion of the checkpoint.
-
+This checkpoint gets you moving the arm and reasoning about where things are in space. You will start in the arm's own web interface — the quickest way to drive the hardware and see what it can do — then move to the control station codebase you will spend the rest of the lab in. By the end you will have made the arm repeat a task you taught it by hand, and built your first camera-to-world transform with nothing but a tape measure.
 
 ### Contents
 * TOC
 {:toc}
 
+## Before you start
 
-## Basic Motion
+- Your station is set up and the control station runs. If not, work through the [Setup Guide](/docs/armlab/setup-guide) first.
+- You know where the emergency stop is. It is on the table next to the arm.
+- You have read the [Hardware](/docs/armlab/hardware) page, in particular the joint limits and the 600 g payload.
 
-### Intro
-As you will be interacting with the control station GUI for most of the lab, it is important for you to understand how it works and how to interface with it. To start the GUI, following the instructions from the [setup guide](/docs/armlab/setup-guide#to-launch-everything).
+The board the arm is mounted on has a **50 mm × 50 mm grid**. The frame everything in this lab is expressed in is defined like this:
 
-The control_station program launches three threads:
+- the **origin** is the centre of the arm's mounting location, which sits on grid lines
+- the **board surface is `z = 0`**
+- positions are in **millimetres**
 
-<a class="image-link" href="/assets/images/armlab/software/architecture.png">
-<img src="/assets/images/armlab/software/architecture.png" alt="Overview of the software architecture" style="max-width:600px;"/>
-</a>
+Because the origin is on a grid line, every grid intersection is a whole multiple of 50 mm away from it — which is what makes the board a usable ruler.
 
-- The Realsense RGB-D camera is handled in its own thread when the node is launched. We refer to this as the VideoThread. The objective of this thread is to capture and display the RGB and Depth images from the ROS topics camera. 
-- The controlling state machine is run in the StateMachineThread. The objective of this thread is to follow a set of commands and states dictated by the state machine that you will develop throughout this lab.
-- Data from the 5-DOF are stored in an RX200 arm object. This process is run in the RXArm Thread.
+{: .warning}
+The gripper can reach the board. When you are driving the arm by hand, watch the **z** readout and keep the tool above the surface — it is very easy to drive the end effector straight into the board while concentrating on x and y.
 
-There are 2 ways to control the arm:
-1. Manual Mode
+## Task 1.1  Drive the arm from the web interface
 
-    <a class="image-link" href="/assets/images/armlab/checkpoints/checkpoint1-motion.png">
-    <img src="/assets/images/armlab/checkpoints/checkpoint1-motion.png" alt="" style="max-width:600px;"/>
-    </a>
+The Lite 6 serves its own web interface, **UFACTORY Studio**. Point a browser at your arm's IP address on port **18333** — the address is the one you set as `XARM_IP` during setup, printed on the label on the back of the arm:
 
-    1. First, click on “INITIALIZE ARM” to set the arm to its initial position. This will allow you to check the “Direct Control” box and use the slider. Moving the slider will adjust all joints of the arm.
-    2. Use “Open Gripper” and “Close Gripper” anytime to control the gripper.
-
-    {: .warning}
-    Always remember to SLEEP ARM before ending the arm node or the arm will crash to the board and may break!!!
-
-2. Autonomous Mode
-
-    Autonomous mode involves the design of the state machine. For this mode, which you will work on later in this lab, you will design a state machine that can be executed upon clicking a button on the GUI. Implementations of these state machines will be done in `src/state_machine.py`.
-
-### Task 1.1 Control Station GUI
-Have team members try to pick up a block manually using the sliders and the open/close gripper buttons on the control station GUI.
-
-### Task 1.2 Waypoints Following
-Implement the `execute` state and associate it with the execute function in `src/state_machine.py`. Use the existing function `execute(self)` in this script for your implementation.
-- In the function, set up a simple waypoint follower that executes the plan below by using the `self.rxarm.set_positions()` function, and uses `time.sleep(t)` for a reasonable amount of time for the arm to get to the waypoint.
-- At the end of the function, set `self.next_state` equal to `"idle"` to transition back to the idle state.
-- The configuration space waypoints the arm should follow are given below and are stored as `self.waypoints` in the `src/state_machine.py` script as well.
-
-```python
-[[       -np.pi/2,     -0.5,     -0.3,          0.0,         0.0],
- [0.75 * -np.pi/2,      0.5,      0.3,     -np.pi/3,     np.pi/2],
- [ 0.5 * -np.pi/2,     -0.5,     -0.3,      np.pi/2,         0.0],
- [0.25 * -np.pi/2,      0.5,      0.3,     -np.pi/3,     np.pi/2],
- [            0.0,      0.0,      0.0,          0.0,         0.0],
- [ 0.25 * np.pi/2,     -0.5,     -0.3,          0.0,     np.pi/2],
- [  0.5 * np.pi/2,      0.5,      0.3,     -np.pi/3,         0.0],
- [ 0.75 * np.pi/2,     -0.5,     -0.3,          0.0,     np.pi/2],
- [        np.pi/2,      0.5,      0.3,     -np.pi/3,         0.0],
- [            0.0,      0.0,      0.0,          0.0,         0.0]]
 ```
+http://192.168.1.xxx:18333
+```
+
+There is no login.
+
+TODO: screenshot of the UFACTORY Studio landing page.
+
+**Instructions**
+
+1. Find the **joint jog** controls and move each of the six joints one at a time with the sliders. Watch which physical joint moves, and compare the direction of travel to the joint numbering on the [Hardware](/docs/armlab/hardware#ufactory-lite-6-arm) page.
+2. **Test the emergency stop.** With the arm somewhere away from its home position, press the E-stop on the table next to the arm. The arm stops immediately, and stays exactly where it was — locks engage on the joints, so it does not drop or sag. Release the E-stop and bring the arm back under control before carrying on.
+3. Push a joint gently toward its limit and watch what the interface reports. J5 (±124°) and J3 (−3.5° to 300°) will stop you long before the others.
+4. Switch to the **Cartesian** controls and move the tool along x, y and z in the base frame. Notice that the joints all move together to produce one straight-line motion of the tool.
+5. Watch the **end-effector position readout** as you move. Get a feel for which numbers change when you move in each direction.
+6. Lower the gripper to the height where it can grasp a block resting on the board, and **write that z value down.** You will need it in Task 1.2. It is not zero: the readout reports the tool reference point, which is not the same place as the tips of the gripper fingers.
+7. Do a manual pick and place: drive the tool over a block, lower it, close the gripper, lift, move to a new spot, and open the gripper. Write down the pose you used to grasp the block.
+8. **Measure your blocks.** You need the height to work out how tall a stack of two or three will be, and the width to know the gripper can take them.
 
 {: .note}
-If the `self.waypoints` value in the code differs from the value on this site, please consider the information on this site as the most current version.
+Hitting the E-stop is safe for the arm. Locks engage on the joints and hold it in place, so nothing falls and nothing is damaged — get comfortable using it.
+
+**Hints**
+
+- Reduce the speed before you go near the board.
+- Approach a block from directly above rather than from the side. You will use the same strategy in code later.
+- The gripper is open or closed, nothing in between, and it cannot tell you whether it actually grabbed anything. Look at it.
 
 {: .sanity_check}
-When you click on "Execute" or your newly defined button, your arm should follow the waypoints above and eventually back to sleep position. Successfully doing this indicates that you have completed task 1.2.
+You have moved a block from one place on the board to another using only the web interface, and you have written down two numbers you will need next: the z at which the gripper grasps a block on the board, and the block dimensions.
 
-### Task 1.3 Teach and repeat
-**Teach and repeat** is a common technique for programming robotic arms to carry out repetitive tasks. It's user-friendly, allowing control of the robot without needing advanced skills. The task at hand is to create a system that interprets a set of distinct waypoints in the robot's joint space, guiding the arm along a path that connects these points.
+## Task 1.2  Script the arm from the web interface
 
-Your objective for this task is to get comfortable with the codebase. This means learning how to make the robot move to certain joint positions. Getting this right is essential for your future tasks in kinematics. To make the arm move smoothly, you will want to check the angular displacements of each joint between waypoints and generate `move_time` and `accel_time` parameters for the `set_joint_position` command so the largest joint displacement moves consistently at some maximum angular speed.
+The web interface has a built-in Python editor with a set of example scripts. Open one of the examples, read it, and use it as your starting point — it will show you the connection and motion calls the arm expects.
 
-Building on task 1.2, where you executed the provided waypoints, your next step is to 'teach' the robot the pattern you want it to follow. This process involves recording the robot arm's joint positions at specific locations. Your task now is to implement this feature in the GUI. You have the freedom to choose the implementation method, but ensure it is user-friendly and intuitive. 
+TODO: screenshot of the Python editor with an example loaded, and the name of the example that makes the best starting point.
 
-Instruction:
-- Implement the "teach-and-repeat" feature using buttons to control the state machine. Begin by setting the arm to idle mode (torque off). Then, manually guide the arm through its workspace, recording a series of waypoints in configuration space. To record, consider adding new buttons in the GUI specifically for this purpose. These waypoints will define the path for the arm to follow. Additionally, integrate controls for opening and closing the gripper as part of the sequence.
+**Instructions**
 
-Hints:
-- To be able to move the robot manually, set torque off via the GUI.
-- To create a button on the GUI, you can edit the `src/control_station.py` script, and use the block of code under “User Buttons” as a guide.
-- Consider utilizing the status message bar at the bottom of the GUI window to provide instructions or using it for your own debug purpose.
+1. Place three blocks in front of the robot at three grid positions of your choosing. Write the positions down in millimetres in the base frame.
+2. Write a script that **stacks** the three blocks into a single tower at a fourth position.
+3. Extend it to **unstack** them — return each block to its original position.
+4. Test it. Fix the parts that do not work.
+5. Wrap the whole stack-and-unstack cycle in a loop so that, in principle, it runs forever.
+6. Leave it running and watch it for a while.
 
-{: .required_for_report }
-1) **Cycle Task:** Teach your robot to cycle swapping blocks at locations (-100, 225) and (100, 225) through an intermediate location at (250,75). Coordinates are in mm, relative to the world frame. See [the board diagram](/docs/armlab/checkpoints#board). <br>
-2) Report how many times you can cycle (if you can do 10, feel free to stop) and include a plot of joint angles over time for 1 cycle. Hint: Use [`ros2 bag`](https://github.com/ros2/rosbag2) to record the `/rx200/joint_states` topic and the [`rosbags`](https://ternaris.gitlab.io/rosbags/) python module to parse the recorded bag. <br><br>
-**Optional:** include a 3D plot of the end effector position by sending recorded joint angles through your FK equations.
+**Hints**
+
+- The 50 mm grid is your friend. Choose positions on grid intersections so that you can measure and re-measure them.
+- Give yourself an approach height above each block, then descend, then grip. Going straight to the grasp pose invites a collision with the block you are trying to pick.
+- Use the grasp height you measured in Task 1.1 rather than guessing. A tower of three blocks is taller than one, so the place height has to step up by one block height each time — that is what you measured the blocks for.
+- Give the gripper time to finish moving before the arm drives away.
+
+{: .highlight}
+Run the loop long enough and it will eventually fail, even though nothing in the code changed. Watch for how it fails and think about why: small positioning errors accumulate in the stack, blocks get nudged, and there is nothing in this system that can notice. Nothing here senses the world — that is the gap the rest of the lab closes.
 
 {: .sanity_check}
-Anyone using your control station should be able to manually move the arm and record waypoints by clicking on your GUI. After recording, they should also be able to execute the path-following feature through the GUI interface. Successfully accomplishing this indicates that you have completed task 1.3.
+Your script stacks and unstacks three blocks repeatedly without intervention.
 
-## Camera Calibration
+## Task 1.3  A waypoint follower in the control station
 
-For this part, you will be performing a camera calibration process:
-1. Find the intrinsic matrix for the Realsense camera by using the ROS camera calibration package and provided checkerboards. 
-2. Using physical measurements come up with a rough extrinsic matrix for the camera.
+Now switch to the codebase you will use for the rest of the lab. Start the control station and spend a few minutes with the interface: the video panel and its four views, the joint readouts and Direct Control. Read [Software](/docs/armlab/software) alongside it so you know which file each panel talks to.
 
-### Task 1.4 Intrinsic Camera Calibration
-The camera comes with an internal factory calibration, and this information is published by the camera's ROS node. You can access it by echoing the ROS topic using following commands:
-```bash
-# list all the topics available
-ros2 topic list
-# echo the specific topic
-ros2 topic echo /the_topic_you_want_to_check
-```
-- The k matrix from camera info usually means intrinsic matrix. 
+**Instructions**
 
-To perform the intrinsic calibration, use the ROS camera calibration package, which should already been installed from the setup guide.
+1. Open `src/state_machine.py` and find the waypoint handlers. They are stubs.
+2. Implement a waypoint follower: given a list of joint-space configurations, drive the arm through them in order.
+3. Give it a list of waypoints of your own choosing so that the arm performs a short, deliberate routine — make it a dance if you like. Six to ten waypoints is plenty.
+4. Trigger it from the GUI and watch it run.
 
-1. You can find official documentation on how to use the camera_calibration package with a checkerboard [here](https://web.archive.org/web/20230322162201id_/https://navigation.ros.org/tutorials/docs/camera_calibration.html#tutorial-steps). You do not need to run any of the commands in that guide, it is provided solely as a reference for how the package works.
-2. To do the calibration, you need to:
-   1. Firstly start the Realsense2 node
-   ```bash
-   ros2 launch realsense2_camera rs_l515_launch.py
-   ```
-   2. Then start the camera calibration node:
-   ```bash
-    cd ~/image_pipeline
-    source install/setup.bash
-    # the size of the checkerboard and the dimensions of its squares may vary
-    ros2 run camera_calibration cameracalibrator --size 6x8 --square 0.025 \
-        --no-service-check --ros-args \
-        -r image:=/camera/color/image_raw  \
-        -p camera:=/camera
-   ```
-3. Quickly move the checkerboard through a variety of tilts and positions so the bars fill up. You don't want this to take too long or the calibration process will hang forever.
-4. As soon as the "Calibrate" button lights up, click it.
-5. When you start the calibration process, the window will display that it is not responding and will give you the option to "Force Quit" or "Wait". Be patient! Do not force quit the application, as it is working in the background, albeit slowly.
-6. After a minute or so, the calibration results will print to the terminal. If you have waited more than 2 minutes and nothing happens, try again or ask for help.
+**Hints**
 
-Notes:
+- Joint angles in this codebase are **radians**. The GUI converts to degrees for display only — see [Units and conventions](/docs/armlab/software#units-and-conventions).
+- Check every waypoint against the joint limits before you send it. An unreachable configuration will be refused by the arm, not silently clamped.
+- The arm needs time to reach each waypoint. Decide how you know a motion is finished before starting the next one.
+- Start slow. The speed slider scales every motion command.
 
-- The ROS camera calibration package will also identify lens distortion parameters, which can be used to reduce video distortion. However, this might not be essential since the Realsense camera usually has low distortion in the imaging area of interest. The distortion for the depth camera is unknown. 
-- Make sure that you save the calibration values obtained from this process.
+{: .sanity_check}
+Clicking the button runs your routine from start to finish and the arm ends where you expect.
 
-{: .required_for_report }
-Record your average intrinsic calibration after performing the checkerboard calibration 3-5 times. Compare it to the factory calibration.
-<br><br>
-Question to consider: <br>
-1) How do the matrices compare? <br>
-2) Do you trust your own calibration or the factory calibration more?<br>
-3) What are the sources of error and how large are they? 
+## Task 1.4  Teach and repeat
 
-### Task 1.5 Extrinsic Camera Calibration
-Using physical measurements of the lab apparatus, come up with a rough extrinsic matrix for the camera. Use the extrinsic matrix and the camera intrinsic matrix to map image coordinates (u,v,d) to world coordinates. Have them displayed in the GUI. A pixel in the depth image from the ROS driver is a 16-bit integer representing a distance from the camera frame in millimeters.
+Teaching by demonstration is how a lot of industrial arms get programmed: you move the robot through the motion by hand, and it plays it back. You are going to build that, and then use it to teach the stacking task from Task 1.2.
 
-There are two possible ways of finding the rotation of the camera. The first way is accurate enough for our purposes. You only need to do option 2 if you are personally interested in how to get the best possible calibration accuracy.
+**Instructions**
 
-1. (Easy, Less Accurate) Use your phone as a protractor and measure the tilt of the camera relative to the horizontal.
-2. (Hard, More Accurate) You may also use the `realsense-viewer` program to find a readout of the camera’s accelerometer, which should give you an approximation of the orientation of the sensor. Launch the program by running `realsense-viewer` in the terminal. To see the accelerometer, enable the Motion Module then click on the "2D" text on the top right.
+1. Put the arm into **teach mode** from the control station — the Manual Mode toggle calls `set_teach_mode()`. This arms hand-guiding, but does not start it.
+2. **Press the button on the arm.** That is what actually releases it: the arm now holds its own weight while staying easy to push around, so you can guide it by hand.
+3. Add a **record** control to the control station that captures the arm's current joint configuration as a waypoint.
+4. Add a **playback** control that replays the recorded waypoints in order.
+5. Add a way to insert **open gripper** and **close gripper** actions into the sequence, so a recorded plan can grip and release, not just move.
+6. Use it to teach the robot the **stacking** task — three blocks into a tower. Unstacking is not required.
 
-Assumptions: 
-1. X axis of the world frame are parallel to U axes of the sensor 
-2. YZ plane of the camera frame is parallel to the YZ plane of the world
-3. Camera frame is at the front surface of the sensor
+**Hints**
 
-{: .required_for_report }
-Record your extrinsic matrix
+- A waypoint needs to carry the gripper state as well as the joint angles. Two consecutive waypoints can share a pose and differ only in whether the gripper is closed — that is exactly what a grasp looks like.
+- Decide what happens on playback when a waypoint changes the gripper: the arm should finish moving, then actuate, then move on.
+- The Waypoint Recorder card in the GUI already has buttons wired to state-machine states. You can use them, or add your own.
+- Teach a few waypoints and play them back before you try to teach the whole stacking sequence.
 
-## Checkpoint Submission
+{: .sanity_check}
+You can hand-guide the arm, record a sequence that includes gripper actions, and have it stack three blocks on playback without you touching it.
 
-- Task 1.2
-    - Record a video of your robot playing back the waypoints 
-- Task 1.3
-    - Demonstrate the teach-and-repeat in a video by recording the process of teaching the robot and repeating at least once the cycle task from the "required for the report" subsection
-- Task 1.4/1.5:
-    - Report your factory and calibrated camera intrinsic matrices.
-    - Record a screenshot or video of the GUI reporting world coordinates of the mouse cursor when hovering over the image using the intrinsic and extrinsic calibrations.
-    - Record the reported position (x,y,z) of the center of the top of a stack of large blocks placed at the following locations for a stack size of [0,1,2,4,6] blocks (total of 20 measurements): (0,175), (-300, -75), (300, -75), (300, 325)
+## Task 1.5  Measure the camera extrinsics
 
+The camera sees pixels. The arm works in millimetres in its own base frame. The **extrinsic matrix** is what connects them: a homogeneous transform describing where the camera sits relative to the robot.
 
+Later in the lab you will compute this automatically from AprilTags. First you are going to measure it by hand, with a tape measure, so that you know exactly what the numbers in that matrix mean.
+
+**Instructions**
+
+1. Measure the position of the camera relative to the robot base frame: how far along x, y and z its optical centre sits.
+2. Work out its orientation — which way the camera's axes point relative to the base frame.
+3. Build the 4 × 4 homogeneous transform from those measurements. Be explicit about **which direction** it maps: world into camera, or camera into world.
+4. Get the camera intrinsic matrix. `camera.py` reads it from the camera at startup and prints it:
+    ```bash
+    cd src
+    python camera.py
+    ```
+5. Now test it. For each of these four points on the board, at `z = 0` in the base frame:
+
+    | Point | x (mm) | y (mm) |
+    | ----- | ------ | ------ |
+    | A | 0 | 200 |
+    | B | 0 | −200 |
+    | C | 200 | 200 |
+    | D | 200 | −200 |
+
+    - **Predict** the pixel each one should land on, using your extrinsic matrix and the intrinsic matrix.
+    - **Measure** where it actually lands: start the control station, hover the mouse over that point in the video, and read the pixel coordinate from the readout under the image.
+    - Record both, and the difference.
+
+**Hints**
+
+- Draw the two coordinate frames before you write down any numbers. Most of the difficulty here is bookkeeping, not arithmetic.
+- A point in the world becomes a pixel in two steps: world → camera frame using the extrinsics, camera frame → pixel using the intrinsics. Keep them separate and you can debug them separately.
+- Remember the camera looks *down* at the board. Its z axis points roughly along the board's −z.
+- Your numbers will not match well. That is the point — quantify how badly, and think about why.
+
+{: .sanity_check}
+You have predicted and measured pixel coordinates for all four points, and you can explain the sign and rough size of the disagreement.
+
+## Deliverables
+
+Submit the following on Canvas.
+
+{: .submission}
+**1)** A short video of the arm replaying your taught sequence from Task 1.4, gripper actions included. <br>
+**2)** Your recorded waypoint list from Task 1.4 as a table — all six joint angles plus the gripper state for each waypoint, **with units stated**. <br>
+**3)** Two or three sentences on how you represented a waypoint, and why the gripper state is stored with the pose rather than in a separate list. <br>
+**4)** A labelled sketch of your Task 1.5 setup: the robot base frame, the camera frame, both sets of axes, and the distances you measured. <br>
+**5)** Your 4 × 4 extrinsic matrix with real numbers, and a statement of which direction it maps. <br>
+**6)** A table for the four board points: predicted pixel, measured pixel, and the difference for each. <br>
+**7)** Two or three sentences on where the error comes from and how large you expected it to be.
+
+{: .required_for_report}
+From this checkpoint, carry the following into your final report: <br>
+**1)** The labelled frame diagram from Task 1.5. <br>
+**2)** The extrinsic matrix and how you arrived at it. <br>
+**3)** The predicted-vs-measured pixel table for the four board points. <br>
+**4)** Your analysis of the error — its sources, its size, and what it implies about calibrating this way.

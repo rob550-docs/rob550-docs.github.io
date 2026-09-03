@@ -8,16 +8,6 @@ last_modified_at: 2026-09-02 12:00:00 -0400
 
 > What is at your station: the arm, the gripper, the camera, and how it is all powered and connected.
 
-<!--
-TEMPLATE NOTES
-- Put images in /assets/images/armlab/hardware/
-- Image snippet:
-    <a class="image-link" href="/assets/images/armlab/hardware/FILE.png">
-    <img src="/assets/images/armlab/hardware/FILE.png" alt="" style="max-width:400px;"/>
-    </a>
-- Available callouts: .note .important .warning .highlight .new .sanity_check .required_for_report
--->
-
 ### Contents
 * TOC
 {:toc}
@@ -41,6 +31,23 @@ The arm is a **UFACTORY Lite 6**, a 6-DOF collaborative arm with the control ele
 | Communication | Ethernet |
 | Tool flange | ISO 9409-1-50 |
 
+### Joints
+
+The six joints are numbered from the base outwards. You will see these numbers in the web interface, in the control station readouts, and in every error message the arm produces.
+
+<a class="image-link" href="/assets/images/armlab/hardware/xarm_joint_lables.png">
+<img src="/assets/images/armlab/hardware/xarm_joint_lables.png" alt="The Lite 6 with each joint labelled, Joint 1 at the base through Joint 6 at the tool flange" style="max-width:340px;"/>
+</a>
+
+Each joint also has a sign convention — which way counts as a positive angle:
+
+<a class="image-link" href="/assets/images/armlab/hardware/xarm_rotation_direction.png">
+<img src="/assets/images/armlab/hardware/xarm_rotation_direction.png" alt="The Lite 6 with a plus and minus marked on each joint showing the positive direction of rotation" style="max-width:320px;"/>
+</a>
+
+{: .note}
+Check a joint's sign here before you assume your maths is wrong. A forward-kinematics result that is right in magnitude but wrong in sign is usually a joint turning the opposite way to what you assumed.
+
 Joint travel limits are **not symmetric**:
 
 | Joint | Range |
@@ -57,6 +64,17 @@ J5 (±124°) and J3 (−3.5° to 300°) are the limits you will actually run int
 
 {: .warning}
 The 600 g payload is the entire budget and **the gripper counts against it**, leaving very little for the object you are picking up.
+
+### Zero position
+
+At the zero configuration — all six joint angles at 0 — the arm stands straight up, and the tool flange sits **87 mm** out in x and **154.2 mm** up in z from the base frame origin.
+
+<a class="image-link" href="/assets/images/armlab/hardware/xarm_zero_pose.png">
+<img src="/assets/images/armlab/hardware/xarm_zero_pose.png" alt="Line drawing of the Lite 6 at its zero configuration, dimensioned 87 mm in x and 154.2 mm in z from the base to the tool flange" style="max-width:300px;"/>
+</a>
+
+{: .highlight}
+These two numbers are a free check on your forward kinematics. Feed your FK all zeros and it should put the flange at (87, 0, 154.2) mm. If it does not, the error is in your DH table or your zero offsets, and it is much easier to find here than anywhere else.
 
 The arm is otherwise unmodified for this course — the only change is the custom gripper on the tool flange.
 

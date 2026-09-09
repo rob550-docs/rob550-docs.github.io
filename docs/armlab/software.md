@@ -6,7 +6,7 @@ parent: Armlab
 last_modified_at: 2026-09-02 12:00:00 -0400
 ---
 
-> This page describes the codebase you will be working in: what each file does, how the pieces talk to each other, and which functions are yours to write. Everything runs as plain Python inside the `env550lab` conda environment — there is no ROS in this lab.
+> This page describes the codebase you will be working in: what each file does, how the pieces talk to each other, and which functions are yours to write. Everything runs as plain Python inside the `env550lab` conda environment. There is no ROS in this lab.
 
 ### Contents
 * TOC
@@ -14,7 +14,7 @@ last_modified_at: 2026-09-02 12:00:00 -0400
 
 ## Architecture
 
-The control station is a single PyQt5 process with three background worker threads. Nothing is distributed, and there is no message bus between them — they share Python objects and communicate with Qt signals.
+The control station is a single PyQt5 process with three background worker threads. Nothing is distributed, and there is no message bus between them: they share Python objects and communicate with Qt signals.
 
 | Thread | Rate | Job |
 | ------ | ---- | --- |
@@ -28,7 +28,7 @@ The GUI thread owns the widgets and does nothing else. Each worker emits Qt sign
 <img src="/assets/images/armlab/software/architecture.svg" alt="Arm Lab software architecture: the control station process and its three worker threads above the lab modules, libraries and hardware" style="max-width:900px; width:100%;"/>
 </a>
 
-Arrows show who calls whom. Not drawn, to keep the picture readable: the GUI also calls into the state machine and the arm object directly from its button handlers — `set_next_state()`, `open_gripper()` and friends.
+Arrows show who calls whom. Not drawn, to keep the picture readable: the GUI also calls into the state machine and the arm object directly from its button handlers: `set_next_state()`, `open_gripper()` and friends.
 
 ## Two ways to run
 
@@ -63,20 +63,20 @@ self.arm = SimArm() if arm_mode == "sim" else Lite6Arm()
 | Path | What it is |
 | ---- | ---------- |
 | `src/control_station.py` | PyQt5 GUI, thread wiring, and all the button handlers |
-| `src/lite6arm.py` | `Lite6Arm` — the real arm, wrapping the xArm Python SDK |
-| `src/lite6arm_sim.py` | `SimArm` — same public API, talks to the MuJoCo bridge over LCM |
+| `src/lite6arm.py` | `Lite6Arm`, the real arm, wrapping the xArm Python SDK |
+| `src/lite6arm_sim.py` | `SimArm`, same public API, talks to the MuJoCo bridge over LCM |
 | `src/kinematics.py` | **Student lab.** FK (DH and PoX), `IK_geometric`, `IK_numerical` |
 | `src/camera.py` | RealSense L515 pipeline, AprilTag detection, **student** extrinsic calibration |
 | `src/state_machine.py` | **Student lab.** The state machine behind the GUI's action buttons |
-| `src/ui/layout.py` | Widget layout. Generated-style code — you should rarely need to edit it |
+| `src/ui/layout.py` | Widget layout. Generated-style code; you should rarely need to edit it |
 | `src/ui/style.py` | Qt stylesheet |
-| `src/mujoco_sim/` | The simulation bridge, vendored from [arc-bridge](https://github.com/ARCaD-Lab-UM/arc-bridge) and trimmed to the Lite 6. Has its own README — treat it as a library, not as lab code |
+| `src/mujoco_sim/` | The simulation bridge, vendored from [arc-bridge](https://github.com/ARCaD-Lab-UM/arc-bridge) and trimmed to the Lite 6. Has its own README. Treat it as a library, not as lab code |
 | `install_scripts/` | The three setup scripts, documented in [the setup guide](/docs/armlab/setup-guide#installation) |
 
 ## Units and conventions
 
 {: .warning}
-**Internally this codebase is radians and millimetres.** The arm object is constructed as `XArmAPI(ip, is_radian=True)`, so every angle crossing the SDK boundary is in radians — even though the SDK's own default is degrees. Degrees appear **only** in GUI labels, where `np.degrees()` is applied at the last moment.
+**Internally this codebase is radians and millimetres.** The arm object is constructed as `XArmAPI(ip, is_radian=True)`, so every angle crossing the SDK boundary is in radians, even though the SDK's own default is degrees. Degrees appear **only** in GUI labels, where `np.degrees()` is applied at the last moment.
 
 | Quantity | Unit |
 | -------- | ---- |
@@ -87,7 +87,7 @@ self.arm = SimArm() if arm_mode == "sim" else Lite6Arm()
 | DH table `d` and `a` | millimetres |
 | DH `theta_offset` and `alpha` | radians |
 
-The pose vector used everywhere — FK output, IK input, the GUI readout — is:
+The pose vector used everywhere, for FK output, IK input and the GUI readout, is:
 
 ```
 [x, y, z, roll, pitch, yaw]     # mm, mm, mm, rad, rad, rad
@@ -97,7 +97,7 @@ Orientation is roll-pitch-yaw about **fixed** X, Y, Z axes, matching the xArm SD
 
 The six joints are named `Base, Shoulder, Elbow, F.Roll, W.Pitch, W.Roll` (`JOINT_NAMES` in `lite6arm.py`).
 
-## `lite6arm.py` — the real arm
+## `lite6arm.py`: the real arm
 
 A thin wrapper over `XArmAPI`. Construction connects, enables motion and puts the arm in position mode; if that fails it prints a warning and sets `connected = False` rather than crashing, so the GUI still opens with the arm offline.
 
@@ -107,30 +107,30 @@ The wrapper drives the arm through four xArm firmware modes:
 
 | Method | Firmware mode | Used by |
 | ------ | ------------- | ------- |
-| `enable()` | 0 — position | Normal point-to-point moves |
-| `enter_jog_mode()` / `start_jog()` | 4 — joint velocity | The Direct Control jog buttons |
-| `enter_cartesian_jog_mode()` / `start_cartesian_jog()` | 5 — Cartesian velocity | The Cartesian Jog buttons |
-| `set_teach_mode(True)` | 2 — joint teaching | The Manual Mode toggle (free-drive) |
+| `enable()` | 0, position | Normal point-to-point moves |
+| `enter_jog_mode()` / `start_jog()` | 4, joint velocity | The Direct Control jog buttons |
+| `enter_cartesian_jog_mode()` / `start_cartesian_jog()` | 5, Cartesian velocity | The Cartesian Jog buttons |
+| `set_teach_mode(True)` | 2, joint teaching | The Manual Mode toggle (free-drive) |
 
 Cartesian jog is capped at 150 mm/s linear and 1.0 rad/s angular, scaled by the speed slider.
 
 {: .note}
-`initialize()` also switches on self-collision detection and sets collision sensitivity to 5, then drives to `Q_DEFAULT` — the same home pose UFactory Studio uses, and the seed for the numerical IK solver.
+`initialize()` also switches on self-collision detection and sets collision sensitivity to 5, then drives to `Q_DEFAULT`, the same home pose UFactory Studio uses, and the seed for the numerical IK solver.
 
 The DH table and joint limits are **read from the arm's firmware** at connect time (`get_dh_params()` and `XCONF.Robot.JOINT_LIMITS`), not hard-coded. `kinematics.py` carries its own copy of the limits for use in simulation.
 
 `Lite6Arm` also publishes its joint angles over LCM, so the MuJoCo viewer can mirror the real arm's pose.
 
-## `lite6arm_sim.py` — the simulated arm
+## `lite6arm_sim.py`: the simulated arm
 
-`SimArm` matches `Lite6Arm` method for method, but instead of the SDK it exchanges LCM messages with the `mujoco-sim` bridge on three channels: state (bridge → GUI), control (GUI → bridge) and display (GUI → bridge, viewer overlays only). Its three control modes mirror the firmware modes above — position, joint velocity, and a Cartesian twist whose velocity IK is solved inside the bridge at 1 kHz, exactly as the real arm's firmware would.
+`SimArm` matches `Lite6Arm` method for method, but instead of the SDK it exchanges LCM messages with the `mujoco-sim` bridge on three channels: state (bridge → GUI), control (GUI → bridge) and display (GUI → bridge, viewer overlays only). Its three control modes mirror the firmware modes above: position, joint velocity, and a Cartesian twist whose velocity IK is solved inside the bridge at 1 kHz, exactly as the real arm's firmware would.
 
 {: .note}
 LCM is configured with `ttl=0`, so traffic stays on the local machine and stations do not interfere with each other.
 
 `SimArm` gains two things hardware cannot do: `set_ghost()` draws a translucent preview arm at an IK solution, and `set_fk_display()` overlays frame axes. Both are no-ops on `Lite6Arm` so the GUI can call them unconditionally.
 
-## `camera.py` — perception
+## `camera.py`: perception
 
 The `Camera` class owns the RealSense pipeline and holds the latest frames; `VideoThread` drives it. Stream resolutions and the camera's own specifications are on the [Hardware page](/docs/armlab/hardware#realsense-camera); what `camera.py` adds on top is:
 
@@ -143,13 +143,13 @@ The `Camera` class owns the RealSense pipeline and holds the latest frames; `Vid
 | Visual preset | Short Range, to lower the depth floor near the arm |
 
 {: .important}
-**Intrinsics come from the camera, not from a calibration you run.** `Camera.__init__` reads the factory intrinsics off the color stream profile and builds `intrinsic_matrix` from `fx`, `fy`, `ppx`, `ppy`. What you implement is the **extrinsic** calibration — where the camera sits relative to the robot. See the [Camera Guide](/docs/armlab/how-to-guide/camera-guide) for measuring the intrinsics yourself and checking them against the factory values.
+**Intrinsics come from the camera, not from a calibration you run.** `Camera.__init__` reads the factory intrinsics off the color stream profile and builds `intrinsic_matrix` from `fx`, `fy`, `ppx`, `ppy`. What you implement is the **extrinsic** calibration: where the camera sits relative to the robot. See the [Camera Guide](/docs/armlab/how-to-guide/camera-guide) for measuring the intrinsics yourself and checking them against the factory values.
 
 `TAG_WORLD_POINTS` maps the four workspace tag IDs to their known positions in the robot frame. **Adjust it to match your physical station.**
 
-The GUI offers four views of the same scene — RGB, Depth, Tags, Workspace — selected by radio buttons. Hovering the video reports the pixel, the depth in mm, and the world coordinate once calibration succeeds.
+The GUI offers four views of the same scene, RGB, Depth, Tags and Workspace, selected by radio buttons. Hovering the video reports the pixel, the depth in mm, and the world coordinate once calibration succeeds.
 
-## `state_machine.py` — behavior
+## `state_machine.py`: behavior
 
 A dictionary dispatch from a state name to a handler, polled at 20 Hz. `set_next_state(name)` is what the GUI buttons call.
 
@@ -166,7 +166,7 @@ A dictionary dispatch from a state name to a handler, polled at 20 Hz. `set_next
 | `playback_waypoints` | Playback Waypoints button | **Student lab** |
 | `pick_place` | Click Pick & Place toggle | **Student lab** |
 
-## `kinematics.py` — the maths
+## `kinematics.py`: the maths
 
 Pure functions with no dependency on the arm or the GUI, which is what makes them testable on their own:
 
@@ -174,7 +174,7 @@ Pure functions with no dependency on the arm or the GUI, which is what makes the
 python src/kinematics.py
 ```
 
-It provides the constants — `JOINT_LIMITS`, `Q_DEFAULT` — and the signatures. Both FK methods are stubbed; **you implement either the DH method or the PoX method**, not both. `IK_numerical` is a bounded Gauss-Newton least-squares solve over your FK, so it only works once FK does.
+It provides the constants `JOINT_LIMITS` and `Q_DEFAULT`, and the signatures. Both FK methods are stubbed; **you implement either the DH method or the PoX method**, not both. `IK_numerical` is a bounded Gauss-Newton least-squares solve over your FK, so it only works once FK does.
 
 ## The control station GUI
 
@@ -236,7 +236,7 @@ python src/lite6arm.py      # connects, homes, prints joint angles and FK, sleep
 Everything imports from the `env550lab` conda environment, and a surprising number of failures trace back to that:
 
 - **`opencv-python-headless`, never `opencv-python`.** The normal build bundles its own Qt5, which fights PyQt5 inside the same process. The headless build is identical for image processing; `cv2.imshow` is unavailable, and all display goes through PyQt5.
-- **`pyrealsense2` is built from source**, not installed from the environment file, and lands in `/usr/local/OFF/` — reached through a `PYTHONPATH` entry in `~/.bashrc`. If `import pyrealsense2` fails in a new terminal, `source ~/.bashrc` first.
+- **`pyrealsense2` is built from source**, not installed from the environment file, and lands in `/usr/local/OFF/`, reached through a `PYTHONPATH` entry in `~/.bashrc`. If `import pyrealsense2` fails in a new terminal, `source ~/.bashrc` first.
 - **The environment is pinned to Python 3.10**, because the RealSense binding is compiled against one specific interpreter version.
 
 {: .note}
@@ -244,7 +244,7 @@ If an import fails, check the prompt for `(env550lab)` before anything else. See
 
 ## Reference
 
-- [Lite 6 Arm & SDK Guide](/docs/armlab/how-to-guide/lite6arm-sdk-guide) — the SDK calls behind `lite6arm.py`
-- [Camera Guide](/docs/armlab/how-to-guide/camera-guide) — RealSense Viewer and intrinsic calibration
-- `README.md` and `install_scripts/README.md` in the repo — install rationale and failure modes
-- `src/mujoco_sim/README.md` — the simulation bridge
+- [Lite 6 Arm & SDK Guide](/docs/armlab/how-to-guide/lite6arm-sdk-guide): the SDK calls behind `lite6arm.py`
+- [Camera Guide](/docs/armlab/how-to-guide/camera-guide): RealSense Viewer and intrinsic calibration
+- `README.md` and `install_scripts/README.md` in the repo: install rationale and failure modes
+- `src/mujoco_sim/README.md`: the simulation bridge

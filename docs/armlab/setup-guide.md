@@ -73,7 +73,7 @@ If VS Code is not installed yet, download the `.deb` package from [code.visualst
 ```bash
 sudo apt install ./<downloaded-file>.deb
 ```
-During the installation a prompt appears asking whether to add the Microsoft apt repository. Use **Tab** to move between the options, select `<Yes>`, and press **Enter** — this is what keeps VS Code up to date through apt.
+During the installation a prompt appears asking whether to add the Microsoft apt repository. Use **Tab** to move between the options, select `<Yes>`, and press **Enter**. This is what keeps VS Code up to date through apt.
 
 ### 5. Clone to local
 1. Go to your group’s armlab repository webpage and copy the URL of “Clone with HTTPS”
@@ -174,7 +174,7 @@ Then in a new terminal, run the following command:
 cd src
 python control_station.py --sim
 ```
-- This one starts the control station GUI, driving the simulated arm. The GUI looks the same whether it is driving the simulator or the real arm — see the screenshot below.
+- This one starts the control station GUI, driving the simulated arm. The GUI looks the same whether it is driving the simulator or the real arm, so see the screenshot below.
 
 ### Run on the real arm
 Connect the camera USB and the arm to the lab laptop, then in a terminal run:

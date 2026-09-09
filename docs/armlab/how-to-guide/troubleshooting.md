@@ -32,7 +32,7 @@ The arm must be plugged into the **USB-to-Ethernet adapter**, not the laptop's b
 ping 192.168.1.xxx
 ```
 
-- **Replies:** the network is fine — go to step 4.
+- **Replies:** the network is fine, go to step 4.
 - **No replies:** cable, adapter, port, or power. Nothing in your Python will fix it.
 
 **4. Check the IP in the code matches the arm.** `XARM_IP` is set near the top of `src/lite6arm.py`, and each station's arm is different:
@@ -53,7 +53,7 @@ The video panel shows *No Video Input* instead of a live image.
 lsusb
 ```
 
-Look for an Intel RealSense entry. If nothing appears, it is the cable or the port — try a different one.
+Look for an Intel RealSense entry. If nothing appears, it is the cable or the port. Try a different one.
 
 **2. Check the connection type.** The camera needs USB 3.x:
 
@@ -82,7 +82,7 @@ If the stream looks correct there, the camera is fine and the problem is in your
 
 ## `ImportError` on `pyrealsense2`, `cv2` or `xarm`
 
-Check the prompt for `(env550lab)` before anything else — running with the system Python instead of the lab environment produces exactly this error.
+Check the prompt for `(env550lab)` before anything else. Running with the system Python instead of the lab environment produces exactly this error.
 
 ```bash
 source ~/.bashrc          # the RealSense binding is found through PYTHONPATH

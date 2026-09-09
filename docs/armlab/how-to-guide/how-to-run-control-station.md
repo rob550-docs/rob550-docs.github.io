@@ -38,7 +38,7 @@ The two are mutually exclusive. Both need the full stack installed, so simulatio
 
 1. The workspace is clear and nobody is reaching into it.
 2. You know where the E-stop is.
-3. The arm and camera cables are connected, and `realsense-viewer` is **closed** — it holds the camera and the control station will not get it.
+3. The arm and camera cables are connected, and `realsense-viewer` is **closed**, because it holds the camera and the control station will not get it.
 4. Speed slider low if you are about to run new code.
 
 ## Shutting down
@@ -54,7 +54,7 @@ Then, in order: close the GUI window, and `ctrl+c` the simulator in its terminal
 | ------- | ----- |
 | `ImportError` on `pyrealsense2`, `cv2` or `xarm` | Terminal is not in `env550lab`, or `~/.bashrc` has not been sourced |
 | Camera offline in the status bar | `realsense-viewer` or a stale Python process holds the device |
-| Arm offline in the status bar | Wrong `XARM_IP`, or the arm is unreachable — `ping` it first |
+| Arm offline in the status bar | Wrong `XARM_IP`, or the arm is unreachable. `ping` it first |
 | Qt `xcb` plugin error | Broken environment; see the repo's `install_scripts/README.md` |
 
 More detail in [Troubleshooting](/docs/armlab/how-to-guide/troubleshooting) and [Linux Command Line Tools](/docs/armlab/how-to-guide/linux-clt#managing-running-programs).

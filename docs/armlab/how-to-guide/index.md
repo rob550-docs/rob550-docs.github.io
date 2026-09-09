@@ -7,7 +7,7 @@ parent: Armlab
 last_modified_at: 2026-09-02 12:00:00 -0400
 ---
 
-> Reference material you will come back to throughout the lab. Each page is standalone — start from the [Setup Guide](/docs/armlab/setup-guide) instead if you are setting up your station for the first time.
+> Reference material you will come back to throughout the lab. Each page is standalone. Start from the [Setup Guide](/docs/armlab/setup-guide) instead if you are setting up your station for the first time.
 
 - [Linux Command Line Tools](/docs/armlab/how-to-guide/linux-clt)
 - [How to Run the Control Station](/docs/armlab/how-to-guide/how-to-run-control-station)

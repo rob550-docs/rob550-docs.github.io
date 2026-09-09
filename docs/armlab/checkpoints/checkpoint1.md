@@ -7,7 +7,7 @@ grand_parent: Armlab
 last_modified_at: 2026-09-02 12:00:00 -0400
 ---
 
-This checkpoint gets you moving the arm and reasoning about where things are in space. You will start in the arm's own web interface — the quickest way to drive the hardware and see what it can do — then move to the control station codebase you will spend the rest of the lab in. By the end you will have made the arm repeat a task you taught it by hand, and built your first camera-to-world transform with nothing but a tape measure.
+This checkpoint gets you moving the arm and reasoning about where things are in space. You will start in the arm's own web interface, the quickest way to drive the hardware and see what it can do, then move to the control station codebase you will spend the rest of the lab in. By the end you will have made the arm repeat a task you taught it by hand, and built your first camera-to-world transform with nothing but a tape measure.
 
 ### Contents
 * TOC
@@ -25,14 +25,14 @@ The board the arm is mounted on has a **50 mm × 50 mm grid**. The frame everyth
 - the **board surface is `z = 0`**
 - positions are in **millimetres**
 
-Because the origin is on a grid line, every grid intersection is a whole multiple of 50 mm away from it — which is what makes the board a usable ruler.
+Because the origin is on a grid line, every grid intersection is a whole multiple of 50 mm away from it, which is what makes the board a usable ruler.
 
 {: .warning}
-The gripper can reach the board. When you are driving the arm by hand, watch the **z** readout and keep the tool above the surface — it is very easy to drive the end effector straight into the board while concentrating on x and y. The gripper hangs **100 mm** below the flange, and the flange is what the readout reports, so that is the clearance you need.
+The gripper can reach the board. When you are driving the arm by hand, watch the **z** readout and keep the tool above the surface. It is very easy to drive the end effector straight into the board while concentrating on x and y. The gripper hangs **100 mm** below the flange, and the flange is what the readout reports, so that is the clearance you need.
 
 ## Task 1.1  Drive the arm from the web interface
 
-The Lite 6 serves its own web interface, **UFACTORY Studio**. Point a browser at your arm's IP address on port **18333** — the address is the one you set as `XARM_IP` during setup, printed on the label on the back of the arm:
+The Lite 6 serves its own web interface, **UFACTORY Studio**. Point a browser at your arm's IP address on port **18333**. The address is the one you set as `XARM_IP` during setup, printed on the label on the back of the arm:
 
 ```
 http://192.168.1.xxx:18333
@@ -46,18 +46,18 @@ There is no login.
 
 You land on **Live Control**. The pieces you need are:
 
-- **Enable** (top right) — the arm will not move until you press it
+- **Enable** (top right): the arm will not move until you press it
 - **J1–J6 sliders**, each with `−` and `+` buttons, for joint jogging
 - the **Base** card, with `Z−`/`Z+` and the `XYZ` and `RXYZ` rings, for Cartesian jogging
 - the **pose readout** on the right: X, Y, Z in mm and Roll, Pitch, Yaw in degrees
 - **Gripper**: `OPEN`, `CLOSE`, `OFF`
-- **Speed**, which scales everything — turn it down before going near the board
+- **Speed**, which scales everything. Turn it down before going near the board
 - **STOP**, in red
 
 **Instructions**
 
 1. Find the **joint jog** controls and move each of the six joints one at a time with the sliders. Watch which physical joint moves, and compare the direction of travel to the joint numbering on the [Hardware](/docs/armlab/hardware#ufactory-lite-6-arm) page.
-2. **Test the emergency stop.** With the arm somewhere away from its home position, press the E-stop on the table next to the arm. The arm stops immediately, and stays exactly where it was — locks engage on the joints, so it does not drop or sag. Release the E-stop and bring the arm back under control before carrying on.
+2. **Test the emergency stop.** With the arm somewhere away from its home position, press the E-stop on the table next to the arm. The arm stops immediately, and stays exactly where it was, because locks engage on the joints, so it does not drop or sag. Release the E-stop and bring the arm back under control before carrying on.
 3. Push a joint gently toward its limit and watch what the interface reports. J5 (±124°) and J3 (−3.5° to 300°) will stop you long before the others.
 4. Switch to the **Cartesian** controls and move the tool along x, y and z in the base frame. Notice that the joints all move together to produce one straight-line motion of the tool.
 5. Watch the **end-effector position readout** as you move. Get a feel for which numbers change when you move in each direction.
@@ -66,7 +66,7 @@ You land on **Live Control**. The pieces you need are:
 8. **Measure your blocks.** You need the height to work out how tall a stack of two or three will be, and the width to know the gripper can take them.
 
 {: .note}
-Hitting the E-stop is safe for the arm. Locks engage on the joints and hold it in place, so nothing falls and nothing is damaged — get comfortable using it.
+Hitting the E-stop is safe for the arm. Locks engage on the joints and hold it in place, so nothing falls and nothing is damaged, so get comfortable using it.
 
 **Hints**
 
@@ -79,13 +79,13 @@ You have moved a block from one place on the board to another using only the web
 
 ## Task 1.2  Script the arm from the web interface
 
-Click **Python** in the left sidebar to open the built-in IDE. Under `Python_Examples` you will find **`0003_pick_and_place.py`** — start from that one. It already does a single pick and place, so most of your work is generalising it to three blocks.
+Click **Python** in the left sidebar to open the built-in IDE. Under `Python_Examples` you will find **`0003_pick_and_place.py`**. Start from that one. It already does a single pick and place, so most of your work is generalising it to three blocks.
 
 <a class="image-link" href="/assets/images/armlab/checkpoints/ufactory-python-editor.png">
 <img src="/assets/images/armlab/checkpoints/ufactory-python-editor.png" alt="The Python IDE in UFACTORY Studio with 0003_pick_and_place.py open, showing the connection, mode and state calls followed by set_position and gripper commands" style="max-width:800px; width:100%;"/>
 </a>
 
-Read it before you change anything. It shows the startup sequence (`set_mode(0)`, `set_state(0)`), the approach-then-descend pattern — move to `z = 300`, then down to `z = 200`, then close the gripper — and the `time.sleep(0.5)` that gives the gripper time to finish.
+Read it before you change anything. It shows the startup sequence (`set_mode(0)`, `set_state(0)`), the approach-then-descend pattern (move to `z = 300`, then down to `z = 200`, then close the gripper), and the `time.sleep(0.5)` that gives the gripper time to finish.
 
 {: .warning}
 **These examples are in degrees; the control station codebase is in radians.** The web IDE uses the SDK's default, so `set_position(*[300, 0, 300, 180, 0, 0])` has a roll of 180 **degrees**. From Task 1.3 onward you are in a codebase built with `is_radian=True`. Do not carry numbers between the two without converting.
@@ -94,7 +94,7 @@ Read it before you change anything. It shows the startup sequence (`set_mode(0)`
 
 1. Place three blocks in front of the robot at three grid positions of your choosing. Write the positions down in millimetres in the base frame.
 2. Write a script that **stacks** the three blocks into a single tower at a fourth position.
-3. Extend it to **unstack** them — return each block to its original position.
+3. Extend it to **unstack** them, returning each block to its original position.
 4. Test it. Fix the parts that do not work.
 5. Wrap the whole stack-and-unstack cycle in a loop so that, in principle, it runs forever.
 6. Leave it running and watch it for a while.
@@ -103,11 +103,11 @@ Read it before you change anything. It shows the startup sequence (`set_mode(0)`
 
 - The 50 mm grid is your friend. Choose positions on grid intersections so that you can measure and re-measure them.
 - Give yourself an approach height above each block, then descend, then grip. Going straight to the grasp pose invites a collision with the block you are trying to pick.
-- Use the grasp height you measured in Task 1.1 rather than guessing. A tower of three blocks is taller than one, so the place height has to step up by one block height each time — that is what you measured the blocks for.
+- Use the grasp height you measured in Task 1.1 rather than guessing. A tower of three blocks is taller than one, so the place height has to step up by one block height each time. That is what you measured the blocks for.
 - Give the gripper time to finish moving before the arm drives away.
 
 {: .highlight}
-Run the loop long enough and it will eventually fail, even though nothing in the code changed. Watch for how it fails and think about why: small positioning errors accumulate in the stack, blocks get nudged, and there is nothing in this system that can notice. Nothing here senses the world — that is the gap the rest of the lab closes.
+Run the loop long enough and it will eventually fail, even though nothing in the code changed. Watch for how it fails and think about why: small positioning errors accumulate in the stack, blocks get nudged, and there is nothing in this system that can notice. Nothing here senses the world, and that is the gap the rest of the lab closes.
 
 {: .sanity_check}
 Your script stacks and unstacks three blocks repeatedly without intervention.
@@ -120,12 +120,12 @@ Now switch to the codebase you will use for the rest of the lab. Start the contr
 
 1. Open `src/state_machine.py` and find the waypoint handlers. They are stubs.
 2. Implement a waypoint follower: given a list of joint-space configurations, drive the arm through them in order.
-3. Give it a list of waypoints of your own choosing so that the arm performs a short, deliberate routine — make it a dance if you like. Six to ten waypoints is plenty.
+3. Give it a list of waypoints of your own choosing so that the arm performs a short, deliberate routine. Make it a dance if you like. Six to ten waypoints is plenty.
 4. Trigger it from the GUI and watch it run.
 
 **Hints**
 
-- Joint angles in this codebase are **radians**. The GUI converts to degrees for display only — see [Units and conventions](/docs/armlab/software#units-and-conventions).
+- Joint angles in this codebase are **radians**. The GUI converts to degrees for display only. See [Units and conventions](/docs/armlab/software#units-and-conventions).
 - Check every waypoint against the joint limits before you send it. An unreachable configuration will be refused by the arm, not silently clamped.
 - The arm needs time to reach each waypoint. Decide how you know a motion is finished before starting the next one.
 - Start slow. The speed slider scales every motion command.
@@ -139,16 +139,16 @@ Teaching by demonstration is how a lot of industrial arms get programmed: you mo
 
 **Instructions**
 
-1. Put the arm into **teach mode** from the control station — the Manual Mode toggle calls `set_teach_mode()`. This arms hand-guiding, but does not start it.
+1. Put the arm into **teach mode** from the control station: the Manual Mode toggle calls `set_teach_mode()`. This arms hand-guiding, but does not start it.
 2. **Press the button on the arm.** That is what actually releases it: the arm now holds its own weight while staying easy to push around, so you can guide it by hand.
 3. Add a **record** control to the control station that captures the arm's current joint configuration as a waypoint.
 4. Add a **playback** control that replays the recorded waypoints in order.
 5. Add a way to insert **open gripper** and **close gripper** actions into the sequence, so a recorded plan can grip and release, not just move.
-6. Use it to teach the robot the **stacking** task — three blocks into a tower. Unstacking is not required.
+6. Use it to teach the robot the **stacking** task, three blocks into a tower. Unstacking is not required.
 
 **Hints**
 
-- A waypoint needs to carry the gripper state as well as the joint angles. Two consecutive waypoints can share a pose and differ only in whether the gripper is closed — that is exactly what a grasp looks like.
+- A waypoint needs to carry the gripper state as well as the joint angles. Two consecutive waypoints can share a pose and differ only in whether the gripper is closed. That is exactly what a grasp looks like.
 - Decide what happens on playback when a waypoint changes the gripper: the arm should finish moving, then actuate, then move on.
 - The Waypoint Recorder card in the GUI already has buttons wired to state-machine states. You can use them, or add your own.
 - Teach a few waypoints and play them back before you try to teach the whole stacking sequence.
@@ -158,12 +158,12 @@ You can hand-guide the arm, record a sequence that includes gripper actions, and
 
 ## Task 1.5  Calibrate the camera intrinsics
 
-The camera reports intrinsics of its own, burned in at the factory. Before you trust them, measure them yourself and see how close you get — and, more importantly, find out what makes a calibration worth trusting in the first place. Use the `utils/camera_calibration.py` tool; the [Camera Guide](/docs/armlab/how-to-guide/camera-guide) covers it in detail.
+The camera reports intrinsics of its own, burned in at the factory. Before you trust them, measure them yourself and see how close you get. More importantly, find out what makes a calibration worth trusting in the first place. Use the `utils/camera_calibration.py` tool; the [Camera Guide](/docs/armlab/how-to-guide/camera-guide) covers it in detail.
 
 **Instructions**
 
 1. **Measure your checkerboard.** You need two things:
-    - the number of **inner corners** across and down — the points where four squares meet, *not* the number of squares
+    - the number of **inner corners** across and down, the points where four squares meet, *not* the number of squares
     - the size of one square, with calipers
 
     {: .warning}
@@ -174,7 +174,7 @@ The camera reports intrinsics of its own, burned in at the factory. Before you t
 
     | Run | How to hold the board |
     | --- | --------------------- |
-    | A | **Flat on the board only.** Leave the checkerboard lying at `z = 0` and slide it around — near, far, left, right, corners — but never lift or tilt it. |
+    | A | **Flat on the board only.** Leave the checkerboard lying at `z = 0` and slide it around: near, far, left, right, corners, but never lift or tilt it. |
     | B | **All through the space.** Tilt it, turn it, hold it at different heights and distances, work it into the corners of the image as well as the middle. |
     | C | Your best effort, using what runs A and B taught you. |
 
@@ -188,7 +188,7 @@ The camera reports intrinsics of its own, burned in at the factory. Before you t
 - Capture a similar number of frames in each run, so you are comparing technique and not sample size.
 
 {: .highlight}
-**One of these three runs is not a valid calibration, and its reprojection error will not be what gives it away.** Work out which one, and why: think about what the camera never got to see. A flat board slid around in its own plane presents the same orientation to the camera every time, however many frames you take — and a solver that only ever sees one orientation cannot separate how big the board is from how far away it is.
+**One of these three runs is not a valid calibration, and its reprojection error will not be what gives it away.** Work out which one, and why: think about what the camera never got to see. A flat board slid around in its own plane presents the same orientation to the camera every time, however many frames you take, and a solver that only ever sees one orientation cannot separate how big the board is from how far away it is.
 
 {: .sanity_check}
 You have three sets of intrinsics and their errors written down beside the factory values, and you can say which run you would trust and why.
@@ -202,7 +202,7 @@ Later in the lab you will compute this automatically from AprilTags. First you a
 **Instructions**
 
 1. Measure the position of the camera relative to the robot base frame: how far along x, y and z its optical centre sits.
-2. Work out its orientation — which way the camera's axes point relative to the base frame.
+2. Work out its orientation, which way the camera's axes point relative to the base frame.
 3. Build the 4 × 4 homogeneous transform from those measurements. Be explicit about **which direction** it maps: world into camera, or camera into world.
 4. Get the camera intrinsic matrix. `camera.py` reads it from the camera at startup and prints it:
     ```bash
@@ -227,7 +227,7 @@ Later in the lab you will compute this automatically from AprilTags. First you a
 - Draw the two coordinate frames before you write down any numbers. Most of the difficulty here is bookkeeping, not arithmetic.
 - A point in the world becomes a pixel in two steps: world → camera frame using the extrinsics, camera frame → pixel using the intrinsics. Keep them separate and you can debug them separately.
 - Remember the camera looks *down* at the board. Its z axis points roughly along the board's −z.
-- Your numbers will not match well. That is the point — quantify how badly, and think about why.
+- Your numbers will not match well. That is the point. Quantify how badly, and think about why.
 
 {: .sanity_check}
 You have predicted and measured pixel coordinates for all four points, and you can explain the sign and rough size of the disagreement.
@@ -238,7 +238,7 @@ Submit the following on Canvas.
 
 {: .submission}
 **1)** A short video of the arm replaying your taught sequence from Task 1.4, gripper actions included. <br>
-**2)** Your recorded waypoint list from Task 1.4 as a table — all six joint angles plus the gripper state for each waypoint, **with units stated**. <br>
+**2)** Your recorded waypoint list from Task 1.4 as a table, with all six joint angles plus the gripper state for each waypoint, **with units stated**. <br>
 **3)** Two or three sentences on how you represented a waypoint, and why the gripper state is stored with the pose rather than in a separate list. <br>
 **4)** Your Task 1.5 intrinsics table: for each of the three runs, the RMS error and fx, fy, cx, cy beside the factory values, plus a sentence on which run you trust and why. <br>
 **5)** A labelled sketch of your Task 1.6 setup: the robot base frame, the camera frame, both sets of axes, and the distances you measured. <br>
@@ -251,4 +251,4 @@ From this checkpoint, carry the following into your final report: <br>
 **1)** The labelled frame diagram from Task 1.6. <br>
 **2)** The extrinsic matrix and how you arrived at it. <br>
 **3)** The predicted-vs-measured pixel table for the four board points. <br>
-**4)** Your analysis of the error — its sources, its size, and what it implies about calibrating this way.
+**4)** Your analysis of the error: its sources, its size, and what it implies about calibrating this way.

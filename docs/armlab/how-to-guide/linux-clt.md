@@ -7,7 +7,7 @@ parent: How-to Guide
 last_modified_at: 2026-09-02 12:00:00 -0400
 ---
 
-> Almost everything in this lab happens in a terminal. This page covers the commands you will actually use, and a few habits that will save you a lot of time. You do not need to memorize it — skim it once, then come back when you get stuck.
+> Almost everything in this lab happens in a terminal. This page covers the commands you will actually use, and a few habits that will save you a lot of time. You do not need to memorize it. Skim it once, then come back when you get stuck.
 
 ### Contents
 * TOC
@@ -39,15 +39,15 @@ If Tab does not complete a script name, the script may not be executable. See [R
 (env550lab) student@ROB550-AM:~/armlab$
 ```
 
-- `(env550lab)` — the active conda environment. If you do not see this, your code will not run
-- `student` — the user you are logged in as
-- `ROB550-AM` — the machine name
-- `~/armlab` — **where you are right now**. `~` means your home directory
-- `$` — end of the prompt; what you type goes after it
+- `(env550lab)`: the active conda environment. If you do not see this, your code will not run
+- `student`: the user you are logged in as
+- `ROB550-AM`: the machine name
+- `~/armlab`: **where you are right now**. `~` means your home directory
+- `$`: end of the prompt; what you type goes after it
 
 ## Finding your way around
 
-### `pwd` — where am I?
+### `pwd`: where am I?
 
 ```bash
 pwd
@@ -57,7 +57,7 @@ pwd
 /home/student/armlab
 ```
 
-### `ls` — what is here?
+### `ls`: what is here?
 
 ```bash
 ls
@@ -75,11 +75,11 @@ install_scripts  README.md  src
 | `ls -l` | Long form: permissions, owner, size, modification date |
 | `ls -a` | Includes hidden files (anything starting with `.`, like `.git`) |
 | `ls -lh` | Long form with human-readable sizes (`4.0K`, `1.2M`) |
-| `ls -lt` | Sorted by time, newest first — handy for "which file did I just create?" |
+| `ls -lt` | Sorted by time, newest first, handy for "which file did I just create?" |
 
 Flags combine, so `ls -alh` is all three at once.
 
-### `cd` — move somewhere else
+### `cd`: move somewhere else
 
 ```bash
 cd src
@@ -123,7 +123,7 @@ Your armlab repo **must** be cloned directly into your home directory (`~/armlab
 | `less file.py` | Page through a long file. Arrows/PgUp/PgDn to move, `/word` to search, **`q` to quit** |
 | `head -n 20 file.py` | First 20 lines |
 | `tail -n 20 file.py` | Last 20 lines |
-| `tail -f log.txt` | Last lines, then **keep watching** as the file grows — good for logs while a program runs |
+| `tail -f log.txt` | Last lines, then **keep watching** as the file grows, good for logs while a program runs |
 
 {: .note}
 If you find yourself stuck in a full-screen program with no prompt, you are probably in `less` or `man`. Press `q`.
@@ -142,7 +142,7 @@ rm file.py                  # delete a file
 rm -r folder/               # delete a folder and its contents
 ```
 
-`mv` is both "move" and "rename" — renaming is just moving to a new name in the same place.
+`mv` is both "move" and "rename": renaming is just moving to a new name in the same place.
 
 The `-r` flag on `cp` and `rm` stands for **recursive**: apply this to the folder and everything inside it.
 
@@ -164,7 +164,7 @@ Wildcards expand *before* the command runs. `rm *` deletes everything in the cur
 
 ## Finding things
 
-### `grep` — search inside files
+### `grep`: search inside files
 
 This is one of the most valuable commands you will learn. It finds text *inside* files, which is how you locate a function or a variable in a codebase you did not write.
 
@@ -184,7 +184,7 @@ src/state_machine.py:88:        self.rxarm.set_position(...)
 | `-i` | Ignore case |
 | `-w` | Match whole words only |
 
-### `find` — search for files by name
+### `find`: search for files by name
 
 ```bash
 find . -name "*.png"        # every PNG below the current directory
@@ -215,7 +215,7 @@ cd src
 python control_station.py
 ```
 
-`which` tells you where a command actually comes from — useful for confirming you are running the Python inside your conda environment and not the system one:
+`which` tells you where a command actually comes from, which is useful for confirming you are running the Python inside your conda environment and not the system one:
 
 ```bash
 which python
@@ -251,7 +251,7 @@ Read the first ten characters as: type, then three groups of **r**ead/**w**rite/
 {: .important}
 A stale Python process will hold onto the camera or the arm connection and make the next run fail with a "device busy" error. When something refuses to start and you cannot see why, check `ps aux | grep python` for a leftover process and kill it.
 
-A program that occupies the terminal is not stuck — that is normal. Open a second terminal (**ctrl+alt+t**) to run something else at the same time.
+A program that occupies the terminal is not stuck. That is normal. Open a second terminal (**ctrl+alt+t**) to run something else at the same time.
 
 ## Pipes and redirection
 
@@ -287,7 +287,7 @@ Only use `sudo` when a command genuinely needs it, such as `apt`. Running your l
 
 ## Checking hardware and the network
 
-These matter in this lab specifically — the camera is on USB and the arm is on the network.
+These matter in this lab specifically: the camera is on USB and the arm is on the network.
 
 ```bash
 lsusb                        # list USB devices; confirm the camera is attached
@@ -297,7 +297,7 @@ ping 192.168.1.xxx           # can this laptop reach an address? ctrl+c to stop
 ```
 
 {: .note}
-If the control station cannot connect to the arm, `ping` the address you set as `XARM_IP` before you start debugging your code. If `ping` does not get replies, the problem is the cable, the IP, or the arm — not your Python.
+If the control station cannot connect to the arm, `ping` the address you set as `XARM_IP` before you start debugging your code. If `ping` does not get replies, the problem is the cable, the IP, or the arm, not your Python.
 
 
 ## Conda in the terminal

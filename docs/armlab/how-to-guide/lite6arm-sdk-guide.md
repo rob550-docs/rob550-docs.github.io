@@ -10,7 +10,7 @@ last_modified_at: 2026-09-02 12:00:00 -0400
 > The arm at your station is a **UFACTORY Lite 6**, and you talk to it over the network with the **xArm Python SDK**. This page summarizes the hardware limits you have to design around and the SDK calls you will actually use.
 
 {: .note}
-In this lab you will normally go through the wrapper in `src/lite6arm.py` rather than calling the SDK directly. Read this page anyway — the wrapper is thin, and every error message you see comes from the layer described here.
+In this lab you will normally go through the wrapper in `src/lite6arm.py` rather than calling the SDK directly. Read this page anyway: the wrapper is thin, and every error message you see comes from the layer described here.
 
 ### Contents
 * TOC
@@ -18,7 +18,7 @@ In this lab you will normally go through the wrapper in `src/lite6arm.py` rather
 
 ## The arm
 
-The Lite 6 is a 6-DOF collaborative arm with the control electronics built into its base. Its specifications, joint limits and payload are on the [Hardware page](/docs/armlab/hardware#ufactory-lite-6-arm) — this page covers only how you talk to it.
+The Lite 6 is a 6-DOF collaborative arm with the control electronics built into its base. Its specifications, joint limits and payload are on the [Hardware page](/docs/armlab/hardware#ufactory-lite-6-arm). This page covers only how you talk to it.
 
 Two hardware facts drive most of the software problems you will hit:
 
@@ -51,7 +51,7 @@ arm.set_state(0)    # ready to move
 ```
 
 {: .important}
-You must repeat this sequence **every time you clear an error**, and after an emergency stop. Clearing the error alone does not make the arm ready again — a very common "my code stopped working and I don't know why" bug.
+You must repeat this sequence **every time you clear an error**, and after an emergency stop. Clearing the error alone does not make the arm ready again, and it is a very common "my code stopped working and I don't know why" bug.
 
 ## Modes
 
@@ -61,7 +61,7 @@ You must repeat this sequence **every time you clear an error**, and after an em
 | ---- | ------- | --------------- |
 | 0 | Position control | **The default.** Point-to-point moves |
 | 1 | Servo motion | High-frequency small steps, streamed by you |
-| 2 | Joint teaching | **Free-drive.** Arms hand-guiding — the button on the arm then releases it |
+| 2 | Joint teaching | **Free-drive.** Arms hand-guiding; the button on the arm then releases it |
 | 3 | Cartesian teaching | Not available |
 | 4 | Joint velocity control | Velocity commands per joint |
 | 5 | Cartesian velocity control | Velocity commands on the TCP |
@@ -72,7 +72,7 @@ You must repeat this sequence **every time you clear an error**, and after an em
 **Mode 2 is how you do teach-and-repeat.** Put the arm in joint teaching mode, press the button on the arm to release it, physically guide it to a pose, read the joint angles back with `get_servo_angle()`, and store them. Switch back to mode 0 to replay them.
 
 {: .note}
-`set_mode(2)` only arms hand-guiding — the arm becomes back-driveable when the button on it is pressed. It stays under gravity compensation throughout, so it holds its own weight rather than dropping.
+`set_mode(2)` only arms hand-guiding: the arm becomes back-driveable when the button on it is pressed. It stays under gravity compensation throughout, so it holds its own weight rather than dropping.
 
 Mode 1 is a trap for beginners: it executes each command immediately at maximum speed, so it only behaves sensibly if you are streaming small increments at a high, steady rate. Stay in mode 0 unless you know you need otherwise.
 
@@ -111,11 +111,11 @@ Most methods take an `is_radian` argument, and you can set the default for the w
 arm = XArmAPI('192.168.1.xxx', is_radian=True)
 ```
 
-Pick one convention and apply it consistently. If your kinematics code works in radians — and it probably should — decide early whether you convert at the boundary or set `is_radian=True` everywhere, and write it down for your teammates.
+Pick one convention and apply it consistently. If your kinematics code works in radians, and it probably should, decide early whether you convert at the boundary or set `is_radian=True` everywhere, and write it down for your teammates.
 
 ## Reading the arm's state
 
-Both getters return a `(code, value)` tuple — the code first, then the data:
+Both getters return a `(code, value)` tuple, the code first and then the data:
 
 ```python
 code, pose = arm.get_position()      # [x, y, z, roll, pitch, yaw]
@@ -156,7 +156,7 @@ Common arguments:
 | `relative` | Treat the position as an offset from the current one |
 
 {: .important}
-`wait=True` is what you want while you are learning — without it your next command is issued while the arm is still moving, and a sequence of waypoints will blur together or be dropped. Use `wait=False` deliberately, not by accident.
+`wait=True` is what you want while you are learning. Without it your next command is issued while the arm is still moving, and a sequence of waypoints will blur together or be dropped. Use `wait=False` deliberately, not by accident.
 
 ## The gripper
 
@@ -171,7 +171,7 @@ arm.stop_lite6_gripper()    # de-energize and hold where it is
 Each returns a code like any other SDK call. `open` and `close` drive the gripper; `stop` cuts the drive.
 
 {: .warning}
-The gripper is **binary** — no width, no force, no feedback about whether it grasped anything. Your state machine has to verify a grasp some other way, such as looking at it with the camera, and should aim for a repeatable approach pose rather than a closed loop on grip force.
+The gripper is **binary**: no width, no force, no feedback about whether it grasped anything. Your state machine has to verify a grasp some other way, such as looking at it with the camera, and should aim for a repeatable approach pose rather than a closed loop on grip force.
 
 {: .note}
 Give the gripper time to finish moving before the arm drives away. The call returns as soon as the command is sent, not when the jaws have finished travelling.
@@ -186,7 +186,7 @@ Give the gripper time to finish moving before the arm drives away. The call retu
 | 1 | There are errors that have not been cleared |
 | 2 | There are warnings that have not been cleared |
 | 9 | State is not ready to move |
-| −2 | Arm not ready — motion not enabled, or state not set |
+| −2 | Arm not ready: motion not enabled, or state not set |
 | −9 | Emergency stop active |
 
 To inspect and clear a controller error:
@@ -196,7 +196,7 @@ code, (err, warn) = arm.get_err_warn_code()
 arm.clean_error()
 arm.clean_warn()
 
-# the arm is NOT ready yet — redo the startup sequence
+# the arm is NOT ready yet, redo the startup sequence
 arm.motion_enable(enable=True)
 arm.set_mode(0)
 arm.set_state(0)
@@ -208,9 +208,9 @@ Controller error codes worth recognizing:
 | ----- | ------- |
 | 1, 2, 3 | Emergency stop (button, control-box IO, three-state switch) |
 | 10 | Servo motor error |
-| 21 | Kinematics solution failed — the pose you asked for has no IK solution |
+| 21 | Kinematics solution failed: the pose you asked for has no IK solution |
 | 22 | Self-collision detected |
-| 23 | Joint angle exceeds limit — check against the joint limit table above |
+| 23 | Joint angle exceeds limit: check against the joint limit table above |
 | 24 | Commanded speed exceeds the maximum |
 | 31 | Abnormal current, consistent with a collision |
 | 35 | Safety boundary limit triggered |
@@ -220,8 +220,8 @@ Errors 21 and 23 are the ones you will meet while writing IK. Both mean the targ
 
 ## Reference
 
-- [xArm Python SDK on GitHub](https://github.com/xArm-Developer/xArm-Python-SDK) — source, and the `example/wrapper/lite6/` folder of runnable examples
-- [Full API documentation](https://github.com/xArm-Developer/xArm-Python-SDK/blob/master/doc/api/xarm_api.md) — every method on `XArmAPI`
+- [xArm Python SDK on GitHub](https://github.com/xArm-Developer/xArm-Python-SDK): source, and the `example/wrapper/lite6/` folder of runnable examples
+- [Full API documentation](https://github.com/xArm-Developer/xArm-Python-SDK/blob/master/doc/api/xarm_api.md): every method on `XArmAPI`
 - [API return and error codes](https://github.com/xArm-Developer/xArm-Python-SDK/blob/master/doc/api/xarm_api_code.md)
 - [UFACTORY developer documentation](https://docs.api.ufactory.cc/)
 - [Lite 6 product page and specifications](https://www.ufactory.us/product/lite-6)

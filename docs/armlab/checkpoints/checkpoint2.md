@@ -291,18 +291,32 @@ Turn the results into a picture: a heat map, or contours over the board. This co
 
 ### 2.8c  Check it in three dimensions
 
-The board plane is only one slice of the workspace. To test the rest, you need a target whose true position you know at heights above the board, and the arm is a far better ruler than a tape measure.
+The board plane is only one slice of the workspace. To test the rest, you need targets whose true positions you know at heights above the board. There are two ways to get them. Use the first if your station has a calibration fixture; otherwise use the second. Either way you end up with **four board locations × three heights**, twelve points.
 
-Use the **calibration fixture**: a 3D-printed AprilTagged object the gripper grips in a known, repeatable way, so the tag's pose relative to the end-effector frame is known to a fraction of a millimetre.
+**Option 1: the calibration fixture**
 
-**Instructions**
+The fixture is a 3D-printed AprilTagged object the gripper grips in a known, repeatable way, so the tag's pose relative to the end-effector frame is known to a fraction of a millimetre. That makes the arm your ruler, and it is a far better one than a tape measure.
 
 1. Grip the fixture.
-2. Drive the arm to **four board locations × three heights** (roughly `z` = 50, 150 and 250 mm), using the jog controls or waypoints from Checkpoint 1.
+2. Drive the arm to four board locations at roughly `z` = 50, 150 and 250 mm, using the jog controls or waypoints from Checkpoint 1.
 3. At each pose, record two things:
     - **truth**: the arm's reported end-effector pose, plus the known fixture offset
-    - **estimate**: the fixture's position from your camera pipeline
+    - **estimate**: the fixture's tag position from your camera pipeline
 4. Record the error in each axis and the total distance, at all twelve poses.
+
+**Option 2: block stacks**
+
+You measured your blocks in Checkpoint 1, and the board's grid gives you known positions. That is enough to build targets at known heights by hand.
+
+1. Choose four grid intersections: two near the middle of the board, two near its edges.
+2. At each one, in turn, place a stack of one block, then two, then three.
+3. For each stack, record two things:
+    - **truth**: the grid coordinates, and `z` = the number of blocks × the block height you measured
+    - **estimate**: hover the mouse over the centre of the top face and read the world coordinate from the readout under the video
+4. Record the error in each axis and the total distance, at all twelve points.
+
+{: .note}
+Option 2 is less precise: your placement of the stack and your click on its centre each contribute a millimetre or two, on top of whatever the calibration gets wrong. Say so when you report the numbers, and do not read a 2 mm error as a calibration error when it could be your click.
 
 **What to report**
 
@@ -327,7 +341,7 @@ Submit the following on Canvas.
 **4)** Your extrinsic matrix from Task 2.5, with a statement of which direction it maps, and a comparison against the hand-measured one from Checkpoint 1. <br>
 **5)** A short video of the calibration: the GUI before calibrating, then the camera re-aimed on its bracket, then Calibrate pressed, showing the Workspace view square up again. <br>
 **6)** A figure of your grid projection (2.8a) and your board-plane error map (2.8b). <br>
-**7)** Your twelve-pose fixture table (2.8c): truth, estimate and error per axis, with mean and maximum split by region and by height.
+**7)** Your twelve-point 3D table (2.8c), stating which option you used: truth, estimate and error per axis, with mean and maximum split by region and by height.
 
 {: .required_for_report}
 From this checkpoint, carry the following into your final report: <br>
@@ -336,4 +350,4 @@ From this checkpoint, carry the following into your final report: <br>
 **3)** The extrinsic matrix and how you obtained it, compared against the hand-measured result. <br>
 **4)** The equations that take a pixel and a depth reading to a world coordinate. <br>
 **5)** Your homography matrix, and which points you used to compute it. <br>
-**6)** Your calibration accuracy: the grid projection figure, the board-plane error map, and the twelve-pose table, with your account of where the error comes from and how it varies across the workspace.
+**6)** Your calibration accuracy: the grid projection figure, the board-plane error map, and the twelve-point 3D table, with your account of where the error comes from and how it varies across the workspace.

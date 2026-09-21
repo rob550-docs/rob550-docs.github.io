@@ -14,14 +14,14 @@ last_modified_at: 2026-09-02 12:00:00 -0400
 
 ## Station Overview
 <a class="image-link" href="/assets/images/armlab/hardware/station-overview.jpg">
-<img src="/assets/images/armlab/hardware/station-overview.jpg" alt="A full Arm Lab station: an aluminium frame over the table carrying the camera, the Lite 6 arm behind a gridded board with AprilTags at its corners, a laptop to the left and the red emergency stop in the foreground" style="max-width:560px;"/>
+<img src="/assets/images/armlab/hardware/station-overview.jpg" alt="A full Arm Lab station: an aluminum frame over the table carrying the camera, the Lite 6 arm behind a gridded board with AprilTags at its corners, a laptop to the left and the red emergency stop in the foreground" style="max-width:560px;"/>
 </a>
 
 Every station has the same parts:
 
 - the **Lite 6 arm**, bolted to the back edge of the board
 - the **board**, marked with a 50 mm grid and carrying an AprilTag near each corner
-- the **aluminium frame** spanning the table, with the RealSense camera mounted on the top rail looking down
+- the **aluminum frame** spanning the table, with the RealSense camera mounted on the top rail looking down
 - the **24 V power supply**, under the board
 - the **laptop**, running the control station
 - the **emergency stop**, loose on the table beside the arm, the red button in the foreground above
@@ -47,7 +47,7 @@ The arm is a **UFACTORY Lite 6**, a 6-DOF collaborative arm with the control ele
 The six joints are numbered from the base outwards. You will see these numbers in the web interface, in the control station readouts, and in every error message the arm produces.
 
 <a class="image-link" href="/assets/images/armlab/hardware/xarm_joint_lables.png">
-<img src="/assets/images/armlab/hardware/xarm_joint_lables.png" alt="The Lite 6 with each joint labelled, Joint 1 at the base through Joint 6 at the tool flange" style="max-width:340px;"/>
+<img src="/assets/images/armlab/hardware/xarm_joint_lables.png" alt="The Lite 6 with each joint labeled, Joint 1 at the base through Joint 6 at the tool flange" style="max-width:340px;"/>
 </a>
 
 Each joint also has a sign convention, which way counts as a positive angle:
@@ -57,7 +57,7 @@ Each joint also has a sign convention, which way counts as a positive angle:
 </a>
 
 {: .note}
-Check a joint's sign here before you assume your maths is wrong. A forward-kinematics result that is right in magnitude but wrong in sign is usually a joint turning the opposite way to what you assumed.
+Check a joint's sign here before you assume your math is wrong. A forward-kinematics result that is right in magnitude but wrong in sign is usually a joint turning the opposite way to what you assumed.
 
 Joint travel limits are **not symmetric**:
 
@@ -108,7 +108,7 @@ It is a parallel-jaw design: two flat fingers that travel together, driven by th
 | Grasp stroke | 50 mm |
 | Overall length | 100 mm |
 | Mass | ~50 g |
-| Flange to finger centre | 85 mm |
+| Flange to finger center | 85 mm |
 
 {: .important}
 **The 85 mm offset is the number your kinematics needs.** Forward kinematics gives you the pose of the **tool flange**; the point that actually grasps a block sits 85 mm further along the tool axis. Leave it out and every pick will aim 85 mm short.
@@ -167,7 +167,7 @@ The camera is mounted on an **aluminum frame above the arm**, looking down at th
 Aiming the camera **invalidates your extrinsic calibration**. The calibration solves for where the camera sits relative to the robot, so any time you loosen that screw you have to run Calibrate again before world coordinates mean anything.
 
 <a class="image-link" href="/assets/images/armlab/hardware/camera-mount.jpg">
-<img src="/assets/images/armlab/hardware/camera-mount.jpg" alt="The RealSense L515 held in a black bracket bolted to the aluminium rail above the board, with the hex screw that sets its aim" style="max-width:400px;"/>
+<img src="/assets/images/armlab/hardware/camera-mount.jpg" alt="The RealSense L515 held in a black bracket bolted to the aluminum rail above the board, with the hex screw that sets its aim" style="max-width:400px;"/>
 </a>
 
 The hex screw in the bracket is the one to loosen when you re-aim the camera. The camera sits roughly **1 m above the board**.

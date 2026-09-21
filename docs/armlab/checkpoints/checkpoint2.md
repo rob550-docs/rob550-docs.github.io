@@ -52,7 +52,7 @@ Given six joint angles, where is the end effector? You will answer it twice, by 
 
 **Hints**
 
-- The codebase is **radians and millimetres**. See [Units and conventions](/docs/armlab/software#units-and-conventions).
+- The codebase is **radians and millimeters**. See [Units and conventions](/docs/armlab/software#units-and-conventions).
 - Orientation is roll-pitch-yaw about **fixed** axes, matching the SDK, not ZYZ Euler.
 - FK gives you the **flange**. The point that grasps a block is 85 mm further along the tool axis; you will need that in Checkpoint 3.
 - The visual check is the fastest way to find a sign error. A joint turning the wrong way puts the frame somewhere obviously wrong long before the numbers make it clear.
@@ -134,10 +134,10 @@ When the numbers disagree, the shape of the disagreement points at the cause:
 | Large and unpatterned | Transforms chained in the wrong order |
 
 {: .highlight}
-**A correct FK agrees with the vendor to within floating-point noise**: micrometres and millionths of a degree, not millimetres. Both solvers are evaluating the same chain of transforms in double precision, so there is nothing to accumulate. A 2 mm disagreement is not rounding and is not "close enough": it is a real error you have not found yet.
+**A correct FK agrees with the vendor to within floating-point noise**: micrometers and millionths of a degree, not millimeters. Both solvers are evaluating the same chain of transforms in double precision, so there is nothing to accumulate. A 2 mm disagreement is not rounding and is not "close enough": it is a real error you have not found yet.
 
 {: .sanity_check}
-Your maximum position error over several hundred random configurations is smaller than a micrometre, and your maximum orientation error is negligible.
+Your maximum position error over several hundred random configurations is smaller than a micrometer, and your maximum orientation error is negligible.
 
 ## Task 2.3  Forward kinematics again, by product of exponentials
 
@@ -162,7 +162,7 @@ For a revolute joint, with the arm at its home configuration:
 Any point on the axis gives the same `v`, which is a useful thing to check yourself with. Pick two different points on the same axis and confirm you get the same answer.
 
 {: .note}
-Units are millimetres, as everywhere else in this file. `w` is dimensionless, `v` carries the length.
+Units are millimeters, as everywhere else in this file. `w` is dimensionless, `v` carries the length.
 
 **Getting `M` right first**
 
@@ -196,7 +196,7 @@ Before trusting the detector, look at what it sees. `VideoThread` already runs t
 
 1. Implement `draw_tags_in_rgb_image()` in `src/camera.py`. For every detection, draw:
     - the tag's **ID**
-    - a marker on its **centre**
+    - a marker on its **center**
     - its **outline**, from the four corners
 2. Select the **Tags** view in the GUI to see your work.
 
@@ -224,12 +224,12 @@ Now compute the camera pose automatically, and put it behind the **Calibrate** b
 **Hints**
 
 - `cv2.solvePnP` takes your known world points, the matching image points, and `self.intrinsic_matrix`, and returns a rotation vector and translation. `cv2.Rodrigues` turns the rotation vector into a matrix.
-- The detector is currently called without pose estimation, so detections give you corners and centres but not tag poses. Either work from the centres, or use all four corners of every tag, which gives you sixteen points instead of four and a much better-conditioned solve. `TAG_SIZE_MM` is defined for exactly this.
+- The detector is currently called without pose estimation, so detections give you corners and centers but not tag poses. Either work from the centers, or use all four corners of every tag, which gives you sixteen points instead of four and a much better-conditioned solve. `TAG_SIZE_MM` is defined for exactly this.
 - Sanity-check the answer before you trust it: the camera sits about 1 m above the board looking down, so the translation should say so.
 - Be explicit with yourself about which direction your matrix maps. Storing world → camera when you meant camera → world produces results that look almost right, which is the worst kind of wrong.
 
 {: .sanity_check}
-Pressing Calibrate reports success, and the recovered camera position is within a few centimetres of where you measured it in Checkpoint 1.
+Pressing Calibrate reports success, and the recovered camera position is within a few centimeters of where you measured it in Checkpoint 1.
 
 ## Task 2.6  From pixels to the world
 
@@ -245,13 +245,13 @@ Implement the three functions that make up the chain:
 
 **Hints**
 
-- Raw depth units are not millimetres. Multiply by `self.depth_scale_mm`.
-- Depth is already aligned to colour, so `(u, v)` means the same point in both images. That alignment is why this works at all.
+- Raw depth units are not millimeters. Multiply by `self.depth_scale_mm`.
+- Depth is already aligned to color, so `(u, v)` means the same point in both images. That alignment is why this works at all.
 - Deprojection is the intrinsic matrix run backwards: `X = (u − cx)·Z / fx`, `Y = (v − cy)·Z / fy`.
 - Depth is noisy on dark, shiny or steeply angled surfaces, and returns zero where it has no reading. Decide what your code does with a zero.
 
 {: .sanity_check}
-Hover over a grid intersection you know the coordinates of. The world readout under the video should land within a few millimetres, and read `(0, 0)` at the base of the arm.
+Hover over a grid intersection you know the coordinates of. The world readout under the video should land within a few millimeters, and read `(0, 0)` at the base of the arm.
 
 ## Task 2.7  The top-down workspace view
 
@@ -266,8 +266,8 @@ The camera looks at the board from an angle, so the board appears as a trapezoid
 
 **Hints**
 
-- Source points can be the tag centres (you have those pixel coordinates already) or the board corners (you know their world coordinates and now have the means to project them into the image).
-- Choose destination points that keep the board's aspect ratio. Stretching it will not break the maths but will make everything harder to look at.
+- Source points can be the tag centers (you have those pixel coordinates already) or the board corners (you know their world coordinates and now have the means to project them into the image).
+- Choose destination points that keep the board's aspect ratio. Stretching it will not break the math but will make everything harder to look at.
 - Step 3 is the one people forget. The mouse readout and Click Pick & Place both go through it, and if it is missing, clicks in the Workspace view land somewhere else entirely.
 
 {: .sanity_check}
@@ -295,7 +295,7 @@ The board plane is only one slice of the workspace. To test the rest, you need t
 
 **Option 1: the calibration fixture**
 
-The fixture is a 3D-printed AprilTagged object the gripper grips in a known, repeatable way, so the tag's pose relative to the end-effector frame is known to a fraction of a millimetre. That makes the arm your ruler, and it is a far better one than a tape measure.
+The fixture is a 3D-printed AprilTagged object the gripper grips in a known, repeatable way, so the tag's pose relative to the end-effector frame is known to a fraction of a millimeter. That makes the arm your ruler, and it is a far better one than a tape measure.
 
 1. Grip the fixture.
 2. Drive the arm to four board locations at roughly `z` = 50, 150 and 250 mm, using the jog controls or waypoints from Checkpoint 1.
@@ -312,21 +312,21 @@ You measured your blocks in Checkpoint 1, and the board's grid gives you known p
 2. At each one, in turn, place a stack of one block, then two, then three.
 3. For each stack, record two things:
     - **truth**: the grid coordinates, and `z` = the number of blocks × the block height you measured
-    - **estimate**: hover the mouse over the centre of the top face and read the world coordinate from the readout under the video
+    - **estimate**: hover the mouse over the center of the top face and read the world coordinate from the readout under the video
 4. Record the error in each axis and the total distance, at all twelve points.
 
 {: .note}
-Option 2 is less precise: your placement of the stack and your click on its centre each contribute a millimetre or two, on top of whatever the calibration gets wrong. Say so when you report the numbers, and do not read a 2 mm error as a calibration error when it could be your click.
+Option 2 is less precise: your placement of the stack and your click on its center each contribute a millimeter or two, on top of whatever the calibration gets wrong. Say so when you report the numbers, and do not read a 2 mm error as a calibration error when it could be your click.
 
 **What to report**
 
-Mean and maximum error, broken down two ways: **centre versus edge** of the board, and **low versus high** above it. Then account for what you see.
+Mean and maximum error, broken down two ways: **center versus edge** of the board, and **low versus high** above it. Then account for what you see.
 
 {: .highlight}
 Expect it to be worse at the edges, and worse high up. Three reasons are worth separating: the board is viewed obliquely near the edges, depth is noisiest at grazing incidence, and all four tags sit in one region of the board, so a pose fitted to them is being *extrapolated* everywhere else. Which of those dominates is something your numbers can tell you.
 
 {: .sanity_check}
-You can state your calibration's accuracy as a number with a region attached, not "a few millimetres" but "3 mm near the middle, 12 mm at the far corner, and worse above 200 mm."
+You can state your calibration's accuracy as a number with a region attached, not "a few millimeters" but "3 mm near the middle, 12 mm at the far corner, and worse above 200 mm."
 
 ---
 

@@ -21,9 +21,9 @@ This checkpoint gets you moving the arm and reasoning about where things are in 
 
 The board the arm is mounted on has a **50 mm × 50 mm grid**. The frame everything in this lab is expressed in is defined like this:
 
-- the **origin** is the centre of the arm's mounting location, which sits on grid lines
+- the **origin** is the center of the arm's mounting location, which sits on grid lines
 - the **board surface is `z = 0`**
-- positions are in **millimetres**
+- positions are in **millimeters**
 
 Because the origin is on a grid line, every grid intersection is a whole multiple of 50 mm away from it, which is what makes the board a usable ruler.
 
@@ -79,7 +79,7 @@ You have moved a block from one place on the board to another using only the web
 
 ## Task 1.2  Script the arm from the web interface
 
-Click **Python** in the left sidebar to open the built-in IDE. Under `Python_Examples` you will find **`0003_pick_and_place.py`**. Start from that one. It already does a single pick and place, so most of your work is generalising it to three blocks.
+Click **Python** in the left sidebar to open the built-in IDE. Under `Python_Examples` you will find **`0003_pick_and_place.py`**. Start from that one. It already does a single pick and place, so most of your work is generalizing it to three blocks.
 
 <a class="image-link" href="/assets/images/armlab/checkpoints/ufactory-python-editor.png">
 <img src="/assets/images/armlab/checkpoints/ufactory-python-editor.png" alt="The Python IDE in UFACTORY Studio with 0003_pick_and_place.py open, showing the connection, mode and state calls followed by set_position and gripper commands" style="max-width:800px; width:100%;"/>
@@ -92,7 +92,7 @@ Read it before you change anything. It shows the startup sequence (`set_mode(0)`
 
 **Instructions**
 
-1. Place three blocks in front of the robot at three grid positions of your choosing. Write the positions down in millimetres in the base frame.
+1. Place three blocks in front of the robot at three grid positions of your choosing. Write the positions down in millimeters in the base frame.
 2. Write a script that **stacks** the three blocks into a single tower at a fourth position.
 3. Extend it to **unstack** them, returning each block to its original position.
 4. Test it. Fix the parts that do not work.
@@ -195,13 +195,13 @@ You have three sets of intrinsics and their errors written down beside the facto
 
 ## Task 1.6  Measure the camera extrinsics
 
-The camera sees pixels. The arm works in millimetres in its own base frame. The **extrinsic matrix** is what connects them: a homogeneous transform describing where the camera sits relative to the robot.
+The camera sees pixels. The arm works in millimeters in its own base frame. The **extrinsic matrix** is what connects them: a homogeneous transform describing where the camera sits relative to the robot.
 
 Later in the lab you will compute this automatically from AprilTags. First you are going to measure it by hand, with a tape measure, so that you know exactly what the numbers in that matrix mean.
 
 **Instructions**
 
-1. Measure the position of the camera relative to the robot base frame: how far along x, y and z its optical centre sits.
+1. Measure the position of the camera relative to the robot base frame: how far along x, y and z its optical center sits.
 2. Work out its orientation, which way the camera's axes point relative to the base frame.
 3. Build the 4 × 4 homogeneous transform from those measurements. Be explicit about **which direction** it maps: world into camera, or camera into world.
 4. Get the camera intrinsic matrix. `camera.py` reads it from the camera at startup and prints it:
@@ -241,14 +241,14 @@ Submit the following on Canvas.
 **2)** Your recorded waypoint list from Task 1.4 as a table, with all six joint angles plus the gripper state for each waypoint, **with units stated**. <br>
 **3)** Two or three sentences on how you represented a waypoint, and why the gripper state is stored with the pose rather than in a separate list. <br>
 **4)** Your Task 1.5 intrinsics table: for each of the three runs, the RMS error and fx, fy, cx, cy beside the factory values, plus a sentence on which run you trust and why. <br>
-**5)** A labelled sketch of your Task 1.6 setup: the robot base frame, the camera frame, both sets of axes, and the distances you measured. <br>
+**5)** A labeled sketch of your Task 1.6 setup: the robot base frame, the camera frame, both sets of axes, and the distances you measured. <br>
 **6)** Your 4 × 4 extrinsic matrix with real numbers, and a statement of which direction it maps. <br>
 **7)** A table for the four board points: predicted pixel, measured pixel, and the difference for each. <br>
 **8)** Two or three sentences on where the error comes from and how large you expected it to be.
 
 {: .required_for_report}
 From this checkpoint, carry the following into your final report: <br>
-**1)** The labelled frame diagram from Task 1.6. <br>
+**1)** The labeled frame diagram from Task 1.6. <br>
 **2)** The extrinsic matrix and how you arrived at it. <br>
 **3)** The predicted-vs-measured pixel table for the four board points. <br>
 **4)** Your analysis of the error: its sources, its size, and what it implies about calibrating this way.

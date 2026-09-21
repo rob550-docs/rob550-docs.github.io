@@ -76,15 +76,15 @@ self.arm = SimArm() if arm_mode == "sim" else Lite6Arm()
 ## Units and conventions
 
 {: .warning}
-**Internally this codebase is radians and millimetres.** The arm object is constructed as `XArmAPI(ip, is_radian=True)`, so every angle crossing the SDK boundary is in radians, even though the SDK's own default is degrees. Degrees appear **only** in GUI labels, where `np.degrees()` is applied at the last moment.
+**Internally this codebase is radians and millimeters.** The arm object is constructed as `XArmAPI(ip, is_radian=True)`, so every angle crossing the SDK boundary is in radians, even though the SDK's own default is degrees. Degrees appear **only** in GUI labels, where `np.degrees()` is applied at the last moment.
 
 | Quantity | Unit |
 | -------- | ---- |
 | Joint angles | radians |
-| Positions (`x`, `y`, `z`) | millimetres |
+| Positions (`x`, `y`, `z`) | millimeters |
 | Orientation (`roll`, `pitch`, `yaw`) | radians |
 | Joint limits | radians |
-| DH table `d` and `a` | millimetres |
+| DH table `d` and `a` | millimeters |
 | DH `theta_offset` and `alpha` | radians |
 
 The pose vector used everywhere, for FK output, IK input and the GUI readout, is:
@@ -166,7 +166,7 @@ A dictionary dispatch from a state name to a handler, polled at 20 Hz. `set_next
 | `playback_waypoints` | Playback Waypoints button | **Student lab** |
 | `pick_place` | Click Pick & Place toggle | **Student lab** |
 
-## `kinematics.py`: the maths
+## `kinematics.py`: the math
 
 Pure functions with no dependency on the arm or the GUI, which is what makes them testable on their own:
 

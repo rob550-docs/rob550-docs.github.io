@@ -98,7 +98,7 @@ So after a successful `set_state(0)`, a healthy idle arm reads back as state **2
 ## Units and conventions
 
 {: .warning}
-**The SDK works in millimetres and degrees by default.** Not metres, not radians. Mixing units is the most common source of bugs in this lab, and a factor-of-1000 error will drive the arm into the board.
+**The SDK works in millimeters and degrees by default.** Not meters, not radians. Mixing units is the most common source of bugs in this lab, and a factor-of-1000 error will drive the arm into the board.
 
 - Cartesian positions: `x`, `y`, `z` in **mm**
 - Orientation: `roll`, `pitch`, `yaw` in **degrees**
@@ -174,7 +174,7 @@ Each returns a code like any other SDK call. `open` and `close` drive the grippe
 The gripper is **binary**: no width, no force, no feedback about whether it grasped anything. Your state machine has to verify a grasp some other way, such as looking at it with the camera, and should aim for a repeatable approach pose rather than a closed loop on grip force.
 
 {: .note}
-Give the gripper time to finish moving before the arm drives away. The call returns as soon as the command is sent, not when the jaws have finished travelling.
+Give the gripper time to finish moving before the arm drives away. The call returns as soon as the command is sent, not when the jaws have finished traveling.
 
 ## Errors
 

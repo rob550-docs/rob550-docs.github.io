@@ -113,9 +113,9 @@ On hardware `arm.dh_params` is read from the arm itself, so the second call runs
 
 | Result | What it means |
 | ------ | ------------- |
-| Both agree with the vendor | You are done |
-| Firmware table passes, yours fails | Your chaining is right and `DH_STD` is wrong |
-| Both fail | The bug is in `get_transform_from_dh` or `FK_dh` |
+| The two runs agree with each other | Your `DH_STD` matches the firmware's table |
+| They disagree | Your chaining is right and `DH_STD` is wrong. The size of the gap tells you how wrong |
+| Both are far from the vendor by the same amount | Expected. See the accuracy note below |
 
 {: .note}
 The firmware's table has **seven** rows where `DH_STD` has six. Working out why is worth a minute of your time.
@@ -134,10 +134,10 @@ When the numbers disagree, the shape of the disagreement points at the cause:
 | Large and unpatterned | Transforms chained in the wrong order |
 
 {: .highlight}
-**A correct FK agrees with the vendor to within floating-point noise**: micrometers and millionths of a degree, not millimeters. Both solvers are evaluating the same chain of transforms in double precision, so there is nothing to accumulate. A 2 mm disagreement is not rounding and is not "close enough": it is a real error you have not found yet.
+**Aim to agree with the vendor to within 10 mm.** You will not do better than a few millimeters, and that is not your fault: every arm carries a per-arm factory calibration in its controller, the firmware uses it for FK, and the published DH table does not include it. On our arms that accounts for up to about 7 mm, varying with configuration. What you *should* see is a smooth residual with structure, not a wild one. If your error is tens of millimeters, or jumps, or grows without bound, that is a real bug sitting on top of the calibration floor. [Factory Calibration](/docs/armlab/factory-calibration) explains where those millimeters go and, optionally, how to remove them.
 
 {: .sanity_check}
-Your maximum position error over several hundred random configurations is smaller than a micrometer, and your maximum orientation error is negligible.
+Your maximum position error against the vendor over several hundred random configurations is under 10 mm, and the error varies smoothly with configuration rather than jumping around.
 
 ## Task 2.3  Forward kinematics again, by product of exponentials
 
@@ -173,13 +173,13 @@ If your DH implementation is working, `FK_dh(DH_STD, zeros, 6)` **is** `M`, whic
 
 **Two comparisons**
 
-1. **Against the vendor**, exactly as in Task 2.2: same sweep, same two metrics, same expectation of floating-point agreement.
-2. **Against your own DH**, over the same random configurations. This one needs no vendor at all, and it is the check you would still have on a robot whose manufacturer gave you nothing.
+1. **Against the vendor**, exactly as in Task 2.2: same sweep, same two metrics, same 10 mm target and the same calibration floor underneath it.
+2. **Against your own DH**, over the same random configurations. This one has no calibration floor, because both describe the same nominal arm, so it should agree to floating-point noise. It needs no vendor at all, and it is the check you would still have on a robot whose manufacturer gave you nothing.
 
 The failure patterns differ from DH's in a useful way. A wrong `w` shows up as an error that grows with that joint's angle and vanishes at zero. A wrong `v`, usually from picking a point that is not actually on the axis, shows up as a position error that persists even when that joint sits at zero. A wrong `M` offsets everything uniformly, at every configuration.
 
 {: .sanity_check}
-`FK_pox` and `FK_dh` agree with each other, and both agree with the vendor, to within floating-point noise across several hundred random configurations. The simulator readout is identical whichever one `SimArm` is wired to.
+`FK_pox` and `FK_dh` agree **with each other to floating-point noise** across several hundred random configurations, and both land within 10 mm of the vendor. The simulator readout is identical whichever one `SimArm` is wired to.
 
 ---
 

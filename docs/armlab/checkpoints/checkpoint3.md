@@ -15,7 +15,7 @@ Checkpoint 2 gave you two things: a forward kinematics you trust, and a camera t
 
 ## Before you start
 
-- Checkpoint 2 is done. In particular, both FK implementations agree with the vendor's solver to floating-point noise, and the Workspace view and the pixel-to-world chain work.
+- Checkpoint 2 is done. In particular, your two FK implementations agree with each other to floating-point noise and land within 10 mm of the vendor's solver, and the Workspace view and the pixel-to-world chain work.
 - You know your block sizes. The two used in this lab are about **38 mm** and **25 mm** on a side; use the numbers you measured.
 - You have the *From Pixels to the Workspace* lecture to hand. Part B follows it step for step.
 
@@ -100,6 +100,9 @@ You verified FK by comparison. IK gets the same treatment, plus something FK cou
 
 On the real arm, `arm.xarm.get_inverse_kinematics(pose)` returns the vendor's answer. Run the same sweep and compare, again through FK. This one needs the hardware, but the arm never moves.
 
+{: .note}
+The same 10 mm allowance applies here as in Checkpoint 2, and for the same reason: the vendor's solvers use a per-arm factory calibration your model does not have. The round trip above has no such floor, because it stays inside your own model throughout.
+
 **The reachability map**
 
 For the competition you need to know, before you try, whether a block at a given spot can be picked up from above. Build that map now.
@@ -115,7 +118,7 @@ Repeat for the 25 mm block if the two maps differ noticeably; they may not.
 Expect a shape that is nothing like a circle. The 440 mm reach sets the outer edge, but joint 5's ±124° limit and the elbow range carve out a region close to the base where the wrist cannot point straight down, and the far corners of the board fall off entirely. This map is going into your report, and it should shape where you put things during the competition.
 
 {: .sanity_check}
-Both solvers round-trip to floating-point noise on every reachable configuration, both agree with the vendor through FK, and you have a plotted map of the pickable region of the board.
+Both solvers round-trip to floating-point noise on every reachable configuration, both land within 10 mm of the vendor through FK, and you have a plotted map of the pickable region of the board.
 
 ---
 

@@ -134,7 +134,7 @@ When the numbers disagree, the shape of the disagreement points at the cause:
 | Large and unpatterned | Transforms chained in the wrong order |
 
 {: .highlight}
-**Aim to agree with the vendor to within 10 mm.** You will not do better than a few millimeters, and that is not your fault: every arm carries a per-arm factory calibration in its controller, the firmware uses it for FK, and the published DH table does not include it. On our arms that accounts for up to about 7 mm, varying with configuration. What you *should* see is a smooth residual with structure, not a wild one. If your error is tens of millimeters, or jumps, or grows without bound, that is a real bug sitting on top of the calibration floor. [Factory Calibration](/docs/armlab/factory-calibration) explains where those millimeters go and, optionally, how to remove them.
+**Aim to agree with the vendor to within 10 mm.** You will not do better than a few millimeters, and that is not your fault: every arm carries a per-arm factory calibration in its controller, the firmware uses it for FK, and the published DH table does not include it. Measured across several of our arms, that accounts for 2 to 7 mm, varying with configuration. What you *should* see is a smooth residual with structure, not a wild one. If your error is tens of millimeters, or jumps, or grows without bound, that is a real bug sitting on top of the calibration floor. [Factory Calibration](/docs/armlab/factory-calibration) explains where those millimeters go and, optionally, how to remove them.
 
 {: .sanity_check}
 Your maximum position error against the vendor over several hundred random configurations is under 10 mm, and the error varies smoothly with configuration rather than jumping around.

@@ -16,7 +16,7 @@ last_modified_at: 2026-09-22 12:00:00 -0400
 
 You write forward kinematics from the published Lite 6 DH table, sample joint configurations inside the joint limits, and compare your end effector position against the one the controller reports through `get_forward_kinematics()`.
 
-On our arms the two differ by **up to about 7 mm**. The difference changes with the joint configuration, and it does not look like a constant offset.
+On our arms the two differ by **2 to 7 mm**. The difference changes with the joint configuration, and it does not look like a constant offset.
 
 That is expected, and it does not mean your FK is wrong.
 
@@ -185,8 +185,12 @@ Roughly in order of effort. None of this is required.
 
 ## Verification status
 
-{: .warning}
-The FK formula here was checked against the nominal model at zero joint angles, and the effective model fit was tested offline against the default file and against simulated calibrations, reproducing both to numerical precision in position and orientation. **The comparison between an arm's calibration file and its firmware FK has not yet been run on one of our arms.** UFactory describes the file as the calibrated parameters of the arm, so the expected agreement is well under 0.1 mm, but treat that as expected rather than measured. Run step 5 of the script below on your station and see for yourself.
+**Measured on our arms.** Reading the stored calibration from several of the lab's Lite 6 units and comparing it against the nominal DH table gives a maximum position difference of **2 to 7 mm**, consistently, on every arm tested. That is the same size as the gap students see between their own FK and the firmware, which is the confirmation the explanation on this page needed. It also shows the calibration is substantial rather than a token: these arms really are individually measured, and the corrections really do move the flange by millimeters.
+
+{: .note}
+The remaining number worth collecting per station is step 5, the calibration model against the SDK's own `get_forward_kinematics`. UFactory describes the stored file as the arm's calibrated parameters, so that comparison should come out well under 0.1 mm. If it does not, the six-parameter chain in [FK from the calibration](#fk-from-the-calibration) is not the whole story and the difference is worth reporting.
+
+The rest of the model was checked offline: the FK formula against the nominal model at zero joint angles, and the effective DH fit against both the default file and simulated calibrations, reproducing each to numerical precision in position and orientation.
 
 ## Running the script
 

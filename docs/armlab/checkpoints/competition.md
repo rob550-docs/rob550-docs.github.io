@@ -66,7 +66,33 @@ Requirements:
 - 50% deduction for using "click" for each pick-and-place instead of an autonomous approach.
 
 
-## Event 3: To the sky!
+## Event 3: Stack 'em high! (500 points)
+### Task Setup
+Blocks will be placed on the board in a specific configuration, some of them already stacked, no more than four high. Your team must rebuild them into tall stacks in rainbow color order, red on the bottom.
+
+For levels 1 and 2 the large and small blocks form separate stacks. For level 3 they form two alternating towers, in which every block lands on one of the other size: the small block of a color sits on the large block of the same color, and the next color's large block sits on that small block.
+
+Requirements:
+- Choose a level for the task.
+- Complete the task within 600 seconds.
+- Stacks are built in rainbow color order (ROYGBV) with red at the bottom.
+- For level 2, the large blocks and the small blocks form two separate stacks.
+- For level 3, the twelve blocks form two alternating towers of six, one holding red through yellow and the other green through violet.
+
+### Level Setup
+- Level 1 - only big blocks (6, ROYGBV), one stack
+- Level 2 - big (6, ROYGBV) & small blocks (6, ROYGBV), two separate stacks
+- Level 3 - the same 12 blocks in two alternating towers of six **R r O o Y y** and **G g B b V v**, each read from the bottom up
+
+### Points
+- Blocks score by how high they sit: the **n**th block in a stack scores **n × 5**, so the bottom block is worth 5 and the sixth is worth 30. A completed six-block stack is worth 105 points.
+- At level 3 every block lands on one of a different size, which is a harder placement, so blocks there score **n × 10** instead.
+- +40 points for each stack completed in the correct order
+- 50% deduction for using "click" for each pick-and-place instead of an autonomous approach
+
+A perfect run scores **145** at level 1, **290** at level 2, and **500** at level 3.
+
+## Event 4: To the sky!
 ### Task Setup
 For this task, use only large blocks and stack them in any color order you choose. You have the freedom to add any number of blocks to the board, but they must not be pre-stacked. You can add blocks to the board as the arm is moving. Your goal is to stack them as high as possible, pushing the limit of how many blocks you can stack. The challenge is to see just how high your stack can reach!
 
@@ -81,13 +107,15 @@ Requirements:
 - Blocks can be placed while the arm is moving.
 
 ### Points
-- The first 8 blocks are worth 30 points
-- Any blocks after that are worth 50 points
-- The following lookup table gives scores for N=1 to N=20 (tying the class record)
+- Every block in the stack is worth 40 points
+- There is no cap
 
-| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 |
-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|
-| 30 | 60 | 90 | 120 | 150 | 180 | 210 | 240 | 290 | 340 | 390 | 440 | 490 | 540 | 590 | 640 | 690 | 740 | 790 | 840 |
+| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
+|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|:-|
+| 40 | 80 | 120 | 160 | 200 | 240 | 280 | 320 | 360 | 400 | 440 | 480 | 520 | 560 | 600 |
+
+The table stops at 15 for width, not because the scoring does. Every block beyond it is another 40 points.
+
 
 ## Score Calculation
 Your overall score will be the sum of your best run on each event. Each event can be completed multiple times at different levels.

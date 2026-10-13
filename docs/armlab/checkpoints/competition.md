@@ -7,6 +7,9 @@ grand_parent: Armlab
 last_modified_at: 2026-09-02 12:00:00 -0400
 ---
 
+{: .new}
+There is also an optional, sim-only **Event 0** to warm up on. It carries no points and needs no camera work, and it lets you write and debug competition code before your turn on a station. See [Sim Competition](/docs/armlab/checkpoints/sim_competition).
+
 {: .important}
 **The events and point values on this page are not final.** The competition will be updated before the end of the term. Expect tasks, levels and scoring to change. Check back here before you start optimizing for a particular event.
 

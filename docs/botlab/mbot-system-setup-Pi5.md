@@ -151,8 +151,20 @@ In this session, we are going to work on setup of the Control Board, which is th
 ### 2. Calibrate the MBot and flash the firmware
 In this step, we are going to calibrate the mbot and then flash the firmware.
 
+#### Put the Pico in BOOTSEL mode
+The Pico must be in BOOTSEL (flashing) mode **every time** before you run `mbot-upload-firmware`. Use the two small buttons on the Pico:
+1. Hold down both `RST` and `BOOTSEL`.
+2. Release `RST` first, then release `BOOTSEL`.
+
+<a class="image-link" href="/assets/images/botlab/bootsel-location.jpg">
+<img src="/assets/images/botlab/bootsel-location.jpg" alt="Location of the RST and BOOTSEL buttons on the Pico" style="max-width:500px;"/>
+</a>
+
+The Pico stays in BOOTSEL mode until it is flashed or reset, so you can run the flash command right after pressing the buttons.
+
+#### Calibrate and flash
 1. **Place the MBot on the floor** in a spot with at least 2 feet of clear space around the robot, preferably on the same type of surface you plan to use it on.
-2. First, flash the calibration file to calibrate your MBot.
+2. [Put the Pico in BOOTSEL mode](#put-the-pico-in-bootsel-mode), then flash the calibration file to calibrate your MBot.
     ```bash
     cd ~/mbot_firmware_ros/build
     sudo mbot-upload-firmware flash mbot_calibrate_classic.uf2
@@ -171,7 +183,7 @@ In this step, we are going to calibrate the mbot and then flash the firmware.
 
     <iframe width="400" height="227" src="https://www.youtube.com/embed/iIghZzf8ZQY?si=w_ultg6PtCwJVr2_" title="YouTube video player" frameborder="2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     - **Allow the Pico to finish its calibration routine without interference.** The calibration script will save the parameters onto the Pico’s memory.
-3. Then, you can flash the firmware that will run on the Pico during operation.
+3. [Put the Pico in BOOTSEL mode](#put-the-pico-in-bootsel-mode) again, then flash the firmware that will run on the Pico during operation.
     ```bash
     sudo mbot-upload-firmware flash mbot_classic_ros.uf2 
     ```
@@ -180,8 +192,9 @@ If you didn't see the expected output above, but having the following output:
 ```bash
 No accessible RP-series devices in BOOTSEL mode were found.
 ```
-1. Check if all the cables are connected correctly (USB-C from Pico to Pi; Pico's power cable; the GREEN/WHITE jumper wire to the control board).
-2. If all the cables are connected, please use the "Manual Boot Mode" in this [tutorial](https://mbot.robotics.umich.edu/docs/setup/firmware/#1-manual-boot-mode) to flash the firmware.
+1. The Pico was not in BOOTSEL mode. Repeat the [button steps](#put-the-pico-in-bootsel-mode) and run the command again. The buttons are small, so make sure you release `RST` before `BOOTSEL`.
+2. Check that the cables are connected correctly (USB-C from the Pico to the Pi, and the Pico's power cable).
+3. If it still fails, hold `BOOTSEL` for 5 to 10 seconds after releasing `RST`, then run the command again.
 
 ### 3. Minicom to verify the flash operation
 
